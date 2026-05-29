@@ -1,0 +1,12 @@
+% =====================================================================
+\section{Conclusion}
+% =====================================================================
+Open, locally-servable LLMs are now strong enough to serve as annotators on objective and verifiable tasks, where
+they meet or exceed established proprietary-judge correlations. But across \Nstudies{} reviewed studies and a
+\STHRn{}-judgment meta-evaluation on six datasets with real human labels, reliability is bounded by the same thing
+for every model: the \emph{human-human agreement ceiling}, and it degrades on exactly the items where humans
+themselves disagree. Scaling the judge helps only modestly, and contamination does not explain the pattern. The
+practical consequence is that an LLM-as-a-judge should be reported the way we report any measurement instrument,
+against a human reference, with chance-corrected and disagreement-aware metrics, with uncertainty, and with a stated
+operating range, rather than trusted as an oracle. The right question is never ``can a machine judge?'' but ``can
+this open model agree with humans, on this construct, as well as humans agree with each other?''

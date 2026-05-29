@@ -1,0 +1,11 @@
+\begin{tabular}{@{}l l c c c c l@{}}
+\toprule
+Dataset & Construct & Human & Best model & macro-F1 & Jury & Modal verdict \\
+ & & ceiling & (acc) & (best) & (acc) & \\
+\midrule
+GoEmotions & emotion (4-way) & 0.78 & 0.61 (qwen3.6-27b) & 0.54 & 0.61 & \cellcolor{a!60}Mixed \\
+SBIC & offensive (binary) & 0.91 & 0.86 (glm-5.1) & 0.85 & 0.84 & \cellcolor{g!25}Promising \\
+HateXplain & hate (3-way) & 0.83 & 0.66 (gemma-4-31b) & 0.64 & 0.62 & \cellcolor{a!60}Mixed \\
+MultiPICo & irony (binary) & 0.82 & 0.82 (gemma-4-31b) & 0.70 & 0.83 & \cellcolor{g!25}Promising \\
+\bottomrule
+\end{tabular}

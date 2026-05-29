@@ -1,0 +1,21 @@
+\noindent
+Large language models are increasingly used as ``judges'' that stand in for human annotators, but the field lacks
+an evidence-based account of \emph{when} an LLM judge agrees with humans well enough to substitute for them, and
+\emph{what} governs that agreement. We address this for \emph{open, locally-servable} models, the realistic and
+reproducible choice for most researchers. We contribute three studies anchored to a single principle: an LLM judge
+should be measured against the \emph{human-human agreement ceiling} for a task, never a manufactured ``gold.''
+\textbf{Study 1} is a PRISMA systematic review of \Nstudies{} studies across \Ndomains{} domains (all
+\Nstudies{}${+}\STN$ references independently web-verified) that maps where LLM-as-a-judge agreement reaches the
+human ceiling. \textbf{Study 2} replicates the standard summary-level G-Eval protocol on SummEval with the most
+powerful open models and finds, with bootstrap confidence intervals, that open judges meet or exceed the established
+proprietary-judge correlations on the \emph{verifiable} aspects (consistency, coherence) while the most compressed
+aspect (fluency) is hard to rank for every judge. \textbf{Study 3} is a new meta-evaluation of a six-model open
+panel (9B-754B) on natural-language-inference datasets with rich human label distributions ($\sim$100
+annotators/item; \NLInjudg{} judgments), benchmarked against the annotator-bootstrap human ceiling with
+chance-corrected agreement, jury aggregation, a calibrated contamination screen, and an item-level mixed-effects
+analysis. The organizing finding is that judge reliability is governed by \emph{item-level human disagreement}:
+panel accuracy on low-disagreement items ($\NLIlowH$) far exceeds that on high-disagreement items ($\NLIhighH$),
+item-level variance dominates dataset- and model-level variance, and model scale contributes only modestly. We turn
+this into a decision framework and an eight-point protocol for designing LLM-as-a-judge experiments. A companion
+paper applies the same evaluation, with a systematic review, to subjective social-computing annotation in
+Human-Centered Computing.

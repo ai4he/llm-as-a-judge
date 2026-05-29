@@ -1,0 +1,37 @@
+\section{Background and shared methodology}
+% =====================================================================
+LLM-as-a-judge descends from reference-free metrics (BERTScore, COMET) but uses a general instruction-following
+model with a natural-language rubric, supporting pointwise, pairwise, and listwise judgment
+\citep{li2024compsurvey,gu2024survey}. Four architectural families recur: prompted general LLMs
+\citep{zheng2023mtbench,liu2023geval}; fine-tuned open evaluators \citep{kim2023prometheus,zhu2023judgelm,
+wang2023pandalm}; juries/multi-agent panels \citep{verga2024poll,chan2023chateval}; and calibrated rubric methods
+\citep{hashemi2024llmrubric}. Prior surveys taxonomize methodology \citep{gu2024survey,li2024gen2judge}; we instead
+synthesize \emph{where substitution is empirically validated}, and, uniquely, do so through the HCC lens.
+
+\paragraph{Related work.} Four literatures meet in this paper. (1) \emph{LLM-as-a-judge evaluation}: studies report
+strong agreement on aggregate, verifiable tasks (MT-Bench \citep{zheng2023mtbench}, GEMBA \citep{kocmi2023gembamqm},
+SAFE factuality \citep{wei2024safe}) but document systematic biases (position, verbosity, self-preference, and an
+expertise gap by which judges converge on crowd rather than expert consensus \citep{bavaresco2024judgebench}), which
+motivates benchmarking against the human ceiling rather than against a single ``gold.'' (2) \emph{LLMs in HCI and
+qualitative research}: a fast-growing body uses LLMs to assist coding and thematic analysis
+\citep{xiao2023support,gao2024collabcoder,dai2023llminloop} while qualitative scholars warn that interpretation,
+reflexivity, and positionality resist automation \citep{schroeder2025usestensions,davison2024ethics}. (3)
+\emph{Participant and persona simulation}: ``silicon samples'' \citep{argyle2023outofone} and synthetic users are
+increasingly scrutinized for flattening identity and distorting variance
+\citep{wang2024flatten,cheng2023compost,bisbee2023perils}. (4) \emph{Learning with disagreement and perspectivism}:
+work on annotator disagreement and human label variation \citep{calderon2025alttest} argues that for subjective
+constructs the ``ceiling'' is itself low and contested, which our Study 3 datasets (ChaosNLI, GoEmotions, MultiPICo)
+operationalize directly. We connect these threads with two methodological commitments often missing from
+judge evaluations: anchoring every verdict to the \emph{human-human} ceiling, and probing \emph{data contamination}
+so that agreement on older public datasets is not mistaken for genuine competence.
+
+\paragraph{Shared protocol.} The systematic review follows PRISMA~2020 \citep{page2021prisma}, identify studies through a
+triangulated search (the OpenAlex API as the primary bibliographic database, Semantic Scholar as a cross-check, and
+a structured web ``deep-research'' arm), and code each study on a five-level \textbf{reliability verdict}
+benchmarked against the \emph{human-human agreement ceiling} for the same task: \textbf{1 Validated}
+($\approx$/$>$ ceiling), \textbf{2 Promising} (conditional), \textbf{3 Mixed} (task-dependent), \textbf{4 Caution}
+(below ceiling), \textbf{5 Unreliable} (near chance / bias-dominated). We report a reliability score $=6-$verdict
+and synthesize within metric families rather than pooling incommensurable effect sizes. Full protocols, search
+logs, and the coded corpus is released.
+
+% =====================================================================

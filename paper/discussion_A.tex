@@ -1,0 +1,56 @@
+% =====================================================================
+\section{Discussion}
+% =====================================================================
+\subsection{What governs LLM-judge reliability}
+Across the three studies one principle organizes the evidence: an LLM judge is reliable to the degree that the task
+has a high, verifiable human-agreement ceiling, and it cannot exceed an agreement level that humans themselves do
+not reach. Study~3 localizes the mechanism at the \emph{item} level. The random-intercept SD of judge correctness is
+far larger across items ($\mathrm{SD}=\VCitem$) than across datasets ($\VCdataset$) or models (between-model
+accuracy SD $=\VCmodel$); on \emph{every} dataset, panel accuracy on low-human-disagreement items far exceeds that on
+high-disagreement items; and chance-corrected agreement ($\kappa$, macro-F1) collapses precisely where humans
+disagree. Model scale helps only modestly ($\mathrm{OR}_{/\mathrm{SD}}=\RTwosizeOR$), and a calibrated contamination
+screen plus the recent-clean MultiPICo condition argue the shortfall is not memorization. We are careful about the
+unit of analysis: with six datasets we cannot identify a dataset-level ``subjectivity'' coefficient (it is
+inconclusive, not null), so we locate our inferential claims at the well-powered item level, following standard
+practice for designs with few level-2 units.
+
+\subsection{Connection to measurement and disagreement scholarship}
+This result operationalizes a long-running argument that there is no single ground truth for subjective constructs
+\citep{aroyo2015truth,plank2022humanlabel}: when judges are benchmarked against the human-human ceiling rather than a
+forced majority, their ``failures'' on emotion, hate, and irony are revealed as properties of the construct's
+contested human reference, not fixable model deficits. Reporting a single accuracy against a majority gold imposes
+consensus where the data shows disagreement; the honest object of evaluation is the human label \emph{distribution}.
+
+\subsection{Implications for designing LLM-as-a-judge experiments}
+The evidence yields a concrete, reusable protocol. Any study using an LLM-as-a-judge should:
+\begin{enumerate}[leftmargin=1.5em,itemsep=2pt]
+\item \textbf{Anchor to the human-human ceiling}, not a single gold; report the ceiling (computed from the annotator
+distribution at the dataset's native annotator count) and the judge-vs-ceiling gap.
+\item \textbf{Match the metric to the construct}: on imbalanced tasks report macro-F1 and per-class scores and
+prefer disagreement-aware evaluation against the full label distribution over forced-majority accuracy.
+\item \textbf{Quantify uncertainty}: bootstrap confidence intervals for every comparison; do not assert ``beats/
+matches'' from point estimates.
+\item \textbf{Stratify by item difficulty}: because variance lives in items, report where the judge fails (high
+human-disagreement items), not only mean accuracy.
+\item \textbf{Probe contamination, but calibrate the probe}: evaluate on post-cutoff data where possible, and treat
+surface-recall probes as conservative screens (they false-positive on high-recall models).
+\item \textbf{Pin the setup}: fix model identifier, version, decoding (temperature, seed); report robustness to
+prompt paraphrase, since small models are prompt-sensitive on subjective tasks.
+\item \textbf{Use juries for aggregate decisions} but not as a ceiling-breaker: panels improve stability yet do not
+lift a subjective task above its human ceiling.
+\item \textbf{Pre-register and release}: register the construct, the human baseline, and the decision threshold, and
+release item-level labels and aggregates.
+\end{enumerate}
+
+\subsection{A decision framework}
+For annotation and labeling specifically, three regimes follow. \textbf{Automate (with light audit):} objective
+labeling of user-generated content (stance, topic, relevance, frames, simple sentiment) where the ceiling is high
+and verifiable. \textbf{Calibrate and audit:} coarse, binary, or low-consensus subjective labels (e.g.\ binary
+offensiveness), where open judges reach a low ceiling but only by predicting base rates, so report $\kappa$ and audit
+high-disagreement items. \textbf{Keep humans in the loop:} fine-grained or high-consensus subjective constructs
+(multi-way emotion, hate-speech typing), where no open judge in our panel earns the right to replace a human. A
+critical caution for the field: agreement on older public benchmarks can reflect memorization
+\citep{bender2021parrots}, and a single headline accuracy can mask base-rate learning (our irony case: 0.82 accuracy
+at $\kappa{=}0.40$), so calibrated, disagreement-aware, post-cutoff evaluation should be the norm. The application of
+these ideas to interpretive Human-Centered Computing methods (qualitative coding, participant simulation, design
+judgment) is the subject of a companion systematic review.

@@ -1,0 +1,68 @@
+\section{Study 2: Is the reliability landscape a moving target?}\label{sec:s1b}
+% =====================================================================
+A systematic review necessarily captures results \emph{as reported}, and most ``promising''-band evidence in
+Study~1 was produced with proprietary judges that are now one or two model generations old (e.g.\ the influential
+G-Eval used GPT-4). This raises a question that the review alone cannot answer: when an LLM judge falls short of the
+human ceiling in a promising domain, is that a \emph{temporary} limitation that more capable models will erase
+(``matter of time''), or a \emph{structural} property of LLM-as-a-judge that better models do not overcome? Study~2
+answers this directly for a flagship case by re-running the evaluation with the most powerful open models available
+to us today and comparing against the canonical reported numbers.
+
+\subsection{Method}
+We select \textbf{SummEval} \citep{fabbri2021summeval} (summarization quality assessment, a central amber-band task
+in Study~1) because it pairs (i) a widely cited LLM-judge result to beat (G-Eval/GPT-4; \citealp{liu2023geval})
+with (ii) public expert human ratings on four aspects (coherence, consistency, fluency, relevance) for
+$100\times16=1600$ machine summaries. We replicate the G-Eval summary-level protocol \emph{verbatim} (same aspect
+definitions, 1-5 integer ratings, temperature~0) but swap the judge for the \ONEmodels{} most powerful open models
+in the available open-model catalogue (\ONEpanel). The comparison metric is the canonical \emph{summary-level Spearman}: for each
+source document, correlate the judge's 16 scores with the human means, averaged across documents. The bar to beat is
+G-Eval/GPT-4's reported per-aspect correlations (coherence~.582, consistency~.507, fluency~.455, relevance~.547;
+average~$\approx$.52). In total Study~2 contributes \ONEnjudg{} fresh judgments.
+
+\subsection{Results}
+\begin{table}[t]\centering\small
+\caption{Study 2. Summary-level Spearman $\rho$ of the most powerful open judges on SummEval vs.\ the reported
+G-Eval-4/GPT-4 correlations (\ONEnjudg{} judgments). Green cells \emph{surpass} the reported per-aspect number.}
+\label{tab:study1b}
+\input{tables/tab_study1b_results}
+\end{table}
+We follow the standard summary-level G-Eval protocol \citep{liu2023geval} and attach bootstrap 95\% CIs (over the
+100 source documents) to every correlation (Figure~\ref{fig:s1b}, Table~\ref{tab:study1b}). On the verifiable
+aspects the open judges \emph{meet or exceed} the established G-Eval/GPT-4 benchmark: \RTwobeats{} of the 16
+model$\times$aspect cells have a 95\% CI lying \emph{entirely above} the reported value, all on \textbf{consistency}
+and \textbf{coherence} (e.g.\ \ONEbest{} consistency $\rho{=}0.69$, CI $[0.63,0.74]$ vs.\ $.507$), and
+\textbf{relevance} is on par ($.48$-$.54$ vs.\ $.55$). Our protocol differs from the original in two deliberate,
+deployment-relevant ways: the judges are open and locally-servable, and we read a single integer score rather than a
+proprietary model's probability-weighted decoding. The comparison is to the figures reported by the original work,
+the standard reference point in this literature. But on \textbf{fluency} every open model falls well
+\emph{short} ($.22$-$.39$ vs.\ a reported $.455$). We diagnose why: fluency is the most \emph{compressed} aspect of
+the human reference, with the lowest within-document rating variance ($\mathrm{SD}=\SEfluSD$ vs $\SEconSD$ for
+consistency) and $\SEfluTop\%$ of summaries rated near the top of the scale, so it offers the least to rank, and it
+is the aspect on which the \emph{reported proprietary judge also scores lowest}. This is a property of the
+\emph{reference}, not the judges: even a noiseless judge returning the rounded human means tops out at
+$\rho{\approx}\SEfluSelf$ on fluency. The clean result is therefore that capability gains concentrate on the
+verifiable, rankable aspects (consistency, coherence), while the most compressed aspect is hard to rank for every
+judge, open or proprietary.
+
+\begin{figure}[t]\centering
+\includegraphics[width=0.97\linewidth]{s1b_fig01_spearman}
+\caption{Study 2. Summary-level Spearman of the most powerful open judges on SummEval, per aspect, against the
+reported G-Eval/GPT-4 bar (dashed). Bars above the dashed line indicate an open model that \emph{surpasses} the
+reported proprietary-judge correlation.}
+\label{fig:s1b}
+\end{figure}
+
+\paragraph{Interpretation: time vs.\ structure.} Study~2 shows the reliability landscape is \emph{partly} a moving
+target. Where Study~1's amber rating reflected a capability gap on a verifiable sub-judgment, today's open models
+close or exceed it; reliability there is largely a matter of time and access. But where the shortfall reflects a
+\emph{compressed or contested human ceiling} (e.g.\ fluency, and, as Study~3 will show, subjective social annotation),
+even the most powerful models do not break through, because the limit lives in the human reference, not the model.
+This distinction, temporal capability gap vs.\ structural ceiling, is the lens we carry into HCC.
+
+\paragraph{Takeaway.} Study~1 says LLM judges are safe where the task is objective and verifiable, and
+Study~2 shows that frontier open models are now strong enough to match proprietary judges on exactly those
+verifiable tasks. But subjective, high-disagreement constructs (the kind that
+humans themselves contest) are precisely the tasks Study~1 flags as risky and Study~2
+predicts scale will \emph{not} fix. Study~3 then tests this prediction directly, on datasets with rich human label distributions.
+
+% =====================================================================

@@ -1,0 +1,63 @@
+\section{Study 1a: The cross-domain reliability landscape}
+% =====================================================================
+\subsection{Method (summary)}
+Study 1a systematically reviewed \Nstudies{} studies across \Ndomains{} domains comparing LLM-as-a-judge to human
+annotation. Identification triangulated OpenAlex (\OAretrieved{} records, \OAunique{} unique), Semantic Scholar, and
+a 59-query web search; screening retained on-topic empirical comparisons; \Nnumeric{} studies reported an
+extractable numeric agreement value (Figure~\ref{fig:prisma1}; the full coded corpus is \corpustabref).
+\textbf{Coding reliability:} because the verdict rubric embeds judgement, we validated it with an independent
+re-coding of a 25\% random sample ($n{=}\IRRsoneN$): the reliability verdict reproduced at Krippendorff
+$\alpha=\IRRsoneA$ (ordinal) with \IRRsoneWone\% of cases within one level (Appendix~\ref{app:irr}). The re-coders are
+LLM-assisted, like the primary pipeline, so this measures rubric \emph{reproducibility} rather than human
+inter-rater agreement, which we flag as a limitation. \textbf{Citation integrity:} every one of the
+$\Nstudies{+}\STN$ references was independently web-verified for existence against arXiv/venue/DOI records;
+$270/272$ were confirmed (260 at high confidence) and the $2$ that could not be verified were removed, so the
+corpus contains no unverifiable citations.
+
+\begin{figure}[t]\centering
+\includegraphics[width=0.96\linewidth]{fig01_prisma_flow}
+\caption{Study 1a PRISMA~2020 flow (two-arm identification: OpenAlex database + web/citation).}
+\label{fig:prisma1}
+\end{figure}
+
+\subsection{Findings: a green/amber/red landscape}
+The modal verdict is \emph{mixed/task-dependent}; only \Pctreliable\% of studies sit in the reliable band and
+\Pctproblematic\% in the problematic band (mean reliability \Meanrel/5). Reliability is governed by three properties:
+\textbf{objectivity}, \textbf{tractable verification}, and a \textbf{low human-agreement floor}.
+\textbf{Green ($\ge$3.5; \Ngreen{} domains):} machine translation (system level), text-to-image alignment,
+verifiable instruction-following, QA/factuality, information extraction, general-NLG pairwise preference, dialogue,
+and legal scoring: here LLM judges frequently match or exceed the human ceiling (e.g., MT-Bench 85\% vs.\ 81\%
+human-human \citep{zheng2023mtbench}; GEMBA-MQM 96.5\% \citep{kocmi2023gembamqm}; SAFE wins 76\% of disagreements
+\citep{wei2024safe}). \textbf{Amber (\Namber{} domains):} summarization, RAG, education, social-science annotation,
+medicine (structure-dependent: $\kappa\!\approx\!0.82$-$0.93$ structured vs.\ $0.47$-$0.71$ complex reasoning),
+code, and IR/relevance (strong but contested \citep{clarke2024cantreplace}). \textbf{Red (\Nred{} domains):}
+low-resource multilingual evaluation and creative writing (near-zero expert correlation
+\citep{chakrabarty2024artartifice}). Figures~\ref{fig:dom1}-\ref{fig:land1} give the domain ordering and the
+domain$\times$task landscape; the decision map (Figure~\ref{fig:dec1}) positions domains by reliability against
+stakes.
+
+\begin{figure}[t]\centering
+\begin{subfigure}{0.5\linewidth}\includegraphics[width=\linewidth]{fig05_reliability_by_domain}\caption{}\label{fig:dom1}\end{subfigure}\hfill
+\begin{subfigure}{0.48\linewidth}\includegraphics[width=\linewidth]{fig06_reliability_landscape}\caption{}\label{fig:land1}\end{subfigure}
+\caption{Study 1a. (a) Mean reliability by domain (green/amber/red). (b) Reliability landscape: domain$\times$judging
+task; verification/classification columns are greener than open-ended scoring.}
+\end{figure}
+
+\subsection{Failure modes and the decision map}
+Recurring biases such as verbosity/length, position, self-preference, style-over-substance, preference leakage,
+non-determinism, and the \emph{expertise gap} (judges converge to crowd, not expert, consensus
+\citep{bavaresco2024judgebench}) all modulate reliability (Figure~\ref{fig:bias1}). Agreement should be benchmarked
+against the human ceiling, which on subjective tasks is itself low (Krippendorff $\alpha<0.35$
+\citep{imrit2026iaa}). The Study-1a decision map (Figure~\ref{fig:dec1}) and Table~\ref{tab:decision} translate this into
+deployment guidance and motivate both the moving-target test (Study 1b) and the HCC-specific analysis that follows.
+
+\begin{figure}[t]\centering
+\begin{subfigure}{0.5\linewidth}\includegraphics[width=\linewidth]{fig11_bias_frequency}\caption{}\label{fig:bias1}\end{subfigure}\hfill
+\begin{subfigure}{0.49\linewidth}\includegraphics[width=\linewidth]{fig15_decision_map}\caption{}\label{fig:dec1}\end{subfigure}
+\caption{Study 1a. (a) Catalogue of reported failure modes/biases. (b) Deployment decision map (reliability$\times$
+stakes; bubble area $\propto$ studies).}
+\end{figure}
+
+\input{tables/tab_domain_decision_wrap}
+
+% =====================================================================

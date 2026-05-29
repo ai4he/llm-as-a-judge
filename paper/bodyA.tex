@@ -1,0 +1,346 @@
+% =====================================================================
+\section{Introduction}
+% =====================================================================
+Large language models are now routinely deployed as \emph{judges}: instead of recruiting human annotators to label
+data, rate outputs, or score quality, researchers prompt an LLM to do it for a fraction of the cost
+\citep{zheng2023mtbench,liu2023geval,gilardi2023chatgpt}. The practice is spreading faster than the evidence that
+licenses it. Two questions remain under-answered. \textbf{When} does an LLM judge agree with humans closely enough to
+substitute for them, and \textbf{what} governs that agreement, model scale, task, or something about the human
+labels themselves?
+
+We answer these questions for \emph{open, locally-servable} models. This is a deliberate scope, not a limitation:
+proprietary judges are expensive, non-reproducible, and change without notice, so for most researchers the realistic
+question is whether an open model they can run themselves is a trustworthy judge. Our entire empirical program uses
+open models served through a standard vLLM endpoint at temperature~0 with released harnesses.
+
+One methodological commitment runs through the paper: an LLM judge must be measured against the \emph{human-human
+agreement ceiling} for the task, not against a single ``gold'' label. For subjective constructs there is no single
+correct answer \citep{aroyo2015truth,plank2022humanlabel}; the relevant question is whether the judge agrees with
+humans as well as humans agree with each other. We compute that ceiling directly from the per-item annotator
+distributions that the datasets already provide, so our human reference is real, independent, and inherited from the
+data, not added by us.
+
+\paragraph{Contributions.} (1) \textbf{Study 1:} a PRISMA systematic review of \Nstudies{} studies across
+\Ndomains{} domains (every reference independently web-verified) that maps, against the human ceiling, where
+LLM-as-a-judge is reliable and where it is not. (2) \textbf{Study 2:} a controlled replication showing that the most
+powerful open models now meet or exceed the established proprietary-judge correlations on the verifiable aspects of a
+flagship benchmark, with bootstrap confidence intervals. (3) \textbf{Study 3:} a new meta-evaluation of a six-model
+open panel (9B-754B) on NLI datasets with rich human label distributions (\NLInjudg{} judgments), establishing that
+\emph{item-level human disagreement}, not model scale or data contamination, is the binding constraint on judge
+reliability. (4) A decision framework and an eight-point protocol for designing LLM-as-a-judge experiments. All
+code, corpora, search logs, and harnesses are released.
+\section{Background and shared methodology}
+% =====================================================================
+LLM-as-a-judge descends from reference-free metrics (BERTScore, COMET) but uses a general instruction-following
+model with a natural-language rubric, supporting pointwise, pairwise, and listwise judgment
+\citep{li2024compsurvey,gu2024survey}. Four architectural families recur: prompted general LLMs
+\citep{zheng2023mtbench,liu2023geval}; fine-tuned open evaluators \citep{kim2023prometheus,zhu2023judgelm,
+wang2023pandalm}; juries/multi-agent panels \citep{verga2024poll,chan2023chateval}; and calibrated rubric methods
+\citep{hashemi2024llmrubric}. Prior surveys taxonomize methodology \citep{gu2024survey,li2024gen2judge}; we instead
+synthesize \emph{where substitution is empirically validated} and quantify it against the human-human ceiling.
+
+\paragraph{Related work.} Four literatures meet in this paper. (1) \emph{LLM-as-a-judge evaluation}: studies report
+strong agreement on aggregate, verifiable tasks (MT-Bench \citep{zheng2023mtbench}, GEMBA \citep{kocmi2023gembamqm},
+SAFE factuality \citep{wei2024safe}) but document systematic biases (position, verbosity, self-preference, and an
+expertise gap by which judges converge on crowd rather than expert consensus \citep{bavaresco2024judgebench}), which
+motivates benchmarking against the human ceiling rather than against a single ``gold.'' (2) \emph{LLMs in HCI and
+qualitative research}: a fast-growing body uses LLMs to assist coding and thematic analysis
+\citep{xiao2023support,gao2024collabcoder,dai2023llminloop} while qualitative scholars warn that interpretation,
+reflexivity, and positionality resist automation \citep{schroeder2025usestensions,davison2024ethics}. (3)
+\emph{Participant and persona simulation}: ``silicon samples'' \citep{argyle2023outofone} and synthetic users are
+increasingly scrutinized for flattening identity and distorting variance
+\citep{wang2024flatten,cheng2023compost,bisbee2023perils}. (4) \emph{Learning with disagreement and perspectivism}:
+work on annotator disagreement and human label variation \citep{calderon2025alttest} argues that for subjective
+constructs the ``ceiling'' is itself low and contested, which our Study 3 datasets (ChaosNLI)
+operationalize directly. We connect these threads with two methodological commitments often missing from
+judge evaluations: anchoring every verdict to the \emph{human-human} ceiling, and probing \emph{data contamination}
+so that agreement on older public datasets is not mistaken for genuine competence.
+
+\paragraph{Shared protocol.} The systematic review follows PRISMA~2020 \citep{page2021prisma}, identifying studies through a
+triangulated search (the OpenAlex API as the primary bibliographic database, Semantic Scholar as a cross-check, and
+a structured web ``deep-research'' arm), and code each study on a five-level \textbf{reliability verdict}
+benchmarked against the \emph{human-human agreement ceiling} for the same task: \textbf{1 Validated}
+($\approx$/$>$ ceiling), \textbf{2 Promising} (conditional), \textbf{3 Mixed} (task-dependent), \textbf{4 Caution}
+(below ceiling), \textbf{5 Unreliable} (near chance / bias-dominated). We report a reliability score $=6-$verdict
+and synthesize within metric families rather than pooling incommensurable effect sizes. Full protocol, search logs, and the coded corpus are released.
+
+% =====================================================================
+\section{Study 1: The cross-domain reliability landscape}
+% =====================================================================
+\subsection{Method (summary)}
+Study 1 systematically reviewed \Nstudies{} studies across \Ndomains{} domains comparing LLM-as-a-judge to human
+annotation. Identification triangulated OpenAlex (\OAretrieved{} records, \OAunique{} unique), Semantic Scholar, and
+a 59-query web search; screening retained on-topic empirical comparisons; \Nnumeric{} studies reported an
+extractable numeric agreement value (Figure~\ref{fig:prisma1}; the full coded corpus is \corpustabref).
+\textbf{Coding reliability:} because the verdict rubric embeds judgement, we validated it with an independent
+re-coding of a 25\% random sample ($n{=}\IRRsoneN$): the reliability verdict reproduced at Krippendorff
+$\alpha=\IRRsoneA$ (ordinal) with \IRRsoneWone\% of cases within one level (Appendix~\ref{app:irr}). The re-coders are
+LLM-assisted, like the primary pipeline, so this measures rubric \emph{reproducibility} rather than human
+inter-rater agreement, which we flag as a limitation. \textbf{Citation integrity:} every one of the
+$\Nstudies{+}\STN$ references was independently web-verified for existence against arXiv/venue/DOI records;
+$270/272$ were confirmed (260 at high confidence) and the $2$ that could not be verified were removed, so the
+corpus contains no unverifiable citations.
+
+\begin{figure}[t]\centering
+\includegraphics[width=0.96\linewidth]{fig01_prisma_flow}
+\caption{Study 1 PRISMA~2020 flow (two-arm identification: OpenAlex database + web/citation).}
+\label{fig:prisma1}
+\end{figure}
+
+\subsection{Findings: a green/amber/red landscape}
+The modal verdict is \emph{mixed/task-dependent}; only \Pctreliable\% of studies sit in the reliable band and
+\Pctproblematic\% in the problematic band (mean reliability \Meanrel/5). Reliability is governed by three properties:
+\textbf{objectivity}, \textbf{tractable verification}, and a \textbf{low human-agreement floor}.
+\textbf{Green ($\ge$3.5; \Ngreen{} domains):} machine translation (system level), text-to-image alignment,
+verifiable instruction-following, QA/factuality, information extraction, general-NLG pairwise preference, dialogue,
+and legal scoring: here LLM judges frequently match or exceed the human ceiling (e.g., MT-Bench 85\% vs.\ 81\%
+human-human \citep{zheng2023mtbench}; GEMBA-MQM 96.5\% \citep{kocmi2023gembamqm}; SAFE wins 76\% of disagreements
+\citep{wei2024safe}). \textbf{Amber (\Namber{} domains):} summarization, RAG, education, social-science annotation,
+medicine (structure-dependent: $\kappa\!\approx\!0.82$-$0.93$ structured vs.\ $0.47$-$0.71$ complex reasoning),
+code, and IR/relevance (strong but contested \citep{clarke2024cantreplace}). \textbf{Red (\Nred{} domains):}
+low-resource multilingual evaluation and creative writing (near-zero expert correlation
+\citep{chakrabarty2024artartifice}). Figures~\ref{fig:dom1}-\ref{fig:land1} give the domain ordering and the
+domain$\times$task landscape; the decision map (Figure~\ref{fig:dec1}) positions domains by reliability against
+stakes.
+
+\begin{figure}[t]\centering
+\begin{subfigure}{0.5\linewidth}\includegraphics[width=\linewidth]{fig05_reliability_by_domain}\caption{}\label{fig:dom1}\end{subfigure}\hfill
+\begin{subfigure}{0.48\linewidth}\includegraphics[width=\linewidth]{fig06_reliability_landscape}\caption{}\label{fig:land1}\end{subfigure}
+\caption{Study 1. (a) Mean reliability by domain (green/amber/red). (b) Reliability landscape: domain$\times$judging
+task; verification/classification columns are greener than open-ended scoring.}
+\end{figure}
+
+\subsection{Failure modes and the decision map}
+Recurring biases such as verbosity/length, position, self-preference, style-over-substance, preference leakage,
+non-determinism, and the \emph{expertise gap} (judges converge to crowd, not expert, consensus
+\citep{bavaresco2024judgebench}) all modulate reliability (Figure~\ref{fig:bias1}). Agreement should be benchmarked
+against the human ceiling, which on subjective tasks is itself low (Krippendorff $\alpha<0.35$
+\citep{imrit2026iaa}). The Study-1a decision map (Figure~\ref{fig:dec1}) and Table~\ref{tab:decision} translate this into
+deployment guidance and motivate the moving-target test (Study 2) that follows.
+
+\begin{figure}[t]\centering
+\begin{subfigure}{0.5\linewidth}\includegraphics[width=\linewidth]{fig11_bias_frequency}\caption{}\label{fig:bias1}\end{subfigure}\hfill
+\begin{subfigure}{0.49\linewidth}\includegraphics[width=\linewidth]{fig15_decision_map}\caption{}\label{fig:dec1}\end{subfigure}
+\caption{Study 1. (a) Catalogue of reported failure modes/biases. (b) Deployment decision map (reliability$\times$
+stakes; bubble area $\propto$ studies).}
+\end{figure}
+
+\input{tables/tab_domain_decision_wrap}
+
+% =====================================================================
+\section{Study 2: Is the reliability landscape a moving target?}\label{sec:s1b}
+% =====================================================================
+A systematic review necessarily captures results \emph{as reported}, and most ``promising''-band evidence in
+Study~1 was produced with proprietary judges that are now one or two model generations old (e.g.\ the influential
+G-Eval used GPT-4). This raises a question that the review alone cannot answer: when an LLM judge falls short of the
+human ceiling in a promising domain, is that a \emph{temporary} limitation that more capable models will erase
+(``matter of time''), or a \emph{structural} property of LLM-as-a-judge that better models do not overcome? Study~2
+answers this directly for a flagship case by re-running the evaluation with the most powerful open models available
+to us today and comparing against the canonical reported numbers.
+
+\subsection{Method}
+We select \textbf{SummEval} \citep{fabbri2021summeval} (summarization quality assessment, a central amber-band task
+in Study~1) because it pairs (i) a widely cited LLM-judge result to beat (G-Eval/GPT-4; \citealp{liu2023geval})
+with (ii) public expert human ratings on four aspects (coherence, consistency, fluency, relevance) for
+$100\times16=1600$ machine summaries. We replicate the G-Eval summary-level protocol \emph{verbatim} (same aspect
+definitions, 1-5 integer ratings, temperature~0) but swap the judge for the \ONEmodels{} most powerful open models
+in the available open-model catalogue (\ONEpanel). The comparison metric is the canonical \emph{summary-level Spearman}: for each
+source document, correlate the judge's 16 scores with the human means, averaged across documents. The bar to beat is
+G-Eval/GPT-4's reported per-aspect correlations (coherence~.582, consistency~.507, fluency~.455, relevance~.547;
+average~$\approx$.52). In total Study~2 contributes \ONEnjudg{} fresh judgments.
+
+\subsection{Results}
+\begin{table}[t]\centering\small
+\caption{Study 2. Summary-level Spearman $\rho$ of the most powerful open judges on SummEval vs.\ the reported
+G-Eval-4/GPT-4 correlations (\ONEnjudg{} judgments). Green cells \emph{surpass} the reported per-aspect number.}
+\label{tab:study1b}
+\input{tables/tab_study1b_results}
+\end{table}
+We follow the standard summary-level G-Eval protocol \citep{liu2023geval} and attach bootstrap 95\% CIs (over the
+100 source documents) to every correlation (Figure~\ref{fig:s1b}, Table~\ref{tab:study1b}). On the verifiable
+aspects the open judges \emph{meet or exceed} the established G-Eval/GPT-4 benchmark: \RTwobeats{} of the 16
+model$\times$aspect cells have a 95\% CI lying \emph{entirely above} the reported value, all on \textbf{consistency}
+and \textbf{coherence} (e.g.\ \ONEbest{} consistency $\rho{=}0.69$, CI $[0.63,0.74]$ vs.\ $.507$), and
+\textbf{relevance} is on par ($.48$-$.54$ vs.\ $.55$). Our protocol differs from the original in two deliberate,
+deployment-relevant ways: the judges are open and locally-servable, and we read a single integer score rather than a
+proprietary model's probability-weighted decoding. The comparison is to the figures reported by the original work,
+the standard reference point in this literature. But on \textbf{fluency} every open model falls well
+\emph{short} ($.22$-$.39$ vs.\ a reported $.455$). We diagnose why: fluency is the most \emph{compressed} aspect of
+the human reference, with the lowest within-document rating variance ($\mathrm{SD}=\SEfluSD$ vs $\SEconSD$ for
+consistency) and $\SEfluTop\%$ of summaries rated near the top of the scale, so it offers the least to rank, and it
+is the aspect on which the \emph{reported proprietary judge also scores lowest}. This is a property of the
+\emph{reference}, not the judges: even a noiseless judge returning the rounded human means tops out at
+$\rho{\approx}\SEfluSelf$ on fluency. The clean result is therefore that capability gains concentrate on the
+verifiable, rankable aspects (consistency, coherence), while the most compressed aspect is hard to rank for every
+judge, open or proprietary.
+
+\begin{figure}[t]\centering
+\includegraphics[width=0.97\linewidth]{s1b_fig01_spearman}
+\caption{Study 2. Summary-level Spearman of the most powerful open judges on SummEval, per aspect, against the
+reported G-Eval/GPT-4 bar (dashed). Bars above the dashed line indicate an open model that \emph{surpasses} the
+reported proprietary-judge correlation.}
+\label{fig:s1b}
+\end{figure}
+
+\paragraph{Interpretation: time vs.\ structure.} Study~2 shows the reliability landscape is \emph{partly} a moving
+target. Where Study~1's amber rating reflected a capability gap on a verifiable sub-judgment, today's open models
+close or exceed it; reliability there is largely a matter of time and access. But where the shortfall reflects a
+\emph{compressed or contested human ceiling} (e.g.\ fluency, and, as Study~3 will show, subjective social annotation),
+even the most powerful models do not break through, because the limit lives in the human reference, not the model.
+This distinction, temporal capability gap vs.\ structural ceiling, is the lens we carry into HCC.
+
+\paragraph{Takeaway.} Study~1 says LLM judges are safe where the task is objective and verifiable, and
+Study~2 shows that frontier open models are now strong enough to match proprietary judges on exactly those
+verifiable tasks. But subjective, high-disagreement constructs (the kind that
+humans themselves contest) are precisely the tasks Study~1 flags as risky and Study~2
+predicts scale will \emph{not} fix. Study~3 then tests this prediction directly, on datasets with rich human label distributions.
+
+% =====================================================================
+% =====================================================================
+\section{Study 3: An open-panel meta-evaluation on NLI with rich human labels}\label{sec:study3}
+% =====================================================================
+Study 1 shows LLM judges are most reliable where the human-agreement ceiling is high and verifiable; Study 2 shows
+frontier open models reach the established benchmark on the verifiable aspects of summarization. Study 3 tests the
+mechanism directly on \emph{natural language inference} (NLI), the rare setting that ships \emph{rich} human label
+distributions: ChaosNLI \citep{plank2022humanlabel} re-annotates SNLI and MultiNLI items with ${\sim}100$ human
+labels each, so the human-human agreement ceiling and the per-item disagreement are measured precisely rather than
+estimated from three annotators.
+
+\subsection{Method}
+We evaluate a panel of \STHRmodels{} open models served via \PROVIDER{} (OpenAI-compatible), spanning five families
+and 9B-754B parameters, run at temperature~0. Each model labels every item as a virtual annotator under the
+standard NLI instructions; we benchmark against the \emph{human-human ceiling} (random-annotator-vs-majority
+accuracy with an annotator bootstrap 95\% CI, plus pairwise agreement), and report accuracy, Cohen's $\kappa$, and
+macro-F1 against the majority gold, a majority \textbf{jury} \citep{verga2024poll}, and a calibrated
+contamination screen. The run comprised \NLInjudg{} judgments across \NLIndat{} NLI datasets with zero API errors
+and a 100\% answer-parse rate. Dataset cards, prompts, and metric definitions are in
+Appendices~\ref{app:protocol} to~\ref{app:robust}.
+
+\subsection{Results}
+Table~\ref{tab:nlires} reports the panel against the human ceiling. Where humans agree only moderately
+(SNLI ceiling 0.75, MNLI 0.64), the open panel \emph{matches or exceeds} them: the jury reaches 0.86 on SNLI
+($>$ ceiling) and 5/6 models are \textbf{Validated}, with MNLI \textbf{Promising}. Chance-corrected agreement is
+substantial (best-model $\kappa$ up to 0.71), so this is genuine competence, not base-rate learning.
+
+\begin{table}[t]\centering\small
+\caption{Study 3 (NLI). Open panel vs the human-human ceiling. Ceiling = random-annotator-vs-majority accuracy;
+macro-F1 is the best model's chance-corrected score.}
+\label{tab:nlires}
+\input{tables/tab_nli_results}
+\end{table}
+
+\subsection{Item-level disagreement governs reliability}
+The organizing finding is that errors concentrate on \emph{contested} items. On both datasets, panel accuracy on
+low-human-disagreement (low-entropy) items far exceeds accuracy on high-disagreement items ($\NLIlowH$ vs
+$\NLIhighH$; Table~\ref{tab:nlidis}), and the panel's label distribution diverges from the human distribution most on
+the most contested items. An item-level mixed-effects model of judge correctness (over all \NLInjudg{} judgments)
+makes this precise: the random-intercept SD is far larger across \emph{items} ($\mathrm{SD}=\VCitem$) than across
+datasets ($\VCdataset$) or models (between-model accuracy SD $=\VCmodel$), and with standardized predictors model
+scale contributes only modestly ($\mathrm{OR}_{/\mathrm{SD}}=\RTwosizeOR$). In short, \emph{which item} is judged,
+its latent human (dis)agreement, predicts judge correctness better than which model judges it. A calibrated
+contamination screen (Appendix~\ref{app:robust}) does not explain the pattern: it false-positives on high-recall
+models even for guaranteed-clean text, so we treat it as a conservative screen and rest the claim on the
+disagreement analysis. Juries raise accuracy but cannot lift agreement above the human ceiling on the most contested
+items.
+
+\begin{table}[t]\centering\small
+\caption{Study 3 (NLI) disagreement-aware results. Ceiling with annotator-bootstrap 95\% CI; best-model $\kappa$ and
+macro-F1; panel accuracy on low- vs high-human-disagreement items; Jensen-Shannon panel-vs-human divergence.}
+\label{tab:nlidis}
+\input{tables/tab_nli_disagr}
+\end{table}
+% =====================================================================
+\section{Discussion}
+% =====================================================================
+\subsection{What governs LLM-judge reliability}
+Across the three studies one principle organizes the evidence: an LLM judge is reliable to the degree that the task
+has a high, verifiable human-agreement ceiling, and it cannot exceed an agreement level that humans themselves do
+not reach. Study~3 localizes the mechanism at the \emph{item} level. The random-intercept SD of judge correctness is
+far larger across items ($\mathrm{SD}=\VCitem$) than across datasets ($\VCdataset$) or models (between-model
+accuracy SD $=\VCmodel$); on \emph{every} dataset, panel accuracy on low-human-disagreement items far exceeds that on
+high-disagreement items; and chance-corrected agreement ($\kappa$, macro-F1) collapses precisely where humans
+disagree. Model scale helps only modestly ($\mathrm{OR}_{/\mathrm{SD}}=\RTwosizeOR$), and a calibrated contamination
+screen argues the shortfall is not memorization. We are careful about the
+unit of analysis: with few datasets we do not identify a dataset-level coefficient (inconclusive, not null), so we locate our inferential claims at the well-powered item level, following standard
+practice for designs with few level-2 units.
+
+\subsection{Connection to measurement and disagreement scholarship}
+This result operationalizes a long-running argument that there is no single ground truth for subjective constructs
+\citep{aroyo2015truth,plank2022humanlabel}: when judges are benchmarked against the human-human ceiling rather than a
+forced majority, their ``failures'' on contested items are revealed as properties of the construct's contested human reference, not fixable model deficits. Reporting a single accuracy against a majority gold imposes
+consensus where the data shows disagreement; the honest object of evaluation is the human label \emph{distribution}.
+
+\subsection{Implications for designing LLM-as-a-judge experiments}
+The evidence yields a concrete, reusable protocol. Any study using an LLM-as-a-judge should:
+\begin{enumerate}[leftmargin=1.5em,itemsep=2pt]
+\item \textbf{Anchor to the human-human ceiling}, not a single gold; report the ceiling (computed from the annotator
+distribution at the dataset's native annotator count) and the judge-vs-ceiling gap.
+\item \textbf{Match the metric to the construct}: on imbalanced tasks report macro-F1 and per-class scores and
+prefer disagreement-aware evaluation against the full label distribution over forced-majority accuracy.
+\item \textbf{Quantify uncertainty}: bootstrap confidence intervals for every comparison; do not assert ``beats/
+matches'' from point estimates.
+\item \textbf{Stratify by item difficulty}: because variance lives in items, report where the judge fails (high
+human-disagreement items), not only mean accuracy.
+\item \textbf{Probe contamination, but calibrate the probe}: evaluate on post-cutoff data where possible, and treat
+surface-recall probes as conservative screens (they false-positive on high-recall models).
+\item \textbf{Pin the setup}: fix model identifier, version, decoding (temperature, seed); report robustness to
+prompt paraphrase, since small models are prompt-sensitive on subjective tasks.
+\item \textbf{Use juries for aggregate decisions} but not as a ceiling-breaker: panels improve stability yet do not
+lift a subjective task above its human ceiling.
+\item \textbf{Pre-register and release}: register the construct, the human baseline, and the decision threshold, and
+release item-level labels and aggregates.
+\end{enumerate}
+
+\subsection{A decision framework}
+For annotation and evaluation tasks, three regimes follow from the human-ceiling principle. \textbf{Automate (with
+light audit):} objective, verifiable judgments (entailment, factual consistency, instruction-following) where the
+human ceiling is high, exactly where Study~3's NLI panel reaches or exceeds it. \textbf{Calibrate and audit:}
+judgments with a low or moderate ceiling, where a judge can post high accuracy by predicting base rates, so report
+chance-corrected agreement ($\kappa$) and audit the high-disagreement items. \textbf{Keep humans in the loop:}
+constructs on which human annotators themselves disagree sharply, where no open judge can exceed a ceiling humans do
+not reach. A critical caution for the field: agreement on older public benchmarks can reflect memorization
+\citep{bender2021parrots}, and a single headline accuracy can mask base-rate learning, so calibrated,
+disagreement-aware, post-cutoff evaluation should be the norm. The application of these ideas to the subjective,
+interpretive tasks of Human-Centered Computing is the subject of a companion paper.
+% =====================================================================
+\section{Limitations}
+% =====================================================================
+The \emph{human} validation here is inherited from prior work, not added by us: Study 3's ground truth is ChaosNLI's
+${\sim}100$ human labels per item, and the Study 1 review codes each study against the human baselines those studies
+report. The review verdict is our interpretation (only \Nnumeric{} of \Nstudies{} report an extractable numeric
+agreement value); we report an independent re-coding as a reproducibility check (Krippendorff $\alpha=\IRRsoneA$,
+$100\%$ within one level; Appendix~\ref{app:irr}), which is LLM-assisted and therefore measures rubric
+reproducibility. All \Nstudies{}${+}\STN{}$ references were web-verified and two unverifiable entries removed.
+By design we evaluate \emph{open} models (the reproducible choice for most researchers) at temperature~0; Study 2
+uses one summarization benchmark with integer scoring, and Study 3's deep human-label data are available for NLI
+rather than every domain. Subjective social-computing annotation, where the human ceiling is contested, is the focus
+of a companion paper. Findings reflect models available through mid-2026.
+\section{Ethics and reproducibility}
+% =====================================================================
+\textbf{Ethics.} The review analyzes published research, not human subjects, and Study 3 reuses already-public,
+de-identified NLI datasets under their licenses; this work was therefore not human-subjects research requiring IRB
+review, and we sought an exemption determination consistent with our institution's policy. We release only
+item-level labels and aggregate statistics. One ethical point bears on the method itself: treating the
+\emph{majority} human label as ``ground truth'' for the ceiling can encode majority bias and erase minority readings,
+which is why we report the full disagreement (soft labels, entropy) rather than only the majority and recommend
+disagreement-aware evaluation. The contamination screen is reported precisely so ``validated'' verdicts are not
+silently inflated by pretraining exposure.
+\textbf{Reproducibility.} Every number in this paper regenerates from released code: the OpenAlex, Semantic Scholar,
+and web search logs; the coded corpus; the figure and table generators; the SummEval harness and the
+Study-3 judging/scoring/contamination/mixed-effects harness, all keyed to documented model identifiers served through
+\PROVIDER{} at temperature~$0$ with idempotent, resumable checkpoints. The auto-generated statistics macros
+mean the manuscript cannot drift from the data. Repository: \REPO{}.
+
+% =====================================================================
+% =====================================================================
+\section{Conclusion}
+% =====================================================================
+Open, locally-servable LLMs are now strong enough to serve as annotators on objective and verifiable tasks, where
+they meet or exceed established proprietary-judge correlations. But across \Nstudies{} reviewed studies and a
+\NLInjudg{}-judgment meta-evaluation on NLI datasets with rich human labels, reliability is bounded by the same thing
+for every model: the \emph{human-human agreement ceiling}, and it degrades on exactly the items where humans
+themselves disagree. Scaling the judge helps only modestly, and contamination does not explain the pattern. The
+practical consequence is that an LLM-as-a-judge should be reported the way we report any measurement instrument,
+against a human reference, with chance-corrected and disagreement-aware metrics, with uncertainty, and with a stated
+operating range, rather than trusted as an oracle. The right question is never ``can a machine judge?'' but ``can
+this open model agree with humans, on this construct, as well as humans agree with each other?''

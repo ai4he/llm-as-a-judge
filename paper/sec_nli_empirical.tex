@@ -1,0 +1,53 @@
+% =====================================================================
+\section{Study 3: An open-panel meta-evaluation on NLI with rich human labels}\label{sec:study3}
+% =====================================================================
+Study 1 shows LLM judges are most reliable where the human-agreement ceiling is high and verifiable; Study 2 shows
+frontier open models reach the established benchmark on the verifiable aspects of summarization. Study 3 tests the
+mechanism directly on \emph{natural language inference} (NLI), the rare setting that ships \emph{rich} human label
+distributions: ChaosNLI \citep{plank2022humanlabel} re-annotates SNLI and MultiNLI items with ${\sim}100$ human
+labels each, so the human-human agreement ceiling and the per-item disagreement are measured precisely rather than
+estimated from three annotators.
+
+\subsection{Method}
+We evaluate a panel of \STHRmodels{} open models served via \PROVIDER{} (OpenAI-compatible), spanning five families
+and 9B--754B parameters, run at temperature~0. Each model labels every item as a virtual annotator under the
+standard NLI instructions; we benchmark against the \emph{human-human ceiling} (random-annotator-vs-majority
+accuracy with an annotator bootstrap 95\% CI, plus pairwise agreement), and report accuracy, Cohen's $\kappa$, and
+macro-F1 against the majority gold, a majority \textbf{jury} \citep{verga2024poll}, and a calibrated
+contamination screen. The run comprised \NLInjudg{} judgments across \NLIndat{} NLI datasets with zero API errors
+and a 100\% answer-parse rate. Dataset cards, prompts, and metric definitions are in
+Appendices~\ref{app:protocol} to~\ref{app:robust}.
+
+\subsection{Results}
+Table~\ref{tab:nlires} reports the panel against the human ceiling. Where humans agree only moderately
+(SNLI ceiling 0.75, MNLI 0.64), the open panel \emph{matches or exceeds} them: the jury reaches 0.86 on SNLI
+($>$ ceiling) and 5/6 models are \textbf{Validated}, with MNLI \textbf{Promising}. Chance-corrected agreement is
+substantial (best-model $\kappa$ up to 0.71), so this is genuine competence, not base-rate learning.
+
+\begin{table}[t]\centering\small
+\caption{Study 3 (NLI). Open panel vs the human-human ceiling. Ceiling = random-annotator-vs-majority accuracy;
+macro-F1 is the best model's chance-corrected score.}
+\label{tab:nlires}
+\input{tables/tab_nli_results}
+\end{table}
+
+\subsection{Item-level disagreement governs reliability}
+The organizing finding is that errors concentrate on \emph{contested} items. On both datasets, panel accuracy on
+low-human-disagreement (low-entropy) items far exceeds accuracy on high-disagreement items ($\NLIlowH$ vs
+$\NLIhighH$; Table~\ref{tab:nlidis}), and the panel's label distribution diverges from the human distribution most on
+the most contested items. An item-level mixed-effects model of judge correctness (over all \NLInjudg{} judgments)
+makes this precise: the random-intercept SD is far larger across \emph{items} ($\mathrm{SD}=\VCitem$) than across
+datasets ($\VCdataset$) or models (between-model accuracy SD $=\VCmodel$), and with standardized predictors model
+scale contributes only modestly ($\mathrm{OR}_{/\mathrm{SD}}=\RTwosizeOR$). In short, \emph{which item} is judged,
+its latent human (dis)agreement, predicts judge correctness better than which model judges it. A calibrated
+contamination screen (Appendix~\ref{app:robust}) does not explain the pattern: it false-positives on high-recall
+models even for guaranteed-clean text, so we treat it as a conservative screen and rest the claim on the
+disagreement analysis. Juries raise accuracy but cannot lift agreement above the human ceiling on the most contested
+items.
+
+\begin{table}[t]\centering\small
+\caption{Study 3 (NLI) disagreement-aware results. Ceiling with annotator-bootstrap 95\% CI; best-model $\kappa$ and
+macro-F1; panel accuracy on low- vs high-human-disagreement items; Jensen-Shannon panel-vs-human divergence.}
+\label{tab:nlidis}
+\input{tables/tab_nli_disagr}
+\end{table}

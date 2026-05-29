@@ -1,0 +1,136 @@
+\section{Study 3: An empirical LLM-as-a-judge evaluation on HCC datasets with human ground truth}
+\label{sec:study3}
+% =====================================================================
+Studies 1-2 expose a recurring gap: many human-centered datasets ship with human labels yet have never had a
+\emph{formal} LLM-as-a-judge evaluation, meaning a panel of models, bias controls, agreement benchmarked against the
+human ceiling, and a contamination check. Study 3 closes this gap empirically with a released, reproducible harness.
+
+\subsection{Method}
+We evaluate a panel of \STHRmodels{} open models served via \textbf{\PROVIDER{}} (OpenAI-compatible),
+spanning five families and 9B-754B parameters (\texttt{glm-5.1}~754B, \texttt{gptoss-120b}, \texttt{deepseek-v4},
+\texttt{gemma-4-31b}, \texttt{qwen3.6-27b}, \texttt{qwen3.5-9b}), run in parallel at each model's documented
+concurrency. Each model judges every item as a \emph{virtual annotator} under the same instructions the humans
+received. We benchmark against the \emph{human-human ceiling} (random-annotator-vs-majority accuracy and pairwise
+agreement, computed from the per-item annotator counts), report accuracy, Cohen's $\kappa$, and macro-F1 against the
+majority gold, compute a count-based \textbf{alt-test} winning rate \citep{calderon2025alttest}, aggregate the panel
+into a majority \textbf{jury} \citep{verga2024poll}, and run a verbatim quote-completion \textbf{contamination
+probe}. Sample size is power-justified at $n{=}500$ items/dataset (95\% CI half-width $\le\!\pm4.4\%$; $>$80\% power
+for a 0.10 gap vs the ceiling). The run comprised \textbf{\STHRn{} judgments} across \STHRdatasets{} datasets with
+\emph{zero} API errors and a 100\% answer-parse rate; only item-level labels and aggregates are released (no raw
+text), and the two sensitive sets are used under their public licenses.
+
+\subsection{Results}
+Figures~\ref{fig:s3acc}-\ref{fig:s3heat} and Table~\ref{tab:study3} yield one organizing finding:
+\textbf{the human-agreement ceiling governs LLM reliability.} Where humans agree little (NLI; ceiling 0.64-0.75) the
+panel \emph{matches or exceeds} them: on ChaosNLI-SNLI 5/6 models are \textbf{Validated} (jury 0.858 $>$ ceiling
+0.752), and ChaosNLI-MNLI is \textbf{Promising}. Where humans agree strongly on a subjective social construct, the panel falls
+short: GoEmotions (an authors-defined 4-way sentiment grouping of its native 27 emotions, with its own computed
+ceiling 0.78) is uniformly \textbf{Mixed} (best 0.61); HateXplain 3-way hate
+(ceiling 0.835) is \textbf{Mixed} at best and \textbf{Unreliable} for the small model; binary offensiveness (SBIC,
+ceiling 0.905) is the strongest social-computing case (\textbf{Promising}; \texttt{glm-5.1} 0.856) yet still below
+the ceiling. The sixth dataset is a deliberate \emph{clean condition}: MultiPICo irony detection
+\citep{casola2024multipico}, a 2024 perspectivist corpus recent enough to be unlikely in pretraining. Its human
+ceiling is itself low (0.82, just above the 76\% majority baseline); the panel \emph{matches} it
+(\textbf{Promising}; best 0.82, jury 0.83) but largely by defaulting to the majority class (macro-F1 ${\approx}0.45$),
+and \texttt{qwen3.5-9b} collapses (0.40, \textbf{Unreliable}). Four further effects: (i) \textbf{granularity}: binary offensiveness (Promising) clearly beats 3-way
+hate (Mixed); (ii) \textbf{scale}: \texttt{qwen3.5-9b} is weakest on \emph{every} dataset (Caution/Unreliable),
+while 27B-754B cluster together (bigger is not always better: 31B \texttt{gemma} ties the 754B \texttt{glm});
+(iii) \textbf{chance-corrected agreement} (Cohen's $\kappa$, macro-F1; Table~\ref{tab:disagr}) collapses on the
+subjective social-computing tasks (e.g.\ MultiPICo $\kappa{=}0.40$ at $0.82$ accuracy, GoEmotions $\kappa{=}0.44$)
+while staying high on NLI, so the verdicts are not artifacts of raw accuracy on imbalanced labels. We caution that
+our \emph{count-based} alt-test is unreliable on these datasets, which provide per-item label counts but not
+annotator identities: a bootstrap shows it is biased toward a judge that simply predicts the majority class (it
+nominally ``passes'' on essentially every dataset), so we do \emph{not} use it as a replacement gate and report it
+only as a caveated sensitivity check; (iv) \textbf{juries}
+raise accuracy but do not lift any subjective task above its human ceiling. The \textbf{contamination probe}
+(Table~\ref{tab:study3}, last column) shows the strongest judges have non-trivial verbatim recall across sets
+(gemma MEDIUM throughout). We calibrate the probe with a clean control (Appendix~\ref{app:robust}): on freshly
+authored post-cutoff text, high-recall models produce fluent continuations regardless of memorization, so we read
+the probe as a \emph{conservative} screen and draw contamination conclusions from the stronger evidence. That
+evidence is decisive: the recent (2024) MultiPICo set, which the low-recall judge scores LOW on and which is matched
+only at its low human ceiling, shows the social-computing shortfall reflects \emph{human disagreement}, not
+pretraining exposure. The disagreement analysis (next) carries the claim directly.
+
+\begin{figure}[t]\centering
+\includegraphics[width=\linewidth]{s3_fig02_full_accuracy}
+\caption{Study 3. Per-dataset accuracy vs the human ceiling (blue dashed) for the 6-model panel (n=500 each;
+whiskers = 95\% bootstrap CI; bar colour = verdict; WR = alt-test winning rate). Datasets ordered by construct
+subjectivity. LLMs clear LOW ceilings (NLI) but fall short of HIGH ceilings on subjective social-computing tasks.}
+\label{fig:s3acc}
+\end{figure}
+
+\begin{figure}[t]\centering
+\includegraphics[width=0.92\linewidth]{s3_fig03_full_verdict}
+\caption{Study 3. Dataset$\times$judge-model reliability verdict (cell = accuracy + verdict). The scale effect
+(\texttt{qwen3.5-9b} column) and the construct-subjectivity gradient (rows) are both visible.}
+\label{fig:s3heat}
+\end{figure}
+
+\begin{table}[t]\centering\small
+\caption{Study 3 results across \STHRdatasets{} datasets $\times$ \STHRmodels{} models (\STHRn{} judgments).
+Human ceiling = random-annotator-vs-majority accuracy; macro-F1 is the best model's chance-corrected score; contamination tier
+from the verbatim-recall probe.}
+\label{tab:study3}
+\input{tables/tab_study3_results}
+\end{table}
+
+\subsection{What governs reliability? A mixed-effects analysis}
+We probe the ``ceiling governs'' claim with successively stricter models of judgment correctness
+($\mathbf{1}[\text{judge}=\text{majority gold}]$, over all \STHRn{} judgments). A naive logistic model with only task
+\emph{subjectivity} ($1\!-\!$ceiling, at the dataset level) and \emph{scale} ($\log_{10}$ params) returns a large
+subjectivity effect (Figure~\ref{fig:s3stats}a). That model is confounded, however: with only six datasets,
+subjectivity is collinear with construct \emph{granularity} (number of classes) and label \emph{base-rate skew}.
+When we add those competitors and use item-cluster-robust standard errors with all predictors standardized (so the
+odds ratios are per-SD and comparable), the apparent subjectivity effect is \textbf{not significant}
+($\mathrm{OR}_{/\mathrm{SD}}=\RTwosubjOR$, $p=\RTwosubjP$); the remaining effects are modest, with base-rate skew
+($\mathrm{OR}_{/\mathrm{SD}}=\RTwobaseOR$) and model scale ($\mathrm{OR}_{/\mathrm{SD}}=\RTwosizeOR$) the largest
+(an earlier draft reported an $\mathrm{OR}{=}8.2$ for base-rate skew, which was a raw-unit scaling artifact corrected
+here). At the dataset level (the honest unit of analysis, $n{=}\metaN$ datasets) the accuracy-subjectivity slope has
+a dataset-cluster bootstrap 95\% CI of $[\RTwometaCIlo,\RTwometaCIhi]$. Following standard practice for designs with
+few level-2 units, we therefore locate our inferential claims at the \emph{item} level, where the data are abundant
+and the effect is robust (below), and report dataset-level differences descriptively.
+
+What \emph{is} robust is the disagreement account. (i) \textbf{Variance lives in the items:} the random-intercept SD
+is far larger across \emph{items} ($\mathrm{SD}=\VCitem$) than across datasets ($\VCdataset$) or models
+(between-model accuracy SD $=\VCmodel$); \emph{which item} is judged, that is, its latent human (dis)agreement,
+matters more than which model judges or which dataset it comes from. (ii) \textbf{Judges fail where humans disagree:}
+on \emph{every} dataset, panel accuracy on low-human-disagreement (low-entropy) items far exceeds accuracy on
+high-disagreement items (Table~\ref{tab:disagr}, columns acc$_{\downarrow H}$ vs acc$_{\uparrow H}$), and the panel's
+label distribution diverges from the human distribution (Jensen-Shannon) most on the most contested datasets.
+(iii) \textbf{Chance-corrected agreement confirms it:} best-model Cohen's $\kappa$ and macro-F1
+(Table~\ref{tab:disagr}) fall sharply on subjective constructs (e.g.\ MultiPICo $\kappa{=}0.40$ at $0.82$ accuracy),
+so the verdicts are not artifacts of raw accuracy on imbalanced labels. (iv) A Benjamini-Hochberg analysis across the
+\SMEfdrtests{} judge$\times$dataset cells, using bootstrap CIs for each ceiling rather than a fixed constant, still
+places the majority significantly \emph{below} their human ceiling. In short, scale helps a little and base-rate
+structure helps a lot, but the binding constraint is the human disagreement embedded in each item, not a tidy
+dataset-level subjectivity score.
+
+\begin{table}[t]\centering\small
+\caption{Study 3 disagreement-aware results. Ceiling with annotator-bootstrap 95\% CI; best-model Cohen's $\kappa$
+and macro-F1; panel accuracy on low- vs high-human-disagreement (entropy) items; Jensen-Shannon divergence between
+the panel and human label distributions. Judges systematically lose accuracy as human disagreement rises.}
+\label{tab:disagr}
+\input{tables/tab_disagreement}
+\end{table}
+
+\begin{figure}[t]\centering
+\includegraphics[width=\linewidth]{s3_fig04_stats}
+\caption{Study 3 inferential layer. (a) Odds ratios from the \emph{naive} two-predictor logit (subjectivity appears
+strong here, but the effect is not robust once base-rate skew and granularity are added; see text). (b) Variance
+components: item-level variance dominates dataset- and model-level variance. (c) Ceiling gap per judge$\times$dataset
+(filled = BH $q<.05$); most cells sit below the human ceiling.}
+\label{fig:s3stats}
+\end{figure}
+
+\subsection{Integration with the decision framework}
+Mapped onto the five-level rubric, Study 3 drops fresh, dataset-level points into the Study-1/2 landscape and
+\emph{quantitatively confirms} the augment-not-replace conclusion for human-centered annotation: LLM judges are a
+validated substitute for objective/low-ceiling labeling and a strong assistant for coarse (binary) moderation, but
+fall short of, and fail the replacement test for, subjective, fine-grained, or high-consensus human-centered
+constructs, a pattern the mixed-effects model shows is driven by item-level human (dis)agreement rather than by
+model scale. The recent MultiPICo clean condition rules out contamination as the explanation: a 2024 set the
+low-recall judge has not memorized is still matched only at its (low) human ceiling. \emph{Limitation:} the panel is
+limited to open models from a single provider, and qualitative-coding corpora with public multi-coder labels (still
+scarce) are the immediate next addition.
+
+% =====================================================================

@@ -1,0 +1,31 @@
+% =====================================================================
+\section{Introduction}
+% =====================================================================
+Large language models are now routinely deployed as \emph{judges}: instead of recruiting human annotators to label
+data, rate outputs, or score quality, researchers prompt an LLM to do it for a fraction of the cost
+\citep{zheng2023mtbench,liu2023geval,gilardi2023chatgpt}. The practice is spreading faster than the evidence that
+licenses it. Two questions remain under-answered. \textbf{When} does an LLM judge agree with humans closely enough to
+substitute for them, and \textbf{what} governs that agreement, model scale, task, or something about the human
+labels themselves?
+
+We answer these questions for \emph{open, locally-servable} models. This is a deliberate scope, not a limitation:
+proprietary judges are expensive, non-reproducible, and change without notice, so for most researchers the realistic
+question is whether an open model they can run themselves is a trustworthy judge. Our entire empirical program uses
+open models served through a standard vLLM endpoint at temperature~0 with released harnesses.
+
+One methodological commitment runs through the paper: an LLM judge must be measured against the \emph{human-human
+agreement ceiling} for the task, not against a single ``gold'' label. For subjective constructs there is no single
+correct answer \citep{aroyo2015truth,plank2022humanlabel}; the relevant question is whether the judge agrees with
+humans as well as humans agree with each other. We compute that ceiling directly from the per-item annotator
+distributions that the datasets already provide, so our human reference is real, independent, and inherited from the
+data, not added by us.
+
+\paragraph{Contributions.} (1) \textbf{Study 1:} a PRISMA systematic review of \Nstudies{} studies across
+\Ndomains{} domains (every reference independently web-verified) that maps, against the human ceiling, where
+LLM-as-a-judge is reliable and where it is not. (2) \textbf{Study 2:} a controlled replication showing that the most
+powerful open models now meet or exceed the established proprietary-judge correlations on the verifiable aspects of a
+flagship benchmark, with bootstrap confidence intervals. (3) \textbf{Study 3:} a new meta-evaluation of a six-model
+open panel (9B-754B) on six datasets with human label distributions (\STHRn{} judgments), establishing that
+\emph{item-level human disagreement}, not model scale or data contamination, is the binding constraint on judge
+reliability. (4) A decision framework and an eight-point protocol for designing LLM-as-a-judge experiments. All
+code, corpora, search logs, and harnesses are released.
