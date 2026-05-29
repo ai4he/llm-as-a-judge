@@ -1,0 +1,1 @@
+{"started": 1780064728.8734975, "datasets": {"chaosnli_snli": {"phase": "done", "start": 1780064728.8735101, "end": 1780064977.606741}, "chaosnli_mnli": {"phase": "done", "start": 1780064977.6070468, "end": 1780065239.7018778}, "hatexplain": {"phase": "done", "start": 1780065239.7021906, "end": 1780065488.770872}}, "finished": 1780065488.7710876}

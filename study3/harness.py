@@ -37,6 +37,16 @@ PROMPTS = {
           "Answer with ONLY a JSON object on the last line: {{\"label\": \"entailment\"|\"neutral\"|\"contradiction\"}}",
    "labels":{"entailment":"e","neutral":"n","contradiction":"c"},
  },
+ "hate_v1": {
+   "system":"You are an expert content-moderation annotator. You label social-media posts as hateful, "
+            "offensive, or normal following standard hate-speech annotation guidelines. Content may be "
+            "offensive; classify it objectively.",
+   "user":"Post: {text}\n\nClassify the post: HATE SPEECH (attacks/dehumanizes a group based on identity), "
+          "OFFENSIVE (abusive/offensive but not group-targeted hate), or NORMAL.\n"
+          "Answer with ONLY a JSON object on the last line: {{\"label\": \"hate speech\"|\"offensive\"|\"normal\"}}",
+   "labels":{"hate speech":"hate","hatespeech":"hate","hateful":"hate","hate":"hate",
+             "offensive":"off","abusive":"off","normal":"norm","neither":"norm","none":"norm"},
+ },
 }
 
 def parse_label(text, labelmap):
@@ -65,15 +75,34 @@ def load_chaosnli(subset="snli", n=None, seed=20260529):
         p=ex.get("premise"); h=ex.get("hypothesis")
         if not p or not h: continue
         items.append({"id":d["uid"],"premise":p,"hypothesis":h,
-                      "gold":d["majority_label"],            # 'e'/'n'/'c'
-                      "label_count":d["label_count"],         # [e,n,c]
-                      "n_annot":sum(d["label_count"])})
+                      "gold":d["majority_label"],"classes":["e","n","c"],
+                      "label_count":d["label_count"],"n_annot":sum(d["label_count"])})
+    random.Random(seed).shuffle(items)
+    return items[:n] if n else items
+
+def load_hatexplain(n=None, seed=20260529):
+    "HateXplain (3 annotators/post; hate/offensive/normal). Sensitive content; only ids/labels are stored."
+    import urllib.request
+    from collections import Counter
+    cache=RAW/"hatexplain_dataset.json"
+    if not cache.exists():
+        urllib.request.urlretrieve("https://raw.githubusercontent.com/hate-alert/HateXplain/master/Data/dataset.json", cache)
+    d=json.load(open(cache)); LM={"hatespeech":"hate","offensive":"off","normal":"norm"}; classes=["hate","off","norm"]
+    items=[]
+    for pid,rec in d.items():
+        labs=[LM[a["label"]] for a in rec.get("annotators",[]) if a.get("label") in LM]
+        if len(labs)<3: continue
+        cnt=Counter(labs); top,tc=cnt.most_common(1)[0]
+        if list(cnt.values()).count(tc)>1: continue            # no majority -> drop (HateXplain convention)
+        items.append({"id":pid,"text":" ".join(rec.get("post_tokens",[])),"gold":top,
+                      "classes":classes,"label_count":[cnt.get(c,0) for c in classes],"n_annot":len(labs)})
     random.Random(seed).shuffle(items)
     return items[:n] if n else items
 
 LOADERS={"chaosnli_snli":lambda n: load_chaosnli("snli",n),
-         "chaosnli_mnli":lambda n: load_chaosnli("mnli",n)}
-TASK_PROMPT={"chaosnli_snli":"nli_v1","chaosnli_mnli":"nli_v1"}
+         "chaosnli_mnli":lambda n: load_chaosnli("mnli",n),
+         "hatexplain":lambda n: load_hatexplain(n)}
+TASK_PROMPT={"chaosnli_snli":"nli_v1","chaosnli_mnli":"nli_v1","hatexplain":"hate_v1"}
 
 # ---------------- async judging ----------------
 async def call_chat(session, model, messages, max_tokens, temperature):
@@ -97,7 +126,7 @@ async def call_chat(session, model, messages, max_tokens, temperature):
 async def judge(session, sem, model, item, prompt_id, run_id, temperature):
     pr=PROMPTS[prompt_id]
     messages=[{"role":"system","content":pr["system"]},
-              {"role":"user","content":pr["user"].format(premise=item["premise"],hypothesis=item["hypothesis"])}]
+              {"role":"user","content":pr["user"].format(**item)}]
     async with sem:
         res=await call_chat(session,model,messages,1500,temperature)
         text=res.get("content") or res.get("reasoning") or ""

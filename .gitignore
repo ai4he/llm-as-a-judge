@@ -23,3 +23,10 @@ paper/compile.log
 # --- misc ---
 .DS_Store
 texinstall.log
+
+# Study 3 raw datasets (licenses/ethics: not redistributed)
+study3/data_raw/
+study3/outputs/*.raw.jsonl
+
+# agent/session files (may contain secrets) - never commit
+.claude/

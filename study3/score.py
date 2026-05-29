@@ -28,12 +28,12 @@ def human_ceiling(items):
         pair.append(sum(x*(x-1) for x in c)/(N*(N-1)))          # P(two random annotators agree)
     return float(np.mean(accs)), float(np.mean(pair))
 
-def alt_test_winrate(items_by_id, preds):
+def alt_test_winrate(items_by_id, preds, classes):
     "Count-based approx of the alt-test: P(LLM >= a random excluded human at predicting the rest)."
-    wins=[]
+    wins=[]; idx={c:i for i,c in enumerate(classes)}
     for iid,pred in preds.items():
         if pred is None or iid not in items_by_id: continue
-        c=list(items_by_id[iid]["label_count"]); N=sum(c); idx={"e":0,"n":1,"c":2}
+        c=list(items_by_id[iid]["label_count"]); N=sum(c)
         if N<2 or pred not in idx: continue
         wr=0.0
         for j,cj in enumerate(c):
@@ -61,7 +61,7 @@ def main():
     models=sorted({r["model"] for r in recs})
     report={"dataset":a.dataset,"run":a.run,"n_items":len(items),
             "human_ceiling_acc":round(H_acc,3),"human_pairwise_agree":round(H_pair,3),"models":{}}
-    classes=["e","n","c"]; per_item_pred=defaultdict(dict)
+    classes=items[0]["classes"]; per_item_pred=defaultdict(dict)
     for m in models:
         rm=[r for r in recs if r["model"]==m]
         pairs=[(r["gold"],r["pred"]) for r in rm if r["pred"] in classes and r["gold"] in classes]
@@ -76,7 +76,7 @@ def main():
         f1=float(f1_score(g,p,labels=classes,average="macro",zero_division=0))
         pr,rc,_,_=precision_recall_fscore_support(g,p,labels=classes,average="macro",zero_division=0)
         acc_lo,acc_hi=boot_ci(pairs, lambda s: np.mean([x==y for x,y in s]))
-        wr,wn=alt_test_winrate(by_id,preds_by_id)
+        wr,wn=alt_test_winrate(by_id,preds_by_id,classes)
         v=verdict(acc,H_acc,kap)
         report["models"][m]={"parse_rate":parse_rate,"n":len(pairs),"accuracy":round(acc,3),
             "acc_CI":[round(acc_lo,3),round(acc_hi,3)],"cohen_kappa_vs_gold":round(kap,3),

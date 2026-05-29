@@ -1,0 +1,124 @@
+{
+  "dataset": "chaosnli_snli",
+  "run": "full",
+  "n_items": 500,
+  "human_ceiling_acc": 0.752,
+  "human_pairwise_agree": 0.656,
+  "models": {
+    "deepseek-v4-pro": {
+      "parse_rate": 1.0,
+      "n": 500,
+      "accuracy": 0.792,
+      "acc_CI": [
+        0.758,
+        0.828
+      ],
+      "cohen_kappa_vs_gold": 0.638,
+      "macro_f1": 0.768,
+      "macro_precision": 0.778,
+      "macro_recall": 0.76,
+      "alt_test_winrate": 0.523,
+      "alt_test_pass": true,
+      "verdict": 1,
+      "verdict_label": "Validated",
+      "vs_ceiling_acc": 0.04
+    },
+    "gemma-4-31b": {
+      "parse_rate": 1.0,
+      "n": 500,
+      "accuracy": 0.836,
+      "acc_CI": [
+        0.802,
+        0.868
+      ],
+      "cohen_kappa_vs_gold": 0.708,
+      "macro_f1": 0.793,
+      "macro_precision": 0.853,
+      "macro_recall": 0.772,
+      "alt_test_winrate": 0.545,
+      "alt_test_pass": true,
+      "verdict": 1,
+      "verdict_label": "Validated",
+      "vs_ceiling_acc": 0.084
+    },
+    "glm-5.1-fp8": {
+      "parse_rate": 1.0,
+      "n": 500,
+      "accuracy": 0.832,
+      "acc_CI": [
+        0.8,
+        0.864
+      ],
+      "cohen_kappa_vs_gold": 0.713,
+      "macro_f1": 0.81,
+      "macro_precision": 0.816,
+      "macro_recall": 0.818,
+      "alt_test_winrate": 0.545,
+      "alt_test_pass": true,
+      "verdict": 1,
+      "verdict_label": "Validated",
+      "vs_ceiling_acc": 0.08
+    },
+    "gptoss-120b": {
+      "parse_rate": 1.0,
+      "n": 500,
+      "accuracy": 0.786,
+      "acc_CI": [
+        0.75,
+        0.82
+      ],
+      "cohen_kappa_vs_gold": 0.603,
+      "macro_f1": 0.732,
+      "macro_precision": 0.808,
+      "macro_recall": 0.695,
+      "alt_test_winrate": 0.52,
+      "alt_test_pass": true,
+      "verdict": 1,
+      "verdict_label": "Validated",
+      "vs_ceiling_acc": 0.034
+    },
+    "qwen3.5-9b": {
+      "parse_rate": 1.0,
+      "n": 500,
+      "accuracy": 0.594,
+      "acc_CI": [
+        0.55,
+        0.634
+      ],
+      "cohen_kappa_vs_gold": 0.379,
+      "macro_f1": 0.577,
+      "macro_precision": 0.619,
+      "macro_recall": 0.613,
+      "alt_test_winrate": 0.425,
+      "alt_test_pass": false,
+      "verdict": 4,
+      "verdict_label": "Caution",
+      "vs_ceiling_acc": -0.158
+    },
+    "qwen3.6-27b-fp8": {
+      "parse_rate": 1.0,
+      "n": 500,
+      "accuracy": 0.834,
+      "acc_CI": [
+        0.802,
+        0.866
+      ],
+      "cohen_kappa_vs_gold": 0.714,
+      "macro_f1": 0.814,
+      "macro_precision": 0.82,
+      "macro_recall": 0.814,
+      "alt_test_winrate": 0.545,
+      "alt_test_pass": true,
+      "verdict": 1,
+      "verdict_label": "Validated",
+      "vs_ceiling_acc": 0.082
+    }
+  },
+  "jury": {
+    "n": 500,
+    "accuracy": 0.858,
+    "cohen_kappa": 0.753,
+    "verdict_label": "Validated",
+    "vs_ceiling_acc": 0.106
+  }
+}
