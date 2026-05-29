@@ -355,15 +355,22 @@ panel \emph{matches or exceeds} them: on ChaosNLI-SNLI 5/6 models are \textbf{Va
 short: GoEmotions 4-way sentiment (ceiling 0.78) is uniformly \textbf{Mixed} (best 0.61); HateXplain 3-way hate
 (ceiling 0.835) is \textbf{Mixed} at best and \textbf{Unreliable} for the small model; binary offensiveness (SBIC,
 ceiling 0.905) is the strongest social-computing case (\textbf{Promising}; \texttt{glm-5.1} 0.856) yet still below
-the ceiling. Four further effects: (i) \textbf{granularity}: binary offensiveness (Promising) clearly beats 3-way
+the ceiling. The sixth dataset is a deliberate \emph{clean condition}: MultiPICo irony detection
+\citep{casola2024multipico}, a 2024 perspectivist corpus recent enough to be unlikely in pretraining. Its human
+ceiling is itself low (0.82, just above the 76\% majority baseline); the panel \emph{matches} it
+(\textbf{Promising}; best 0.82, jury 0.83) but largely by defaulting to the majority class (macro-F1 ${\approx}0.45$),
+and \texttt{qwen3.5-9b} collapses (0.40, \textbf{Unreliable}). Four further effects: (i) \textbf{granularity}: binary offensiveness (Promising) clearly beats 3-way
 hate (Mixed); (ii) \textbf{scale}: \texttt{qwen3.5-9b} is weakest on \emph{every} dataset (Caution/Unreliable),
 while 27B-754B cluster together (bigger is not always better: 31B \texttt{gemma} ties the 754B \texttt{glm});
-(iii) the \textbf{alt-test} is passed (winning rate $\ge$0.5) \emph{only} on NLI; on every subjective
-social-computing task no model statistically earns the right to replace a human annotator; (iv) \textbf{juries}
+(iii) the \textbf{alt-test} (winning rate $\ge$0.5) is passed only on the \emph{low-ceiling} tasks, NLI and the
+binary irony set (5/6 models on both ChaosNLI-SNLI and MultiPICo); on every \emph{high-consensus} task, including the
+Promising binary offensiveness (SBIC, 0/6), no model earns the statistical right to replace a human annotator;
+(iv) \textbf{juries}
 raise accuracy but do not lift any subjective task above its human ceiling. The \textbf{contamination probe}
-(Table~\ref{tab:study3}, last column) shows the strongest judges have non-trivial verbatim recall of the oldest sets
-(e.g., MEDIUM on SNLI), caveating the NLI ``Validated'' result; the social-computing shortfall holds regardless of
-tier.
+(Table~\ref{tab:study3}, last column) shows the strongest judges have non-trivial verbatim recall across sets
+(gemma MEDIUM throughout), caveating the NLI ``Validated'' result; crucially the recent low-contamination MultiPICo
+(LOW for the small-recall \texttt{qwen3.5-9b}) is still matched only at its low human ceiling, so the
+social-computing shortfall tracks the human ceiling, not memorization.
 
 \begin{figure}[t]\centering
 \includegraphics[width=\linewidth]{s3_fig02_full_accuracy}
@@ -381,7 +388,7 @@ subjectivity. LLMs clear LOW ceilings (NLI) but fall short of HIGH ceilings on s
 \end{figure}
 
 \begin{table}[t]\centering\small
-\caption{Study 3 results across \STHRdatasets{} datasets $\times$ \STHRmodels{} models (15{,}000 judgments).
+\caption{Study 3 results across \STHRdatasets{} datasets $\times$ \STHRmodels{} models (\STHRn{} judgments).
 Human ceiling = random-annotator-vs-majority accuracy; alt-test pass = winning rate $\ge0.5$; contamination tier
 from the verbatim-recall probe.}
 \label{tab:study3}
@@ -421,9 +428,10 @@ Mapped onto the five-level rubric, Study 3 drops fresh, dataset-level points int
 validated substitute for objective/low-ceiling labeling and a strong assistant for coarse (binary) moderation, but
 fall short of, and fail the replacement test for, subjective, fine-grained, or high-consensus human-centered
 constructs, a pattern the mixed-effects model shows is driven by item-level human (dis)agreement rather than by
-model scale. \emph{Limitation:} the present datasets are predominantly higher-contamination; a dedicated
-low-contamination clean condition (a post-cutoff annotated set) and additional qualitative-coding corpora are the
-immediate next additions.
+model scale. The recent MultiPICo clean condition rules out contamination as the explanation: a 2024 set the
+low-recall judge has not memorized is still matched only at its (low) human ceiling. \emph{Limitation:} the panel is
+limited to open models from a single provider, and qualitative-coding corpora with public multi-coder labels (still
+scarce) are the immediate next addition.
 
 % =====================================================================
 \section{General discussion: a decision framework for HCC}
@@ -456,9 +464,9 @@ are heterogeneous and synthesized within families rather than pooled; several me
 (flagged via family/role aggregates); database recall depends on indexing and query phrasing (mitigated, not
 removed, by three-source triangulation); and findings reflect models available through mid-2026. The empirical
 studies are bounded too: Study 1b uses one flagship promising-domain benchmark (SummEval), and Study 3's panel is
-limited to open models from a single provider and to \STHRdatasets{} datasets, with a low-contamination clean
-condition and qualitative-coding corpora still in progress. The verdict rubric, though explicit and released, embeds
-judgement; we therefore release both corpora for re-coding.
+limited to open models from a single provider and to \STHRdatasets{} datasets (one of which, MultiPICo, is included
+as a recent low-contamination clean condition), with qualitative-coding corpora still in progress. The verdict
+rubric, though explicit and released, embeds judgement; we therefore release both corpora for re-coding.
 
 % =====================================================================
 \section{Conclusion}

@@ -1,0 +1,124 @@
+{
+  "dataset": "multipico",
+  "run": "full",
+  "n_items": 500,
+  "human_ceiling_acc": 0.821,
+  "human_pairwise_agree": 0.688,
+  "models": {
+    "deepseek-v4-pro": {
+      "parse_rate": 1.0,
+      "n": 500,
+      "accuracy": 0.774,
+      "acc_CI": [
+        0.736,
+        0.81
+      ],
+      "cohen_kappa_vs_gold": 0.457,
+      "macro_f1": 0.724,
+      "macro_precision": 0.71,
+      "macro_recall": 0.77,
+      "alt_test_winrate": 0.507,
+      "alt_test_pass": true,
+      "verdict": 2,
+      "verdict_label": "Promising",
+      "vs_ceiling_acc": -0.047
+    },
+    "gemma-4-31b": {
+      "parse_rate": 1.0,
+      "n": 500,
+      "accuracy": 0.822,
+      "acc_CI": [
+        0.79,
+        0.856
+      ],
+      "cohen_kappa_vs_gold": 0.404,
+      "macro_f1": 0.697,
+      "macro_precision": 0.767,
+      "macro_recall": 0.671,
+      "alt_test_winrate": 0.505,
+      "alt_test_pass": true,
+      "verdict": 2,
+      "verdict_label": "Promising",
+      "vs_ceiling_acc": 0.001
+    },
+    "glm-5.1-fp8": {
+      "parse_rate": 1.0,
+      "n": 500,
+      "accuracy": 0.816,
+      "acc_CI": [
+        0.782,
+        0.85
+      ],
+      "cohen_kappa_vs_gold": 0.424,
+      "macro_f1": 0.71,
+      "macro_precision": 0.742,
+      "macro_recall": 0.692,
+      "alt_test_winrate": 0.504,
+      "alt_test_pass": true,
+      "verdict": 2,
+      "verdict_label": "Promising",
+      "vs_ceiling_acc": -0.005
+    },
+    "gptoss-120b": {
+      "parse_rate": 1.0,
+      "n": 500,
+      "accuracy": 0.8,
+      "acc_CI": [
+        0.762,
+        0.836
+      ],
+      "cohen_kappa_vs_gold": 0.435,
+      "macro_f1": 0.718,
+      "macro_precision": 0.716,
+      "macro_recall": 0.719,
+      "alt_test_winrate": 0.51,
+      "alt_test_pass": true,
+      "verdict": 2,
+      "verdict_label": "Promising",
+      "vs_ceiling_acc": -0.021
+    },
+    "qwen3.5-9b": {
+      "parse_rate": 1.0,
+      "n": 500,
+      "accuracy": 0.402,
+      "acc_CI": [
+        0.358,
+        0.446
+      ],
+      "cohen_kappa_vs_gold": 0.076,
+      "macro_f1": 0.402,
+      "macro_precision": 0.569,
+      "macro_recall": 0.569,
+      "alt_test_winrate": 0.363,
+      "alt_test_pass": false,
+      "verdict": 5,
+      "verdict_label": "Unreliable",
+      "vs_ceiling_acc": -0.419
+    },
+    "qwen3.6-27b-fp8": {
+      "parse_rate": 1.0,
+      "n": 500,
+      "accuracy": 0.808,
+      "acc_CI": [
+        0.774,
+        0.842
+      ],
+      "cohen_kappa_vs_gold": 0.465,
+      "macro_f1": 0.732,
+      "macro_precision": 0.728,
+      "macro_recall": 0.737,
+      "alt_test_winrate": 0.512,
+      "alt_test_pass": true,
+      "verdict": 2,
+      "verdict_label": "Promising",
+      "vs_ceiling_acc": -0.013
+    }
+  },
+  "jury": {
+    "n": 500,
+    "accuracy": 0.83,
+    "cohen_kappa": 0.536,
+    "verdict_label": "Promising",
+    "vs_ceiling_acc": 0.009
+  }
+}

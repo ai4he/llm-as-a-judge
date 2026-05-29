@@ -23,8 +23,9 @@ Clemson's vLLM API and the agreement-against-human-ceiling methodology distilled
 that contain human labels but have never been formally tested with an LLM judge. Across \STHRn{} judgments (a
 6-model open panel, 9B-754B), it finds the human-agreement ceiling governs reliability: the panel matches or
 exceeds humans on low-ceiling NLI but falls short of, and fails the alt-test for, subjective social-computing
-annotation (emotion, hate speech), with binary offensiveness the strongest case. A mixed-effects model confirms the
-mechanism: judge correctness is governed overwhelmingly by item-level human (dis)agreement (random-intercept
+annotation (emotion, hate speech), with binary offensiveness the strongest case; a recent low-contamination irony
+set is matched only at its own low human ceiling, ruling out memorization as the explanation. A mixed-effects model
+confirms the mechanism: judge correctness is governed overwhelmingly by item-level human (dis)agreement (random-intercept
 $\mathrm{SD}_{\text{item}}=\SMEvcitem$) and by task subjectivity ($\mathrm{OR}=\SMEsubjOR$ per unit of
 $1\!-\!$ceiling), while model scale contributes only modestly ($\mathrm{OR}=\SMEsizeOR$ per $\log_{10}$ params);
 after FDR correction \SMEfdrbelow{} of \SMEfdrtests{} judge$\times$dataset cells sit significantly below the human
