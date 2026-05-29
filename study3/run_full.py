@@ -8,7 +8,16 @@ HERE=Path(__file__).resolve().parent; sys.path.insert(0,str(HERE))
 import harness
 from plan import FULL_PLAN, PANEL, RUN_ID
 OUT=HERE/"outputs"; OUT.mkdir(exist_ok=True)
-(OUT/"full_run.start").write_text(str(time.time()))   # start marker for ETA
+def _count_run(ds):
+    f=OUT/f"{ds}.judgments.jsonl"; c=0
+    if f.exists():
+        for l in open(f):
+            try:
+                if json.loads(l).get("run_id")==RUN_ID: c+=1
+            except: pass
+    return c
+_baseline=sum(_count_run(ds) for ds,_,_,_ in FULL_PLAN)   # already-done judgments (resume)
+(OUT/"full_run.start").write_text(json.dumps({"start":time.time(),"baseline":_baseline}))
 status={"started":time.time(),"datasets":{}}
 for ds,n,tier,sensitive in FULL_PLAN:
     print(f"\n=== {ds} (n={n}, contamination={tier}, sensitive={sensitive}) x {len(PANEL)} models ===",flush=True)

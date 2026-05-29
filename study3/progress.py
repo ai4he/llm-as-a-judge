@@ -19,10 +19,13 @@ def counts(ds):
         except: pass
     return done,err,unp
 
-start=None
+start=None; baseline=0
 if (OUT/"full_run.start").exists():
-    try: start=float((OUT/"full_run.start").read_text().strip())
-    except: pass
+    try:
+        raw=(OUT/"full_run.start").read_text().strip()
+        try: j=json.loads(raw); start=j.get("start"); baseline=j.get("baseline",0)
+        except Exception: start=float(raw)
+    except Exception: pass
 elapsed=(time.time()-start) if start else 0
 tot_done=tot_exp=0; rows=[]
 for ds,n,tier,sens in FULL_PLAN:
@@ -30,7 +33,8 @@ for ds,n,tier,sens in FULL_PLAN:
     pct=100*done/exp if exp else 0
     st="✔ done" if done>=exp else ("▶ running" if done>0 else "… queued")
     rows.append((ds,tier,("Y" if sens else "-"),done,exp,pct,unp,err,st))
-rate=tot_done/elapsed if elapsed>0 else 0
+done_since=max(0,tot_done-baseline)                 # judgments since this launch (excludes resumed)
+rate=done_since/elapsed if elapsed>0 else 0
 eta=(tot_exp-tot_done)/rate if rate>0 else float("inf")
 hh=lambda s: ("%dm%02ds"%(s//60,s%60)) if s!=float("inf") and s<1e7 else "—"
 

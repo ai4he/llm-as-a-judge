@@ -47,6 +47,20 @@ PROMPTS = {
    "labels":{"hate speech":"hate","hatespeech":"hate","hateful":"hate","hate":"hate",
              "offensive":"off","abusive":"off","normal":"norm","neither":"norm","none":"norm"},
  },
+ "emotion_v1": {
+   "system":"You are an expert emotion/sentiment annotator labeling short social-media (Reddit) comments.",
+   "user":"Comment: {text}\n\nWhat is the overall sentiment of the comment? POSITIVE, NEGATIVE, AMBIGUOUS "
+          "(mixed/uncertain such as surprise or curiosity), or NEUTRAL.\n"
+          "Answer with ONLY a JSON object on the last line: {{\"label\": \"positive\"|\"negative\"|\"ambiguous\"|\"neutral\"}}",
+   "labels":{"positive":"pos","negative":"neg","ambiguous":"amb","mixed":"amb","neutral":"neu"},
+ },
+ "offensive_v1": {
+   "system":"You are a content-moderation annotator. You judge whether social-media posts are offensive "
+            "(rude, disrespectful, toxic, or demeaning toward a person or group). Content may be offensive; judge objectively.",
+   "user":"Post: {text}\n\nIs this post offensive (including potentially offensive / 'maybe')?\n"
+          "Answer with ONLY a JSON object on the last line: {{\"label\": \"offensive\"|\"not offensive\"}}",
+   "labels":{"offensive":"off","maybe":"off","yes":"off","not offensive":"notoff","inoffensive":"notoff","no":"notoff","none":"notoff"},
+ },
 }
 
 def parse_label(text, labelmap):
@@ -99,10 +113,69 @@ def load_hatexplain(n=None, seed=20260529):
     random.Random(seed).shuffle(items)
     return items[:n] if n else items
 
+_GE_POS={"admiration","amusement","approval","caring","desire","excitement","gratitude","joy","love","optimism","pride","relief"}
+_GE_NEG={"anger","annoyance","disappointment","disapproval","disgust","embarrassment","fear","grief","nervousness","remorse","sadness"}
+_GE_AMB={"confusion","curiosity","realization","surprise"}
+_GE_EMOS=sorted(_GE_POS|_GE_NEG|_GE_AMB|{"neutral"})
+def _ge_sent(flags):
+    from collections import Counter
+    g=Counter()
+    for e in flags:
+        g["pos" if e in _GE_POS else "neg" if e in _GE_NEG else "amb" if e in _GE_AMB else "neu" if e=="neutral" else "x"]+=1
+    g.pop("x",None)
+    if not g: return "neu"
+    top=g.most_common()
+    return "amb" if len(top)>1 and top[0][1]==top[1][1] else top[0][0]
+def load_goemotions(n=None, seed=20260529):
+    "GoEmotions collapsed to 4-way sentiment (pos/neg/amb/neu); multi-rater majority gold."
+    from datasets import load_dataset
+    from collections import Counter
+    ds=load_dataset("google-research-datasets/go_emotions","raw",split="train")
+    byid={}
+    for r in ds:
+        flags=[e for e in _GE_EMOS if r.get(e)==1]
+        d=byid.setdefault(r["id"],{"text":r["text"],"s":[]}); d["s"].append(_ge_sent(flags))
+    classes=["pos","neg","amb","neu"]; items=[]
+    for rid,d in byid.items():
+        if len(d["s"])<3: continue
+        cnt=Counter(d["s"]); top,tc=cnt.most_common(1)[0]
+        if list(cnt.values()).count(tc)>1: continue
+        items.append({"id":rid,"text":d["text"],"gold":top,"classes":classes,
+                      "label_count":[cnt.get(c,0) for c in classes],"n_annot":len(d["s"])})
+    random.Random(seed).shuffle(items); return items[:n] if n else items
+
+def load_sbic(n=None, seed=20260529):
+    "Social Bias Frames: binary offensiveness (off/notoff) from per-annotator offensiveYN; majority gold. Sensitive."
+    import urllib.request, tarfile, csv as _csv
+    from collections import defaultdict, Counter
+    tgz=RAW/"SBIC.v2.tgz"
+    if not tgz.exists(): urllib.request.urlretrieve("https://maartensap.com/social-bias-frames/SBIC.v2.tgz", tgz)
+    tf=tarfile.open(tgz)
+    name=[m.name for m in tf.getmembers() if m.name.endswith("trn.csv") and "agg" not in m.name.lower()][0]
+    rows=list(_csv.DictReader((l.decode("utf-8","ignore") for l in tf.extractfile(name))))
+    byp=defaultdict(lambda:{"text":None,"o":[]})
+    for r in rows:
+        post=r.get("post"); off=r.get("offensiveYN")
+        if not post or off in (None,""): continue
+        try: lab="off" if float(off)>=0.5 else "notoff"
+        except: continue
+        d=byp[post]; d["text"]=post; d["o"].append(lab)
+    classes=["off","notoff"]; items=[]; i=0
+    for post,d in byp.items():
+        if len(d["o"])<3: continue
+        cnt=Counter(d["o"]); top,tc=cnt.most_common(1)[0]
+        if list(cnt.values()).count(tc)>1: continue
+        items.append({"id":f"sbic_{i}","text":post,"gold":top,"classes":classes,
+                      "label_count":[cnt.get(c,0) for c in classes],"n_annot":len(d["o"])}); i+=1
+    random.Random(seed).shuffle(items); return items[:n] if n else items
+
 LOADERS={"chaosnli_snli":lambda n: load_chaosnli("snli",n),
          "chaosnli_mnli":lambda n: load_chaosnli("mnli",n),
-         "hatexplain":lambda n: load_hatexplain(n)}
-TASK_PROMPT={"chaosnli_snli":"nli_v1","chaosnli_mnli":"nli_v1","hatexplain":"hate_v1"}
+         "hatexplain":lambda n: load_hatexplain(n),
+         "go_emotions":lambda n: load_goemotions(n),
+         "social_bias_frames":lambda n: load_sbic(n)}
+TASK_PROMPT={"chaosnli_snli":"nli_v1","chaosnli_mnli":"nli_v1","hatexplain":"hate_v1",
+             "go_emotions":"emotion_v1","social_bias_frames":"offensive_v1"}
 
 # ---------------- async judging ----------------
 async def call_chat(session, model, messages, max_tokens, temperature):

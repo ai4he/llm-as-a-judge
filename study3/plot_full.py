@@ -9,14 +9,16 @@ ROOT=Path(__file__).resolve().parent.parent; OUT=ROOT/"study3"/"outputs"; FIG=RO
 VC={"Validated":"#1a9850","Promising":"#91cf60","Mixed":"#fee08b","Caution":"#fc8d59","Unreliable":"#d73027"}
 VNUM={"Validated":5,"Promising":4,"Mixed":3,"Caution":2,"Unreliable":1}
 RDYLGN=mcolors.LinearSegmentedColormap.from_list("r",["#d73027","#fc8d59","#fee08b","#91cf60","#1a9850"])
-DS=[("chaosnli_snli","ChaosNLI-SNLI\n(NLI, ceiling=low)"),
+DS=[("chaosnli_snli","ChaosNLI-SNLI\n(NLI)"),
     ("chaosnli_mnli","ChaosNLI-MNLI\n(NLI, harder)"),
+    ("go_emotions","GoEmotions\n(4-way sentiment)"),
+    ("social_bias_frames","SBIC\n(offensive, sensitive)"),
     ("hatexplain","HateXplain\n(hate speech, sensitive)")]
 S={k:json.load(open(OUT/f"{k}.full.scores.json")) for k,_ in DS if (OUT/f"{k}.full.scores.json").exists()}
 models=sorted({m for s in S.values() for m in s["models"] if "accuracy" in s["models"][m]})
 
 # Fig A: per-dataset accuracy vs ceiling
-fig,axes=plt.subplots(1,len(DS),figsize=(15,5),sharey=True)
+fig,axes=plt.subplots(1,len(DS),figsize=(4.3*len(DS),5),sharey=True)
 for ax,(k,title) in zip(axes,DS):
     s=S[k]; ms=[m for m in models if m in s["models"] and "accuracy" in s["models"][m]]
     acc=[s["models"][m]["accuracy"] for m in ms]
