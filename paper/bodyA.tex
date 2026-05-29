@@ -256,14 +256,14 @@ macro-F1; panel accuracy on low- vs high-human-disagreement items; Jensen-Shanno
 \subsection{What governs LLM-judge reliability}
 Across the three studies one principle organizes the evidence: an LLM judge is reliable to the degree that the task
 has a high, verifiable human-agreement ceiling, and it cannot exceed an agreement level that humans themselves do
-not reach. Study~3 localizes the mechanism at the \emph{item} level. The random-intercept SD of judge correctness is
-far larger across items ($\mathrm{SD}=\VCitem$) than across datasets ($\VCdataset$) or models (between-model
-accuracy SD $=\VCmodel$); on \emph{every} dataset, panel accuracy on low-human-disagreement items far exceeds that on
-high-disagreement items; and chance-corrected agreement ($\kappa$, macro-F1) collapses precisely where humans
-disagree. Model scale helps only modestly ($\mathrm{OR}_{/\mathrm{SD}}=\RTwosizeOR$), and a calibrated contamination
-screen argues the shortfall is not memorization. We are careful about the
-unit of analysis: with few datasets we do not identify a dataset-level coefficient (inconclusive, not null), so we locate our inferential claims at the well-powered item level, following standard
-practice for designs with few level-2 units.
+not reach. Study~3 localizes the mechanism at the \emph{item} level: on the same logit scale the random-intercept SD
+of judge correctness is far larger across items ($\mathrm{SD}_{\text{logit}}=\NLIitemSDlogit$) than across models
+($\NLImodelSDlogit$), and the judge-vs-ceiling gap is near zero across the human-disagreement spectrum, so open
+judges are at human level on NLI regardless of how much humans disagree. Model scale helps only modestly
+($\mathrm{OR}_{/\mathrm{SD}}=\RTwosizeOR$). We are careful about the unit of analysis: with two NLI datasets we do
+not fit a dataset-level model. We also do not claim contamination is excluded; SNLI/MultiNLI are old corpora and our
+recall screen is only a conservative check (Appendix~\ref{app:robust}), so memorization remains a live alternative
+that a post-cutoff NLI benchmark would adjudicate.
 
 \subsection{Connection to measurement and disagreement scholarship}
 This result operationalizes a long-running argument that there is no single ground truth for subjective constructs
@@ -340,7 +340,7 @@ Open, locally-servable LLMs are now strong enough to serve as annotators on obje
 they meet or exceed established proprietary-judge correlations. But across \Nstudies{} reviewed studies and a
 \NLInjudg{}-judgment meta-evaluation on NLI datasets with rich human labels, reliability is bounded by the same thing
 for every model: the \emph{human-human agreement ceiling}, and it degrades on exactly the items where humans
-themselves disagree. Scaling the judge helps only modestly, and contamination does not explain the pattern. The
+themselves disagree. Scaling the judge helps only modestly; contamination cannot be excluded on these older NLI corpora and is stated as a limitation. The
 practical consequence is that an LLM-as-a-judge should be reported the way we report any measurement instrument,
 against a human reference, with chance-corrected and disagreement-aware metrics, with uncertainty, and with a stated
 operating range, rather than trusted as an oracle. The right question is never ``can a machine judge?'' but ``can

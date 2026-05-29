@@ -42,7 +42,7 @@ LLM, to \emph{augment}, \emph{replace}, or \emph{simulate} the human? \textbf{(R
 (enabling, tension, critical) does the literature take, and what does that imply for HCC practice?
 
 \subsection{Method}
-Following the shared protocol, we ran a Study-2-specific identification arm: 25 HCC/HCI/qualitative concept-block
+Following the shared protocol, we ran a review-specific identification arm: 25 HCC/HCI/qualitative concept-block
 queries against OpenAlex (\SToa{} unique works), triangulated with the web arm and a venue-scoped sweep of HCI venues (CHI, CSCW, UIST, IUI, TOCHI). After topicality screening and eligibility assessment we included
 \STN{} studies (Figure~\ref{fig:s2prisma}). An independent re-coding of a 30\% sample ($n{=}\IRRstwoN$) reproduced
 the verdict at Krippendorff $\alpha=\IRRstwoV$ and the augment/replace/simulate role at $\alpha=\IRRstwoRole$; the
@@ -196,7 +196,7 @@ substitution failure, not noise on ambiguous cases. The residual variance is ite
 random-intercept SD across \emph{items} ($\mathrm{SD}_{\text{logit}}=\SOCitemSDlogit$) far exceeds that across
 \emph{models} ($\mathrm{SD}_{\text{logit}}=\SOCmodelSDlogit$, on the same logit scale), and standardized model scale
 contributes only modestly ($\mathrm{OR}_{/\mathrm{SD}}=\RTwosizeOR$); with four datasets we do not fit a
-dataset-level model. Contamination does not explain the shortfall: the recent (2024) MultiPICo corpus, which the
+dataset-level model. Contamination is unlikely to explain the shortfall: the recent (2024) MultiPICo corpus, which the
 low-recall judge has not memorized, is matched only at its low ceiling, so the limitation tracks human judgment, not
 pretraining exposure (the verbatim screen is conservative, Appendix~\ref{app:robust}).
 
@@ -279,7 +279,7 @@ participant simulation, and design judgment are characterized by the review rath
 Findings reflect models available through mid-2026.
 \section{Ethics and reproducibility}
 % =====================================================================
-\textbf{Ethics.} The review analyzes published research, not human subjects, and Study 3 reuses already-public,
+\textbf{Ethics.} The review analyzes published research, not human subjects, and Study 2 reuses already-public,
 de-identified datasets under their licenses; this work was therefore not human-subjects research requiring IRB
 review, and we sought an exemption determination consistent with our institution's policy. Two datasets (HateXplain,
 SBIC) contain hateful or identity-attacking text, which we process only to measure moderation reliability and never
