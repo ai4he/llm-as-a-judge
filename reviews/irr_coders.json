@@ -1,0 +1,640 @@
+[
+  {
+    "coder": 1,
+    "s1": [
+      {
+        "id": "ostyakova2023crowdexperts",
+        "verdict": 3
+      },
+      {
+        "id": "gao2025reranking",
+        "verdict": 4
+      },
+      {
+        "id": "hua2025mhscoping",
+        "verdict": 4
+      },
+      {
+        "id": "frobe2025assessorsagree",
+        "verdict": 4
+      },
+      {
+        "id": "mendonca2024dialogue",
+        "verdict": 2
+      },
+      {
+        "id": "judgesverdict2025",
+        "verdict": 2
+      },
+      {
+        "id": "ahmad2025moralmachine",
+        "verdict": 3
+      },
+      {
+        "id": "liang2024feedback",
+        "verdict": 2
+      },
+      {
+        "id": "xie2023nextchapter",
+        "verdict": 3
+      },
+      {
+        "id": "gao2023humanlike",
+        "verdict": 2
+      },
+      {
+        "id": "zhu2024nationalitybias",
+        "verdict": 3
+      },
+      {
+        "id": "mathrobust2026",
+        "verdict": 2
+      },
+      {
+        "id": "wang2023shepherd",
+        "verdict": 2
+      },
+      {
+        "id": "li2024gen2judge",
+        "verdict": 3
+      },
+      {
+        "id": "k12sci2026",
+        "verdict": 2
+      },
+      {
+        "id": "wataoka2024selfpref",
+        "verdict": 4
+      },
+      {
+        "id": "thakur2024judgingjudges",
+        "verdict": 3
+      },
+      {
+        "id": "madaan2024refverdict",
+        "verdict": 2
+      },
+      {
+        "id": "lu2023erroranalysis",
+        "verdict": 2
+      },
+      {
+        "id": "sefl2025feedback",
+        "verdict": 1
+      },
+      {
+        "id": "shopovski2025peerreview",
+        "verdict": 3
+      },
+      {
+        "id": "nasution2024chatgptlabel",
+        "verdict": 2
+      },
+      {
+        "id": "lu2024wildvision",
+        "verdict": 2
+      },
+      {
+        "id": "overcorrect2026",
+        "verdict": 4
+      },
+      {
+        "id": "feuer2024style",
+        "verdict": 4
+      },
+      {
+        "id": "niu2024text2emotion",
+        "verdict": 3
+      },
+      {
+        "id": "li2024splitmerge",
+        "verdict": 2
+      },
+      {
+        "id": "wei2024safe",
+        "verdict": 1
+      },
+      {
+        "id": "szymanski2025limits",
+        "verdict": 4
+      },
+      {
+        "id": "kim2024meganno",
+        "verdict": 3
+      },
+      {
+        "id": "justice2024prejudice",
+        "verdict": 4
+      },
+      {
+        "id": "counselbench2025",
+        "verdict": 4
+      },
+      {
+        "id": "imrit2026iaa",
+        "verdict": 3
+      },
+      {
+        "id": "wu2024metarewarding",
+        "verdict": 2
+      },
+      {
+        "id": "quah2024dentalaes",
+        "verdict": 3
+      },
+      {
+        "id": "zhuang2024beyondyesno",
+        "verdict": 2
+      },
+      {
+        "id": "murad2024quality",
+        "verdict": 3
+      },
+      {
+        "id": "wang2024clinicalevent",
+        "verdict": 1
+      },
+      {
+        "id": "hackl2023reliablerater",
+        "verdict": 2
+      },
+      {
+        "id": "humanllmcollab2024",
+        "verdict": 2
+      },
+      {
+        "id": "ner2024augment",
+        "verdict": 2
+      },
+      {
+        "id": "kholodna2024activelearning",
+        "verdict": 2
+      },
+      {
+        "id": "tang2023medevidence",
+        "verdict": 4
+      },
+      {
+        "id": "qualcoding2025jla",
+        "verdict": 3
+      },
+      {
+        "id": "mmeval2024",
+        "verdict": 3
+      },
+      {
+        "id": "thematic2025charity",
+        "verdict": 3
+      },
+      {
+        "id": "pan2024hcdjudge",
+        "verdict": 3
+      },
+      {
+        "id": "fan2024sedareval",
+        "verdict": 2
+      },
+      {
+        "id": "lambert2024rewardbench",
+        "verdict": 3
+      },
+      {
+        "id": "liu2023trustworthy",
+        "verdict": 3
+      },
+      {
+        "id": "arabzadeh2025benchrelevance",
+        "verdict": 3
+      },
+      {
+        "id": "reiss2023testing",
+        "verdict": 4
+      },
+      {
+        "id": "watson2024aicodereview",
+        "verdict": 4
+      },
+      {
+        "id": "haase2025creativitypeaked",
+        "verdict": 4
+      }
+    ],
+    "s2": [
+      {
+        "id": "huang2025surveyworth",
+        "verdict": 4,
+        "role": "simulate",
+        "stance": "critical"
+      },
+      {
+        "id": "depaoli2023inductive",
+        "verdict": 3,
+        "role": "replace",
+        "stance": "tension"
+      },
+      {
+        "id": "cheng2023compost",
+        "verdict": 4,
+        "role": "simulate",
+        "stance": "critical"
+      },
+      {
+        "id": "dunivin2025hermeneutics",
+        "verdict": 3,
+        "role": "augment",
+        "stance": "tension"
+      },
+      {
+        "id": "zhang2023redefining",
+        "verdict": 3,
+        "role": "augment",
+        "stance": "enabling"
+      },
+      {
+        "id": "zhu2023reproduce",
+        "verdict": 3,
+        "role": "replace",
+        "stance": "tension"
+      },
+      {
+        "id": "duan2024visualcritique",
+        "verdict": 3,
+        "role": "replace",
+        "stance": "tension"
+      },
+      {
+        "id": "thematic2025charity",
+        "verdict": 3,
+        "role": "augment",
+        "stance": "tension"
+      },
+      {
+        "id": "duan2024uimockup",
+        "verdict": 3,
+        "role": "augment",
+        "stance": "tension"
+      },
+      {
+        "id": "chew2023llmcontent",
+        "verdict": 2,
+        "role": "augment",
+        "stance": "enabling"
+      },
+      {
+        "id": "lequere2024researchtools",
+        "verdict": 3,
+        "role": "augment",
+        "stance": "tension"
+      },
+      {
+        "id": "dunivin2024scalablecot",
+        "verdict": 2,
+        "role": "replace",
+        "stance": "enabling"
+      },
+      {
+        "id": "salminen2025syntheticcritical",
+        "verdict": 5,
+        "role": "simulate",
+        "stance": "critical"
+      },
+      {
+        "id": "abbasiantaeb2024llmstalk",
+        "verdict": 3,
+        "role": "simulate",
+        "stance": "tension"
+      },
+      {
+        "id": "jain2025multillmthematic",
+        "verdict": 1,
+        "role": "replace",
+        "stance": "enabling"
+      },
+      {
+        "id": "wachinger2024prompts",
+        "verdict": 3,
+        "role": "augment",
+        "stance": "tension"
+      }
+    ]
+  },
+  {
+    "coder": 2,
+    "s1": [
+      {
+        "id": "ostyakova2023crowdexperts",
+        "verdict": 3
+      },
+      {
+        "id": "gao2025reranking",
+        "verdict": 4
+      },
+      {
+        "id": "hua2025mhscoping",
+        "verdict": 4
+      },
+      {
+        "id": "frobe2025assessorsagree",
+        "verdict": 4
+      },
+      {
+        "id": "mendonca2024dialogue",
+        "verdict": 2
+      },
+      {
+        "id": "judgesverdict2025",
+        "verdict": 2
+      },
+      {
+        "id": "ahmad2025moralmachine",
+        "verdict": 3
+      },
+      {
+        "id": "liang2024feedback",
+        "verdict": 2
+      },
+      {
+        "id": "xie2023nextchapter",
+        "verdict": 3
+      },
+      {
+        "id": "gao2023humanlike",
+        "verdict": 2
+      },
+      {
+        "id": "zhu2024nationalitybias",
+        "verdict": 3
+      },
+      {
+        "id": "mathrobust2026",
+        "verdict": 2
+      },
+      {
+        "id": "wang2023shepherd",
+        "verdict": 2
+      },
+      {
+        "id": "li2024gen2judge",
+        "verdict": 3
+      },
+      {
+        "id": "k12sci2026",
+        "verdict": 2
+      },
+      {
+        "id": "wataoka2024selfpref",
+        "verdict": 4
+      },
+      {
+        "id": "thakur2024judgingjudges",
+        "verdict": 3
+      },
+      {
+        "id": "madaan2024refverdict",
+        "verdict": 2
+      },
+      {
+        "id": "lu2023erroranalysis",
+        "verdict": 2
+      },
+      {
+        "id": "sefl2025feedback",
+        "verdict": 1
+      },
+      {
+        "id": "shopovski2025peerreview",
+        "verdict": 3
+      },
+      {
+        "id": "nasution2024chatgptlabel",
+        "verdict": 2
+      },
+      {
+        "id": "lu2024wildvision",
+        "verdict": 2
+      },
+      {
+        "id": "overcorrect2026",
+        "verdict": 4
+      },
+      {
+        "id": "feuer2024style",
+        "verdict": 4
+      },
+      {
+        "id": "niu2024text2emotion",
+        "verdict": 3
+      },
+      {
+        "id": "li2024splitmerge",
+        "verdict": 2
+      },
+      {
+        "id": "wei2024safe",
+        "verdict": 1
+      },
+      {
+        "id": "szymanski2025limits",
+        "verdict": 4
+      },
+      {
+        "id": "kim2024meganno",
+        "verdict": 3
+      },
+      {
+        "id": "justice2024prejudice",
+        "verdict": 4
+      },
+      {
+        "id": "counselbench2025",
+        "verdict": 4
+      },
+      {
+        "id": "imrit2026iaa",
+        "verdict": 3
+      },
+      {
+        "id": "wu2024metarewarding",
+        "verdict": 2
+      },
+      {
+        "id": "quah2024dentalaes",
+        "verdict": 3
+      },
+      {
+        "id": "zhuang2024beyondyesno",
+        "verdict": 2
+      },
+      {
+        "id": "murad2024quality",
+        "verdict": 3
+      },
+      {
+        "id": "wang2024clinicalevent",
+        "verdict": 1
+      },
+      {
+        "id": "hackl2023reliablerater",
+        "verdict": 2
+      },
+      {
+        "id": "humanllmcollab2024",
+        "verdict": 3
+      },
+      {
+        "id": "ner2024augment",
+        "verdict": 2
+      },
+      {
+        "id": "kholodna2024activelearning",
+        "verdict": 2
+      },
+      {
+        "id": "tang2023medevidence",
+        "verdict": 4
+      },
+      {
+        "id": "qualcoding2025jla",
+        "verdict": 3
+      },
+      {
+        "id": "mmeval2024",
+        "verdict": 3
+      },
+      {
+        "id": "thematic2025charity",
+        "verdict": 3
+      },
+      {
+        "id": "pan2024hcdjudge",
+        "verdict": 3
+      },
+      {
+        "id": "fan2024sedareval",
+        "verdict": 2
+      },
+      {
+        "id": "lambert2024rewardbench",
+        "verdict": 3
+      },
+      {
+        "id": "liu2023trustworthy",
+        "verdict": 3
+      },
+      {
+        "id": "arabzadeh2025benchrelevance",
+        "verdict": 3
+      },
+      {
+        "id": "reiss2023testing",
+        "verdict": 4
+      },
+      {
+        "id": "watson2024aicodereview",
+        "verdict": 3
+      },
+      {
+        "id": "haase2025creativitypeaked",
+        "verdict": 4
+      }
+    ],
+    "s2": [
+      {
+        "id": "huang2025surveyworth",
+        "verdict": 4,
+        "role": "simulate",
+        "stance": "critical"
+      },
+      {
+        "id": "depaoli2023inductive",
+        "verdict": 3,
+        "role": "replace",
+        "stance": "tension"
+      },
+      {
+        "id": "cheng2023compost",
+        "verdict": 4,
+        "role": "simulate",
+        "stance": "critical"
+      },
+      {
+        "id": "dunivin2025hermeneutics",
+        "verdict": 3,
+        "role": "augment",
+        "stance": "tension"
+      },
+      {
+        "id": "zhang2023redefining",
+        "verdict": 3,
+        "role": "augment",
+        "stance": "enabling"
+      },
+      {
+        "id": "zhu2023reproduce",
+        "verdict": 3,
+        "role": "replace",
+        "stance": "tension"
+      },
+      {
+        "id": "duan2024visualcritique",
+        "verdict": 2,
+        "role": "augment",
+        "stance": "tension"
+      },
+      {
+        "id": "thematic2025charity",
+        "verdict": 3,
+        "role": "augment",
+        "stance": "tension"
+      },
+      {
+        "id": "duan2024uimockup",
+        "verdict": 3,
+        "role": "augment",
+        "stance": "tension"
+      },
+      {
+        "id": "chew2023llmcontent",
+        "verdict": 2,
+        "role": "augment",
+        "stance": "tension"
+      },
+      {
+        "id": "lequere2024researchtools",
+        "verdict": 3,
+        "role": "augment",
+        "stance": "tension"
+      },
+      {
+        "id": "dunivin2024scalablecot",
+        "verdict": 2,
+        "role": "replace",
+        "stance": "enabling"
+      },
+      {
+        "id": "salminen2025syntheticcritical",
+        "verdict": 4,
+        "role": "simulate",
+        "stance": "critical"
+      },
+      {
+        "id": "abbasiantaeb2024llmstalk",
+        "verdict": 3,
+        "role": "simulate",
+        "stance": "tension"
+      },
+      {
+        "id": "jain2025multillmthematic",
+        "verdict": 1,
+        "role": "replace",
+        "stance": "enabling"
+      },
+      {
+        "id": "wachinger2024prompts",
+        "verdict": 3,
+        "role": "augment",
+        "stance": "tension"
+      }
+    ]
+  }
+]

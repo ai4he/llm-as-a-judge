@@ -119,7 +119,44 @@ rate across all \STHRn{} judgments.
 ($\mathbf{1}[\text{judge}=y^\star]$) with fixed effects for task subjectivity ($1-$ceiling, dataset level) and model
 scale ($\log_{10}$ parameters), reported as a Bayesian logistic GLMM with random intercepts for dataset and item and,
 for clean inference, as a logistic GLM with item-cluster-robust standard errors; the Benjamini-Hochberg procedure
-controls the false-discovery rate across the \SMEfdrtests{} judge$\times$dataset ceiling-gap tests.
+controls the false-discovery rate across the \SMEfdrtests{} judge$\times$dataset ceiling-gap tests. A naive
+two-predictor version of this model overstates a ``subjectivity'' effect; once construct granularity and label
+base-rate skew are added and item-cluster-robust standard errors are used, subjectivity is not significant
+($\mathrm{OR}=\GLMsubjOR$, $p=\GLMsubjP$) and the robust predictors are base-rate skew, scale, and granularity. A
+dataset-level meta-regression ($n{=}\metaN$) is reported with leave-one-dataset-out bounds.
+
+% =====================================================================
+\section{Inter-coder reliability}\label{app:irr}
+% =====================================================================
+Because the reliability verdict and the role/stance codes embed judgement, we re-coded a held-out random sample of
+each corpus with two \emph{independent} coders who saw only the per-study summaries and the rubric (no original
+codes, no other context). For Study~1a ($n{=}\IRRsoneN$, 25\%) the verdict reproduced at Krippendorff
+$\alpha=\IRRsoneA$ (ordinal, three coders) with \IRRsoneWone\% of cases within one level. For Study~2
+($n{=}\IRRstwoN$, 30\%) the verdict gave $\alpha=\IRRstwoV$, the augment/replace/simulate role $\alpha=\IRRstwoRole$,
+and the epistemic stance $\alpha=\IRRstwoStance$ (the least reliable code). \emph{Caveat:} the re-coders are
+LLM-assisted, like the primary pipeline, so these figures measure rubric \emph{reproducibility} under independent
+application, not human inter-rater agreement; the moderate stance $\alpha$ is why we treat stance-based claims as
+indicative.
+
+% =====================================================================
+\section{Robustness and validity checks}\label{app:robust}
+% =====================================================================
+\textbf{Prompt robustness.} We re-ran a subset of Study~3 (three models $\times$ six datasets, $n{=}120$) under
+three semantically equivalent prompt paraphrases per task. \emph{Accuracy} is fairly prompt-stable (mean SD across
+paraphrases $=\PRmeanSD$), but the discrete five-level \emph{verdict} is exactly stable in only \PRstable{}/\PRtotal{}
+cells: most instability is a one-level flip for cells sitting near a band boundary, and the smaller model is the most
+sensitive (worst-case acc SD $\PRmaxSD$), the larger models the least. We therefore report verdicts as robust to
+\emph{within one level} rather than exact, and flag small-model verdicts on subjective tasks as prompt-sensitive.
+\textbf{Contamination clean control.} We ran the verbatim-recall probe on freshly authored, post-cutoff sentences
+that no model can have seen. The result is a cautionary one: the high-recall model still scores $\CCmaxOverlap$ mean
+overlap (\CCflag) on this guaranteed-clean text, i.e.\ it confabulates plausible continuations regardless of
+memorization, while the low-recall model scores LOW. The probe thus has a high false-positive rate for high-recall
+models and \emph{cannot} be read as a reliable leakage test; the uniform MEDIUM tiers in Table~\ref{tab:study3} are
+largely an artifact of generative fluency. We retain the probe only as a conservative, low-recall-model signal and
+base our substantive claims on the disagreement analysis instead.
+\textbf{Annotator-subgroup check.} On MultiPICo (which carries annotator demographics), the panel's agreement with
+the female- vs male-annotator majority differs by only \MPCgenderGap, i.e.\ we did not detect a large majority-group
+bias in this corpus, though demographic metadata is sparse and this check is limited.
 
 % =====================================================================
 \section{Study 1 corpus}\label{app:s1}

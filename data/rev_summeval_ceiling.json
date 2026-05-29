@@ -1,0 +1,28 @@
+{
+  "coherence": {
+    "within_doc_sd": 0.94,
+    "frac_ratings_ge_4.5": 0.147,
+    "noiseless_judge_spearman": 0.943,
+    "reported_geval": 0.582
+  },
+  "consistency": {
+    "within_doc_sd": 0.812,
+    "frac_ratings_ge_4.5": 0.867,
+    "noiseless_judge_spearman": 0.898,
+    "reported_geval": 0.507
+  },
+  "fluency": {
+    "within_doc_sd": 0.629,
+    "frac_ratings_ge_4.5": 0.807,
+    "noiseless_judge_spearman": 0.87,
+    "reported_geval": 0.455
+  },
+  "relevance": {
+    "within_doc_sd": 0.669,
+    "frac_ratings_ge_4.5": 0.169,
+    "noiseless_judge_spearman": 0.894,
+    "reported_geval": 0.547
+  },
+  "most_compressed_aspect": "fluency",
+  "note": "lower within-doc SD => harder to rank => lower attainable summary-level Spearman for ANY judge"
+}

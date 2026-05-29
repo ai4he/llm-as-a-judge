@@ -1,0 +1,12 @@
+{
+  "gemma-4-31b": {
+    "n": 10,
+    "mean_overlap": 0.448,
+    "flag": "MEDIUM"
+  },
+  "qwen3.5-9b": {
+    "n": 10,
+    "mean_overlap": 0.071,
+    "flag": "LOW"
+  }
+}

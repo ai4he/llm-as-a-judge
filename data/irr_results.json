@@ -1,0 +1,14 @@
+{
+  "s1_verdict_alpha_3coder": 0.866,
+  "s1_verdict_alpha_orig_vs_c1": 0.812,
+  "s1_exact_orig_c1": 0.741,
+  "s1_within1_orig_c1": 1.0,
+  "s1_n": 54,
+  "s2_n": 16,
+  "s2_verdict_alpha": 0.849,
+  "s2_verdict_exact_orig_c1": 0.75,
+  "s2_role_alpha": 0.804,
+  "s2_role_exact_orig_c1": 0.812,
+  "s2_stance_alpha": 0.592,
+  "s2_stance_exact_orig_c1": 0.75
+}

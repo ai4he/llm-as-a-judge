@@ -114,6 +114,11 @@ Study 1a systematically reviewed \Nstudies{} studies across \Ndomains{} domains 
 annotation. Identification triangulated OpenAlex (\OAretrieved{} records, \OAunique{} unique), Semantic Scholar, and
 a 59-query web search; screening retained on-topic empirical comparisons; \Nnumeric{} studies reported an
 extractable numeric agreement value (Figure~\ref{fig:prisma1}; the full coded corpus is \corpustabref).
+\textbf{Coding reliability:} because the verdict rubric embeds judgement, we validated it with an independent
+re-coding of a 25\% random sample ($n{=}\IRRsoneN$): the reliability verdict reproduced at Krippendorff
+$\alpha=\IRRsoneA$ (ordinal) with \IRRsoneWone\% of cases within one level (Appendix~\ref{app:irr}). The re-coders are
+LLM-assisted, like the primary pipeline, so this measures rubric \emph{reproducibility} rather than human
+inter-rater agreement, which we flag as a limitation.
 
 \begin{figure}[t]\centering
 \includegraphics[width=0.96\linewidth]{fig01_prisma_flow}
@@ -197,10 +202,15 @@ reported ${\approx}\ONEreportedrho$). The aspect pattern is itself the finding. 
 \emph{verifiable} judgment, groundable in the source document) \emph{all four} models leap past the reported value
 (from $.507$ to $.685$-$.702$), and on \textbf{coherence} three of four do (up to $.650$ vs.\ $.582$);
 \textbf{relevance} is on par ($.48$-$.54$ vs.\ $.55$). But on \textbf{fluency} every open model falls well
-\emph{short} ($.22$-$.39$ vs.\ a reported $.455$): human fluency ratings of competent machine summaries are
-compressed near the top of the scale (low variance), so the summary-level correlation is structurally low
-\emph{regardless of how capable the judge is}, a limit that lives in the human reference, not the model, and that
-scale does not move.
+\emph{short} ($.22$-$.39$ vs.\ a reported $.455$). We diagnose why: fluency is the most \emph{compressed} aspect of
+the human reference, with the lowest within-document rating variance ($\mathrm{SD}=\SEfluSD$ vs $\SEconSD$ for
+consistency) and $\SEfluTop\%$ of summaries rated near the top of the scale, so it offers the least to rank, and it
+is the aspect on which the \emph{reported proprietary judge also scores lowest}. We are careful not to over-claim a
+hard ``structural ceiling'': a noiseless judge returning the rounded human means would still attain
+$\rho{\approx}\SEfluSelf$ on fluency, so the open models' especially low fluency correlation is part compression of
+the reference and part a genuine residual gap, and probability-weighted scoring (which we did not run) could narrow
+it. The defensible claim is the weaker one: gains from scale concentrate on the verifiable aspects, while the
+hardest-to-rank aspect stays hard for every judge.
 
 \begin{figure}[t]\centering
 \includegraphics[width=0.97\linewidth]{s1b_fig01_spearman}
@@ -239,7 +249,10 @@ LLM, to \emph{augment}, \emph{replace}, or \emph{simulate} the human? \textbf{(R
 Following the shared protocol, we ran a Study-2-specific identification arm: 25 HCC/HCI/qualitative concept-block
 queries against OpenAlex (\SToa{} unique works), triangulated with the web arm and with the venue-scoped sweep of
 Study 1 (CHI, CSCW, UIST, IUI, TOCHI). After topicality screening and eligibility assessment we included
-\STN{} studies (Figure~\ref{fig:s2prisma}). We extracted, per study: the HCC \textbf{method}; the LLM \textbf{role}
+\STN{} studies (Figure~\ref{fig:s2prisma}). An independent re-coding of a 30\% sample ($n{=}\IRRstwoN$) reproduced
+the verdict at Krippendorff $\alpha=\IRRstwoV$ and the augment/replace/simulate role at $\alpha=\IRRstwoRole$; the
+\emph{epistemic stance} code is the least reliable ($\alpha=\IRRstwoStance$), so we treat stance-based claims as
+indicative rather than precise (Appendix~\ref{app:irr}). We extracted, per study: the HCC \textbf{method}; the LLM \textbf{role}
 (replace / augment / simulate); reported agreement and the human baseline; the reliability \textbf{verdict};
 the \textbf{epistemic stance} (enabling / tension / critical); and the \textbf{community} (HCI, CSCW,
 qualitative-methods, computational social science, NLP, health). The full corpus is \sttwotabref.
@@ -385,9 +398,14 @@ Promising binary offensiveness (SBIC, 0/6), no model earns the statistical right
 (iv) \textbf{juries}
 raise accuracy but do not lift any subjective task above its human ceiling. The \textbf{contamination probe}
 (Table~\ref{tab:study3}, last column) shows the strongest judges have non-trivial verbatim recall across sets
-(gemma MEDIUM throughout), caveating the NLI ``Validated'' result; crucially the recent low-contamination MultiPICo
-(LOW for the small-recall \texttt{qwen3.5-9b}) is still matched only at its low human ceiling, so the
-social-computing shortfall tracks the human ceiling, not memorization.
+(gemma MEDIUM throughout). A clean control is sobering and we report it plainly: on freshly authored post-cutoff
+text that no model can have seen, the high-recall model still scores \CCmaxOverlap{} overlap (\CCflag), i.e.\ it
+confabulates plausible continuations regardless of memorization (Appendix~\ref{app:robust}). The uniform MEDIUM tiers
+are therefore largely a \emph{probe artifact} for that model, not evidence of memorization, and we do \emph{not}
+treat the verbatim probe as a reliable leakage test. The one interpretable signal is that the low-recall model scores
+LOW on the recent MultiPICo, consistent with no memorization there; combined with the fact that MultiPICo is matched
+only at its low human ceiling, this argues the social-computing shortfall reflects human disagreement rather than
+pretraining exposure. We otherwise lean on the disagreement analysis, not the contamination probe, for our claims.
 
 \begin{figure}[t]\centering
 \includegraphics[width=\linewidth]{s3_fig02_full_accuracy}
@@ -413,29 +431,48 @@ from the verbatim-recall probe.}
 \end{table}
 
 \subsection{What governs reliability? A mixed-effects analysis}
-To test the ``ceiling governs'' claim inferentially rather than descriptively, we model every individual judgment
-($N{=}\STHRn$; outcome $=\mathbf{1}[\text{judge}=\text{majority gold}]$) with a logistic specification whose fixed
-effects are task \emph{subjectivity} ($1\!-\!$human-ceiling accuracy, at the dataset level) and model \emph{scale}
-($\log_{10}$ parameters), reported both as a Bayesian mixed-effects logistic GLMM with random intercepts for dataset
-and item, and, for clean inference, as a logistic GLM with item-cluster-robust standard errors
-(Figure~\ref{fig:s3stats}). Three results stand out. (i) \textbf{Subjectivity dominates:} each unit of
-$1\!-\!$ceiling multiplies the odds of agreeing with humans by $\mathrm{OR}=\SMEsubjOR$ ($p=\SMEsubjP$). (ii)
-\textbf{Scale helps, but modestly:} larger models do better ($\mathrm{OR}=\SMEsizeOR$ per $\log_{10}$ params,
-$z=\SMEsizeZ$), an effect far smaller than subjectivity's, consistent with Study~1b's ``partly a moving target.''
-(iii) \textbf{Variance lives in the items:} the GLMM random-intercept standard deviation is far larger across
-\emph{items} ($\mathrm{SD}=\SMEvcitem$) than across datasets ($\mathrm{SD}=\SMEvcdataset$), i.e.\ \emph{which item}
-is being judged, its latent human (dis)agreement, explains judge correctness better than which model judges or
-even which dataset it comes from. Finally, a Benjamini-Hochberg analysis across all \SMEfdrtests{}
-judge$\times$dataset cells finds \SMEfdrsig{} significant at $q<.05$: \textbf{\SMEfdrbelow{} sit significantly
-\emph{below} the human ceiling} and only \SMEfdrabove{} significantly above (the objective-NLI cases). Scaling the
-judge shifts cells modestly rightward; it does not move a high-ceiling subjective task across the line.
+We probe the ``ceiling governs'' claim with successively stricter models of judgment correctness
+($\mathbf{1}[\text{judge}=\text{majority gold}]$, over all \STHRn{} judgments). A naive logistic model with only task
+\emph{subjectivity} ($1\!-\!$ceiling, at the dataset level) and \emph{scale} ($\log_{10}$ params) returns a large
+subjectivity effect (Figure~\ref{fig:s3stats}a). That model is confounded, however: with only six datasets,
+subjectivity is collinear with construct \emph{granularity} (number of classes) and label \emph{base-rate skew}.
+When we add those competitors and use item-cluster-robust standard errors, the apparent subjectivity effect is
+\textbf{no longer significant} ($\mathrm{OR}=\GLMsubjOR$, $p=\GLMsubjP$); the robust item-level predictors are
+base-rate skew ($\mathrm{OR}=\GLMbaseOR$, $p{<}.001$), model scale ($\mathrm{OR}=\GLMsizeOR$, $p{<}.001$), and
+granularity ($\mathrm{OR}=\GLMgranOR$, $p=\GLMgranP$). A dataset-level meta-regression (the honest unit,
+$n{=}\metaN$) gives a negative accuracy-subjectivity slope ($\metaSlope$) that is \emph{not} robust to
+leave-one-dataset-out ($[\metaLODOmin,\metaLODOmax]$). We therefore do \emph{not} claim a clean dataset-level
+``subjectivity'' coefficient, and we have tempered the earlier draft accordingly.
+
+What \emph{is} robust is the disagreement account. (i) \textbf{Variance lives in the items:} the random-intercept SD
+is far larger across \emph{items} ($\mathrm{SD}=\VCitem$) than across datasets ($\VCdataset$) or models
+(between-model accuracy SD $=\VCmodel$); \emph{which item} is judged, that is, its latent human (dis)agreement,
+matters more than which model judges or which dataset it comes from. (ii) \textbf{Judges fail where humans disagree:}
+on \emph{every} dataset, panel accuracy on low-human-disagreement (low-entropy) items far exceeds accuracy on
+high-disagreement items (Table~\ref{tab:disagr}, columns acc$_{\downarrow H}$ vs acc$_{\uparrow H}$), and the panel's
+label distribution diverges from the human distribution (Jensen-Shannon) most on the most contested datasets.
+(iii) \textbf{Chance-corrected agreement confirms it:} best-model Cohen's $\kappa$ and macro-F1
+(Table~\ref{tab:disagr}) fall sharply on subjective constructs (e.g.\ MultiPICo $\kappa{=}0.40$ at $0.82$ accuracy),
+so the verdicts are not artifacts of raw accuracy on imbalanced labels. (iv) A Benjamini-Hochberg analysis across the
+\SMEfdrtests{} judge$\times$dataset cells, using bootstrap CIs for each ceiling rather than a fixed constant, still
+places the majority significantly \emph{below} their human ceiling. In short, scale helps a little and base-rate
+structure helps a lot, but the binding constraint is the human disagreement embedded in each item, not a tidy
+dataset-level subjectivity score.
+
+\begin{table}[t]\centering\small
+\caption{Study 3 disagreement-aware results. Ceiling with annotator-bootstrap 95\% CI; best-model Cohen's $\kappa$
+and macro-F1; panel accuracy on low- vs high-human-disagreement (entropy) items; Jensen-Shannon divergence between
+the panel and human label distributions. Judges systematically lose accuracy as human disagreement rises.}
+\label{tab:disagr}
+\input{tables/tab_disagreement}
+\end{table}
 
 \begin{figure}[t]\centering
 \includegraphics[width=\linewidth]{s3_fig04_stats}
-\caption{Study 3 inferential layer. (a) Fixed-effect odds ratios (item-cluster-robust logit): subjectivity is a
-strong negative predictor of judge correctness, scale a weak positive one. (b) GLMM variance components: item-level
-variance dominates. (c) Ceiling gap per judge$\times$dataset (filled = BH $q<.05$); most cells sit below the human
-ceiling.}
+\caption{Study 3 inferential layer. (a) Odds ratios from the \emph{naive} two-predictor logit (subjectivity appears
+strong here, but the effect is not robust once base-rate skew and granularity are added; see text). (b) Variance
+components: item-level variance dominates dataset- and model-level variance. (c) Ceiling gap per judge$\times$dataset
+(filled = BH $q<.05$); most cells sit below the human ceiling.}
 \label{fig:s3stats}
 \end{figure}
 
@@ -505,24 +542,34 @@ models default to the majority reading and erase the minority perspective that p
 preserve, is a concrete instance of that flattening at the level of a single subjective label.
 
 \subsection{A critical assessment: what these practices do to the field}
-We read the rush to LLM-as-a-judge in HCC as carrying five structural risks that the community should name.
-\textbf{Illusory validation.} Because agreement on older public benchmarks can reflect memorization rather than
-competence, ``validated'' verdicts are not trustworthy without a contamination check; our probe shows non-trivial
-verbatim recall even of recent data, and a field that omits this step risks certifying judges that merely remember.
-\textbf{Methodological monoculture and deskilling.} Cheap labeling invites the substitution of LLM judgment for the
-human annotation and reflexive interpretation that train the next generation of HCC researchers; combined with the
-documented convergence of judges toward crowd rather than expert consensus \citep{bavaresco2024judgebench}, this
-risks a slow regression of the field's interpretive capacity toward the mean of its own training data.
-\textbf{Epistemic injustice and flattening.} Where models default to majority readings of subjective content, the
-perspectives of minority annotators (often the populations HCC seeks to center) are systematically discounted, a
-representational harm that a single accuracy number conceals.
-\textbf{False closure on contested constructs.} Reporting one accuracy against a majority gold imposes consensus
-where the data shows disagreement; our irony case (0.82 accuracy but macro-F1 near 0.45) shows how a high headline
-number can mask the fact that the model has learned the base rate, not the construct.
-\textbf{Incentive capture.} The very convenience of LLM evaluation pressures authors, reviewers, and venues to treat
-it as a default, embedding its biases into the published record. Against these we weigh genuine benefits, scale,
-triage, breadth, reproducibility, first-pass coding, and disagreement surfacing, and conclude that LLM judges should
-be governed as \emph{instruments requiring calibration and disclosure}, not adopted as oracles.
+We read the rush to LLM-as-a-judge in HCC as carrying five risks that the community should name. We mark which are
+grounded in our data and which are conjectures extending prior critique, so the section is read as argument, not
+finding.
+\textbf{Illusory validation (data-grounded, with a caveat about our own tool).} Agreement on older public benchmarks
+can reflect memorization rather than competence \citep{bender2021parrots}, so ``validated'' verdicts need a
+contamination check, but our clean control (Appendix~\ref{app:robust}) shows such checks are themselves hard: a naive
+verbatim-recall probe false-positives on high-recall models even for text they cannot have seen. The lesson is
+double, that contamination is a real threat to ``validated'' claims and that the community needs better contamination
+diagnostics than surface-recall probes.
+\textbf{Methodological monoculture and deskilling (conjecture).} Cheap labeling invites substituting LLM judgment for
+the human annotation and reflexive interpretation that train researchers; combined with the documented convergence of
+judges toward crowd rather than expert consensus \citep{bavaresco2024judgebench}, and with the way technical
+framings abstract away the social context of measurement \citep{selbst2019abstraction,suchman2007humanmachine}, this
+\emph{could} regress the field's interpretive capacity toward the mean of its training data. We flag this as a
+hypothesis for future study, not a demonstrated effect.
+\textbf{Epistemic injustice and flattening (data-linked).} Where models default to majority readings of subjective
+content, minority annotators (often the populations HCC seeks to center) are discounted, a representational harm that
+a single accuracy number conceals \citep{fricker2007epistemic,birhane2022values}; our disagreement analysis
+(judges lose accuracy precisely on high-disagreement items) is the mechanism by which this occurs, though our
+MultiPICo subgroup check found only a small demographic agreement gap (Appendix~\ref{app:robust}).
+\textbf{False closure on contested constructs (data-grounded).} Reporting one accuracy against a majority gold
+imposes consensus where the data shows disagreement \citep{aroyo2015truth,plank2022humanlabel}; our irony case
+(0.82 accuracy but $\kappa{=}0.40$) shows how a high headline number can mask that the model learned the base rate,
+not the construct.
+\textbf{Incentive capture (conjecture).} The convenience of LLM evaluation may pressure authors, reviewers, and
+venues to treat it as a default, embedding its biases into the record. Against these we weigh genuine benefits,
+scale, triage, breadth, reproducibility, first-pass coding, and disagreement surfacing, and conclude that LLM judges
+should be governed as \emph{instruments requiring calibration and disclosure}, not adopted as oracles.
 
 \subsection{Implications for designing experiments that use LLM-as-a-judge}
 The same evidence yields concrete, reusable guidance. We recommend that any study using an LLM-as-a-judge:
@@ -564,32 +611,49 @@ pangakis2023validation}.
 replacing expert usability/design judgment: these flatten identity, fabricate evidence, and abandon situated
 knowledge \citep{wang2024flatten,guerino2025gpt4ousability,salminen2025syntheticcritical}.
 \end{itemize}
+\textbf{Scope of evidence.} We are explicit about what supports each regime. Study~3 empirically tests only
+\emph{subjective classification/annotation} (NLI, sentiment, offensiveness, hate, irony), which directly grounds the
+``automate'' regime and the boundary into ``augment.'' The placement of \emph{qualitative interpretive coding},
+\emph{participant simulation}, and \emph{expert design judgment} rests on the Study~2 review of the HCC literature,
+not on new Study~3 experiments; public multi-coder qualitative-coding corpora remain scarce, which is itself a gap
+we flag for the community. The framework should therefore be read as review-grounded for the interpretive regimes and
+experiment-grounded for the annotation regime.
 
 % =====================================================================
 \section{Limitations}
 % =====================================================================
-Both reviews used a single-reviewer, LLM-assisted pipeline (logs released) rather than dual human reviewers; metrics
-are heterogeneous and synthesized within families rather than pooled; several methods/domains rest on small $n$
-(flagged via family/role aggregates); database recall depends on indexing and query phrasing (mitigated, not
-removed, by three-source triangulation); and findings reflect models available through mid-2026. The empirical
-studies are bounded too: Study 1b uses one flagship promising-domain benchmark (SummEval), and Study 3's panel is
-limited to open models from a single provider and to \STHRdatasets{} datasets (one of which, MultiPICo, is included
-as a recent low-contamination clean condition), with qualitative-coding corpora still in progress. The verdict
-rubric, though explicit and released, embeds judgement; we therefore release both corpora for re-coding. Full
-protocol, rubric anchors, dataset cards, verbatim judging prompts, and metric definitions are given in
-Appendices~\ref{app:protocol} to~\ref{app:s3detail}.
+Both reviews used a single-reviewer, LLM-assisted pipeline (logs released) rather than dual human reviewers; we
+validated the rubric with an independent re-coding (Krippendorff $\alpha=\IRRsoneA$; Appendix~\ref{app:irr}) but the
+re-coder is also LLM-assisted, so genuine human IRR remains future work, and the stance code is only moderately
+reliable. Metrics are heterogeneous and synthesized within families rather than pooled; several Study-1a
+domains/methods rest on small $n$ (e.g.\ $n{\le}3$), whose point estimates we treat as indicative and report only via
+family-level aggregates. The empirical studies are bounded: Study 1b uses one promising-domain benchmark (SummEval)
+and integer-only scoring; Study 3 covers subjective \emph{classification} on \STHRdatasets{} datasets with open
+models from a single provider and one prompt family (no proprietary frontier judges; prompt-robustness and a
+contamination clean control are reported in Appendix~\ref{app:robust}, but the contamination tiers remain a
+calibrated caution). Interpretive qualitative coding, participant simulation, and design judgment are reviewed
+(Study 2), not tested in Study 3. Findings reflect models available through mid-2026. Full protocol, rubric anchors,
+dataset cards, verbatim judging prompts, and metric definitions are in Appendices~\ref{app:protocol}
+to~\ref{app:robust}.
 
 % =====================================================================
 \section{Ethics and reproducibility}
 % =====================================================================
-\textbf{Ethics.} Studies 1a and 2 analyze published research, not human subjects. Study 3 reuses public datasets
-under their licenses; two of them (HateXplain, SBIC) contain hateful or offensive text, which we process only to
-measure moderation reliability and never reproduce. To avoid redistributing potentially harmful or
-personally-identifiable content, we release only item-level labels and aggregate statistics, never the raw texts. We
-report a contamination probe precisely so that ``validated'' verdicts are not silently inflated by pretraining
-exposure. The work is dual-use only in the benign sense that better-calibrated LLM judges reduce, rather than
-increase, the risk of unaccountable automated moderation; our central finding (that LLM judges should not replace
-humans on subjective, high-consensus social annotation) is itself a guard against premature deployment.
+\textbf{Ethics.} Studies 1a and 2 analyze published research, not human subjects, and Study 3 reuses already-public,
+de-identified datasets under their licenses; this work was therefore not human-subjects research requiring IRB
+review, and we sought an exemption determination consistent with our institution's policy. Two datasets (HateXplain,
+SBIC) contain hateful or identity-attacking text, which we process only to measure moderation reliability and never
+reproduce; to avoid redistributing harmful or personally-identifiable content we release only item-level labels and
+aggregate statistics, never the raw texts. A deeper ethical point bears on our own method: by treating the
+\emph{majority} human label as ``ground truth'' for the ceiling, we risk encoding majority-group bias and erasing
+minority readings, exactly the harm we warn against. We mitigate this by (i) reporting the full disagreement (soft
+labels, entropy) rather than only the majority, (ii) checking, where annotator demographics exist (MultiPICo), that
+the panel does not agree disproportionately with one subgroup (gap $=\MPCgenderGap$; Appendix~\ref{app:robust}), and
+(iii) recommending disagreement-aware evaluation in our guidance; we note the other corpora lack annotator
+demographics, so this check is partial. The contamination probe is reported precisely so ``validated'' verdicts are
+not silently inflated by pretraining exposure. The work is dual-use only in the benign sense that better-calibrated
+LLM judges reduce the risk of unaccountable automated moderation; our central finding (that LLM judges should not
+replace humans on subjective, high-consensus social annotation) is itself a guard against premature deployment.
 \textbf{Reproducibility.} Every number in this paper regenerates from released code: the OpenAlex, Semantic Scholar,
 and web search logs; the two coded corpora; the figure and table generators; the Study-1b SummEval harness and the
 Study-3 judging/scoring/contamination/mixed-effects harness, all keyed to documented model identifiers served through

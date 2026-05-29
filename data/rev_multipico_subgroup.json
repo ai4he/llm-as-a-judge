@@ -1,0 +1,22 @@
+{
+  "by_gender": {
+    "Female": {
+      "n_items": 281,
+      "subgroup_ceiling": 0.905,
+      "panel_agreement": 0.751
+    },
+    "Male": {
+      "n_items": 362,
+      "subgroup_ceiling": 0.895,
+      "panel_agreement": 0.74
+    }
+  },
+  "by_generation": {
+    "Young": {
+      "n_items": 472,
+      "subgroup_ceiling": 0.839,
+      "panel_agreement": 0.74
+    }
+  },
+  "by_gender_gap": 0.011
+}

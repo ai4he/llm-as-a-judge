@@ -1,0 +1,130 @@
+[
+  {
+    "id": "huang2025surveyworth",
+    "method": "Synthetic participants",
+    "agreement": null,
+    "human_baseline": null,
+    "community": "CSS",
+    "finding": "Uncertainty-quantification view: an LLM is worth only a bounded number of human respondents; substitution adds hidden uncertainty."
+  },
+  {
+    "id": "depaoli2023inductive",
+    "method": "Thematic analysis",
+    "agreement": null,
+    "human_baseline": null,
+    "community": "CSS",
+    "finding": "Inductive thematic analysis of interviews with ChatGPT is feasible and plausible, but themes need human verification and lack depth."
+  },
+  {
+    "id": "cheng2023compost",
+    "method": "Synthetic participants",
+    "agreement": null,
+    "human_baseline": null,
+    "community": "NLP",
+    "finding": "CoMPosT: LLM simulations of human subgroups are often caricatures, especially for marginalized identities."
+  },
+  {
+    "id": "dunivin2025hermeneutics",
+    "method": "Content analysis",
+    "agreement": null,
+    "human_baseline": null,
+    "community": "CSS",
+    "finding": "Scaling hermeneutics: guide to reflexive LLM content analysis preserving interpretive validity at scale."
+  },
+  {
+    "id": "zhang2023redefining",
+    "method": "Qual analysis (general)",
+    "agreement": null,
+    "human_baseline": null,
+    "community": "Qual-methods",
+    "finding": "Redefining qualitative analysis in the AI era: ChatGPT accelerates coding; calls for new human-AI qualitative workflows."
+  },
+  {
+    "id": "zhu2023reproduce",
+    "method": "Social-computing annotation",
+    "agreement": null,
+    "human_baseline": null,
+    "community": "CSCW",
+    "finding": "Can ChatGPT reproduce human labels for social-computing tasks? Good on some, poor on subjective/cultural ones."
+  },
+  {
+    "id": "duan2024visualcritique",
+    "method": "UX/design critique",
+    "agreement": null,
+    "human_baseline": null,
+    "community": "HCI",
+    "finding": "Visual prompting with iterative refinement improves LLM design-critique quality toward, but not to, human-expert level."
+  },
+  {
+    "id": "thematic2025charity",
+    "method": "Thematic analysis",
+    "agreement": null,
+    "human_baseline": null,
+    "community": "Qual-methods",
+    "finding": "Thematic analysis case study: GPT-4 accelerates coding with reasonable but imperfect theme overlap."
+  },
+  {
+    "id": "duan2024uimockup",
+    "method": "UX/design critique",
+    "agreement": null,
+    "human_baseline": null,
+    "community": "HCI",
+    "finding": "LLM feedback on UI mockups partially matches expert designer feedback; useful first pass, misses design nuance."
+  },
+  {
+    "id": "chew2023llmcontent",
+    "method": "Content analysis",
+    "agreement": null,
+    "human_baseline": null,
+    "community": "CSS",
+    "finding": "LLM-assisted content analysis: LLMs can apply codebooks with substantial agreement; recommend human validation on a labeled subset."
+  },
+  {
+    "id": "lequere2024researchtools",
+    "method": "HCI research methods",
+    "agreement": null,
+    "human_baseline": null,
+    "community": "HCI",
+    "finding": "LLMs as research tools across HCI data work: maps applications and evaluation gaps; calls for validation norms."
+  },
+  {
+    "id": "dunivin2024scalablecot",
+    "method": "Qual coding (inductive)",
+    "agreement": null,
+    "human_baseline": null,
+    "community": "Qual-methods",
+    "finding": "Chain-of-thought coding matches human performance on 8/9 hermeneutic tasks above substantial-kappa; scalable but task-bounded."
+  },
+  {
+    "id": "salminen2025syntheticcritical",
+    "method": "Synthetic participants",
+    "agreement": null,
+    "human_baseline": null,
+    "community": "HCI",
+    "finding": "Critical analysis of synthetic users in HCI: cannot capture unpredictable behavior; should not stand in for real users."
+  },
+  {
+    "id": "abbasiantaeb2024llmstalk",
+    "method": "Synthetic participants",
+    "agreement": null,
+    "human_baseline": null,
+    "community": "IR",
+    "finding": "'Let the LLMs talk': simulating users in conversational search; useful for evaluation but diverges from real user behavior."
+  },
+  {
+    "id": "jain2025multillmthematic",
+    "method": "Thematic analysis",
+    "agreement": 0.907,
+    "human_baseline": null,
+    "community": "Qual-methods",
+    "finding": "Multi-LLM thematic analysis with dual reliability (kappa + semantic): Gemini kappa 0.907, GPT-4o 0.853, Claude 0.842 vs humans."
+  },
+  {
+    "id": "wachinger2024prompts",
+    "method": "Qual analysis (general)",
+    "agreement": null,
+    "human_baseline": null,
+    "community": "Health",
+    "finding": "Comparing ChatGPT and a human qualitative researcher: useful for surface coding, 'imperfections' in depth and context."
+  }
+]
