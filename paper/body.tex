@@ -38,7 +38,7 @@ persona generation, usability evaluation, and design critique) and codes how the
 replace / simulate) and with what epistemic stance.
 \item \textbf{Study 3, filling the gaps.} Studies 1-2 reveal HCC datasets that contain human labels
 but have never been formally evaluated with an LLM judge. Study 3 runs a standardized LLM-as-a-judge
-meta-evaluation on these datasets, using open models served through Clemson's vLLM API and the
+meta-evaluation on these datasets, using open models served through \PROVIDER{} and the
 agreement-against-human-ceiling methodology distilled from the prior literature, with a mixed-effects analysis of
 what governs judge reliability.
 \end{enumerate}
@@ -52,7 +52,7 @@ what governs judge reliability.
 \textbf{Study 2}: \emph{How does HCC use LLMs} for human-input tasks? (\STN{} studies)
 \;$\rightarrow$\;
 \textbf{Study 3}: \emph{Fill the gaps}, standardized evaluation on HCC datasets with human labels (open models via
-Clemson vLLM).}}
+\PROVIDER{}).}}
 \caption{The four-study progression. Study~1a maps where LLM judges are reliable; Study~1b tests whether today's
 strongest open models move that map; Study~2 narrows to Human-Centered Computing practice; Study~3 supplies new
 empirical evidence on under-tested HCC datasets.}
@@ -178,7 +178,7 @@ in Study~1a) because it pairs (i) a widely cited LLM-judge result to beat (G-Eva
 with (ii) public expert human ratings on four aspects (coherence, consistency, fluency, relevance) for
 $100\times16=1600$ machine summaries. We replicate the G-Eval summary-level protocol \emph{verbatim} (same aspect
 definitions, 1-5 integer ratings, temperature~0) but swap the judge for the \ONEmodels{} most powerful open models
-in the Clemson catalogue (\ONEpanel). The comparison metric is the canonical \emph{summary-level Spearman}: for each
+in the available open-model catalogue (\ONEpanel). The comparison metric is the canonical \emph{summary-level Spearman}: for each
 source document, correlate the judge's 16 scores with the human means, averaged across documents. The bar to beat is
 G-Eval/GPT-4's reported per-aspect correlations (coherence~.582, consistency~.507, fluency~.455, relevance~.547;
 average~$\approx$.52). In total Study~1b contributes \ONEnjudg{} fresh judgments.
@@ -351,7 +351,7 @@ Studies 1-2 expose a recurring gap: many human-centered datasets ship with human
 human ceiling, and a contamination check. Study 3 closes this gap empirically with a released, reproducible harness.
 
 \subsection{Method}
-We evaluate a panel of \STHRmodels{} open models served via \textbf{Clemson RCD's vLLM API} (OpenAI-compatible),
+We evaluate a panel of \STHRmodels{} open models served via \textbf{\PROVIDER{}} (OpenAI-compatible),
 spanning five families and 9B-754B parameters (\texttt{glm-5.1}~754B, \texttt{gptoss-120b}, \texttt{deepseek-v4},
 \texttt{gemma-4-31b}, \texttt{qwen3.6-27b}, \texttt{qwen3.5-9b}), run in parallel at each model's documented
 concurrency. Each model judges every item as a \emph{virtual annotator} under the same instructions the humans
@@ -593,8 +593,8 @@ humans on subjective, high-consensus social annotation) is itself a guard agains
 \textbf{Reproducibility.} Every number in this paper regenerates from released code: the OpenAlex, Semantic Scholar,
 and web search logs; the two coded corpora; the figure and table generators; the Study-1b SummEval harness and the
 Study-3 judging/scoring/contamination/mixed-effects harness, all keyed to documented model identifiers served through
-Clemson's vLLM API at temperature~$0$ with idempotent, resumable checkpoints. The auto-generated statistics macros
-mean the manuscript cannot drift from the data. Repository: \url{https://github.com/ai4he/llm-as-a-judge}.
+\PROVIDER{} at temperature~$0$ with idempotent, resumable checkpoints. The auto-generated statistics macros
+mean the manuscript cannot drift from the data. Repository: \REPO{}.
 
 % =====================================================================
 \section{Conclusion}

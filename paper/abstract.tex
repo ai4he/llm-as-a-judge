@@ -9,7 +9,7 @@ the general reliability landscape of LLM-as-a-judge: substitution is validated (
 human-human ceiling) for objective, verifiable, low-expertise tasks judged in aggregate, and unreliable for
 subjective, expert, low-resource, or adversarial ones (mean reliability \Meanrel/5; only \Pctreliable\% of studies
 in the reliable band). \textbf{Study 1b} asks whether this landscape is a moving target: we re-run a flagship
-``promising'' benchmark (SummEval) with the most powerful open models served via Clemson's vLLM API and ask whether
+``promising'' benchmark (SummEval) with the most powerful open models served via \PROVIDER{} and ask whether
 they now \emph{surpass} the agreement numbers reported for proprietary judges, distinguishing a ``matter of time''
 from a structural ceiling. \textbf{Study 2} is a PRISMA systematic review of \STN{} studies focused on HCC, HCI, and
 qualitative-research methods that historically require human input. It finds that the field overwhelmingly positions
@@ -19,7 +19,7 @@ substitution is validated, interpretive qualitative analysis is reliable only as
 \emph{simulating} participants, personas, and usability evaluations is the least reliable (flattening of identity
 groups, caricature, hallucinated usability issues). \textbf{Study 3} closes the gaps the
 first two studies expose, by running a standardized LLM-as-a-judge meta-evaluation, using open models served via
-Clemson's vLLM API and the agreement-against-human-ceiling methodology distilled from Studies 1-2, on HCC datasets
+\PROVIDER{} and the agreement-against-human-ceiling methodology distilled from Studies 1-2, on HCC datasets
 that contain human labels but have never been formally tested with an LLM judge. Across \STHRn{} judgments (a
 6-model open panel, 9B-754B), it finds the human-agreement ceiling governs reliability: the panel matches or
 exceeds humans on low-ceiling NLI but falls short of, and fails the alt-test for, subjective social-computing

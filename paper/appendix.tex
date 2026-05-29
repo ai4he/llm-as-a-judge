@@ -43,7 +43,7 @@ We replicate the summary-level G-Eval protocol \citep{liu2023geval} on SummEval 
 Each (summary, aspect) pair is scored $1$ to $5$ by the judge with the aspect criterion below; we then compute the
 \textbf{summary-level Spearman} $\rho$ (per source document, correlate the judge's $16$ scores with the human means,
 averaged over documents, dropping documents with no score variance) and compare it to the reported G-Eval-4/GPT-4
-correlations. Judges are the four most powerful open models in the Clemson catalogue
+correlations. Judges are the four most powerful open models in the available open-model catalogue
 (\texttt{glm-5.1-fp8}~$754$B, \texttt{deepseek-v4-pro}, \texttt{gptoss-120b}, \texttt{qwen3.6-35b-a3b-fp8}), decoded
 at temperature~$0$. Aspect criteria (verbatim):
 \begin{quote}\small
