@@ -1,0 +1,60 @@
+batch_block,query
+B1-foundational,LLM-as-a-judge survey systematic review human agreement evaluation
+B1-foundational,large scale empirical study LLM judges across NLP evaluation tasks human judgment
+B1-annotation,ChatGPT outperforms crowd workers text annotation tasks Gilardi PNAS
+B1-IR,large language models accurately predict searcher preferences relevance judgments TREC
+B1-summarization,G-Eval GPT-4 NLG evaluation better human alignment correlation summarization
+B1-bias,LLM evaluator bias position bias verbosity self-preference self-enhancement
+B1-foundational,MT-Bench Chatbot Arena LLM-as-a-judge agreement with human preferences 80%
+B1-MT,GEMBA GPT translation quality evaluation state-of-the-art human correlation
+B1-medical,LLM as judge medical clinical evaluation expert physician agreement limitations
+B1-annotation,automated annotation with generative AI requires validation Pangakis
+B1-general,can large language models be an alternative to human evaluation Chiang Lee ACL
+B1-socsci,LLM annotation social science computational political text Ziems Tornberg validation
+B2-code,LLM-as-a-judge code generation evaluation correctness human developer agreement CodeJudge
+B2-rag,RAGAS ARES RAG evaluation faithfulness answer relevance human correlation
+B2-summarization,LLM evaluator summarization factual consistency faithfulness human annotation SummEval
+B2-education,automated essay scoring GPT-4 human raters agreement education QWK
+B2-moderation,LLM content moderation toxicity hate speech detection vs human annotators agreement
+B2-legal,LLM-as-a-judge legal domain evaluation lawyer expert agreement reliability
+B2-reward,RewardBench reward model preference benchmark LLM judge accuracy human
+B2-reasoning,LLM judge reasoning math correctness JudgeBench process verification human
+B2-open,Prometheus open source evaluator LLM fine-grained evaluation human correlation
+B2-jury,replacing judges with juries panel of LLM evaluators PoLL Verga
+B2-method,alternative annotator test alt-test statistical when LLM can replace human annotators Calderon
+B2-mentalhealth,LLM judge empathy mental health counseling psychotherapy evaluation human expert
+B2-multimodal,vision language model VLM as judge multimodal evaluation human agreement MLLM-as-a-judge
+B2-peerreview,GPT-4 peer review scientific paper evaluation human reviewer agreement
+B3-factcheck,fact-checking misinformation claim verification LLM vs human annotators agreement
+B3-bias,LLM evaluators recognize and favor their own generations self-preference Panickssery
+B3-bias,large language models inconsistent and biased evaluators Stureborg
+B3-bias,cognitive biases benchmark LLMs as evaluators Koo bandwagon authority
+B3-bias,AlpacaEval length-controlled length bias LLM judge win rate Dubois
+B3-robustness,adversarial attack LLM judge robustness inflate score manipulation Raina cheating
+B3-qual,qualitative research thematic analysis deductive coding GPT-4 vs human coders agreement
+B3-sentiment,sentiment analysis emotion annotation ChatGPT vs human crowdworkers reliability
+B3-multilingual,multilingual non-English low-resource language LLM-as-a-judge evaluation reliability
+B3-dialogue,LLM judge dialogue open-ended conversation quality human evaluation correlation
+B3-finance,finance financial domain LLM evaluation expert annotation agreement benchmark
+B3-survey,From Generation to Judgment opportunities challenges LLM-as-a-judge survey taxonomy
+B3-IE,LLM annotation named entity recognition relation extraction NLI vs human labels
+B3-education,short answer grading science education LLM GPT automated scoring human agreement
+B4-t2i,text-to-image generation human preference evaluation model-as-judge VQAScore GenAI-Bench alignment
+B4-creative,creative writing story generation quality LLM evaluation human judgment correlation
+B4-bias,Humans or LLMs as the Judge study on judgement bias 2024
+B4-bias,style over substance superficial features bias LLM judge factuality preference
+B4-method,EvalGen who validates the validators criteria alignment LLM evaluation Shankar
+B4-repro,LLM-as-a-judge reproducibility non-determinism temperature variance stability reliability
+B4-instruction,instruction following evaluation IFEval constraint satisfaction LLM judge human agreement
+B4-factuality,long-form factuality SAFE search-augmented factuality evaluator vs human annotators
+B4-radiology,radiology clinical report generation evaluation GPT-4 vs radiologist physician agreement
+B4-meta,Judge's Verdict comprehensive analysis LLM judge capability human agreement Cohen kappa
+B4-medical,scoping review LLM-as-a-judge healthcare MedJUDGE framework agreement
+B4-education,LLM judge education feedback writing formative tutoring evaluation human teacher
+B5-baseline,inter-annotator agreement human-human baseline subjective NLP tasks Krippendorff alpha Cohen kappa values
+B5-MT,machine translation segment-level LLM evaluation human correlation WMT MQM GEMBA system-level
+B5-argument,argument quality persuasiveness essay debate LLM evaluator human agreement annotation
+B5-expertise,annotator expertise effect LLM-as-judge agreement layperson versus expert disagreement domain knowledge
+B5-health,HealthBench physician rubric grader LLM clinical evaluation OpenAI agreement
+B5-cost,data annotation cost LLM vs human crowdsourcing speedup accuracy trade-off labeling
+B5-SE,LLM judge software engineering code review bug detection developer agreement bias auditing

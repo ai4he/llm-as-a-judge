@@ -1,0 +1,16 @@
+{
+  "identified_openalex": 857,
+  "openalex_topical": 115,
+  "identified_web": 48,
+  "web_screened_in": 44,
+  "cross_dup_removed": 67,
+  "assessed": 92,
+  "excluded_eligibility": {
+    "no_human_compare": 14,
+    "tool_only": 9,
+    "sim_only_offtopic": 11,
+    "grey": 3
+  },
+  "excluded_eligibility_total": 37,
+  "included": 55
+}

@@ -1,0 +1,22 @@
+{
+  "identified_openalex": 1500,
+  "openalex_unique": 957,
+  "openalex_dup_removed": 543,
+  "openalex_excluded_screening": 792,
+  "openalex_topical": 165,
+  "identified_web": 472,
+  "identified_citation": 28,
+  "web_dup_removed": 196,
+  "web_unique": 304,
+  "web_excluded_screening": 175,
+  "web_screened_in": 129,
+  "cross_dup_removed": 31,
+  "assessed": 263,
+  "excl_no_human_compare": 22,
+  "excl_tool_only": 11,
+  "excl_method_only": 8,
+  "excl_grey": 5,
+  "excluded_eligibility_total": 46,
+  "included": 217,
+  "secondary_records": 11
+}

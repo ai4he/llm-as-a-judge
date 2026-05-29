@@ -1,0 +1,152 @@
+[
+  {
+    "query": "LLM-as-a-judge human agreement",
+    "openalex_total": 13901,
+    "fetched": 50
+  },
+  {
+    "query": "large language model evaluator human judgment correlation",
+    "openalex_total": 68793,
+    "fetched": 50
+  },
+  {
+    "query": "ChatGPT annotation human agreement crowdworkers",
+    "openalex_total": 508,
+    "fetched": 50
+  },
+  {
+    "query": "GPT-4 evaluation human evaluation alternative",
+    "openalex_total": 64779,
+    "fetched": 50
+  },
+  {
+    "query": "LLM judge summarization human correlation",
+    "openalex_total": 9974,
+    "fetched": 50
+  },
+  {
+    "query": "LLM machine translation evaluation human GEMBA",
+    "openalex_total": 274,
+    "fetched": 50
+  },
+  {
+    "query": "LLM judge code generation evaluation human",
+    "openalex_total": 22081,
+    "fetched": 50
+  },
+  {
+    "query": "large language model relevance judgment assessor",
+    "openalex_total": 2457,
+    "fetched": 50
+  },
+  {
+    "query": "LLM annotation social science human coder validation",
+    "openalex_total": 10373,
+    "fetched": 50
+  },
+  {
+    "query": "LLM hate speech toxicity annotation human",
+    "openalex_total": 1914,
+    "fetched": 50
+  },
+  {
+    "query": "LLM medical clinical evaluation physician agreement",
+    "openalex_total": 3934,
+    "fetched": 50
+  },
+  {
+    "query": "LLM mental health counseling evaluation expert",
+    "openalex_total": 2274,
+    "fetched": 50
+  },
+  {
+    "query": "LLM legal evaluation expert agreement",
+    "openalex_total": 9126,
+    "fetched": 50
+  },
+  {
+    "query": "LLM automated essay scoring human rater agreement",
+    "openalex_total": 1994,
+    "fetched": 50
+  },
+  {
+    "query": "LLM creative writing evaluation human judgment",
+    "openalex_total": 6600,
+    "fetched": 50
+  },
+  {
+    "query": "LLM peer review scientific human reviewer",
+    "openalex_total": 4630,
+    "fetched": 50
+  },
+  {
+    "query": "multimodal LLM judge vision language human agreement",
+    "openalex_total": 2746,
+    "fetched": 50
+  },
+  {
+    "query": "multilingual LLM-as-a-judge reliability",
+    "openalex_total": 4992,
+    "fetched": 50
+  },
+  {
+    "query": "reward model human preference benchmark RewardBench",
+    "openalex_total": 614,
+    "fetched": 50
+  },
+  {
+    "query": "LLM fact-checking claim human annotator",
+    "openalex_total": 6961,
+    "fetched": 50
+  },
+  {
+    "query": "LLM dialogue evaluation human correlation",
+    "openalex_total": 13577,
+    "fetched": 50
+  },
+  {
+    "query": "LLM qualitative coding thematic analysis human",
+    "openalex_total": 8558,
+    "fetched": 50
+  },
+  {
+    "query": "self-preference bias LLM judge",
+    "openalex_total": 10127,
+    "fetched": 50
+  },
+  {
+    "query": "position bias verbosity bias LLM evaluator",
+    "openalex_total": 1269,
+    "fetched": 50
+  },
+  {
+    "query": "alternative annotator test LLM replace human",
+    "openalex_total": 12311,
+    "fetched": 50
+  },
+  {
+    "query": "inter-annotator agreement LLM human",
+    "openalex_total": 11828,
+    "fetched": 50
+  },
+  {
+    "query": "LLM-as-a-judge survey bias reliability",
+    "openalex_total": 9581,
+    "fetched": 50
+  },
+  {
+    "query": "panel of LLM evaluators jury",
+    "openalex_total": 483,
+    "fetched": 50
+  },
+  {
+    "query": "instruction following evaluation LLM judge",
+    "openalex_total": 25644,
+    "fetched": 50
+  },
+  {
+    "query": "retrieval augmented generation evaluation LLM judge faithfulness",
+    "openalex_total": 3152,
+    "fetched": 50
+  }
+]

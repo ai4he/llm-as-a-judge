@@ -1,0 +1,30 @@
+domain,n,rel,verdict_mode,signal
+Machine Translation,3,4.333333333333333,2,Green
+Text-to-Image,2,4.0,2,Green
+Instruction Following,3,4.0,1,Green
+QA & Factuality,5,3.8,2,Green
+Information Extraction (NER/NLI),9,3.7777777777777777,2,Green
+General NLG,21,3.7142857142857144,2,Green
+Dialogue,2,3.5,2,Green
+Legal,2,3.5,2,Green
+Education & Grading,18,3.388888888888889,3,Amber
+RAG,3,3.3333333333333335,3,Amber
+Summarization,8,3.25,2,Amber
+Fact-Checking,4,3.25,2,Amber
+Sentiment & Emotion,4,3.25,3,Amber
+IR & Relevance,9,3.2222222222222223,2,Amber
+Social-Science Annotation,15,3.2,3,Amber
+Peer Review & Science,6,3.1666666666666665,3,Amber
+Multimodal (Vision-Language),5,3.0,3,Amber
+Qualitative Coding,6,3.0,3,Amber
+Argument Quality,1,3.0,3,Amber
+Finance,3,3.0,3,Amber
+Medicine & Clinical,16,2.875,3,Amber
+Methodology & Bias,38,2.8684210526315788,3,Amber
+Reward Modeling,5,2.8,3,Amber
+Code & SW Eng,7,2.7142857142857144,3,Amber
+Reasoning & Math,3,2.6666666666666665,3,Amber
+Content Moderation & Toxicity,5,2.6,3,Amber
+Mental Health,4,2.5,3,Amber
+Creative Writing,6,2.3333333333333335,3,Red
+Multilingual,4,2.25,4,Red

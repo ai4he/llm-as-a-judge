@@ -1,0 +1,11 @@
+family,count,mean,std
+Annotation / Classification,37,3.35,0.82
+Core NLG / Alignment,31,3.58,0.72
+Cross-lingual,4,2.25,0.5
+Education,18,3.39,0.5
+High-stakes / Expert,31,2.94,0.68
+Knowledge / Objective,25,3.36,0.91
+Methodology,38,2.87,0.78
+Multimodal,7,3.29,0.76
+Subjective / Social,18,2.67,0.59
+Systems / Applied,8,3.0,0.53

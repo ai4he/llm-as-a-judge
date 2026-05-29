@@ -1,0 +1,9 @@
+{
+  "queries": 12,
+  "raw_hits": 100,
+  "unique": 100,
+  "topical": 50,
+  "topical_in_corpus": 5,
+  "topical_missing": 29,
+  "topical_missing_also_absent_from_openalex": 24
+}

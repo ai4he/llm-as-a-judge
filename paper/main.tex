@@ -1,0 +1,428 @@
+\documentclass[11pt]{article}
+% =====================================================================
+%  When Can a Machine Judge Like a Human?
+%  Evaluating LLM-as-a-Judge Approaches for Human-Centered Computing Research
+%  A three-study CHI paper.  Compile: latexmk -pdf main.tex
+% =====================================================================
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\graphicspath{{../figures/}}
+\usepackage[table,dvipsnames]{xcolor}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{amsmath,amssymb}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{enumitem}
+\usepackage{microtype}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=NavyBlue,citecolor=BrickRed,urlcolor=NavyBlue]{hyperref}
+\usepackage{titlesec}
+
+\definecolor{g}{RGB}{26,152,80}
+\definecolor{a}{RGB}{254,224,139}
+\definecolor{r}{RGB}{215,48,39}
+
+\input{tables/autostats}        % Study 1 macros (\Nstudies, \Ndomains, ...)
+\input{tables/study2_autostats} % Study 2 macros (\STN, \STaugment, ...)
+
+\titleformat{\section}{\large\bfseries}{\thesection}{0.6em}{}
+\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{0.6em}{}
+
+\title{\textbf{When Can a Machine Judge Like a Human?}\\[3pt]
+\large Evaluating LLM-as-a-Judge Approaches for Human-Centered Computing Research}
+\author{Carlos Toxtli\thanks{Correspondence: \texttt{ai4helab@gmail.com}. This research used an AI-assisted
+systematic-search and extraction pipeline; all search logs (OpenAlex, Semantic Scholar, web), the two extracted
+study corpora, the analysis code, the figure/table-generation scripts, and the Study-3 evaluation harness are
+released for full reproducibility.}}
+\date{May 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\noindent
+Large language models (LLMs) are flooding into Human-Centered Computing (HCC) research as substitutes for human
+judgment---coding qualitative data, annotating crowdsourced corpora, simulating study participants, generating
+personas, and evaluating designs. Yet HCC's methods carry epistemological commitments (interpretation, reflexivity,
+positionality) that make uncritical substitution risky, and the field lacks an evidence-based account of
+\emph{when} an ``LLM-as-a-judge'' can stand in for a human and when it cannot. We address this with three studies.
+\textbf{Study 1} is a PRISMA systematic review of \Nstudies{} studies across \Ndomains{} domains that establishes
+the general reliability landscape of LLM-as-a-judge: substitution is validated ($\approx$ or above the
+human--human ceiling) for objective, verifiable, low-expertise tasks judged in aggregate, and unreliable for
+subjective, expert, low-resource, or adversarial ones (mean reliability \Meanrel/5; only \Pctreliable\% of studies
+in the reliable band). \textbf{Study 2} is a PRISMA systematic review of \STN{} studies focused on HCC, HCI, and
+qualitative-research methods that historically require human input. It finds that the field overwhelmingly positions
+LLMs to \emph{augment} rather than replace humans (\STaugment{} augment vs.\ \STreplace{} replace vs.\ \STsimulate{}
+simulate), with an epistemic stance dominated by \emph{tension} (\STtension/\STN); objective crowd-annotation
+substitution is validated, interpretive qualitative analysis is reliable only as human-in-the-loop augmentation, and
+\emph{simulating} participants, personas, and usability evaluations is the least reliable (flattening of identity
+groups, caricature, hallucinated usability issues). \textbf{Study 3} (protocol; in progress) closes the gaps the
+first two studies expose by running a standardized LLM-as-a-judge meta-evaluation---using open models served via
+Clemson's vLLM API and the agreement-against-human-ceiling methodology distilled from Studies 1--2---on HCC datasets
+that contain human labels but have never been formally tested with an LLM judge. Together the studies yield a
+decision framework telling HCC researchers when an LLM judge is a validated substitute, a human-in-the-loop
+assistant, or an unsafe replacement.
+\end{abstract}
+
+\tableofcontents
+\bigskip
+
+% =====================================================================
+\section{Introduction and motivation}
+% =====================================================================
+In barely two years, LLMs have moved from objects of HCI study to \emph{instruments} of HCI method. Researchers now
+use them to code interview transcripts \citep{xiao2023support,gao2024collabcoder}, run thematic analyses
+\citep{depaoli2023inductive,dai2023llminloop}, annotate social-media corpora \citep{gilardi2023chatgpt,
+tornberg2023political}, simulate survey respondents and ``silicon samples'' \citep{argyle2023outofone}, generate
+personas \citep{salminen2024deusexmachina}, and even perform heuristic usability evaluation \citep{guerino2025gpt4ousability}.
+The appeal is obvious: human judgment is the costly bottleneck of human-centered research, and an LLM that labels for
+\$0.003 an item is a tempting stand-in \citep{gilardi2023chatgpt}.
+
+The danger is equally clear. HCC and qualitative methods are not mere labeling pipelines; they carry
+\emph{epistemological commitments}---interpretation, reflexivity, positionality, and the situated knowledge of the
+researcher---that an LLM cannot obviously honor \citep{schroeder2025usestensions,davison2024ethics}. Substituting a
+model for a human participant can \emph{flatten} and misportray the very identity groups HCI seeks to center
+\citep{wang2024flatten,cheng2023compost}. And the empirical record is genuinely mixed: the same model can match two
+human coders on a structured codebook \citep{dunivin2024scalablecot} yet hallucinate usability problems that do not
+exist \citep{guerino2025gpt4ousability}, or agree with a second annotator on stance \citep{gilardi2023chatgpt} yet be
+fooled into mislabeling relevance by a few injected keywords \citep{alaofi2024fooledrelevant}.
+
+HCC researchers therefore face a question with no consolidated answer: \textbf{for which HCC research tasks is an
+LLM-as-a-judge a safe substitute for human judgment, for which is it a useful assistant, and for which is it
+unsafe?} This paper answers that question through three studies with a deliberate progression
+(Figure~\ref{fig:overview}):
+
+\begin{enumerate}[leftmargin=1.5em,itemsep=2pt]
+\item \textbf{Study 1 --- the general landscape.} A PRISMA systematic review of \Nstudies{} studies across
+\Ndomains{} domains establishes \emph{where, in general}, LLM-as-a-judge agrees with humans, anchored to the
+human--human ceiling. This gives HCC the broad map and the methodological vocabulary (the reliability rubric, the
+bias catalogue, the decision map).
+\item \textbf{Study 2 --- the HCC lens.} A second PRISMA review of \STN{} studies zooms into the methods HCC
+actually uses---qualitative coding, thematic/content analysis, crowdsourced annotation, participant simulation,
+persona generation, usability evaluation, and design critique---and codes how the field positions LLMs (augment /
+replace / simulate) and with what epistemic stance.
+\item \textbf{Study 3 --- filling the gaps (protocol).} Studies 1--2 reveal HCC datasets that contain human labels
+but have never been formally evaluated with an LLM judge. Study 3 runs a standardized LLM-as-a-judge
+meta-evaluation on these datasets, using open models served through Clemson's vLLM API and the
+agreement-against-human-ceiling methodology distilled from the prior literature.
+\end{enumerate}
+
+\begin{figure}[t]\centering
+\fbox{\parbox{0.96\linewidth}{\centering\small
+\textbf{Study 1}: \emph{Where} is LLM-as-a-judge reliable? (cross-domain landscape, \Nstudies{} studies)
+\;$\longrightarrow$\;
+\textbf{Study 2}: \emph{How does HCC use LLMs} for human-input tasks, and how reliably? (\STN{} studies)
+\;$\longrightarrow$\;
+\textbf{Study 3}: \emph{Fill the gaps} --- standardized LLM-as-a-judge evaluation on HCC datasets with human labels
+(open models via Clemson vLLM).}}
+\caption{The three-study progression. Each study narrows from the general reliability of LLM judges to the specific
+practices of Human-Centered Computing and, finally, to new empirical evidence on under-tested HCC datasets.}
+\label{fig:overview}
+\end{figure}
+
+\paragraph{Contributions.} (1) The first consolidated, human-ceiling-anchored map of LLM-as-a-judge reliability
+across \Ndomains{} domains (Study 1). (2) The first systematic review of LLM substitution \emph{specifically} for
+HCC/HCI/qualitative methods, with a method$\times$role$\times$stance coding that surfaces the field's
+augment-not-replace consensus and its epistemic tensions (Study 2). (3) A reproducible, standardized evaluation
+protocol and harness (Study 3) for testing LLM judges on HCC datasets, plus two released corpora ($\Nstudies+\STN$
+coded studies), all code, and a decision framework for practitioners.
+
+% =====================================================================
+\section{Background and shared methodology}
+% =====================================================================
+LLM-as-a-judge descends from reference-free metrics (BERTScore, COMET) but uses a general instruction-following
+model with a natural-language rubric, supporting pointwise, pairwise, and listwise judgment
+\citep{li2024compsurvey,gu2024survey}. Four architectural families recur: prompted general LLMs
+\citep{zheng2023mtbench,liu2023geval}; fine-tuned open evaluators \citep{kim2023prometheus,zhu2023judgelm,
+wang2023pandalm}; juries/multi-agent panels \citep{verga2024poll,chan2023chateval}; and calibrated rubric methods
+\citep{hashemi2024llmrubric}. Prior surveys taxonomize methodology \citep{gu2024survey,li2024gen2judge}; we instead
+synthesize \emph{where substitution is empirically validated}, and---uniquely---do so through the HCC lens.
+
+\paragraph{Shared protocol.} Both reviews follow PRISMA~2020 \citep{page2021prisma}, identify studies through a
+triangulated search (the OpenAlex API as the primary bibliographic database, Semantic Scholar as a cross-check, and
+a structured web ``deep-research'' arm), and code each study on a five-level \textbf{reliability verdict}
+benchmarked against the \emph{human--human agreement ceiling} for the same task: \textbf{1 Validated}
+($\approx$/$>$ ceiling), \textbf{2 Promising} (conditional), \textbf{3 Mixed} (task-dependent), \textbf{4 Caution}
+(below ceiling), \textbf{5 Unreliable} (near chance / bias-dominated). We report a reliability score $=6-$verdict
+and synthesize within metric families rather than pooling incommensurable effect sizes. Full protocols, search
+logs, and the two coded corpora are released.
+
+% =====================================================================
+\section{Study 1: The cross-domain reliability landscape}
+% =====================================================================
+\subsection{Method (summary)}
+Study 1 systematically reviewed \Nstudies{} studies across \Ndomains{} domains comparing LLM-as-a-judge to human
+annotation. Identification triangulated OpenAlex (\OAretrieved{} records, \OAunique{} unique), Semantic Scholar, and
+a 59-query web search; screening retained on-topic empirical comparisons; \Nnumeric{} studies reported an
+extractable numeric agreement value (Figure~\ref{fig:prisma1}; the full coded corpus is Table~\ref{tab:full}).
+
+\begin{figure}[t]\centering
+\includegraphics[width=0.96\linewidth]{fig01_prisma_flow}
+\caption{Study 1 PRISMA~2020 flow (two-arm identification: OpenAlex database + web/citation).}
+\label{fig:prisma1}
+\end{figure}
+
+\subsection{Findings: a green/amber/red landscape}
+The modal verdict is \emph{mixed/task-dependent}; only \Pctreliable\% of studies sit in the reliable band and
+\Pctproblematic\% in the problematic band (mean reliability \Meanrel/5). Reliability is governed by three properties:
+\textbf{objectivity}, \textbf{tractable verification}, and a \textbf{low human-agreement floor}.
+\textbf{Green ($\ge$3.5; \Ngreen{} domains):} machine translation (system level), text-to-image alignment,
+verifiable instruction-following, QA/factuality, information extraction, general-NLG pairwise preference, dialogue,
+and legal scoring---here LLM judges frequently match or exceed the human ceiling (e.g., MT-Bench 85\% vs.\ 81\%
+human--human \citep{zheng2023mtbench}; GEMBA-MQM 96.5\% \citep{kocmi2023gembamqm}; SAFE wins 76\% of disagreements
+\citep{wei2024safe}). \textbf{Amber (\Namber{} domains):} summarization, RAG, education, social-science annotation,
+medicine (structure-dependent: $\kappa\!\approx\!0.82$--$0.93$ structured vs.\ $0.47$--$0.71$ complex reasoning),
+code, and IR/relevance (strong but contested \citep{clarke2024cantreplace}). \textbf{Red (\Nred{} domains):}
+low-resource multilingual evaluation and creative writing (near-zero expert correlation
+\citep{chakrabarty2024artartifice}). Figures~\ref{fig:dom1}--\ref{fig:land1} give the domain ordering and the
+domain$\times$task landscape; the decision map (Figure~\ref{fig:dec1}) positions domains by reliability against
+stakes.
+
+\begin{figure}[t]\centering
+\begin{subfigure}{0.5\linewidth}\includegraphics[width=\linewidth]{fig05_reliability_by_domain}\caption{}\label{fig:dom1}\end{subfigure}\hfill
+\begin{subfigure}{0.48\linewidth}\includegraphics[width=\linewidth]{fig06_reliability_landscape}\caption{}\label{fig:land1}\end{subfigure}
+\caption{Study 1. (a) Mean reliability by domain (green/amber/red). (b) Reliability landscape: domain$\times$judging
+task; verification/classification columns are greener than open-ended scoring.}
+\end{figure}
+
+\subsection{Failure modes and the decision map}
+Recurring biases---verbosity/length, position, self-preference, style-over-substance, preference leakage,
+non-determinism, and the \emph{expertise gap} (judges converge to crowd, not expert, consensus
+\citep{bavaresco2024judgebench})---modulate reliability (Figure~\ref{fig:bias1}). Agreement should be benchmarked
+against the human ceiling, which on subjective tasks is itself low (Krippendorff $\alpha<0.35$
+\citep{imrit2026iaa}). The Study-1 decision map (Figure~\ref{fig:dec1}) and Table~\ref{tab:decision} translate this into
+deployment guidance and motivate the HCC-specific analysis that follows.
+
+\begin{figure}[t]\centering
+\begin{subfigure}{0.5\linewidth}\includegraphics[width=\linewidth]{fig11_bias_frequency}\caption{}\label{fig:bias1}\end{subfigure}\hfill
+\begin{subfigure}{0.49\linewidth}\includegraphics[width=\linewidth]{fig15_decision_map}\caption{}\label{fig:dec1}\end{subfigure}
+\caption{Study 1. (a) Catalogue of reported failure modes/biases. (b) Deployment decision map (reliability$\times$
+stakes; bubble area $\propto$ studies).}
+\end{figure}
+
+\input{tables/tab_domain_decision_wrap}
+
+\paragraph{Takeaway for HCC.} Study 1 says LLM judges are safe where the task is objective and verifiable. But HCC's
+signature methods---qualitative interpretation, participant study, design judgment---are precisely the
+\emph{subjective, expert, interpretive} tasks Study 1 flags as risky. Study 2 tests whether that prediction holds in
+the HCC literature itself.
+
+% =====================================================================
+\section{Study 2: LLM substitution in HCC, HCI, and qualitative methods}
+% =====================================================================
+\subsection{Motivation and research questions}
+Study 1's map is domain-general; HCC needs a method-specific account. Human-centered research is built on methods
+that historically \emph{require} human input: qualitative coding, thematic and content analysis, interviews and
+open-ended survey analysis, crowdsourced annotation, participant studies, persona development, usability/heuristic
+evaluation, and design critique. Study 2 asks: \textbf{(RQ2.1)} which of these methods have been attempted with
+LLMs, and how reliably do LLM outputs agree with human input? \textbf{(RQ2.2)} How does the field position the
+LLM---to \emph{augment}, \emph{replace}, or \emph{simulate} the human? \textbf{(RQ2.3)} What epistemic stance
+(enabling, tension, critical) does the literature take, and what does that imply for HCC practice?
+
+\subsection{Method}
+Following the shared protocol, we ran a Study-2--specific identification arm: 25 HCC/HCI/qualitative concept-block
+queries against OpenAlex (\SToa{} unique works), triangulated with the web arm and with the venue-scoped sweep of
+Study 1 (CHI, CSCW, UIST, IUI, TOCHI). After topicality screening and eligibility assessment we included
+\STN{} studies (Figure~\ref{fig:s2prisma}). We extracted, per study: the HCC \textbf{method}; the LLM \textbf{role}
+(replace / augment / simulate); reported agreement and the human baseline; the reliability \textbf{verdict};
+the \textbf{epistemic stance} (enabling / tension / critical); and the \textbf{community} (HCI, CSCW,
+qualitative-methods, computational social science, NLP, health). The full corpus is Table~\ref{tab:study2full}.
+
+\begin{figure}[t]\centering
+\includegraphics[width=0.96\linewidth]{s2_fig01_prisma}
+\caption{Study 2 identification flow (HCC/HCI/qualitative methods).}
+\label{fig:s2prisma}
+\end{figure}
+
+\subsection{RQ2.1 --- Which methods, and how reliable?}
+LLMs have been compared against human input across \STmethods{} distinct HCC methods
+(Figure~\ref{fig:s2methods}), most heavily in \emph{thematic analysis}, \emph{synthetic participants}, and
+\emph{crowdsourced annotation}. Reliability is strongly method-dependent (Figure~\ref{fig:s2relmethod};
+Table~\ref{tab:s2methods}). The \emph{same objectivity/interpretation axis} from Study 1 governs HCC:
+\textbf{objective crowd-annotation} is the most reliable method to substitute---ChatGPT matches or beats crowd
+workers and even trained coders on stance, topic, and frame labeling \citep{gilardi2023chatgpt,tornberg2023political};
+\textbf{deductive/inductive coding and content/thematic analysis} are reliable \emph{as augmentation}, with
+human-equivalent agreement on structured codebooks (GPT-4 exceeding substantial $\kappa$ on 8/9 hermeneutic tasks
+\citep{dunivin2024scalablecot}; Gemini $\kappa=0.907$ in multi-LLM thematic analysis \citep{jain2025multillmthematic};
+79.7\% agreement in health thematic summarization \citep{castellanos2025thematicsumm}) but only moderate agreement
+in open interpretive settings ($\kappa\approx0.40$--$0.46$ \citep{li2024gpt4humanqual,qualcoding2025jla}); and
+\textbf{participant/persona simulation and usability evaluation} are the least reliable.
+
+\begin{figure}[t]\centering
+\begin{subfigure}{0.52\linewidth}\includegraphics[width=\linewidth]{s2_fig02_methods}\caption{}\label{fig:s2methods}\end{subfigure}\hfill
+\begin{subfigure}{0.46\linewidth}\includegraphics[width=\linewidth]{s2_fig05_reliability_by_method}\caption{}\label{fig:s2relmethod}\end{subfigure}
+\caption{Study 2. (a) HCC/HCI/qualitative methods studied with LLMs (colour = mean reliability). (b) Mean reliability
+of LLM substitution by method.}
+\end{figure}
+
+\begin{table}[t]\centering\small
+\caption{Study 2 method-level decision table: study count, modal LLM role, mean reliability, and traffic-light
+signal (\textsc{green} $\ge3.5$; \textsc{amber} 2.5--3.5; \textsc{red} $<2.5$).}
+\label{tab:s2methods}
+\input{tables/tab_study2_methods}
+\end{table}
+
+\subsection{RQ2.2 --- Augment, replace, or simulate?}
+HCC overwhelmingly positions LLMs to \emph{augment} humans, not replace them: \STaugment{} of \STN{} studies frame
+the LLM as a collaborator/assistant, versus \STreplace{} as a replacement and \STsimulate{} as a human simulator
+(Figure~\ref{fig:s2rolestance}a). This is not merely rhetorical caution---it tracks reliability
+(Figure~\ref{fig:s2verdictrole}): augmentation studies skew reliable, whereas \emph{replacement} is validated only
+for objective annotation and \emph{simulation} of participants is the least reliable role
+(mean reliability augment \STrelaugment{} vs.\ replace \STrelreplace{} vs.\ simulate \STrelsim{}). The replacement
+mean is buoyed by objective crowd-annotation; remove it and replacement of \emph{interpretive} human input is
+firmly amber/red. The canonical HCC workflow that emerges is human-in-the-loop: LLM proposes, human vets and retains
+interpretive authority \citep{gao2024collabcoder,meng2024chalet,dai2023llminloop}.
+
+\begin{figure}[t]\centering
+\includegraphics[width=0.95\linewidth]{s2_fig03_role_stance}
+\caption{Study 2. (a) Intended LLM role across the HCC corpus; augmentation dominates. (b) Epistemic stance toward
+substitution; \emph{tension} dominates.}
+\label{fig:s2rolestance}
+\end{figure}
+
+\begin{figure}[t]\centering
+\includegraphics[width=0.8\linewidth]{s2_fig04_verdict_by_role}
+\caption{Study 2. Reliability verdict by LLM role. Augmentation is reliable; replacement is reliable only for
+objective annotation; participant/usability \emph{simulation} is the least reliable.}
+\label{fig:s2verdictrole}
+\end{figure}
+
+\subsection{RQ2.3 --- Epistemic stance and the limits of substitution}
+The dominant stance is \emph{tension} (\STtension/\STN), with \STcritical{} explicitly \emph{critical} and only
+\STenabling{} unreservedly \emph{enabling} (Figure~\ref{fig:s2rolestance}b). Three threads recur.
+\textbf{(i) Interpretation and reflexivity.} Qualitative scholars warn that LLMs perform surface-level extraction
+well but cannot supply the situated, reflexive interpretation that gives qualitative findings their validity, and
+that ``conditional trust'' in tool output risks hollowing out analytic rigor \citep{schroeder2025usestensions,
+ngo2026chatqda,davison2024ethics,nguyentrung2025chatgptta}.
+\textbf{(ii) Participants and identity.} Replacing human participants with LLMs \emph{flattens and misportrays}
+demographic groups---positionality cannot be simulated \citep{wang2024flatten}---and LLM ``subgroups'' are often
+caricatures \citep{cheng2023compost}; synthetic survey data distort variances and correlations
+\citep{bisbee2023perils}, and an LLM is worth only a bounded number of real respondents \citep{huang2025surveyworth}.
+HCI critiques accordingly recast synthetic users as ``objects of inquiry,'' not stand-ins \citep{salminen2025syntheticcritical,
+haxvig2025personabias}.
+\textbf{(iii) Expert design judgment.} GPT-4o overlaps only 21\% with expert-found usability issues and hallucinates
+false positives \citep{guerino2025gpt4ousability}, and LLM UI critique trails expert designers
+\citep{duan2024uicrit}---though synthetic heuristic evaluation can exceed \emph{novice} evaluators on issue recall
+\citep{zhong2025synthheuristic}. Figure~\ref{fig:s2comm} shows coverage skews to HCI and computational social
+science, with the augment--replace reliability gap visible across communities.
+
+\begin{figure}[t]\centering
+\includegraphics[width=0.95\linewidth]{s2_fig06_community_role}
+\caption{Study 2. (a) Coverage by research community. (b) Mean reliability by LLM role---augmentation $>$
+replacement $>$ simulation.}
+\label{fig:s2comm}
+\end{figure}
+
+\subsection{Study 2 synthesis}
+For HCC research, the evidence supports a clear, conditional posture.
+\textbf{Validated to substitute:} objective crowd/data annotation (stance, topic, relevance, frames) where a human
+ceiling is modest and verifiable.
+\textbf{Reliable only as augmentation (human-in-the-loop):} deductive/inductive qualitative coding and thematic/
+content analysis---LLMs accelerate breadth and first-pass coding, but humans must own interpretation, theme
+development, and reflexive accounting.
+\textbf{Unsafe to substitute:} simulating human participants, generating personas as stand-ins for real users, and
+replacing expert usability/design judgment---these flatten identity, fabricate issues, and forfeit the situated
+knowledge that defines human-centered inquiry. This posture both confirms Study 1's objective/subjective prediction
+\emph{within} HCC and exposes concrete gaps (\S\ref{sec:study3}) where HCC datasets with human labels have never
+been formally tested with an LLM judge.
+
+% =====================================================================
+\section{Study 3: Filling the gaps with a standardized LLM-as-a-judge evaluation (protocol)}
+\label{sec:study3}
+% =====================================================================
+Studies 1--2 reveal a recurring gap: many HCC datasets ship with human labels or codings, yet a \emph{formal}
+LLM-as-a-judge evaluation---multiple models, bias controls, agreement benchmarked against the human ceiling---has
+never been run on them. Study 3 (in progress) fills these gaps with a standardized, reproducible harness.
+
+\paragraph{Target datasets.} From Studies 1--2 we shortlist HCC datasets that (a) contain human annotations/codings
+and (b) lack a published LLM-as-a-judge evaluation---e.g., qualitative-coding corpora with codebooks and
+inter-coder reliability, crowd-annotation benchmarks, usability-issue sets, and open-ended survey/interview codings.
+Each dataset must report a human--human baseline so that ``matches a second human'' is a testable bar.
+
+\paragraph{Models.} We use open models served via \textbf{Clemson's vLLM API} (OpenAI-compatible), spanning families
+and scales---e.g., \texttt{deepseek-v4-pro}, \texttt{gemma-4-31b}, a \texttt{mistral} model, and the
+\texttt{qwen3.x} instruct line (\texttt{qwen3-30b-a3b-instruct}, \texttt{qwen3.5-9b}, \texttt{qwen3.6-27b},
+\texttt{qwen3.6-35b-a3b}, \texttt{qwen3-omni-30b-a3b})---with \texttt{qwen3-embedding}/\texttt{qwen3-rerank} for
+retrieval-style relevance tasks. Using multiple open models (rather than a single proprietary judge) tests
+robustness and enables the jury/panel design shown to reduce bias \citep{verga2024poll,chan2023chateval}.
+
+\paragraph{Methodology (standardized from Studies 1--2).} For each (dataset, model) pair we will: judge every item
+pointwise and pairwise; control presentation biases (position swapping, length normalization)
+\citep{zheng2023mtbench,dubois2024lc}; pin temperature/seed/version for reproducibility \citep{temperature2026};
+and report agreement with humans using the metric native to the task (Cohen's/Fleiss' $\kappa$, Krippendorff's
+$\alpha$, ICC, \% agreement, or correlation), \emph{always against the human--human ceiling}. We will apply the
+\textbf{alt-test} \citep{calderon2025alttest}---a leave-one-annotator-out procedure that statistically justifies
+replacing a human---as the formal decision rule, aggregate models into a jury, and probe the failure modes from
+Study 1 (self-preference, verbosity, expertise gap). Each dataset will be scored on the same five-level reliability
+verdict, slotting directly into the Study-1/Study-2 landscape.
+
+\paragraph{Expected contribution.} Study 3 will convert qualitative ``promising/mixed'' verdicts on HCC methods into
+\emph{quantitative}, dataset-level evidence on previously untested data, and will report---per method and per
+model---whether an open, locally-servable LLM jury can replace a second human coder under the field's own
+reliability standards. The harness and all outputs will be released for the community to extend.
+
+% =====================================================================
+\section{General discussion: a decision framework for HCC}
+% =====================================================================
+Across both reviews, one principle organizes the evidence: \textbf{LLM-as-a-judge substitution is reliable to the
+degree that the human task is objective, verifiable, low in required expertise, and benchmarked against a modest
+human ceiling}---and it degrades as tasks become interpretive, expert, identity-laden, or open-ended. For
+Human-Centered Computing specifically:
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+\item \textbf{Automate (with light audit):} objective annotation/labeling of user-generated content---stance,
+topic, relevance, frames, simple sentiment \citep{gilardi2023chatgpt,tornberg2023political}.
+\item \textbf{Augment, human-in-the-loop:} qualitative coding and thematic/content analysis---use the LLM for
+first-pass coding, breadth, and disagreement surfacing, but keep human interpretive authority, calibrate on a
+labeled subset, and report reliability against human coders \citep{gao2024collabcoder,meng2024chalet,
+pangakis2023validation}.
+\item \textbf{Keep humans (do not substitute):} simulating participants or replacing them with personas, and
+replacing expert usability/design judgment---these flatten identity, fabricate evidence, and abandon situated
+knowledge \citep{wang2024flatten,guerino2025gpt4ousability,salminen2025syntheticcritical}.
+\end{itemize}
+Practically, HCC researchers reporting LLM-assisted analysis should: state the LLM's \emph{role}
+(augment/replace/simulate); report agreement against a \emph{human--human} baseline at the right granularity;
+control position/length bias and pin model/version; prefer comparative scoring and juries to single absolute judges;
+and treat the alt-test \citep{calderon2025alttest} as the bar for any replacement claim.
+
+% =====================================================================
+\section{Limitations}
+% =====================================================================
+Both reviews used a single-reviewer, LLM-assisted pipeline (logs released) rather than dual human reviewers; metrics
+are heterogeneous and synthesized within families rather than pooled; several methods/domains rest on small $n$
+(flagged via family/role aggregates); database recall depends on indexing and query phrasing (mitigated, not
+removed, by three-source triangulation); and findings reflect models available through mid-2026. Study 3 is a
+protocol whose empirical results are forthcoming. The verdict rubric, though explicit and released, embeds
+judgement; we therefore release both corpora for re-coding.
+
+% =====================================================================
+\section{Conclusion}
+% =====================================================================
+LLMs are already remaking how Human-Centered Computing research is done. Our three studies show that this is neither
+to be embraced nor refused wholesale. Across \Nstudies{} cross-domain studies and \STN{} HCC-specific studies, the
+evidence converges on a conditional verdict: an LLM-as-a-judge is a \emph{validated substitute} for objective
+annotation, a \emph{valuable human-in-the-loop assistant} for qualitative coding and analysis, and an
+\emph{unsafe replacement} for human participants, personas, and expert design judgment. Study 3 will turn the
+remaining ``mixed'' verdicts into dataset-level evidence using open, locally-servable models and the field's own
+reliability standards. The right question for HCC is never ``can a machine judge?'' but ``\emph{can this machine
+replace a second human, on this method, at this granularity, under these controls?}''---and this paper makes that
+question answerable, method by method.
+
+\section*{Reproducibility}
+Two coded corpora (Study 1: \Nstudies{} studies; Study 2: \STN{} studies), three search logs, PRISMA counts, all
+figure/table-generation code, the auto-generated statistics, and the Study-3 evaluation harness are released.
+Everything regenerates via \texttt{make all}.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\appendix
+\section{Study 1 corpus}\label{app:s1}
+{\footnotesize\input{tables/tab_full_studies}}
+\section{Study 2 corpus}\label{app:s2}
+\input{tables/tab_study2_full}
+
+\end{document}

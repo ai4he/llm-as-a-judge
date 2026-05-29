@@ -1,0 +1,25 @@
+# --- secrets (never commit) ---
+secrets.sh
+.env
+*.key
+
+# --- python ---
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# --- LaTeX build artifacts (paper/main.pdf IS tracked as a snapshot) ---
+paper/*.aux
+paper/*.bbl
+paper/*.blg
+paper/*.log
+paper/*.out
+paper/*.toc
+paper/*.fls
+paper/*.fdb_latexmk
+paper/*.synctex.gz
+paper/compile.log
+
+# --- misc ---
+.DS_Store
+texinstall.log
