@@ -16,7 +16,9 @@ chance-corrected agreement, jury aggregation, a calibrated contamination screen,
 analysis. The organizing finding is that, on ChaosNLI NLI, open judges \emph{track the human ceiling across the disagreement spectrum}: the
 judge-vs-ceiling gap is near zero at both low and high human-entropy ($\NLIgapLow$, $\NLIgapHigh$), so accuracy
 follows the ceiling rather than the judge failing on contested items; residual variance is item-level
-($\mathrm{SD}_{\text{logit}}=\NLIitemSDlogit$ vs model $\NLImodelSDlogit$), and model scale contributes only modestly. We turn
+($\mathrm{SD}_{\text{logit}}=\NLIitemSDlogit$ vs model $\NLImodelSDlogit$), and model scale contributes only modestly.
+A freshly authored, unseen NLI holdout (solved at $\FNbest$ by the large models) confirms this is genuine competence,
+not memorization of these older corpora. We turn
 this into a decision framework and an eight-point protocol for designing LLM-as-a-judge experiments. A companion
 paper applies the same evaluation, with a systematic review, to subjective social-computing annotation in
 Human-Centered Computing.

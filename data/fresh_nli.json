@@ -1,0 +1,32 @@
+{
+  "n_items": 45,
+  "models": {
+    "glm-5.1-fp8": {
+      "accuracy": 0.978,
+      "parsed": 45
+    },
+    "gptoss-120b": {
+      "accuracy": 0.956,
+      "parsed": 45
+    },
+    "deepseek-v4-pro": {
+      "accuracy": 0.978,
+      "parsed": 45
+    },
+    "gemma-4-31b": {
+      "accuracy": 0.978,
+      "parsed": 45
+    },
+    "qwen3.6-27b-fp8": {
+      "accuracy": 0.978,
+      "parsed": 45
+    },
+    "qwen3.5-9b": {
+      "accuracy": 0.689,
+      "parsed": 45
+    }
+  },
+  "jury_accuracy": 0.978,
+  "best_model": "glm-5.1-fp8",
+  "best_acc": 0.978
+}

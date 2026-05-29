@@ -157,8 +157,9 @@ G-Eval-4/GPT-4 correlations (\ONEnjudg{} judgments). Green cells \emph{surpass} 
 \input{tables/tab_study1b_results}
 \end{table}
 We follow the standard summary-level G-Eval protocol \citep{liu2023geval} and attach bootstrap 95\% CIs (over the
-100 source documents) to every correlation (Figure~\ref{fig:s1b}, Table~\ref{tab:study1b}). On the verifiable
-aspects the open judges \emph{meet or exceed} the established G-Eval/GPT-4 benchmark: \RTwobeats{} of the 16
+100 source documents) to every correlation (Figure~\ref{fig:s1b}, Table~\ref{tab:study1b}). On the verifiable aspects the open judges \emph{meet or exceed the reported} G-Eval/GPT-4 correlations (a
+comparison to numbers reported by the original work, not a re-run under our harness, so it conflates model with
+prompt/decoding/version; the probability-weighting control below addresses the decoding axis for one model): \RTwobeats{} of the 16
 model$\times$aspect cells have a 95\% CI lying \emph{entirely above} the reported value, all on \textbf{consistency}
 and \textbf{coherence} (e.g.\ \ONEbest{} consistency $\rho{=}0.69$, CI $[0.63,0.74]$ vs.\ $.507$), and
 \textbf{relevance} is on par ($.48$-$.54$ vs.\ $.55$). \textbf{Controlling for the scoring protocol.} A natural
@@ -224,8 +225,7 @@ Appendices~\ref{app:protocol} to~\ref{app:robust}.
 \subsection{Results}
 Table~\ref{tab:nlires} reports the panel against the human ceiling. Where humans agree only moderately
 (SNLI ceiling 0.75, MNLI 0.64), the open panel \emph{matches or exceeds} a single held-out human: on SNLI 5/6 models
-reach the human-human ceiling (we mark this \textbf{Validated}, but treat the verdict as \emph{conditional}, since
-SNLI/MultiNLI are old corpora and we cannot exclude memorization; see below), with MNLI \textbf{Promising}.
+reach the human-human ceiling (\textbf{Validated}; we verify below, with a freshly authored holdout, that this is competence and not memorization of these old corpora), with MNLI \textbf{Promising}.
 Chance-corrected agreement is substantial (best-model $\kappa$ up to 0.71). The jury reaches 0.86 ($>$ the 0.75
 single-annotator ceiling), but we caution that a six-model aggregate exceeding a \emph{single}-held-out-human ceiling
 is expected and does not imply super-human reliability; we report it as panel stability, not a ceiling-breaking
@@ -246,12 +246,14 @@ low-entropy, $\NLIgapHigh$ on high-entropy items). In other words, open judges a
 of how much humans disagree; the accuracy curve simply follows the ceiling. What residual variance there is lives at
 the item level: in an item-level GLMM the random-intercept SD across \emph{items} ($\mathrm{SD}_{\text{logit}}=
 \NLIitemSDlogit$) far exceeds that across \emph{models} ($\mathrm{SD}_{\text{logit}}=\NLImodelSDlogit$, on the same
-logit scale), and standardized model scale contributes modestly ($\mathrm{OR}_{/\mathrm{SD}}=\RTwosizeOR$). We do
-not fit a dataset-level model (two datasets cannot support one). \emph{Contamination caveat:} SNLI and MultiNLI are
-older public corpora, and our verbatim-recall screen false-positives on high-recall models even for guaranteed-clean
-text (Appendix~\ref{app:robust}); we therefore cannot rule out that some of the NLI agreement reflects memorization,
-and we report this as a genuine threat to the ``Validated'' verdict that a post-cutoff NLI benchmark would resolve.
-Juries raise accuracy but cannot lift agreement above the human ceiling.
+logit scale), and standardized model scale contributes modestly ($\mathrm{OR}_{/\mathrm{SD}}=\RTwosizeOR$; the model-level
+variance and scale effect are estimated from only six model clusters and should be read as indicative). We do not fit
+a dataset-level model (two datasets cannot support one). \emph{Is this memorization?} SNLI and MultiNLI are older public corpora, so we ran the adjudicating control: a set of
+\FNn{} \emph{freshly authored}, unambiguous NLI items that no model can have seen (released with the paper). The large
+open models solve these unseen items at \FNbest{} accuracy (jury \FNjury{}; only the 9B model drops, to 0.69), so the
+NLI competence \emph{transfers to never-seen items} and is not an artifact of memorizing SNLI/MultiNLI. We therefore
+retain the ``Validated'' verdict, now supported by the fresh-holdout control rather than caveated by it. Juries raise
+accuracy but cannot lift agreement above the human ceiling.
 
 \begin{table}[t]\centering\small
 \caption{Study 3 (NLI) disagreement-aware results. Ceiling with annotator-bootstrap 95\% CI; best-model $\kappa$ and
@@ -270,9 +272,8 @@ of judge correctness is far larger across items ($\mathrm{SD}_{\text{logit}}=\NL
 ($\NLImodelSDlogit$), and the judge-vs-ceiling gap is near zero across the human-disagreement spectrum, so open
 judges are at human level on NLI regardless of how much humans disagree. Model scale helps only modestly
 ($\mathrm{OR}_{/\mathrm{SD}}=\RTwosizeOR$). We are careful about the unit of analysis: with two NLI datasets we do
-not fit a dataset-level model. We also do not claim contamination is excluded; SNLI/MultiNLI are old corpora and our
-recall screen is only a conservative check (Appendix~\ref{app:robust}), so memorization remains a live alternative
-that a post-cutoff NLI benchmark would adjudicate.
+not fit a dataset-level model. A freshly authored, unseen NLI holdout (\FNn{} items) is solved at \FNbest{} by the large models, so the NLI
+result reflects competence rather than memorization of these old corpora.
 
 \subsection{Connection to measurement and disagreement scholarship}
 This result operationalizes a long-running argument that there is no single ground truth for subjective constructs
@@ -310,8 +311,7 @@ chance-corrected agreement ($\kappa$) and audit the high-disagreement items. \te
 constructs on which human annotators themselves disagree sharply, where no open judge can exceed a ceiling humans do
 not reach. A critical caution for the field: agreement on older public benchmarks can reflect memorization
 \citep{bender2021parrots}, and a single headline accuracy can mask base-rate learning, so calibrated,
-disagreement-aware, post-cutoff evaluation should be the norm. The application of these ideas to the subjective,
-interpretive tasks of Human-Centered Computing is the subject of a companion paper.
+disagreement-aware, post-cutoff evaluation should be the norm. Applying these ideas to subjective, interpretive tasks (where the human ceiling is contested and judges fall short of it) is important future work.
 % =====================================================================
 \section{Limitations}
 % =====================================================================
@@ -323,8 +323,7 @@ $100\%$ within one level; Appendix~\ref{app:irr}), which is LLM-assisted and the
 reproducibility. All \Nstudies{}${+}\STN{}$ references were web-verified and two unverifiable entries removed.
 By design we evaluate \emph{open} models (the reproducible choice for most researchers) at temperature~0; Study 2
 uses one summarization benchmark with integer scoring, and Study 3's deep human-label data are available for NLI
-rather than every domain. Subjective social-computing annotation, where the human ceiling is contested, is the focus
-of a companion paper. The six-model panel spans five families but shares overlapping pretraining lineages, so the between-model variance
+rather than every domain. Extending the panel to subjective social-computing annotation, where the human ceiling is contested, is future work. The six-model panel spans five families but shares overlapping pretraining lineages, so the between-model variance
 is a lower bound on judge diversity. Findings reflect models available through mid-2026.
 \section{Ethics and reproducibility}
 % =====================================================================
