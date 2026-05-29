@@ -186,17 +186,19 @@ the pattern the review's augment-not-replace consensus predicts.
 \input{tables/tab_social_results}
 \end{table}
 
-\subsection{Item-level human disagreement governs reliability}
-The shortfall is not uniform; it concentrates on \emph{contested} items. On every dataset, panel accuracy on
-low-human-disagreement items far exceeds accuracy on high-disagreement items ($\SOClowH$ vs $\SOChighH$;
-Table~\ref{tab:socdis}), and the panel's label distribution diverges from the human distribution most on the most
-contested datasets. An item-level mixed-effects model of judge correctness (over all \SOCnjudg{} judgments) confirms
-the mechanism: the random-intercept SD is far larger across \emph{items} ($\mathrm{SD}=\VCitem$) than across datasets
-($\VCdataset$) or models (between-model accuracy SD $=\VCmodel$), and with standardized predictors model scale
-contributes only modestly ($\mathrm{OR}_{/\mathrm{SD}}=\RTwosizeOR$). The driver is the latent human disagreement in
-each item, not which model judges it. A calibrated contamination screen (Appendix~\ref{app:robust}) does not explain
-the shortfall: the recent (2024) MultiPICo corpus, which the low-recall judge has not memorized, is matched only at
-its low ceiling, so the limitation tracks human disagreement, not pretraining exposure.
+\subsection{The shortfall is largest where humans agree, and is not a label-noise artifact}
+A natural worry is that judges look worse on high-disagreement items simply because the majority gold is noisier
+there (a tautology). The judge-vs-ceiling \emph{gap} rules this out. Raw accuracy does fall on high-entropy items
+($\SOCaccLowE$ low-entropy vs $\SOCaccHighE$ high-entropy), but the gap below the human ceiling is in fact
+\emph{largest on the low-entropy items where humans most agree} ($\SOCgapLow$ vs $\SOCgapHigh$): on clear-consensus
+social items, where there is a definite human answer, the panel still misses it by a wide margin. This is a genuine
+substitution failure, not noise on ambiguous cases. The residual variance is item-level: in an item-level GLMM the
+random-intercept SD across \emph{items} ($\mathrm{SD}_{\text{logit}}=\SOCitemSDlogit$) far exceeds that across
+\emph{models} ($\mathrm{SD}_{\text{logit}}=\SOCmodelSDlogit$, on the same logit scale), and standardized model scale
+contributes only modestly ($\mathrm{OR}_{/\mathrm{SD}}=\RTwosizeOR$); with four datasets we do not fit a
+dataset-level model. Contamination does not explain the shortfall: the recent (2024) MultiPICo corpus, which the
+low-recall judge has not memorized, is matched only at its low ceiling, so the limitation tracks human judgment, not
+pretraining exposure (the verbatim screen is conservative, Appendix~\ref{app:robust}).
 
 \begin{table}[t]\centering\small
 \caption{Study 2 disagreement-aware results. Ceiling with annotator-bootstrap 95\% CI; best-model $\kappa$ and

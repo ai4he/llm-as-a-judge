@@ -1,0 +1,44 @@
+{
+  "NLI": {
+    "vc_logit": {
+      "item": 2.214,
+      "model": 0.592
+    },
+    "model_logit_sd": 0.297,
+    "n_judg": 6000,
+    "n_items": 1000,
+    "by_entropy": {
+      "low": {
+        "acc": 0.858,
+        "ceiling": 0.87,
+        "gap": -0.012
+      },
+      "high": {
+        "acc": 0.552,
+        "ceiling": 0.552,
+        "gap": 0.0
+      }
+    }
+  },
+  "SOC": {
+    "vc_logit": {
+      "item": 2.326,
+      "model": 0.749
+    },
+    "model_logit_sd": 0.363,
+    "n_judg": 12000,
+    "n_items": 2000,
+    "by_entropy": {
+      "low": {
+        "acc": 0.773,
+        "ceiling": 1.0,
+        "gap": -0.227
+      },
+      "high": {
+        "acc": 0.536,
+        "ceiling": 0.578,
+        "gap": -0.041
+      }
+    }
+  }
+}

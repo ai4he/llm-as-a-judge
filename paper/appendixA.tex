@@ -3,15 +3,7 @@
 % =====================================================================
 \section{Review protocol and reliability rubric}\label{app:protocol}
 % =====================================================================
-\paragraph{Identification.} Both reviews follow PRISMA~2020. The primary bibliographic source is the
-\textbf{OpenAlex} API; we cross-check with the \textbf{Semantic Scholar} Graph API and a structured
-\textbf{web ``deep-research''} arm. Study~1a used a 59-query web protocol plus venue-scoped sweeps; Study~2 used a
-25-query HCC/HCI/qualitative concept-block protocol (the same query strings were issued against every source so the
-arms are comparable). Concept blocks combine an LLM term (``LLM'', ``large language model'', ``GPT-4'', ``ChatGPT'',
-``Gemini''), an evaluation/agreement term (``LLM-as-a-judge'', ``automatic evaluation'', ``annotation'', ``inter-annotator
-agreement'', ``human evaluation''), and, for Study~2, an HCC method term (``qualitative coding'', ``thematic analysis'',
-``content analysis'', ``crowdsourcing'', ``participant simulation'', ``persona'', ``usability evaluation'', ``design
-critique''). Records were deduplicated by DOI and normalized title.
+\paragraph{Identification.} The review follows PRISMA~2020. The primary bibliographic source is the \textbf{OpenAlex} API; we cross-check with the \textbf{Semantic Scholar} Graph API and a structured \textbf{web ``deep-research''} arm (a 59-query protocol plus venue-scoped sweeps). Concept blocks combine an LLM term (``LLM'', ``large language model'', ``GPT-4'', ``ChatGPT'', ``Gemini'') with an evaluation/agreement term (``LLM-as-a-judge'', ``automatic evaluation'', ``annotation'', ``inter-annotator agreement'', ``human evaluation''). Records were deduplicated by DOI and normalized title.
 
 \paragraph{Screening and eligibility.} \emph{Inclusion:} peer-reviewed or preprint studies that empirically compare
 LLM judgments to human judgments on the same items and report (or allow computing) an agreement statistic.
@@ -31,11 +23,10 @@ aggregation); conditional substitution.
 \item \textbf{5 Unreliable:} agreement is near chance or dominated by bias (position, verbosity, self-preference).
 \end{itemize}
 We report a reliability score $=6-\text{verdict}$ and synthesize within metric families (e.g.\ Cohen's $\kappa$,
-Krippendorff's $\alpha$, Spearman $\rho$, accuracy) rather than pooling incommensurable effect sizes. The full coded
-corpora (Appendix~\ref{app:s1}) are released for re-coding.
+Krippendorff's $\alpha$, Spearman $\rho$, accuracy) rather than pooling incommensurable effect sizes. The full coded corpus (Appendix~\ref{app:s1}) is released for re-coding.
 
 % =====================================================================
-\section{Study 1b: G-Eval replication details}\label{app:s1bdetail}
+\section{Study 2: G-Eval replication details}\label{app:s1bdetail}
 % =====================================================================
 We replicate the summary-level G-Eval protocol \citep{liu2023geval} on SummEval \citep{fabbri2021summeval}
 ($100$ source articles $\times$ $16$ system summaries $=1600$ summaries, each with expert means for four aspects).
@@ -61,78 +52,48 @@ larger token budget and a retry handle reasoning-model outputs). In total Study~
 % =====================================================================
 \section{Study 3: datasets, judging prompts, and metrics}\label{app:s3detail}
 % =====================================================================
-\paragraph{Datasets.} Table~\ref{tab:cards} summarizes the six datasets. Each is sampled to $n{=}500$ items with a
-clear majority label (ties dropped); we use the per-item annotator distributions to compute the human ceiling.
+\paragraph{Datasets.} Study 3 uses the \NLIndat{} ChaosNLI datasets (Table~\ref{tab:cardsnli}); each is sampled to
+$n{=}500$ items with a clear majority label (ties dropped), and the ${\sim}100$ human labels per item give a precise
+human ceiling. (The companion paper applies the identical harness to four subjective social-computing datasets.)
 
 \begin{table}[h]\centering\small
-\caption{Study 3 dataset cards. Ceiling $=$ random-annotator-vs-majority accuracy. Contam.\ $=$ max verbatim-recall
-tier across probed judges.}
-\label{tab:cards}
-\begin{tabular}{@{}l l l c c c@{}}
-\toprule
-Dataset & Task & Source & Annot./item & Ceiling & Contam. \\
-\midrule
-ChaosNLI-SNLI & NLI (3-way) & SNLI + ChaosNLI relabels & ${\sim}100$ & 0.75 & MEDIUM \\
-ChaosNLI-MNLI & NLI (3-way) & MultiNLI + ChaosNLI relabels & ${\sim}100$ & 0.64 & MEDIUM \\
-GoEmotions & sentiment (4-way, authors' grouping) & Reddit (Google) & ${\sim}3$-$5$ & 0.78 & MEDIUM \\
-SBIC & offensiveness (binary) & Social Bias Frames & ${\sim}3$ & 0.91 & MEDIUM \\
-HateXplain & hate speech (3-way) & Twitter/Gab & $3$ & 0.83 & MEDIUM \\
-MultiPICo & irony (binary) & Reddit/Twitter (2024) & $3$-$8$ & 0.82 & LOW/MED \\
-\bottomrule
-\end{tabular}
+\caption{Study 3 (NLI) dataset cards. Ceiling $=$ random-annotator-vs-majority accuracy.}
+\label{tab:cardsnli}
+\input{tables/tab_cards_nli}
 \end{table}
 
-\paragraph{Judging prompts.} Each model judges every item as a virtual annotator under instructions paralleling the
-human guidelines, returning a JSON label on the final line (parsed with a surface-form-to-code map). The exact user
-prompts:
+\paragraph{Judging prompt.} Each model labels every item as a virtual annotator, returning a JSON label on the final
+line (parsed with a surface-form-to-code map):
 \begin{quote}\small\ttfamily
-NLI: Premise: \{premise\} / Hypothesis: \{hypothesis\} / Does the premise ENTAIL the
-hypothesis, CONTRADICT it, or is it NEUTRAL? -> \{"label": "entailment"|"neutral"|"contradiction"\}\\[2pt]
-Hate: Post: \{text\} / Classify: HATE SPEECH (attacks/dehumanizes a group based on
-identity), OFFENSIVE (abusive but not group-targeted), or NORMAL. -> \{"label":
-"hate speech"|"offensive"|"normal"\}\\[2pt]
-Emotion: Comment: \{text\} / Overall sentiment: POSITIVE, NEGATIVE, AMBIGUOUS
-(mixed/uncertain), or NEUTRAL. -> \{"label": "positive"|"negative"|"ambiguous"|"neutral"\}\\[2pt]
-Offensive: Post: \{text\} / Is this post offensive (including potentially offensive)?
--> \{"label": "offensive"|"not offensive"\}\\[2pt]
-Irony: \{post+reply\} / Is the REPLY ironic/sarcastic (conveys a meaning different from
-or opposite to its literal content), or not ironic? -> \{"label": "ironic"|"not ironic"\}
+Premise: \{premise\} / Hypothesis: \{hypothesis\} / Does the premise ENTAIL the hypothesis, CONTRADICT it, or is it
+NEUTRAL? -> \{"label": "entailment"|"neutral"|"contradiction"\}
 \end{quote}
 
-\paragraph{Metrics.} Let an item have $A$ human annotations with majority label $y^\star$.
-\textbf{Human ceiling} is the random-annotator-vs-majority accuracy (the expected agreement of one held-out human
-with the majority), averaged over items; we also report the pairwise human-human agreement. \textbf{Accuracy},
-\textbf{Cohen's $\kappa$}, and \textbf{macro-F1} are computed against $y^\star$. The \textbf{alt-test} winning rate
-\citep{calderon2025alttest} is the fraction of annotators for whom replacing that human with the LLM does not reduce
-agreement with the remaining humans (a count-based leave-one-annotator-out test); a winning rate $\ge0.5$ is the bar
-for claiming the LLM can ``replace'' a human. The \textbf{jury} is the per-item majority vote of the model panel
-\citep{verga2024poll}. \textbf{95\% confidence intervals} are nonparametric bootstrap (1000 item resamples).
-\textbf{Power:} at $n{=}500$ the accuracy CI half-width is $\le\pm4.4\%$ and the design has $>80\%$ power to detect a
-$0.10$ gap from the ceiling. \textbf{Contamination probe:} the judge is given the dataset name and a prefix
-($\approx$ one third) of an item's text and asked to reproduce the remainder verbatim; we report the mean normalized
-sequence overlap and flag HIGH ($>0.6$ mean or $>20\%$ near-verbatim), MEDIUM ($>0.35$ mean), or LOW. Only item-level
-labels and aggregates are released (no raw text); the runs recorded \emph{zero} API errors and a 100\% answer-parse
-rate across all \STHRn{} judgments.
+\paragraph{Metrics.} Let an item have $A$ human annotations with majority label $y^\star$. \textbf{Human ceiling} is
+the random-annotator-vs-majority accuracy (expected agreement of one held-out human with the majority), averaged over
+items; we also report pairwise human agreement, and bootstrap its 95\% CI by resampling annotators within items.
+\textbf{Accuracy}, \textbf{Cohen's $\kappa$}, and \textbf{macro-F1} are against $y^\star$; the \textbf{jury} is the
+per-item panel majority \citep{verga2024poll}; \textbf{95\% CIs} are nonparametric bootstrap (1000 item resamples).
+\textbf{Contamination screen:} the judge is given the dataset name and a one-third prefix of an item and asked to
+reproduce the remainder; we report mean normalized overlap, but a clean-control (Appendix~\ref{app:robust}) shows it
+false-positives on high-recall models, so we treat it as a conservative screen. The run recorded \emph{zero} API
+errors and a 100\% answer-parse rate across all \NLInjudg{} judgments.
 
-\paragraph{Inferential model.} The mixed-effects analysis models each judgment's correctness
-($\mathbf{1}[\text{judge}=y^\star]$) with fixed effects for task subjectivity ($1-$ceiling, dataset level) and model
-scale ($\log_{10}$ parameters), reported as a Bayesian logistic GLMM with random intercepts for dataset and item and,
-for clean inference, as a logistic GLM with item-cluster-robust standard errors; the Benjamini-Hochberg procedure
-controls the false-discovery rate across the \SMEfdrtests{} judge$\times$dataset ceiling-gap tests. A naive
-two-predictor version of this model overstates a ``subjectivity'' effect; once construct granularity and label
-base-rate skew are added and item-cluster-robust standard errors are used, subjectivity is not significant
-($\mathrm{OR}=\GLMsubjOR$, $p=\GLMsubjP$) and the robust predictors are base-rate skew, scale, and granularity. A
-dataset-level meta-regression ($n{=}\metaN$) is reported with leave-one-dataset-out bounds.
+\paragraph{Inferential model.} We model each judgment's correctness ($\mathbf{1}[\text{judge}=y^\star]$) with an
+item-level Bayesian logistic GLMM with random intercepts for item and model, and report the variance components on a
+common logit scale (item $\mathrm{SD}_{\text{logit}}=\NLIitemSDlogit$, model $\NLImodelSDlogit$). With two datasets
+we do not fit a dataset-level model. To test whether the accuracy decline on high-disagreement items is a label-noise
+artifact, we bin items by human entropy and report the judge-vs-ceiling \emph{gap} per bin (it is near zero
+throughout for NLI, see the main text).
 
 % =====================================================================
 \section{Inter-coder reliability}\label{app:irr}
 % =====================================================================
 Because the reliability verdict and the role/stance codes embed judgement, we re-coded a held-out random sample of
 each corpus with two \emph{independent} coders who saw only the per-study summaries and the rubric (no original
-codes, no other context). For Study~1a ($n{=}\IRRsoneN$, 25\%) the verdict reproduced at Krippendorff
-$\alpha=\IRRsoneA$ (ordinal, three coders) with \IRRsoneWone\% of cases within one level. For Study~2
-($n{=}\IRRstwoN$, 30\%) the verdict gave $\alpha=\IRRstwoV$, the augment/replace/simulate role $\alpha=\IRRstwoRole$,
-and the epistemic stance $\alpha=\IRRstwoStance$ (the least reliable code). \emph{Caveat:} the re-coders are
+codes, no other context). For the review ($n{=}\IRRsoneN$, a 25\% sample) the reliability verdict reproduced at
+Krippendorff $\alpha=\IRRsoneA$ (ordinal, three coders) with \IRRsoneWone\% of cases within one level.
+\emph{Caveat:} the re-coders are
 LLM-assisted, like the primary pipeline, so these figures measure rubric \emph{reproducibility} under independent
 application, not human inter-rater agreement; the moderate stance $\alpha$ is why we treat stance-based claims as
 indicative.
@@ -140,7 +101,7 @@ indicative.
 % =====================================================================
 \section{Robustness and validity checks}\label{app:robust}
 % =====================================================================
-\textbf{Prompt robustness.} We re-ran a subset of Study~3 (three models $\times$ six datasets, $n{=}120$) under
+\textbf{Prompt robustness.} We re-ran a robustness subset (three models, $n{=}120$ per cell) under
 three semantically equivalent prompt paraphrases per task. \emph{Accuracy} is fairly prompt-stable (mean SD across
 paraphrases $=\PRmeanSD$), but the discrete five-level \emph{verdict} is exactly stable in only \PRstable{}/\PRtotal{}
 cells: most instability is a one-level flip for cells sitting near a band boundary, and the smaller model is the most

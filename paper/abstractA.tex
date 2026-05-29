@@ -13,9 +13,10 @@ aspect (fluency) is hard to rank for every judge. \textbf{Study 3} is a new meta
 panel (9B-754B) on natural-language-inference datasets with rich human label distributions ($\sim$100
 annotators/item; \NLInjudg{} judgments), benchmarked against the annotator-bootstrap human ceiling with
 chance-corrected agreement, jury aggregation, a calibrated contamination screen, and an item-level mixed-effects
-analysis. The organizing finding is that judge reliability is governed by \emph{item-level human disagreement}:
-panel accuracy on low-disagreement items ($\NLIlowH$) far exceeds that on high-disagreement items ($\NLIhighH$),
-item-level variance dominates dataset- and model-level variance, and model scale contributes only modestly. We turn
+analysis. The organizing finding is that open judges \emph{track the human ceiling across the disagreement spectrum}: the
+judge-vs-ceiling gap is near zero at both low and high human-entropy ($\NLIgapLow$, $\NLIgapHigh$), so accuracy
+follows the ceiling rather than the judge failing on contested items; residual variance is item-level
+($\mathrm{SD}_{\text{logit}}=\NLIitemSDlogit$ vs model $\NLImodelSDlogit$), and model scale contributes only modestly. We turn
 this into a decision framework and an eight-point protocol for designing LLM-as-a-judge experiments. A companion
 paper applies the same evaluation, with a systematic review, to subjective social-computing annotation in
 Human-Centered Computing.

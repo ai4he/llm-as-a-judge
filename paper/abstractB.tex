@@ -13,8 +13,9 @@ six-model open panel (9B-754B) as virtual annotators on \SOCndat{} subjective so
 human label distributions (emotion, offensiveness, hate, irony; \SOCnjudg{} judgments), benchmarked against the
 human-human agreement ceiling with chance-corrected agreement, a calibrated contamination screen, and an item-level
 mixed-effects analysis. The augment-not-replace consensus is empirically warranted: open judges fall short of the
-human ceiling on every subjective construct, and their errors concentrate on exactly the items where humans
-disagree (accuracy $\SOClowH$ on low-disagreement vs $\SOChighH$ on high-disagreement items). Reliability is
-governed by item-level human disagreement, not model scale or contamination, which we confirm on a recent
+human ceiling on every subjective construct, and, tellingly, the judge-vs-ceiling gap is \emph{largest where humans
+most agree} ($\SOCgapLow$ on low-disagreement items), so the shortfall is a genuine substitution failure, not a
+label-noise artifact on ambiguous cases. Residual variance is item-level ($\mathrm{SD}_{\text{logit}}=
+\SOCitemSDlogit$ vs model $\SOCmodelSDlogit$), not model scale or contamination, which we confirm on a recent
 post-cutoff corpus. We translate this into an evidence-based decision framework for when HCC researchers should
 automate, augment with a human in the loop, or keep humans.

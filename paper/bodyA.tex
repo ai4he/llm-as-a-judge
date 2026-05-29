@@ -229,19 +229,20 @@ macro-F1 is the best model's chance-corrected score.}
 \input{tables/tab_nli_results}
 \end{table}
 
-\subsection{Item-level disagreement governs reliability}
-The organizing finding is that errors concentrate on \emph{contested} items. On both datasets, panel accuracy on
-low-human-disagreement (low-entropy) items far exceeds accuracy on high-disagreement items ($\NLIlowH$ vs
-$\NLIhighH$; Table~\ref{tab:nlidis}), and the panel's label distribution diverges from the human distribution most on
-the most contested items. An item-level mixed-effects model of judge correctness (over all \NLInjudg{} judgments)
-makes this precise: the random-intercept SD is far larger across \emph{items} ($\mathrm{SD}=\VCitem$) than across
-datasets ($\VCdataset$) or models (between-model accuracy SD $=\VCmodel$), and with standardized predictors model
-scale contributes only modestly ($\mathrm{OR}_{/\mathrm{SD}}=\RTwosizeOR$). In short, \emph{which item} is judged,
-its latent human (dis)agreement, predicts judge correctness better than which model judges it. A calibrated
-contamination screen (Appendix~\ref{app:robust}) does not explain the pattern: it false-positives on high-recall
-models even for guaranteed-clean text, so we treat it as a conservative screen and rest the claim on the
-disagreement analysis. Juries raise accuracy but cannot lift agreement above the human ceiling on the most contested
-items.
+\subsection{Judges track the human ceiling across the disagreement spectrum}
+Panel accuracy declines on high-human-disagreement (high-entropy) items ($\NLIaccLowE$ on low-entropy vs
+$\NLIaccHighE$ on high-entropy; Table~\ref{tab:nlidis}), but this is not a judge deficiency: the human ceiling
+declines in lockstep, so the \emph{judge-vs-ceiling gap} is essentially zero at both ends ($\NLIgapLow$ on
+low-entropy, $\NLIgapHigh$ on high-entropy items). In other words, open judges are at human level on NLI regardless
+of how much humans disagree; the accuracy curve simply follows the ceiling. What residual variance there is lives at
+the item level: in an item-level GLMM the random-intercept SD across \emph{items} ($\mathrm{SD}_{\text{logit}}=
+\NLIitemSDlogit$) far exceeds that across \emph{models} ($\mathrm{SD}_{\text{logit}}=\NLImodelSDlogit$, on the same
+logit scale), and standardized model scale contributes modestly ($\mathrm{OR}_{/\mathrm{SD}}=\RTwosizeOR$). We do
+not fit a dataset-level model (two datasets cannot support one). \emph{Contamination caveat:} SNLI and MultiNLI are
+older public corpora, and our verbatim-recall screen false-positives on high-recall models even for guaranteed-clean
+text (Appendix~\ref{app:robust}); we therefore cannot rule out that some of the NLI agreement reflects memorization,
+and we report this as a genuine threat to the ``Validated'' verdict that a post-cutoff NLI benchmark would resolve.
+Juries raise accuracy but cannot lift agreement above the human ceiling.
 
 \begin{table}[t]\centering\small
 \caption{Study 3 (NLI) disagreement-aware results. Ceiling with annotator-bootstrap 95\% CI; best-model $\kappa$ and
