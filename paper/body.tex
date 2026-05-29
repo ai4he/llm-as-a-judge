@@ -80,6 +80,23 @@ wang2023pandalm}; juries/multi-agent panels \citep{verga2024poll,chan2023chateva
 \citep{hashemi2024llmrubric}. Prior surveys taxonomize methodology \citep{gu2024survey,li2024gen2judge}; we instead
 synthesize \emph{where substitution is empirically validated}, and, uniquely, do so through the HCC lens.
 
+\paragraph{Related work.} Four literatures meet in this paper. (1) \emph{LLM-as-a-judge evaluation}: studies report
+strong agreement on aggregate, verifiable tasks (MT-Bench \citep{zheng2023mtbench}, GEMBA \citep{kocmi2023gembamqm},
+SAFE factuality \citep{wei2024safe}) but document systematic biases (position, verbosity, self-preference, and an
+expertise gap by which judges converge on crowd rather than expert consensus \citep{bavaresco2024judgebench}), which
+motivates benchmarking against the human ceiling rather than against a single ``gold.'' (2) \emph{LLMs in HCI and
+qualitative research}: a fast-growing body uses LLMs to assist coding and thematic analysis
+\citep{xiao2023support,gao2024collabcoder,dai2023llminloop} while qualitative scholars warn that interpretation,
+reflexivity, and positionality resist automation \citep{schroeder2025usestensions,davison2024ethics}. (3)
+\emph{Participant and persona simulation}: ``silicon samples'' \citep{argyle2023outofone} and synthetic users are
+increasingly scrutinized for flattening identity and distorting variance
+\citep{wang2024flatten,cheng2023compost,bisbee2023perils}. (4) \emph{Learning with disagreement and perspectivism}:
+work on annotator disagreement and human label variation \citep{calderon2025alttest} argues that for subjective
+constructs the ``ceiling'' is itself low and contested, which our Study 3 datasets (ChaosNLI, GoEmotions, MultiPICo)
+operationalize directly. We connect these threads with two methodological commitments often missing from
+judge evaluations: anchoring every verdict to the \emph{human-human} ceiling, and probing \emph{data contamination}
+so that agreement on older public datasets is not mistaken for genuine competence.
+
 \paragraph{Shared protocol.} Both reviews follow PRISMA~2020 \citep{page2021prisma}, identify studies through a
 triangulated search (the OpenAlex API as the primary bibliographic database, Semantic Scholar as a cross-check, and
 a structured web ``deep-research'' arm), and code each study on a five-level \textbf{reliability verdict}
@@ -434,15 +451,111 @@ limited to open models from a single provider, and qualitative-coding corpora wi
 scarce) are the immediate next addition.
 
 % =====================================================================
-\section{General discussion: a decision framework for HCC}
+\section{Discussion}
 % =====================================================================
-Across both reviews, one principle organizes the evidence: \textbf{LLM-as-a-judge substitution is reliable to the
-degree that the human task is objective, verifiable, low in required expertise, and benchmarked against a modest
-human ceiling}, and it degrades as tasks become interpretive, expert, identity-laden, or open-ended. For
-Human-Centered Computing specifically:
+
+\subsection{From four research questions to one principle}
+Our studies were designed as a narrowing sequence, and their research questions answer one another.
+\textbf{Study 1a} asked \emph{where}, across domains, an LLM-as-a-judge agrees with humans; its goal was to give HCC
+a map and a vocabulary, and it found that reliability tracks three properties (objectivity, tractable verification,
+and a low human-agreement floor). \textbf{Study 1b} asked whether that map is a \emph{moving target}; its goal was
+to separate temporal from structural limits, and it found that today's most powerful open models already match or
+exceed proprietary judges on the \emph{verifiable} part of a promising task (consistency on SummEval) but not on the
+part whose human ceiling is compressed (fluency), so capability closes some gaps and cannot close others.
+\textbf{Study 2} asked, of the methods HCC actually uses, which have been attempted with LLMs and how reliably
+(RQ2.1), how the field positions the model as augment/replace/simulate (RQ2.2), and with what epistemic stance
+(RQ2.3); its goal was the HCC-specific account, and it found an augment-not-replace consensus whose reliability
+follows the same objective/subjective axis as Study 1a, under a dominant stance of \emph{tension}. \textbf{Study 3}
+asked whether that prediction holds when measured directly on HCC datasets with human labels, and \emph{what governs}
+the outcome; its goal was to fill the empirical gaps and identify the mechanism, and it found that the
+human-agreement ceiling governs reliability, that item-level disagreement (not model scale, and not contamination)
+is the dominant source of variance, and that even the strongest panel fails the alt-test wherever humans agree
+strongly.
+
+These answers converge on a single principle that we offer as the paper's organizing contribution:
+\begin{quote}\itshape
+An LLM-as-a-judge can be reliable only to the degree that the human task has a high, verifiable agreement ceiling;
+it cannot exceed an agreement level that human annotators themselves do not reach, and scaling the model does not
+raise that ceiling.
+\end{quote}
+This reframes the field's animating question. ``Can a machine judge like a human?'' is under-specified; the
+answerable question is \emph{whether there is a stable, shared human answer for the judge to approximate}. Where
+there is (objective labeling, verifiable sub-judgments), frontier models already clear the bar; where there is not
+(interpretation, identity, contested constructs), no amount of capability manufactures a ground truth that the human
+community does not itself possess.
+
+\subsection{Connections to HCI and measurement scholarship}
+Our results give empirical weight to three long-running conversations in HCI and adjacent fields.
+\textbf{(1) The myth of a single ground truth.} CSCW and HCI have argued that inter-rater reliability is a negotiated
+practice, not a natural fact \citep{mcdonald2019reliability}, and NLP has reframed annotator disagreement as
+signal rather than noise \citep{aroyo2015truth,plank2022humanlabel}. Study 3 operationalizes this: when we benchmark
+judges against the human-human ceiling rather than a manufactured ``gold,'' the ostensibly poor performance on
+emotion, hate, and irony is revealed as a property of the \emph{construct} (low or contested human consensus), not a
+fixable model deficiency. A judge that reports high accuracy against a forced majority is, on these tasks, reporting
+agreement with a coin the humans themselves are still flipping.
+\textbf{(2) Interpretation is not labeling.} Reflexive thematic analysis treats coding as situated interpretation,
+not classification \citep{braun2006thematic}, and qualitative HCI scholars warn that ``conditional trust'' in LLM
+output hollows out analytic rigor \citep{schroeder2025usestensions,davison2024ethics}. Study 2's augment-not-replace
+consensus and Study 3's subjective-task shortfall are two views of the same boundary: LLMs accelerate the
+\emph{mechanical} surface of qualitative work while the interpretive core remains human.
+\textbf{(3) Participants are not simulable.} The ``silicon sample'' program \citep{argyle2023outofone} meets a
+growing critique that simulated participants flatten identity and distort variance
+\citep{wang2024flatten,cheng2023compost,bisbee2023perils,salminen2025syntheticcritical}; our MultiPICo result, where
+models default to the majority reading and erase the minority perspective that perspectivist corpora were built to
+preserve, is a concrete instance of that flattening at the level of a single subjective label.
+
+\subsection{A critical assessment: what these practices do to the field}
+We read the rush to LLM-as-a-judge in HCC as carrying five structural risks that the community should name.
+\textbf{Illusory validation.} Because agreement on older public benchmarks can reflect memorization rather than
+competence, ``validated'' verdicts are not trustworthy without a contamination check; our probe shows non-trivial
+verbatim recall even of recent data, and a field that omits this step risks certifying judges that merely remember.
+\textbf{Methodological monoculture and deskilling.} Cheap labeling invites the substitution of LLM judgment for the
+human annotation and reflexive interpretation that train the next generation of HCC researchers; combined with the
+documented convergence of judges toward crowd rather than expert consensus \citep{bavaresco2024judgebench}, this
+risks a slow regression of the field's interpretive capacity toward the mean of its own training data.
+\textbf{Epistemic injustice and flattening.} Where models default to majority readings of subjective content, the
+perspectives of minority annotators (often the populations HCC seeks to center) are systematically discounted, a
+representational harm that a single accuracy number conceals.
+\textbf{False closure on contested constructs.} Reporting one accuracy against a majority gold imposes consensus
+where the data shows disagreement; our irony case (0.82 accuracy but macro-F1 near 0.45) shows how a high headline
+number can mask the fact that the model has learned the base rate, not the construct.
+\textbf{Incentive capture.} The very convenience of LLM evaluation pressures authors, reviewers, and venues to treat
+it as a default, embedding its biases into the published record. Against these we weigh genuine benefits, scale,
+triage, breadth, reproducibility, first-pass coding, and disagreement surfacing, and conclude that LLM judges should
+be governed as \emph{instruments requiring calibration and disclosure}, not adopted as oracles.
+
+\subsection{Implications for designing experiments that use LLM-as-a-judge}
+The same evidence yields concrete, reusable guidance. We recommend that any study using an LLM-as-a-judge:
+\begin{enumerate}[leftmargin=1.5em,itemsep=2pt]
+\item \textbf{Anchor to the human-human ceiling, not a single gold.} Report the ceiling (e.g.\ random-annotator-vs-
+majority and pairwise agreement) and the judge-vs-ceiling gap; ``near-human'' is meaningless without it.
+\item \textbf{Gate replacement claims on a replacement test.} Report the alt-test \citep{calderon2025alttest} (or an
+equivalent leave-one-annotator-out test) before asserting that an LLM can stand in for a human annotator.
+\item \textbf{Probe contamination} for any public or pre-cutoff dataset, and discount validation under high recall;
+state model training-cutoff relative to dataset release.
+\item \textbf{Match the metric to the construct.} On imbalanced or minority-sensitive tasks report macro-F1 and
+per-class scores, and prefer disagreement-aware evaluation against the full label distribution (soft labels) over
+forced-majority accuracy.
+\item \textbf{Control known biases and pin the setup.} Counterbalance position, control length, check
+self-preference, and fix model identifier, version, decoding (temperature, seed) so the judge is reproducible.
+\item \textbf{Power the comparison.} Pre-specify the effect size of interest, report confidence intervals, and size
+$n$ accordingly; our analysis shows variance lives at the item level, so also \emph{stratify by item difficulty} and
+report where the judge fails rather than only its mean.
+\item \textbf{Use juries for aggregate decisions, but not as a ceiling-breaker.} Panels improve stability yet do not
+lift a subjective task above its human ceiling.
+\item \textbf{Pre-register and release.} Register the construct, the human baseline, and the decision threshold; and
+release item-level labels and aggregates so others can re-anchor and re-code.
+\end{enumerate}
+Adopted together, these move LLM-as-a-judge from an ad hoc convenience to a measured instrument with a known
+operating range, which is the precondition for the field to use it without quietly degrading its own standards of
+evidence.
+
+\subsection{A decision framework for HCC}
+Mapping the principle onto practice yields three deployment regimes:
 \begin{itemize}[leftmargin=1.4em,itemsep=2pt]
 \item \textbf{Automate (with light audit):} objective annotation/labeling of user-generated content such as
-stance, topic, relevance, frames, and simple sentiment \citep{gilardi2023chatgpt,tornberg2023political}.
+stance, topic, relevance, frames, and simple sentiment \citep{gilardi2023chatgpt,tornberg2023political}, where the
+ceiling is high and verifiable.
 \item \textbf{Augment, human-in-the-loop:} qualitative coding and thematic/content analysis: use the LLM for
 first-pass coding, breadth, and disagreement surfacing, but keep human interpretive authority, calibrate on a
 labeled subset, and report reliability against human coders \citep{gao2024collabcoder,meng2024chalet,
@@ -451,10 +564,6 @@ pangakis2023validation}.
 replacing expert usability/design judgment: these flatten identity, fabricate evidence, and abandon situated
 knowledge \citep{wang2024flatten,guerino2025gpt4ousability,salminen2025syntheticcritical}.
 \end{itemize}
-Practically, HCC researchers reporting LLM-assisted analysis should: state the LLM's \emph{role}
-(augment/replace/simulate); report agreement against a \emph{human-human} baseline at the right granularity;
-control position/length bias and pin model/version; prefer comparative scoring and juries to single absolute judges;
-and treat the alt-test \citep{calderon2025alttest} as the bar for any replacement claim.
 
 % =====================================================================
 \section{Limitations}
@@ -466,7 +575,26 @@ removed, by three-source triangulation); and findings reflect models available t
 studies are bounded too: Study 1b uses one flagship promising-domain benchmark (SummEval), and Study 3's panel is
 limited to open models from a single provider and to \STHRdatasets{} datasets (one of which, MultiPICo, is included
 as a recent low-contamination clean condition), with qualitative-coding corpora still in progress. The verdict
-rubric, though explicit and released, embeds judgement; we therefore release both corpora for re-coding.
+rubric, though explicit and released, embeds judgement; we therefore release both corpora for re-coding. Full
+protocol, rubric anchors, dataset cards, verbatim judging prompts, and metric definitions are given in
+Appendices~\ref{app:protocol} to~\ref{app:s3detail}.
+
+% =====================================================================
+\section{Ethics and reproducibility}
+% =====================================================================
+\textbf{Ethics.} Studies 1a and 2 analyze published research, not human subjects. Study 3 reuses public datasets
+under their licenses; two of them (HateXplain, SBIC) contain hateful or offensive text, which we process only to
+measure moderation reliability and never reproduce. To avoid redistributing potentially harmful or
+personally-identifiable content, we release only item-level labels and aggregate statistics, never the raw texts. We
+report a contamination probe precisely so that ``validated'' verdicts are not silently inflated by pretraining
+exposure. The work is dual-use only in the benign sense that better-calibrated LLM judges reduce, rather than
+increase, the risk of unaccountable automated moderation; our central finding (that LLM judges should not replace
+humans on subjective, high-consensus social annotation) is itself a guard against premature deployment.
+\textbf{Reproducibility.} Every number in this paper regenerates from released code: the OpenAlex, Semantic Scholar,
+and web search logs; the two coded corpora; the figure and table generators; the Study-1b SummEval harness and the
+Study-3 judging/scoring/contamination/mixed-effects harness, all keyed to documented model identifiers served through
+Clemson's vLLM API at temperature~$0$ with idempotent, resumable checkpoints. The auto-generated statistics macros
+mean the manuscript cannot drift from the data. Repository: \url{https://github.com/ai4he/llm-as-a-judge}.
 
 % =====================================================================
 \section{Conclusion}

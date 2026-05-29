@@ -87,8 +87,8 @@ def fig_prisma():
         ax.add_patch(FancyArrowPatch((x1,y1),(x2,y2),arrowstyle="-|>",mutation_scale=15,lw=1.5,color="#33558b"))
     for y,lab in [(10.7,"Identification"),(7.4,"Screening"),(2.0,"Included")]:
         ax.text(0.12,y,lab,rotation=90,va="center",ha="center",fontsize=11,fontweight="bold",color="#33558b")
-    ax.text(3.4,11.7,"Arm A — bibliographic database (OpenAlex API)",ha="center",fontsize=10,fontweight="bold")
-    ax.text(10.3,11.7,"Arm B — web deep-search + citation chasing",ha="center",fontsize=10,fontweight="bold")
+    ax.text(3.4,11.7,"Arm A - bibliographic database (OpenAlex API)",ha="center",fontsize=10,fontweight="bold")
+    ax.text(10.3,11.7,"Arm B - web deep-search + citation chasing",ha="center",fontsize=10,fontweight="bold")
     # Arm A (left)
     box(1.4,10.0,4.0,1.2,f"Records retrieved from OpenAlex\n(30 topic queries × 50)\nn = {PR['identified_openalex']}")
     box(1.4,8.45,4.0,1.0,f"Unique records after de-duplication\nn = {PR['openalex_unique']}\n(duplicates removed n = {PR['openalex_dup_removed']})",fc="#f4f4f4")
@@ -116,7 +116,7 @@ def fig_prisma():
     # merge arrows
     arr(3.4,6.7,5.0,4.15); arr(10.3,6.7,9.0,4.15)
     arr(7.0,3.05,7.0,2.1); arr(9.4,3.6,10.0,3.6)
-    ax.set_title("Figure 1.  PRISMA 2020 flow — two-arm identification (OpenAlex database + web/citation)",
+    ax.set_title("Figure 1.  PRISMA 2020 flow - two-arm identification (OpenAlex database + web/citation)",
                  fontsize=12.5, loc="left")
     save(fig,"fig01_prisma_flow")
 
@@ -129,7 +129,7 @@ def fig_verdict_overall():
     wedges,_ = ax.pie(vc.values, colors=[VERDICT_COLORS[v] for v in VERDICT_ORDER],
                       startangle=90, counterclock=False, wedgeprops=dict(width=0.42,edgecolor="w"))
     ax.text(0,0,f"{N}\nstudies",ha="center",va="center",fontsize=15,fontweight="bold")
-    leg = [f"{VERDICT_NAME[v].replace(chr(10),' ')}  —  {vc[v]}  ({vc[v]/N*100:.0f}%)" for v in VERDICT_ORDER]
+    leg = [f"{VERDICT_NAME[v].replace(chr(10),' ')}  -  {vc[v]}  ({vc[v]/N*100:.0f}%)" for v in VERDICT_ORDER]
     ax.legend(wedges,leg,loc="center left",bbox_to_anchor=(1.0,0.5),frameon=False,fontsize=10,
               title="Reliability verdict")
     ax.set_title("Figure 2.  Reliability verdict across all included studies")
@@ -201,7 +201,7 @@ def fig_landscape():
                 c=cnt.values[i,j]; c=0 if np.isnan(c) else int(c)
                 ax.text(j,i,f"{v:.1f}\n(n={c})",ha="center",va="center",fontsize=7.5,
                         color="#222" if 2.2<v<4.2 else "w")
-    cb=fig.colorbar(im,ax=ax,fraction=0.035,pad=0.02); cb.set_label("mean reliability (1–5)")
+    cb=fig.colorbar(im,ax=ax,fraction=0.035,pad=0.02); cb.set_label("mean reliability (1-5)")
     ax.set_title("Figure 6.  Reliability landscape: domain × judging task")
     ax.set_xlabel("judging task formulation")
     save(fig,"fig06_reliability_landscape")
@@ -245,14 +245,14 @@ def fig_forest():
                 va="center",fontsize=7.3)
         if not np.isnan(r["human_baseline"]):
             ax.plot(r["human_baseline"],yi,marker="D",color="k",ms=6,zorder=5)
-    ax.set_yticks(y); ax.set_yticklabels([f"{r.authors} {r.year} — {r.domain}" for _,r in d.iterrows()],fontsize=7)
+    ax.set_yticks(y); ax.set_yticklabels([f"{r.authors} {r.year} - {r.domain}" for _,r in d.iterrows()],fontsize=7)
     ax.axvspan(0.6,0.8,color="#999",alpha=.12); ax.axvline(0.8,color="#1a9850",ls=":",lw=1)
     ax.axvline(0.6,color="#fc8d59",ls=":",lw=1)
-    ax.set_xlim(0,1.04); ax.set_xlabel("reported LLM–human agreement (coefficient or proportion)")
+    ax.set_xlim(0,1.04); ax.set_xlabel("reported LLM-human agreement (coefficient or proportion)")
     leg=[Line2D([0],[0],marker="s",color="w",markerfacecolor=dcol[dm],markersize=9,label=dm) for dm in sorted(doms)]
-    leg.append(Line2D([0],[0],marker="D",color="w",markerfacecolor="k",markersize=8,label="human–human baseline"))
+    leg.append(Line2D([0],[0],marker="D",color="w",markerfacecolor="k",markersize=8,label="human-human baseline"))
     ax.legend(handles=leg,fontsize=7,loc="lower right",frameon=True,ncol=1)
-    ax.set_title("Figure 9.  Reported LLM–human agreement, by study (grouped by metric family)")
+    ax.set_title("Figure 9.  Reported LLM-human agreement, by study (grouped by metric family)")
     save(fig,"fig09_agreement_forest")
 
 # ===========================================================================
@@ -271,7 +271,7 @@ def fig_parity():
     if HAVE_ADJUST:
         adjust_text(ptexts,ax=ax,expand=(1.3,1.6),
                     arrowprops=dict(arrowstyle="-",color="#888",lw=.6))
-    ax.set_xlabel("human–human agreement (ceiling)"); ax.set_ylabel("LLM–human agreement")
+    ax.set_xlabel("human-human agreement (ceiling)"); ax.set_ylabel("LLM-human agreement")
     ax.set_xlim(0.4,0.95); ax.set_ylim(0.4,0.95)
     ax.fill_between([0,1],[0,1],1,color="#1a9850",alpha=.06)
     ax.text(0.46,0.9,"LLM ≥ human ceiling",fontsize=9,color="#1a9850")
@@ -280,7 +280,7 @@ def fig_parity():
                 markersize=10,label=VERDICT_NAME[v].replace("\n"," ")) for v in VERDICT_ORDER if v in d["verdict"].values]
     leg.insert(0,Line2D([0],[0],color="#444",ls="--",label="parity line"))
     ax.legend(handles=leg,fontsize=8,loc="lower right",frameon=True)
-    ax.set_title("Figure 10.  LLM–human vs human–human agreement (studies reporting both)")
+    ax.set_title("Figure 10.  LLM-human vs human-human agreement (studies reporting both)")
     save(fig,"fig10_parity_scatter")
 
 # ===========================================================================
@@ -336,7 +336,7 @@ def fig_family():
             error_kw=dict(ecolor="#555",lw=1,capsize=3))
     for i,(m,c) in enumerate(zip(g["mean"],g["count"])): ax.text(m+0.06,i,f"{m:.2f} (n={c})",va="center",fontsize=9)
     ax.axvline(3,color="#888",ls="--",lw=1)
-    ax.set_xlim(1,5.4); ax.set_xlabel("mean reliability score (1–5)")
+    ax.set_xlim(1,5.4); ax.set_xlabel("mean reliability score (1-5)")
     ax.set_title("Figure 13.  Reliability by domain family (mean ± SD)")
     save(fig,"fig13_family_reliability")
 
@@ -350,8 +350,8 @@ def fig_trend():
     # reliable share = verdict 1+2 ; problematic = 4+5
     rel=(frac.get(1,0)+frac.get(2,0))*100; prob=(frac.get(4,0)+frac.get(5,0))*100
     fig,ax=plt.subplots(figsize=(8,5))
-    ax.plot(frac.index,rel,"-o",color="#1a9850",lw=2,label="reliable share (verdict 1–2)")
-    ax.plot(frac.index,prob,"-o",color="#d73027",lw=2,label="problematic share (verdict 4–5)")
+    ax.plot(frac.index,rel,"-o",color="#1a9850",lw=2,label="reliable share (verdict 1-2)")
+    ax.plot(frac.index,prob,"-o",color="#d73027",lw=2,label="problematic share (verdict 4-5)")
     for x,y in zip(frac.index,rel): ax.text(x,y+1.5,f"{y:.0f}%",ha="center",fontsize=8,color="#1a9850")
     for x,y in zip(frac.index,prob): ax.text(x,y+1.5,f"{y:.0f}%",ha="center",fontsize=8,color="#d73027")
     ax.set_ylabel("share of that year's studies (%)"); ax.set_xlabel("publication year")
@@ -383,7 +383,7 @@ def fig_decision_map():
     ax.text(1.9,1.05,"VALIDATE FIRST\n(easy but unreliable)",color="#b8860b",fontsize=11,fontweight="bold",ha="center")
     ax.text(4.4,3.12,"HUMAN-IN-THE-LOOP\n(reliable but high-stakes)",color="#1f78b4",fontsize=10.5,fontweight="bold",ha="center")
     ax.text(1.95,3.12,"KEEP HUMANS\n(unreliable + high-stakes)",color="#d73027",fontsize=11,fontweight="bold",ha="center")
-    ax.set_title("Figure 15.  Decision map — where to deploy LLM-as-a-judge (bubble area ∝ #studies)")
+    ax.set_title("Figure 15.  Decision map - where to deploy LLM-as-a-judge (bubble area ∝ #studies)")
     save(fig,"fig15_decision_map")
 
 # ===========================================================================
@@ -457,7 +457,7 @@ def tables():
        "Nassessed":PR["assessed"],"Nexclscreen":PR["openalex_excluded_screening"]+PR["web_excluded_screening"],
        "Crossdup":PR["cross_dup_removed"],"Meanrel":round(float(df["reliability_score"].mean()),2),
        "Nparity":int((df["parity"]=="yes").sum())}
-    macros="% auto-generated -- do not edit by hand (see analysis/make_figures.py)\n"
+    macros="% auto-generated; do not edit by hand (see analysis/make_figures.py)\n"
     for k,v in M.items(): macros+=f"\\newcommand{{\\{k}}}{{{v}}}\n"
     (TAB/"autostats.tex").write_text(macros)
 

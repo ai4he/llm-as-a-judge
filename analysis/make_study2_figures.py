@@ -44,7 +44,7 @@ def fig_methods():
     fig,ax=plt.subplots(figsize=(8.4,7))
     ax.barh(g.index,g["n"],color=[RDYLGN((m-1)/4) for m in g["rel"]],edgecolor="#444",lw=.5)
     for i,(nn,m) in enumerate(zip(g["n"],g["rel"])): ax.text(nn+0.1,i,f"{nn} (rel {m:.1f})",va="center",fontsize=8.5)
-    ax.set_xlabel("number of studies (colour = mean reliability 1–5)")
+    ax.set_xlabel("number of studies (colour = mean reliability 1-5)")
     ax.set_title(f"Figure S2-2.  HCC/HCI/qualitative methods studied with LLMs (n={N})")
     save(fig,"s2_fig02_methods")
 
@@ -103,7 +103,7 @@ def fig_community():
     for i,v in enumerate(rr.values): axes[1].text(i,v+0.05,f"{v:.2f}",ha="center",fontsize=10,fontweight="bold")
     axes[1].axhline(3,color="#888",ls="--",lw=1); axes[1].set_ylim(0,5); axes[1].set_ylabel("mean reliability")
     axes[1].set_title("(b) Mean reliability by LLM role")
-    fig.suptitle("Figure S2-6.  Study-2 community coverage and the augment–replace reliability gap",fontsize=13,fontweight="bold")
+    fig.suptitle("Figure S2-6.  Study-2 community coverage and the augment-replace reliability gap",fontsize=13,fontweight="bold")
     save(fig,"s2_fig06_community_role")
 
 def tables_and_macros():

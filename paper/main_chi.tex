@@ -1,35 +1,31 @@
-\documentclass[sigconf,nonacm]{acmart}
+\documentclass[manuscript,nonacm,screen]{acmart}
 % =====================================================================
-%  CHI-format (acmart sigconf) version of:
+%  CHI submission format (acmart "manuscript": single column, no hard page
+%  limit, "as long as the contribution warrants") of:
 %  "When Can a Machine Judge Like a Human?"
-%  Shares abstract.tex + body.tex with the single-column main.tex.
-%  Compile: latexmk -pdf main_chi.tex
+%  Shares abstract.tex + body.tex + appendix.tex with main.tex (single source).
+%  Compile: latexmk -pdf main_chi.tex   (or pdflatex; bibtex; pdflatex x2)
 % =====================================================================
 % acmart already loads: amsmath/amssymb, hyperref, natbib, xcolor, booktabs, microtype, geometry.
 \usepackage{graphicx}\graphicspath{{../figures/}}
 \usepackage{array}
 \usepackage{colortbl}      % \cellcolor for the verdict tables
+\usepackage{longtable}     % full per-study corpus tables in the appendix
 \usepackage{subcaption}
 \usepackage{enumitem}
 
 \definecolor{g}{RGB}{26,152,80}
 \definecolor{a}{RGB}{254,224,139}
 \definecolor{r}{RGB}{215,48,39}
-% CHI version routes the full corpus tables to the supplementary release:
-\newcommand{\corpustabref}{the released supplementary corpus (\url{https://github.com/ai4he/llm-as-a-judge})}
-\newcommand{\sttwotabref}{the released supplementary corpus}
+% full corpus tables are included as appendices in this complete version:
+\newcommand{\corpustabref}{Table~\ref{tab:full}}
+\newcommand{\sttwotabref}{Table~\ref{tab:study2full}}
 
 \input{tables/autostats}
 \input{tables/study2_autostats}
 \input{tables/study3_autostats}
 \input{tables/study1b_autostats}
 \input{tables/study3_stats_autostats}
-
-% data-availability note used in place of the wide appendix corpus tables (released as supplementary)
-\newcommand{\appendixnote}{\section*{Data availability}\noindent The two full coded corpora
-(\Nstudies{} + \STN{} studies), all search logs, the analysis/figure code, and the Study-1b/Study-3
-evaluation harnesses are released at \url{https://github.com/ai4he/llm-as-a-judge}; the single-column
-version of this paper includes the complete per-study corpus tables as appendices.}
 
 \begin{document}
 \title{When Can a Machine Judge Like a Human? Evaluating LLM-as-a-Judge Approaches for Human-Centered Computing Research}
@@ -45,7 +41,7 @@ version of this paper includes the complete per-study corpus tables as appendice
 \end{abstract}
 
 \keywords{LLM-as-a-judge, human-centered computing, systematic review, qualitative coding, annotation,
-human-AI agreement, evaluation methodology}
+human-AI agreement, evaluation methodology, data contamination}
 
 \maketitle
 
@@ -54,6 +50,6 @@ human-AI agreement, evaluation methodology}
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{references}
 
-\appendixnote
+\input{appendix}
 
 \end{document}
