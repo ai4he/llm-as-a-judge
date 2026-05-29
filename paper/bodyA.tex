@@ -161,10 +161,14 @@ We follow the standard summary-level G-Eval protocol \citep{liu2023geval} and at
 aspects the open judges \emph{meet or exceed} the established G-Eval/GPT-4 benchmark: \RTwobeats{} of the 16
 model$\times$aspect cells have a 95\% CI lying \emph{entirely above} the reported value, all on \textbf{consistency}
 and \textbf{coherence} (e.g.\ \ONEbest{} consistency $\rho{=}0.69$, CI $[0.63,0.74]$ vs.\ $.507$), and
-\textbf{relevance} is on par ($.48$-$.54$ vs.\ $.55$). Our protocol differs from the original in two deliberate,
-deployment-relevant ways: the judges are open and locally-servable, and we read a single integer score rather than a
-proprietary model's probability-weighted decoding. The comparison is to the figures reported by the original work,
-the standard reference point in this literature. But on \textbf{fluency} every open model falls well
+\textbf{relevance} is on par ($.48$-$.54$ vs.\ $.55$). \textbf{Controlling for the scoring protocol.} A natural
+concern is that G-Eval's reported numbers use \emph{probability-weighted} token decoding whereas we read a single
+integer, so the difference could be a scoring artifact rather than a model effect. We test this directly: for a model
+that emits a clean score-token distribution (gemma-4-31b) we recompute summary-level Spearman under both an integer
+(argmax) score and G-Eval's probability-weighted expected score, from the same calls. The two agree closely
+(coherence $\PWintCoh$ vs $\PWexpCoh$; consistency $\PWintCon$ vs $\PWexpCon$; fluency $\PWintFlu$ vs $\PWexpFlu$),
+so the open-model result is \emph{not} an artifact of integer scoring; the comparison to the reported benchmark is
+fair on this axis. But on \textbf{fluency} every open model falls well
 \emph{short} ($.22$-$.39$ vs.\ a reported $.455$). We diagnose why: fluency is the most \emph{compressed} aspect of
 the human reference, with the lowest within-document rating variance ($\mathrm{SD}=\SEfluSD$ vs $\SEconSD$ for
 consistency) and $\SEfluTop\%$ of summaries rated near the top of the scale, so it offers the least to rank, and it

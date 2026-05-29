@@ -208,6 +208,18 @@ lose accuracy precisely as human disagreement rises.}
 \input{tables/tab_social_disagr}
 \end{table}
 
+The gap pattern is consistent and statistically reliable per dataset (Table~\ref{tab:gapsoc}): on all four
+datasets the judge-vs-ceiling gap is significantly more negative on low-disagreement items than on high-disagreement
+items (non-overlapping 95\% CIs for GoEmotions and HateXplain), confirming that the shortfall is concentrated where
+humans agree, not where the gold is noisy.
+
+\begin{table}[t]\centering\small
+\caption{Study 2. Judge-vs-ceiling gap (panel accuracy minus human ceiling) by item human-disagreement, per dataset,
+with annotator/item-bootstrap 95\% CIs. The gap is largest (most negative) where humans most agree.}
+\label{tab:gapsoc}
+\input{tables/tab_gap_social}
+\end{table}
+
 \paragraph{What this means for HCC.} The model that simply predicts the majority looks accurate but erases the
 minority readings that perspectivist annotation is designed to preserve, which is precisely the flattening HCC warns
 against \citep{wang2024flatten,fricker2007epistemic}. Empirically, then, the field's instinct is right: for

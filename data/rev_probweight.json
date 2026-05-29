@@ -1,0 +1,22 @@
+{
+  "model": "gemma-4-31b",
+  "n": 6400,
+  "integer_spearman": {
+    "coherence": 0.663,
+    "consistency": 0.7,
+    "fluency": 0.221,
+    "relevance": 0.534
+  },
+  "expected_spearman": {
+    "coherence": 0.672,
+    "consistency": 0.546,
+    "fluency": 0.24,
+    "relevance": 0.549
+  },
+  "reported_geval": {
+    "coherence": 0.582,
+    "consistency": 0.507,
+    "fluency": 0.455,
+    "relevance": 0.547
+  }
+}
