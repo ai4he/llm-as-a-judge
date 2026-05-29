@@ -8,12 +8,16 @@ new experiment. \textbf{Study 1} is a PRISMA systematic review of \STN{} HCC, HC
 (augment / replace / simulate), the reported reliability against a human baseline, and the epistemic stance. The
 field overwhelmingly positions LLMs to \emph{augment} rather than replace humans (\STaugment{} augment vs.\
 \STreplace{} replace vs.\ \STsimulate{} simulate), under a stance dominated by \emph{tension}, with reliability
-ordered augment $>$ replace $>$ simulate. \textbf{Study 2} tests the field's central boundary empirically: we run a
+ordered augment $>$ replace $>$ simulate (an independent re-coding reproduces the verdict at $\alpha=\IRRstwoV$ and the
+role at $\alpha=\IRRstwoRole$, though it is LLM-assisted and the interpretive stance code is only moderately
+reproducible, $\alpha=\IRRstwoStance$). Simulation and design verdicts are review-derived, not tested here; the
+empirical evaluation covers English affect, toxicity, and irony annotation. \textbf{Study 2} tests the field's central boundary empirically: we run a
 six-model open panel (9B-754B) as virtual annotators on \SOCndat{} subjective social-computing datasets that carry
 human label distributions (emotion, offensiveness, hate, irony; \SOCnjudg{} judgments), benchmarked against the
 human-human agreement ceiling with chance-corrected agreement, a calibrated contamination screen, and an item-level
 mixed-effects analysis. The augment-not-replace consensus is empirically warranted: open judges fall short of the
-human ceiling on every subjective construct, and, tellingly, the judge-vs-ceiling gap is \emph{largest where humans
+human ceiling on the multi-class subjective constructs (and where accuracy nominally reaches it, on binary irony, only
+by predicting the base rate, macro-F1 ${\sim}0.45$); tellingly, the judge-vs-ceiling gap is \emph{largest where humans
 most agree} ($\SOCgapLow$ on low-disagreement items), so the shortfall is a genuine substitution failure, not a
 label-noise artifact on ambiguous cases. Residual variance is item-level ($\mathrm{SD}_{\text{logit}}=
 \SOCitemSDlogit$ vs model $\SOCmodelSDlogit$), not model scale or contamination, which we confirm on a recent

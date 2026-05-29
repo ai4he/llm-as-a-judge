@@ -99,7 +99,7 @@ human-human \citep{zheng2023mtbench}; GEMBA-MQM 96.5\% \citep{kocmi2023gembamqm}
 medicine (structure-dependent: $\kappa\!\approx\!0.82$-$0.93$ structured vs.\ $0.47$-$0.71$ complex reasoning),
 code, and IR/relevance (strong but contested \citep{clarke2024cantreplace}). \textbf{Red (\Nred{} domains):}
 low-resource multilingual evaluation and creative writing (near-zero expert correlation
-\citep{chakrabarty2024artartifice}). Figures~\ref{fig:dom1}-\ref{fig:land1} give the domain ordering and the
+\citep{chakrabarty2024artartifice}). Domain means over $n{\le}3$ studies (e.g.\ several single-study domains) are shown for completeness but flagged as low-confidence and should not be read to two-decimal precision; we rely on family-level aggregates for sparse cells. Figures~\ref{fig:dom1}-\ref{fig:land1} give the domain ordering and the
 domain$\times$task landscape; the decision map (Figure~\ref{fig:dec1}) positions domains by reliability against
 stakes.
 
@@ -166,9 +166,10 @@ concern is that G-Eval's reported numbers use \emph{probability-weighted} token 
 integer, so the difference could be a scoring artifact rather than a model effect. We test this directly: for a model
 that emits a clean score-token distribution (gemma-4-31b) we recompute summary-level Spearman under both an integer
 (argmax) score and G-Eval's probability-weighted expected score, from the same calls. The two agree closely
-(coherence $\PWintCoh$ vs $\PWexpCoh$; consistency $\PWintCon$ vs $\PWexpCon$; fluency $\PWintFlu$ vs $\PWexpFlu$),
-so the open-model result is \emph{not} an artifact of integer scoring; the comparison to the reported benchmark is
-fair on this axis. But on \textbf{fluency} every open model falls well
+(coherence $\PWintCoh$/$\PWexpCoh$, fluency $\PWintFlu$/$\PWexpFlu$, relevance on par); consistency is the one
+aspect where the two diverge ($\PWintCon$ integer vs $\PWexpCon$ probability-weighted), but both remain at or above
+the reported $.507$. The open-model result is therefore not an artifact of integer scoring, and the comparison to the
+reported benchmark is fair on this axis. But on \textbf{fluency} every open model falls well
 \emph{short} ($.22$-$.39$ vs.\ a reported $.455$). We diagnose why: fluency is the most \emph{compressed} aspect of
 the human reference, with the lowest within-document rating variance ($\mathrm{SD}=\SEfluSD$ vs $\SEconSD$ for
 consistency) and $\SEfluTop\%$ of summaries rated near the top of the scale, so it offers the least to rank, and it
@@ -222,9 +223,13 @@ Appendices~\ref{app:protocol} to~\ref{app:robust}.
 
 \subsection{Results}
 Table~\ref{tab:nlires} reports the panel against the human ceiling. Where humans agree only moderately
-(SNLI ceiling 0.75, MNLI 0.64), the open panel \emph{matches or exceeds} them: the jury reaches 0.86 on SNLI
-($>$ ceiling) and 5/6 models are \textbf{Validated}, with MNLI \textbf{Promising}. Chance-corrected agreement is
-substantial (best-model $\kappa$ up to 0.71), so this is genuine competence, not base-rate learning.
+(SNLI ceiling 0.75, MNLI 0.64), the open panel \emph{matches or exceeds} a single held-out human: on SNLI 5/6 models
+reach the human-human ceiling (we mark this \textbf{Validated}, but treat the verdict as \emph{conditional}, since
+SNLI/MultiNLI are old corpora and we cannot exclude memorization; see below), with MNLI \textbf{Promising}.
+Chance-corrected agreement is substantial (best-model $\kappa$ up to 0.71). The jury reaches 0.86 ($>$ the 0.75
+single-annotator ceiling), but we caution that a six-model aggregate exceeding a \emph{single}-held-out-human ceiling
+is expected and does not imply super-human reliability; we report it as panel stability, not a ceiling-breaking
+result.
 
 \begin{table}[t]\centering\small
 \caption{Study 3 (NLI). Open panel vs the human-human ceiling. Ceiling = random-annotator-vs-majority accuracy;
@@ -319,7 +324,8 @@ reproducibility. All \Nstudies{}${+}\STN{}$ references were web-verified and two
 By design we evaluate \emph{open} models (the reproducible choice for most researchers) at temperature~0; Study 2
 uses one summarization benchmark with integer scoring, and Study 3's deep human-label data are available for NLI
 rather than every domain. Subjective social-computing annotation, where the human ceiling is contested, is the focus
-of a companion paper. Findings reflect models available through mid-2026.
+of a companion paper. The six-model panel spans five families but shares overlapping pretraining lineages, so the between-model variance
+is a lower bound on judge diversity. Findings reflect models available through mid-2026.
 \section{Ethics and reproducibility}
 % =====================================================================
 \textbf{Ethics.} The review analyzes published research, not human subjects, and Study 3 reuses already-public,
@@ -340,8 +346,9 @@ mean the manuscript cannot drift from the data. Repository: \REPO{}.
 % =====================================================================
 \section{Conclusion}
 % =====================================================================
-Open, locally-servable LLMs are now strong enough to serve as annotators on objective and verifiable tasks, where
-they meet or exceed established proprietary-judge correlations. But across \Nstudies{} reviewed studies and a
+Open, locally-servable LLMs are now strong enough to serve as judges on objective, verifiable tasks: on the
+verifiable aspects of a summarization benchmark they meet or exceed the reported proprietary-judge correlations, and
+on NLI they reach the human-human ceiling (a conditional verdict, given possible contamination of these older corpora). But across \Nstudies{} reviewed studies and a
 \NLInjudg{}-judgment meta-evaluation on NLI datasets with rich human labels, reliability is bounded by the same thing
 for every model: the \emph{human-human agreement ceiling}, and it degrades on exactly the items where humans
 themselves disagree. Scaling the judge helps only modestly; contamination cannot be excluded on these older NLI corpora and is stated as a limitation. The
