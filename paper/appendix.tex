@@ -75,7 +75,7 @@ Dataset & Task & Source & Annot./item & Ceiling & Contam. \\
 \midrule
 ChaosNLI-SNLI & NLI (3-way) & SNLI + ChaosNLI relabels & ${\sim}100$ & 0.75 & MEDIUM \\
 ChaosNLI-MNLI & NLI (3-way) & MultiNLI + ChaosNLI relabels & ${\sim}100$ & 0.64 & MEDIUM \\
-GoEmotions & sentiment (4-way) & Reddit (Google) & ${\sim}3$-$5$ & 0.78 & MEDIUM \\
+GoEmotions & sentiment (4-way, authors' grouping) & Reddit (Google) & ${\sim}3$-$5$ & 0.78 & MEDIUM \\
 SBIC & offensiveness (binary) & Social Bias Frames & ${\sim}3$ & 0.91 & MEDIUM \\
 HateXplain & hate speech (3-way) & Twitter/Gab & $3$ & 0.83 & MEDIUM \\
 MultiPICo & irony (binary) & Reddit/Twitter (2024) & $3$-$8$ & 0.82 & LOW/MED \\
@@ -157,6 +157,12 @@ base our substantive claims on the disagreement analysis instead.
 \textbf{Annotator-subgroup check.} On MultiPICo (which carries annotator demographics), the panel's agreement with
 the female- vs male-annotator majority differs by only \MPCgenderGap, i.e.\ we did not detect a large majority-group
 bias in this corpus, though demographic metadata is sparse and this check is limited.
+\textbf{Ceiling vs annotator count.} The random-annotator-vs-majority ceiling depends on how many annotators an item
+has: subsampling ChaosNLI-SNLI (${\sim}100$ annotators) to $A{=}3$ raises its estimated ceiling from
+\RTwoablCeilFull{} to \RTwoablCeilThree{} (fewer annotators yield more unanimous majorities). We therefore compute
+each dataset's ceiling at its \emph{native} annotator count and caution that ceilings are not directly comparable
+across datasets with very different $A$; the disagreement-aware analyses (entropy, $\kappa$) do not depend on this
+estimator.
 
 % =====================================================================
 \section{Study 1 corpus}\label{app:s1}

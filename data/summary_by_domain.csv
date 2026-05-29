@@ -1,13 +1,13 @@
 domain,n,rel,verdict_mode,signal
 Machine Translation,3,4.333333333333333,2,Green
 Text-to-Image,2,4.0,2,Green
+Dialogue,1,4.0,2,Green
 Instruction Following,3,4.0,1,Green
 QA & Factuality,5,3.8,2,Green
 Information Extraction (NER/NLI),9,3.7777777777777777,2,Green
 General NLG,21,3.7142857142857144,2,Green
-Dialogue,2,3.5,2,Green
 Legal,2,3.5,2,Green
-Education & Grading,18,3.388888888888889,3,Amber
+Education & Grading,17,3.3529411764705883,3,Amber
 RAG,3,3.3333333333333335,3,Amber
 Summarization,8,3.25,2,Amber
 Fact-Checking,4,3.25,2,Amber

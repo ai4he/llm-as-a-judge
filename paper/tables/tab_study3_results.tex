@@ -1,13 +1,13 @@
-\begin{tabular}{@{}l l c c c l c c@{}}
+\begin{tabular}{@{}l l c c c c l c@{}}
 \toprule
-Dataset & Construct & Human & Best model & Jury & Modal verdict & alt-test & Contam. \\
- & & ceiling & (acc) & (acc) & & pass & tier \\
+Dataset & Construct & Human & Best model & macro-F1 & Jury & Modal verdict & Contam. \\
+ & & ceiling & (acc) & (best) & (acc) & & tier \\
 \midrule
-ChaosNLI-SNLI & NLI & 0.75 & 0.84 (gemma-4-31b) & 0.86 & \cellcolor{g!55}Validated & 5/6 & MEDIUM \\
-ChaosNLI-MNLI & NLI & 0.64 & 0.70 (gemma-4-31b) & 0.65 & \cellcolor{g!25}Promising & 1/6 & MEDIUM \\
-GoEmotions & emotion (4-way) & 0.78 & 0.61 (qwen3.6-27b) & 0.61 & \cellcolor{a!60}Mixed & 0/6 & MEDIUM \\
-SBIC & offensive (binary) & 0.91 & 0.86 (glm-5.1) & 0.84 & \cellcolor{g!25}Promising & 0/6 & MEDIUM \\
-HateXplain & hate (3-way) & 0.83 & 0.66 (gemma-4-31b) & 0.62 & \cellcolor{a!60}Mixed & 0/6 & MEDIUM \\
-MultiPICo (clean) & irony (binary) & 0.82 & 0.82 (gemma-4-31b) & 0.83 & \cellcolor{g!25}Promising & 5/6 & MEDIUM \\
+ChaosNLI-SNLI & NLI & 0.75 & 0.84 (gemma-4-31b) & 0.79 & 0.86 & \cellcolor{g!55}Validated & MEDIUM \\
+ChaosNLI-MNLI & NLI & 0.64 & 0.70 (gemma-4-31b) & 0.70 & 0.65 & \cellcolor{g!25}Promising & MEDIUM \\
+GoEmotions & emotion (4-way) & 0.78 & 0.61 (qwen3.6-27b) & 0.54 & 0.61 & \cellcolor{a!60}Mixed & MEDIUM \\
+SBIC & offensive (binary) & 0.91 & 0.86 (glm-5.1) & 0.85 & 0.84 & \cellcolor{g!25}Promising & MEDIUM \\
+HateXplain & hate (3-way) & 0.83 & 0.66 (gemma-4-31b) & 0.64 & 0.62 & \cellcolor{a!60}Mixed & MEDIUM \\
+MultiPICo (clean) & irony (binary) & 0.82 & 0.82 (gemma-4-31b) & 0.70 & 0.83 & \cellcolor{g!25}Promising & MEDIUM \\
 \bottomrule
 \end{tabular}

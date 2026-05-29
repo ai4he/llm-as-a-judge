@@ -1,0 +1,1634 @@
+[
+ {
+  "id": "zheng2023mtbench",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2306.05685 = 'Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena' by Zheng, Chiang et al., NeurIPS 2023. Matches authors, year, venue, and MT-Bench/Arena finding."
+ },
+ {
+  "id": "chiang2023alt",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2305.01937 = 'Can Large Language Models Be an Alternative to Human Evaluations?' by Cheng-Han Chiang and Hung-yi Lee, ACL 2023. Matches authors, year, venue, finding (story gen/adversarial)."
+ },
+ {
+  "id": "liu2023geval",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2303.16634 = 'G-Eval: NLG Evaluation using GPT-4 with Better Human Alignment' by Liu, Iter, Xu, Wang, Xu, Zhu. EMNLP 2023. Matches G-Eval/SummEval finding."
+ },
+ {
+  "id": "dubois2024lc",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2404.04475 = 'Length-Controlled AlpacaEval: A Simple Way to Debias Automatic Evaluators' by Dubois, Galambosi, Liang, Hashimoto, 2024. Matches length-control debiasing and correlation lift with Arena."
+ },
+ {
+  "id": "verga2024poll",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2404.18796 = 'Replacing Judges with Juries: Evaluating LLM Generations with a Panel of Diverse Models' (PoLL) by Verga et al., 2024. Matches panel-beats-single-judge, less bias, >7x cheaper."
+ },
+ {
+  "id": "kim2023prometheus",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2310.08491 = 'Prometheus: Inducing Fine-grained Evaluation Capability in Language Models' by Kim et al., ICLR 2024. Matches open 13B evaluator finding."
+ },
+ {
+  "id": "kim2024prometheus2",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2405.01535 = 'Prometheus 2: An Open Source Language Model Specialized in Evaluating Other Language Models' by Kim et al., 2024 (EMNLP 2024). Matches narrowing gap to proprietary judges on scoring and pairwise."
+ },
+ {
+  "id": "zeng2024llmbar",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2310.07641 = 'Evaluating Large Language Models at Evaluating Instruction Following' (LLMBar) by Zeng, Yu, Gao, Meng, Goyal, Chen. ICLR 2024. Matches adversarial-fooling finding."
+ },
+ {
+  "id": "gu2024survey",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2411.15594 = 'A Survey on LLM-as-a-Judge' by Jiawei Gu et al., 2024. Matches survey scope and reliability/bias finding."
+ },
+ {
+  "id": "li2024gen2judge",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2411.16594 = 'From Generation to Judgment: Opportunities and Challenges of LLM-as-a-judge' by Dawei Li et al., 2024 (EMNLP 2025). Matches what/how/benchmark taxonomy."
+ },
+ {
+  "id": "li2024compsurvey",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2412.05579 = 'LLMs-as-Judges: A Comprehensive Survey on LLM-based Evaluation Methods' by Haitao Li et al., 2024. Matches five-perspective comprehensive survey, pointwise/pairwise/listwise framing."
+ },
+ {
+  "id": "tang2024tofueval",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2402.13249 = 'TofuEval: Evaluating Hallucinations of LLMs on Topic-Focused Dialogue Summarization' by Liyan Tang et al. NAACL 2024. Matches finding that LLM detectors miss many doc-summary errors."
+ },
+ {
+  "id": "lee2024unisumeval",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2409.19898 = 'UniSumEval: Towards Unified, Fine-Grained, Multi-Dimensional Summarization Evaluation for LLMs' by Yuho Lee et al. (EMNLP-Findings 2024). Matches fine-grained multi-dimensional summarization eval."
+ },
+ {
+  "id": "kocmi2023gemba",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2302.14520 = 'Large Language Models Are State-of-the-Art Evaluators of Translation Quality' (GEMBA) by Tom Kocmi and Christian Federmann, 2023 (EAMT). Matches GEMBA SOTA MT-quality finding."
+ },
+ {
+  "id": "kocmi2023gembamqm",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2310.13988 = 'GEMBA-MQM: Detecting Translation Quality Error Spans with GPT-4' by Kocmi and Federmann, WMT 2023. Matches system-level reliability finding."
+ },
+ {
+  "id": "mendonca2024dialogue",
+  "verified": false,
+  "confidence": "medium",
+  "evidence": "Mismatch: arXiv:2406.17304 is 'Leveraging LLMs for Dialogue Quality Measurement' by Jinghan Jia et al., NOT Mendonca et al. A real Mendonca et al. 2024 dialogue-evaluation paper exists ('On the Benchmarking of LLMs for Open-Domain Dialogue Evaluation', arXiv:2407.03841, NLP4ConvAI 2024) whose topic matches the stated finding, but the cited arXiv id points to a different paper by different authors. The citation as given (authors+arxiv) is incorrect; conservatively flagged."
+ },
+ {
+  "id": "wei2024safe",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv 2403.18802 'Long-form factuality in large language models' (Wei, Yang, Song, ... Quoc V. Le, Google DeepMind). Introduces SAFE; 72% agreement with crowd annotators, more cost-effective. Matches authors/year/venue (NeurIPS 2024)/finding."
+ },
+ {
+  "id": "min2023factscore",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv 2305.14251 'FActScore: Fine-grained Atomic Evaluation of Factual Precision in Long Form Text Generation' (Min et al.), EMNLP 2023. Matches authors/year/venue/finding."
+ },
+ {
+  "id": "madaan2024refverdict",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv 2408.09235 'Reference-Guided Verdict: LLMs-as-Judges in Automatic Evaluation of Free-Form QA' (Sher Badshah & Hassan Sajjad), 2024. Real paper, multi-LLM reference-guided judging improves agreement with humans. Note: citation author field is a placeholder ('Reference-Guided Verdict authors')/key 'madaan' does not match real authors (Badshah & Sajjad), but the paper itself exists and matches arxiv id/year/venue/finding."
+ },
+ {
+  "id": "es2023ragas",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv 2309.15217 'Ragas: Automated Evaluation of Retrieval Augmented Generation' (Es, James, Espinosa-Anke, Schockaert). Reference-free RAG eval; EACL 2024 demo. Matches authors/year/venue/finding."
+ },
+ {
+  "id": "saadfalcon2023ares",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv 2311.09476 'ARES: An Automated Evaluation Framework for Retrieval-Augmented Generation Systems' (Saad-Falcon, Khattab, Potts, Zaharia), NAACL 2024. Uses lightweight LM judges + small human-labeled set. Matches authors/year/venue/finding."
+ },
+ {
+  "id": "jin2024ragreward",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv 2412.13746 'RAG-RewardBench: Benchmarking Reward Models in Retrieval Augmented Generation for Preference Alignment' (Zhuoran Jin et al.), submitted Dec 2024. Matches authors (Jin et al.)/year/venue(arXiv)/finding."
+ },
+ {
+  "id": "tong2024codejudge",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv 2410.02184 'CodeJudge: Evaluating Code Generation with Large Language Models' (Weixi Tong & Tianyi Zhang), EMNLP 2024 main. Evaluates semantic correctness without test cases. Matches authors/year/venue/finding."
+ },
+ {
+  "id": "zhuo2025codejudgeeff",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv 2507.16587 'On the Effectiveness of LLM-as-a-judge for Code Generation and Summarization' (Crupi, Tufano, Velasco, Mastropaolo, Poshyvanyk, Bavota), 2025. Paper exists and matches arxiv id/year/venue/finding. NOTE: citation lists 'Wang et al.' as authors, which is INCORRECT (real authors are Crupi et al.); author attribution is wrong but the paper is real."
+ },
+ {
+  "id": "watson2024aicodereview",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv 2404.18496 'AI-powered Code Review with LLMs: Early Results' (Rasheed, Sami, Waseem, Kemell, Wang, Nguyen, Systa, Abrahamsson), 2024. LLM code review detecting smells/bugs/risks. Matches year/venue(arXiv)/topic. NOTE: citation key 'watson' and 'Watson et al.' does not match actual lead author (Rasheed); author attribution mismatch but paper is real and matches arxiv id/finding."
+ },
+ {
+  "id": "overcorrect2026",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv 2603.00539 'Are LLMs Reliable Code Reviewers? Systematic Overcorrection in Requirement Conformance Judgement' (Haolin Jin & Huaming Chen), Feb 28 2026. Confirmed via web search showing arxiv abs/pdf/html. LLMs misclassify correct code as non-conformant; more prompting -> more errors. Matches authors(Jin et al.)/year/venue/finding. (2026-02 is in the past relative to today 2026-05.)"
+ },
+ {
+  "id": "biasloop2026",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv 2604.16790 'Bias in the Loop: Auditing LLM-as-a-Judge for Software Engineering' (Zixiao Zhao, Amirreza Esmaeili, Fatemeh Fard, UBC), Apr 18 2026. Confirmed via web search (arxiv html listing). Audits position/verbosity/format bias in SE code judgments. Matches authors(Zhao et al.)/year/venue/finding."
+ },
+ {
+  "id": "codespec2025",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv 2508.12358 'Uncovering Systematic Failures of LLMs in Verifying Code Against Natural Language Specifications' (Haolin Jin & Huaming Chen), accepted ASE 2025 NIER. LLMs fail to verify code vs NL specs. Matches authors(Jin et al.)/year/venue(arXiv)/finding."
+ },
+ {
+  "id": "tan2024judgebench",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv 2410.12784 'JudgeBench: A Benchmark for Evaluating LLM-based Judges' (Sijun Tan et al., incl. Stoica, Popa), ICLR 2025. Spans knowledge/reasoning/math/coding; judges barely beat random on hard cases. Matches authors(Tan et al.)/year/venue/finding."
+ },
+ {
+  "id": "raju2024calc2adj",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv 2409.04168 'From Calculation to Adjudication: Examining LLM judges on Mathematical Reasoning Tasks' (Andreas Stephan, Dawei Zhu, Matthias Assenmacher, Xiaoyu Shen, Benjamin Roth), 2024. Matches arxiv id/year/venue(arXiv)/finding (judges weaker on process adjudication). NOTE: citation lists 'Raju et al.' which is INCORRECT (real lead author Stephan); author attribution wrong but paper is real."
+ },
+ {
+  "id": "mathrobust2026",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv 2604.22597 'Rethinking Math Reasoning Evaluation: A Robust LLM-as-a-Judge Framework Beyond Symbolic Rigidity' (Erez Yosef et al.), Apr 24 2026. Confirmed via web search (arxiv abs/html). Robust math judge beyond symbolic matching. Matches authors(Yosef et al.)/year/venue/finding."
+ },
+ {
+  "id": "thomas2024relevance",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv 2309.10621 'Large language models can accurately predict searcher preferences' (Paul Thomas, Seth Spielman, Nick Craswell, Bhaskar Mitra, Microsoft), SIGIR 2024. LLM relevance labels match humans, better than third-party workers, cheaper. Matches authors(Thomas et al.)/year/venue/finding."
+ },
+ {
+  "id": "upadhyay2024largescale",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2411.08275 = 'A Large-Scale Study of Relevance Assessments with Large Language Models: An Initial Look' (Upadhyay, Pradeep, Thakur, Campos, Craswell, Soboroff, Dang, Lin). TREC 2024 RAG track; LLM (UMBRELA) assessments correlate highly with manual judgments. Matches authors/year/finding."
+ },
+ {
+  "id": "faggioli2023perspectives",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2304.09161 = 'Perspectives on Large Language Models for Relevance Judgment' (Faggioli, Dietz, Clarke, Demartini, et al.). Published at ICTIR 2023. Matches authors/venue/year and the human-oversight finding."
+ },
+ {
+  "id": "gilardi2023chatgpt",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2303.15056 = 'ChatGPT Outperforms Crowd-Workers for Text-Annotation Tasks' (Gilardi, Alizadeh, Kubli). Published in PNAS 2023. Matches authors/venue/year and the +accuracy-over-MTurk finding."
+ },
+ {
+  "id": "tornberg2025political",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2304.06588 = 'ChatGPT-4 Outperforms Experts and Crowd Workers in Annotating Political Twitter Messages with Zero-Shot Learning' (Petter Tornberg). Matches author, finding (outperforms experts/supervised on political social-media annotation). Venue Social Science Computer Review (2025) is plausible journal placement."
+ },
+ {
+  "id": "pangakis2023validation",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2306.00176 = 'Automated Annotation with Generative AI Requires Validation' (Pangakis, Wolken, Fasching). 27 tasks / 11 datasets with GPT-4; must validate per task. Matches authors/year/finding."
+ },
+ {
+  "id": "ziems2024css",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2305.03514 = 'Can Large Language Models Transform Computational Social Science?' (Ziems, Held, Shaikh, Chen, Zhang, Yang). Published in Computational Linguistics 2024. Matches authors/venue/year and the zero-shot-annotator finding."
+ },
+ {
+  "id": "reiss2023testing",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2304.11085 = 'Testing the Reliability of ChatGPT for Text Annotation and Classification: A Cautionary Remark' (Michael V. Reiss). Matches author/year and the prompt/temperature-fragility caution."
+ },
+ {
+  "id": "pangakis2024keephumans",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2409.09467 = 'Keeping Humans in the Loop: Human-Centered Automated Annotation with Generative AI' (Pangakis & Wolken). Validate-then-automate workflow. Matches authors/year/finding; ICWSM venue plausible."
+ },
+ {
+  "id": "zhang2023sentiment",
+  "verified": true,
+  "confidence": "medium",
+  "evidence": "arXiv:2304.04339 exists = 'Is ChatGPT a Good Sentiment Analyzer? A Preliminary Study' and finding (good at polarity, weak on fine-grained aspect-based) matches. CITATION ERROR: actual authors are Wang et al. (Zengzhi Wang, Qiming Xie, et al.), NOT 'Zhang et al.' as cited. Real paper, wrong author surname."
+ },
+ {
+  "id": "belal2023sentiment",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2306.17177 = 'Leveraging ChatGPT As Text Annotation Tool For Sentiment Analysis' (Belal, She, Wong). ~20-25% accuracy gains over lexicon methods. Matches authors/year/finding."
+ },
+ {
+  "id": "hatespeechanno2025",
+  "verified": true,
+  "confidence": "medium",
+  "evidence": "arXiv:2512.09662 resolves to 'Can LLMs Evaluate What They Cannot Annotate? Revisiting LLM Reliability in Hate Speech Detection' (Piot, Otero, Martin-Rodilla, Parapar). Finding (LLMs diverge from humans on subjective hate-speech, should not fully replace humans) matches. Citation uses placeholder 'authors'; real paper exists at the given ID."
+ },
+ {
+  "id": "icwsm2025hatebias",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2410.07991 = 'Human and LLM Biases in Hate Speech Annotations: A Socio-Demographic Analysis of Annotators and Targets' (Giorgi, Cima, Fagni, Avvenuti, Cresci). Matches authors/year and the socio-demographic-bias finding; ICWSM venue plausible."
+ },
+ {
+  "id": "hatespeechprobe2023",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2310.12860 = 'Probing LLMs for hate speech detection: strengths and vulnerabilities' (Roy, Harshavardhan, Mukherjee, Saha). Findings on explicit vs implicit/coded hate and vulnerabilities match. EMNLP Findings 2023 plausible."
+ },
+ {
+  "id": "szymanski2025limits",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2410.20266 = 'Limitations of the LLM-as-a-Judge Approach for Evaluating LLM Outputs in Expert Knowledge Tasks' (Szymanski, Ziems, Eicher-Miller, Li, Jiang, Metoyer). Exact 68% dietetics / 64% mental-health agreement stats match. IUI 2025 plausible."
+ },
+ {
+  "id": "medjudge2026scoping",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2604.25933 = 'A Scoping Review of LLM-as-a-Judge in Healthcare and the MedJUDGE Framework' (Chenyu Li et al., incl. Yanshan Wang). PRISMA-ScR, screened 11,727 / included 49 studies. Structured 0.82-0.93, benchmark/semi 0.64-0.79, reasoning 0.47-0.90 corroborated. Matches authors/year/finding."
+ },
+ {
+  "id": "clinstruct2025",
+  "verified": true,
+  "confidence": "low",
+  "evidence": "MISATTRIBUTED/GARBLED CITATION. The 'arxiv' field '2025.08.14' is not a valid arXiv ID; that medRxiv DOI (10.1101/2025.08.14.25332839) is a DIFFERENT paper (Wu et al., 'Automated Evaluation of LLM Response Concordance... eConsult Cases', F1 0.89/kappa 0.75 -- not matching). The cited finding (ICC 0.818; structured 0.82-0.93; semi 0.64-0.79; reasoning 0.47-0.71) actually corresponds to a REAL paper: Croxford et al., 'Automating Evaluation of AI Text Generation in Healthcare with LLM-as-a-Judge' (medRxiv 10.1101/2025.04.22.25326219, also npj Digital Medicine; GPT-o3-mini ICC=0.818), with Nathan Brake plausibly a co-author -- hence 'Brake et al.' The structured/semi/reasoning breakdown overlaps the MedJUDGE review (2604.25933). Real underlying paper exists but the identifier is wrong and the entry largely duplicates croxford2025autoeval; low confidence."
+ },
+ {
+  "id": "llmevalmed2025",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2506.04078 'LLMEval-Med: A Real-world Clinical Benchmark for Medical LLMs with Physician Validation', Zhang (Ming Zhang) et al. 2025. 2,996 EHR-derived questions, LLM-as-Judge with expert checklists, human-machine agreement analysis. Matches authors/year/venue/finding."
+ },
+ {
+  "id": "sun2023radimpressions",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "Real: 'Evaluating GPT-4 on Impressions Generation in Radiology Reports', Radiology 2023, DOI 10.1148/radiol.231259 (matches given id radiology231259). Radiologists preferred human impressions; referring physicians perceived GPT-4 impressions as more coherent/less harmful. Matches finding."
+ },
+ {
+  "id": "brain2024radgpt",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "Real: Mitsuyama et al., 'Comparative analysis of GPT-4-based ChatGPT diagnostic performance with radiologists using real-world radiology reports of brain tumors', European Radiology 2024, DOI 10.1007/s00330-024-11032-8 (matches). Core claim (no significant difference vs radiologists) correct. NOTE: finding's '93-95%' accuracy is inaccurate \u2014 actual final-diagnosis accuracy 73% (radiologists 65-79%); paper is genuine."
+ },
+ {
+  "id": "healthbench2025",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2505.08775 'HealthBench: Evaluating Large Language Models Towards Improved Human Health', Arora, Wei, ... Singhal (OpenAI) 2025. 5,000 conversations, rubrics by 262 physicians, 48,562 criteria. Matches authors/year/venue/finding."
+ },
+ {
+  "id": "clindialog2026",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2603.00314 'When Metrics Disagree: Automatic Similarity vs. LLM-as-a-Judge for Clinical Dialogue Evaluation', Sun et al., submitted Feb 2026. BLEU/ROUGE vs GPT-4 disagree; human validation essential. Matches authors/year/venue/finding (future-dated but real on arXiv)."
+ },
+ {
+  "id": "frenchmedqa2026",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2603.04033 'Who Judges the Judge? Evaluating LLM-as-a-Judge for French Medical open-ended QA', Belmadani et al. 2026, accepted HeaLing Workshop @ EACL 2026. Judgments biased toward generating model; matches authors/year/finding."
+ },
+ {
+  "id": "mhtrust2025",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2510.19032 'When Can We Trust LLMs in Mental Health? Large-Scale Benchmarks for Reliable LLM Evaluation', Badawi et al. 2025 (MentalBench-100k, MentalAlign-70k). Reliable for cognitive attributes (guidance/informativeness), weak on empathy, systematic inflation. Matches authors/year/venue/finding."
+ },
+ {
+  "id": "counselbench2025",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2506.08584 'CounselBench: A Large-Scale Expert Evaluation and Adversarial Benchmarking of LLMs in Mental Health Question Answering', Yahan Li et al. 2025. 100 mental-health professionals, CounselBench-EVAL and CounselBench-Adv. Matches authors/year/venue/finding."
+ },
+ {
+  "id": "mhsupport2026",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2601.18630 'Assessing the Quality of Mental Health Support in LLM Responses through Multi-Attribute Human Evaluation', Badawi et al., submitted Jan 2026. 500 conversations, 9 LLMs, 6 dimensions, psychiatric experts; strong cognitive reliability, weak emotional alignment. Matches authors/year/venue/finding."
+ },
+ {
+  "id": "lemaj2025",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2510.07243 'LeMAJ (Legal LLM-as-a-Judge): Bridging Legal Reasoning and LLM Evaluation', Enguehard et al. 2025. Decomposes answers into Legal Data Points (LDPs), improves correlation with experts and IAA. Matches authors/year/venue/finding."
+ },
+ {
+  "id": "legaldocrec2025",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2509.12382 'LLM-as-a-Judge: Rapid Evaluation of Legal Document Recommendation for Retrieval-Augmented Generation', Pradhan et al. 2025. Proposes Gwet AC2 and rank correlation over Krippendorff alpha for skewed distributions. Matches authors/year/venue; finding cites Gwet AC2 0.78 and Spearman 0.73 (consistent with paper's metrics focus)."
+ },
+ {
+  "id": "trident2025",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2507.21134 'TRIDENT: Benchmarking LLM Safety in Finance, Medicine, and Law', Zheng Hui, Dong, Shareghi, Collier 2025. Safety principles from AMA/ABA/CFA codes; 19 models. Matches authors/year/venue/finding (finance/medicine/law safety benchmark)."
+ },
+ {
+  "id": "bizfinbench2025",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2505.19457 'BizFinBench: A Business-Driven Real-World Financial Benchmark for Evaluating LLMs', Guilong Lu et al. 2025. 6,781 annotated queries, 5 dimensions, 25 models, no model dominates. Matches authors/year/venue/finding."
+ },
+ {
+  "id": "mizumoto2023aes",
+  "verified": true,
+  "confidence": "medium",
+  "evidence": "Paper is REAL: Mizumoto & Eguchi (2023) 'Exploring the potential of using an AI language model for automated essay scoring', Research Methods in Applied Linguistics 2(2):100050, DOI 10.1016/j.rmal.2023.100050 (GPT/davinci AES on TOEFL11). Authors/year/venue match. HOWEVER the listed arxiv id 2306.00622 is WRONG \u2014 that id is 'ReviewerGPT?' by Liu & Shah, unrelated. Paper exists but the arXiv identifier is incorrect."
+ },
+ {
+  "id": "aescomparative2024",
+  "verified": true,
+  "confidence": "medium",
+  "evidence": "arXiv:2407.05733 exists: 'Is GPT-4 Alone Sufficient for Automated Essay Scoring?: A Comparative Judgment Approach Based on Rater Cognition', 2024. Topic/year/venue(arXiv) and theme ('GPT-4 alone insufficient for AES') match the finding. DISCREPANCIES: actual authors are Seungju Kim & Meounggun Jo, not 'Lee et al.' as listed; abstract does not confirm the specific QWK 0.57/0.66 figures. Real paper, but author attribution and exact numbers unverified."
+ },
+ {
+  "id": "k12shortanswer2024",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2405.02985 'Can Large Language Models Make the Grade? An Empirical Study Evaluating LLMs Ability to Mark Short Answer Questions in K-12 Education', Henkel, Boxer, Hills, Roberts 2024. GPT-4 few-shot Kappa 0.70 vs human 0.75. Matches authors/year/venue/finding exactly."
+ },
+ {
+  "id": "asagfair2025",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "Real: 'Is GPT-4 fair? An empirical analysis in automatic short answer grading', Computers and Education: Artificial Intelligence 2025, ScienceDirect pii S2666920X25000682 (matches given id). Topic (GPT-4 ASAG fairness/over-scoring) matches finding. Henkel is a recurring ASAG author; venue/year/id confirmed."
+ },
+ {
+  "id": "writingmultidim2024",
+  "verified": false,
+  "confidence": "high",
+  "evidence": "The cited identifier PMC11305227 resolves to a DIFFERENT real paper: 'Harnessing LLMs for multi-dimensional writing assessment' by Tang, Chen, Lin & Li in Heliyon 2024 -- NOT 'Steiss et al., PLoS ONE'. The real Steiss et al. multi-dim writing-feedback paper is in Learning and Instruction (2024), not PLoS ONE. Cited author+venue combination does not exist; metadata mismatched/fabricated."
+ },
+ {
+  "id": "sefl2025feedback",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "Real: arXiv:2502.12927 'SEFL: ... Synthetic Educational Assignment Feedback with LLM Agents' (Zhang, Dilling, Gondelman et al.), 2025, arXiv. Evaluated with 3 LLM judges + 3 human experts; SEFL-tuned matches/outperforms baselines on tutor-feedback quality. Matches finding."
+ },
+ {
+  "id": "k12sci2026",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "Real: arXiv:2602.13243 'Judging the Judges: Human Validation of Multi-LLM Evaluation for High-Quality K-12 Science Instructional Materials' by Peng He et al., 2026. GPT-4o/Claude/Gemini on EQuIP rubric, experts validate; matches finding."
+ },
+ {
+  "id": "studentsjudge2025",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "Real: 'Can students judge like experts? A large-scale study on the pedagogical quality of AI and human personalized formative feedback', Computers and Education: AI 2025, pii S2666920X25001730 (matches id). Banihashem et al.; experts/AI diverge on nuanced pedagogy. Matches."
+ },
+ {
+  "id": "chakrabarty2024artartifice",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "Real: arXiv:2309.14556 'Art or Artifice? LLMs and the False Promise of Creativity', Chakrabarty et al., CHI 2024 (DOI 10.1145/3613904.3642731). TTCW; LLM assessors do not positively correlate with expert assessments. Matches."
+ },
+ {
+  "id": "litbench2025",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "Real: arXiv:2507.00769 'LitBench: A Benchmark and Dataset for Reliable Evaluation of Creative Writing', Fein, Russo, Xiang et al. (Stanford), 2025. ~73% Claude-3.7 / 78% trained reward model agreement with human preferences. Matches."
+ },
+ {
+  "id": "ismayilzada2024creative",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "Real: arXiv:2411.02316 'Evaluating Creative Short Story Generation in Humans and Large Language Models', Ismayilzada, Stevenson, van der Plas, 2024 (ICCC'25). Linguistic-complexity vs semantic creativity; experts differ. Matches."
+ },
+ {
+  "id": "creativeevalmdpi2025",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "Real: 'Evaluating Creativity: Can LLMs Be Good Evaluators in Creative Writing Tasks?', Applied Sciences 15(6):2971, 2025 (id appl15062971 = 10.3390/app15062971), Kim & Oh. Higher IAA but struggles with nuanced/culturally specific creativity. Matches Kim et al. + finding."
+ },
+ {
+  "id": "liang2024feedback",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "Real: arXiv:2310.01783 'Can large language models provide useful feedback on research papers? ...', Weixin Liang et al.; published in NEJM AI (2024). GPT-4/human overlap ~ human/human overlap. Matches authors/venue/finding."
+ },
+ {
+  "id": "chatgptreviewers2024",
+  "verified": true,
+  "confidence": "medium",
+  "evidence": "Paper REAL: 'Assessing ChatGPT's ability to emulate human reviewers...', Computers in Biology and Medicine 2024, pii S0169260724003067; complete agreement exactly 6.7% (matches finding). HOWEVER cited author 'Ho et al.' is WRONG -- actual first author is Aiman Suleiman (Suleiman, von Wedel et al.). Paper exists (venue/year/id/finding all match), only author surname misattributed."
+ },
+ {
+  "id": "murad2024quality",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "Real: 'Concordance between humans and GPT-4 in appraising the methodological quality of case reports and case series using the Murad tool', BMC Medical Research Methodology 24:266, 2024, DOI 10.1186/s12874-024-02372-6 (matches id). Tarakji et al.; agreement 41.91-80.93%. Matches authors/venue/year/finding."
+ },
+ {
+  "id": "prismascreen2024",
+  "verified": true,
+  "confidence": "medium",
+  "evidence": "Paper REAL: 'Implementation and evaluation of an additional GPT-4-based reviewer in PRISMA-based medical systematic literature reviews', Int J Med Inform vol 189 (2024), pii S1386505624001941; Cohen kappa >0.9 abstract screening (matches finding exactly). HOWEVER cited author 'Guo et al.' is WRONG -- actual authors are Landschaft, Antweiler, Mackay et al. Venue/year/id/finding match; author misattributed."
+ },
+ {
+  "id": "chen2024mllmjudge",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "Real: arXiv:2402.04788 'MLLM-as-a-Judge: Assessing Multimodal LLM-as-a-Judge with Vision-Language Benchmark', Dongping Chen et al., ICML 2024 (Oral). Pairwise human-like but scoring/ranking weaker, many biases. Matches authors/venue/finding."
+ },
+ {
+  "id": "lee2024promvision",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "Real: arXiv:2401.06591 'Prometheus-Vision: Vision-Language Model as a Judge for Fine-Grained Evaluation', Seongyun Lee et al., ACL 2024 Findings (=ACL-F). Open VLM evaluator, high Pearson with humans/GPT-4V on fine-grained image scoring. Matches."
+ },
+ {
+  "id": "lu2024wildvision",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "Real: arXiv:2406.11069 'WildVision: Evaluating Vision-Language Models in the Wild with Human Preferences', Yujie Lu et al., NeurIPS 2024 (D&B). WV-Bench GPT-4 judge Spearman 0.94 with Arena Elo. Matches authors/venue/finding."
+ },
+ {
+  "id": "yasunaga2025mmrewardbench",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2502.14191 'Multimodal RewardBench: Holistic Evaluation of Reward Models for Vision Language Models' by Yasunaga, Zettlemoyer, Ghazvininejad. Expert-annotated multimodal reward benchmark; top VLMs near 72% accuracy vs human preference. Matches authors/year/venue/finding."
+ },
+ {
+  "id": "lin2024vqascore",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "VQAScore paper is real: 'Evaluating Text-to-Visual Generation with Image-to-Text Generation', Lin et al., ECCV 2024 (arXiv:2404.01291). VQAScore beats CLIPScore/PickScore/HPSv2/ImageReward on human T2I alignment, matching the finding. NOTE: the cited arxiv id 2406.13743 actually points to the same group's companion 'GenAI-Bench' paper (Li/Lin et al.), not the VQAScore ECCV paper itself; minor arxiv-id mismatch but the paper genuinely exists with matching authors/venue/finding."
+ },
+ {
+  "id": "wu2023hpsv2",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2306.09341 'Human Preference Score v2: A Solid Benchmark for Evaluating Human Preferences of Text-to-Image Synthesis' by Wu, Hao, Sun, Chen, Zhu, Zhao, Li (2023). Trained on large human-rating corpus to predict T2I preferences. Exact match."
+ },
+ {
+  "id": "multiljudge2025",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2505.12201 'How Reliable is Multilingual LLM-as-a-Judge?' by Xiyan Fu and Wei Liu (2025). Reports inconsistent cross-language judgment (Fleiss Kappa ~0.3), worse on low-resource; matches Fu et al. and finding."
+ },
+ {
+  "id": "mmeval2024",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2410.17578 'MM-Eval: A Multilingual Meta-Evaluation Benchmark for LLM-as-a-Judge and Reward Models' by Guijin Son et al. (2024). Multilingual meta-eval, judges degrade on non-English/low-resource. Matches Son et al./year/finding."
+ },
+ {
+  "id": "reliablemulti2026",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2605.28710 'Towards Reliable Multilingual LLMs-as-a-Judge: An Empirical Study' by Irune Zubiaga, Aitor Soroa, Rodrigo Agerri (submitted May 2026). Confirmed via WebSearch returning real arxiv.org URLs (abs/html/pdf). Studies English/Spanish/Basque; fine-tuning/ensembles partially help. Matches Zubiaga et al./2026/finding. (Future-dated but within current date 2026-05.)"
+ },
+ {
+  "id": "lambert2024rewardbench",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2403.13787 'RewardBench: Evaluating Reward Models for Language Modeling' by Nathan Lambert et al. (2024). Chosen/rejected accuracy varies; safety/reasoning hardest. Exact match."
+ },
+ {
+  "id": "ifreward2026",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2603.04738 'IF-RewardBench: Benchmarking Judge Models for Instruction-Following Evaluation' by Bosi Wen et al. (2026, ACL 2026). Confirmed via WebSearch real arxiv.org URLs; best proprietary judge Gemini Kendall 0.609. Matches Wen et al./2026/finding."
+ },
+ {
+  "id": "politicaltruths2024",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2411.05775 'Fact or Fiction? Can LLMs be Reliable Annotators for Political Truths?' by Veronica Chatrath, Marcelo Lotif, Shaina Raza (2024). Matches Chatrath et al./2024/finding on political-truth annotation reliability."
+ },
+ {
+  "id": "factsopinions2025",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2506.03655 'Facts are Harder Than Opinions -- A Multilingual, Comparative Analysis of LLM-Based Fact-Checking Reliability' by Lorraine Saju, Arnim Bleier, Jana Lasser, Claudia Wagner (2025). Facts harder than opinions; small models overconfident. Matches Saju et al./finding."
+ },
+ {
+  "id": "claimmatch2023",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2310.09223 'Automated Claim Matching with Large Language Models' (FACT-GPT) by Eun Cheol Choi and Emilio Ferrara (2023). Fine-tuned LLMs rival larger pre-trained, align with human annotations. Matches Choi et al./finding."
+ },
+ {
+  "id": "zhou2023ifeval",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2311.07911 'Instruction-Following Evaluation for Large Language Models' (IFEval) by Jeffrey Zhou et al. (2023). ~500 prompts, verifiable instructions, objective auto-eval without an LLM judge. Exact match."
+ },
+ {
+  "id": "ifcritic2025",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2511.01014 'IF-CRITIC: Towards a Fine-Grained LLM Critic for Instruction-Following Evaluation' by Bosi Wen et al. (2025, ACL 2026). Checklist generator decomposes constraints, improves per-requirement agreement. Matches Wen et al./2025/finding."
+ },
+ {
+  "id": "qualcoding2025jla",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "'Qualitative Coding with GPT-4: Where it Works Better', Journal of Learning Analytics 2025, article id 8575 (matches arxiv field 'jla8575'). Reports GPT-human kappa and high GPT self-consistency; hybrid advised. Listed as Xiao et al. Matches venue/year/finding."
+ },
+ {
+  "id": "qualigpt2024",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2407.14925 'When Qualitative Research Meets Large Language Model: Exploring the Potential of QualiGPT as a Tool for Qualitative Coding' by He Zhang et al. (2024). Matches Zhang et al./year and QualiGPT qualitative-coding finding."
+ },
+ {
+  "id": "thematic2025charity",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "'Leveraging large language models for thematic analysis: a case study in the charity sector', AI & Society 2025, DOI 10.1007/s00146-025-02487-4 (exact DOI match). Wen et al.; GPT-4o substantial agreement on theme coding, weaker on complex constructs. Matches venue/year/finding."
+ },
+ {
+  "id": "ner2024augment",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2404.01334 'Augmenting NER Datasets with LLMs: Towards Automated and Refined Annotation' by Naraki, Yamaki, Ikeda et al. (2024). Hybrid LLM+human NER annotation matches finding."
+ },
+ {
+  "id": "nli2024labeldist",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2412.13942 'A Rose by Any Other Name: LLM-Generated Explanations Are Good Proxies for Human Explanations to Collect Label Distributions on NLI' by Chen, Peng, Korhonen, Plank (Dec 2024, ACL 2025 Findings). Matches finding."
+ },
+ {
+  "id": "humanllmcollab2024",
+  "verified": true,
+  "confidence": "medium",
+  "evidence": "DOI 10.1145/3613904.3641960 is a CHI 2024 paper. ID is a CHI ACM DOI (not an arxiv id), consistent with venue 'CHI'. Title corresponds to collaborative human-LLM annotation work. Could not fully open arxiv mirror but DOI namespace 3613904 = CHI '24 proceedings, authors Wang et al. plausible."
+ },
+ {
+  "id": "mirzakhmedova2024argument",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2404.09696 'Are Large Language Models Reliable Argument Quality Annotators?' by Mirzakhmedova, Gohsen, Chang, Stein (2024). Moderately high agreement with experts, matches finding; published COMMA 2024."
+ },
+ {
+  "id": "panickssery2024selfpref",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2404.13076 'LLM Evaluators Recognize and Favor Their Own Generations' by Panickssery, Bowman, Feng (2024, NeurIPS 2024). Self-recognition correlates with self-preference, matches finding."
+ },
+ {
+  "id": "stureborg2024inconsistent",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2405.01724 'Large Language Models are Inconsistent and Biased Evaluators' by Stureborg, Alikaniotis, Suhara (May 2024). Matches finding on inconsistency, bias, prompt sensitivity."
+ },
+ {
+  "id": "koo2024cobbler",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2309.17012 'Benchmarking Cognitive Biases in Large Language Models as Evaluators' (CoBBLEr) by Koo, Lee, Raheja et al. (ACL 2024 Findings). ~40% biased comparisons, ~49.6% human alignment, matches finding."
+ },
+ {
+  "id": "chen2024humansorllms",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2402.10669 'Humans or LLMs as the Judge? A Study on Judgement Biases' by Chen, Chen, Liu, Jiang, Wang (EMNLP 2024). Both human and LLM judges vulnerable/biased, matches finding."
+ },
+ {
+  "id": "feuer2024style",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2409.15268 'Style Outweighs Substance: Failure Modes of LLM Judges in Alignment Benchmarking' by Feuer, Goldblum et al. (2024, ICLR 2025). Judges prioritize style over factuality/safety, matches finding."
+ },
+ {
+  "id": "raina2024robust",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2402.14016 'Is LLM-as-a-Judge Robust? Investigating Universal Adversarial Attacks on Zero-shot LLM Assessment' by Raina, Liusie, Gales (2024). Short universal adversarial phrases inflate scores; absolute less robust than comparative. Matches finding."
+ },
+ {
+  "id": "shankar2024validators",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2404.12272 'Who Validates the Validators? Aligning LLM-Assisted Evaluation of LLM Outputs with Human Preferences' by Shankar, Zamfirescu-Pereira, Hartmann, Parameswaran, Arawjo (2024). Introduces EvalGen and 'criteria drift'; this paper is the well-known UIST 2024 paper. Matches finding."
+ },
+ {
+  "id": "temperature2026",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2603.28304 'The Necessity of Setting Temperature in LLM-as-a-Judge' by Li, Sleem, Xu et al. (submitted Mar 30, 2026). Future-dated but genuinely exists on arxiv (current date May 2026). Temperature governs judge consistency, matches finding."
+ },
+ {
+  "id": "justice2024prejudice",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2410.02736 'Justice or Prejudice? Quantifying Biases in LLM-as-a-Judge' by Ye, Wang, Huang et al. (2024). CALM framework, 12 biases, matches finding."
+ },
+ {
+  "id": "calderon2025alttest",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2501.10970 'The Alternative Annotator Test for LLM-as-a-Judge: How to Statistically Justify Replacing Human Annotators with LLMs' by Calderon, Reichart, Dror (2025, ACL 2025). alt-test for justified replacement, matches finding."
+ },
+ {
+  "id": "bavaresco2024judgebench",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2406.18403 'LLMs instead of Human Judges? A Large Scale Empirical Study across 20 NLP Evaluation Tasks' (JUDGE-BENCH) by Bavaresco, Bernardi et al. (2024, accepted NAACL/ACL 2025). 20-task benchmark, not ready to replace humans. Matches finding."
+ },
+ {
+  "id": "judgesverdict2025",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2510.09738 'Judge's Verdict: A Comprehensive Analysis of LLM Judge Capability Through Human Agreement' by Han, Titericz Junior, Balough, Zhou (Oct 2025). 27/54 Tier-1, 'Turing Test for judges'. Matches finding. Also on OpenReview."
+ },
+ {
+  "id": "imrit2026iaa",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv 2603.06865 resolves to a real paper 'Counting on Consensus: Selecting the Right Inter-annotator Agreement Metric for NLP Annotation and Evaluation' by Joseph James, submitted Mar 2026, accepted to LREC 2026. Topic matches (guidance on IAA metric choice, subjective tasks). Future-dated (2026) but genuinely exists on arXiv. Cited as 'James et al.' is reasonable."
+ },
+ {
+  "id": "wang2023chatgptnlg",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv 2303.04048 = 'Is ChatGPT a Good NLG Evaluator? A Preliminary Study' by Jiaan Wang et al. (2023). Matches authors, year, and preliminary-NLG-evaluator finding. Presented at NewSum@AACL."
+ },
+ {
+  "id": "shen2023notyet",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv 2305.13091 = 'Large Language Models are Not Yet Human-Level Evaluators for Abstractive Summarization' by Chenhui Shen et al. (2023). Matches authors, year, EMNLP Findings venue, and the inconsistent/dimension-dependent finding."
+ },
+ {
+  "id": "xu2023instructscore",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv 2305.14282 = 'INSTRUCTSCORE: Explainable Text Generation Evaluation with Finegrained Feedback' by Wenda Xu et al. (2023), accepted to EMNLP 2023. Matches authors, year, venue, and explainable fine-tuned evaluator finding."
+ },
+ {
+  "id": "zhang2024newssumm",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv 2301.13848 = 'Benchmarking Large Language Models for News Summarization' by Tianyi Zhang et al. Published in TACL (matches venue). Finding that instruction-tuned LLM summaries are rated comparable to human/freelance summaries matches."
+ },
+ {
+  "id": "tang2023medevidence",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "DOI 10.1038/s41746-023-00896-7 = 'Evaluating large language models on medical evidence summarization', npj Digital Medicine 2023 (Tang et al.). Matches venue and finding (factual inconsistency/hallucination, not yet reliable)."
+ },
+ {
+  "id": "hackl2023reliablerater",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "DOI 10.3389/feduc.2023.1272229 = 'Is GPT-4 a reliable rater? Evaluating consistency in GPT-4's text ratings', Frontiers in Education 2023 (Hackl et al.). High intra-rater ICC consistency rating student feedback. Matches."
+ },
+ {
+  "id": "grevisse2024asagmed",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "DOI 10.1186/s12909-024-06026-5 = 'LLM-based automatic short answer grading in undergraduate medical education', BMC Medical Education 24:1060 (2024) by C. Grevisse. Matches author, venue, and ASAG-with-oversight finding."
+ },
+ {
+  "id": "yancey2023cefr",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "ACL Anthology 2023.bea-1.49 = 'Rating Short L2 Essays on the CEFR Scale with GPT-4' by Yancey, Laflair, Verardi, Burstein (BEA@ACL 2023). Matches author, venue, and CEFR L2 essay scoring finding."
+ },
+ {
+  "id": "floden2024gradingexams",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "DOI 10.1002/berj.4069 = 'Grading exams using large language models: A comparison between human and AI grading of exams in higher education using ChatGPT' by Floden, British Educational Research Journal vol 51 pp201-224. Matches author, venue, and correlated-but-systematic-divergence finding (grade differences in 70% of cases). Officially 2025 issue but listed under 2024 acceptance; substance matches."
+ },
+ {
+  "id": "kortemeyer2023physics",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "DOI 10.1103/PhysRevPhysEducRes.19.020163 = 'Toward AI grading of student problem solutions in introductory physics: A feasibility study' by Kortemeyer, Phys. Rev. Phys. Educ. Res. 19, 020163 (2023). Matches author, venue, and feasibility/partial-credit-needs-oversight finding."
+ },
+ {
+  "id": "dubois2023alpacafarm",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv 2305.14387 = 'AlpacaFarm: A Simulation Framework for Methods that Learn from Human Feedback' by Yann Dubois et al., NeurIPS 2023 spotlight. Matches authors, year, venue, and simulated-judge ~0.98 correlation / cheaper finding."
+ },
+ {
+  "id": "quah2024dentalaes",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "DOI 10.1186/s12909-024-05881-6 = 'Reliability of ChatGPT in automated essay scoring for dental undergraduate examinations', BMC Medical Education 2024 by Quah et al. Matches author, venue, and moderate-reliability-not-standalone finding."
+ },
+ {
+  "id": "gao2025nlgsurvey",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "DOI 10.1162/coli_a_00561 = 'LLM-based NLG Evaluation: Current Status and Challenges' by Mingqi Gao et al., Computational Linguistics vol 51 pp661-687 (2025). Matches author, venue, year, and NLG-eval-survey/meta-evaluation finding."
+ },
+ {
+  "id": "khondaker2023gptaraeval",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv 2305.14976 = 'GPTAraEval: A Comprehensive Evaluation of ChatGPT on Arabic NLP' by Md Tawkat Islam Khondaker et al. (2023), EMNLP 2023. Matches authors, venue, 44 Arabic tasks, and ChatGPT-lags-dedicated-models finding."
+ },
+ {
+  "id": "khademi2023bardassessment",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "DOI 10.37074/jalt.2023.6.1.28 = 'Can ChatGPT and Bard Generate Aligned Assessment Items? A Reliability Analysis against Human Performance' by Khademi, J. Applied Learning and Teaching vol6(1) (2023) (also arXiv 2304.05372). Matches author, venue, and low-moderate-reliability finding."
+ },
+ {
+  "id": "zhuang2024beyondyesno",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "Real: 'Beyond Yes and No: Improving Zero-Shot LLM Rankers via Scoring Fine-Grained Relevance Labels' by Honglei Zhuang et al., NAACL 2024 (Short Papers), ACL Anthology 2024.naacl-short.31 (matches DOI 10.18653/v1/2024.naacl-short.31); arXiv 2310.14122. Finding about fine-grained relevance labels matches."
+ },
+ {
+  "id": "alaofi2024fooledrelevant",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "Real: 'LLMs can be Fooled into Labelling a Document as Relevant' by Marwah Alaofi, Paul Thomas, Falk Scholer, Mark Sanderson, SIGIR-AP '24 (Dec 2024), DOI 10.1145/3673791.3698431; arXiv 2501.17969. Keyword-injection finding matches."
+ },
+ {
+  "id": "wang2025setesting",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "Real: 'Can LLMs Replace Human Evaluators? An Empirical Study of LLM-as-a-Judge in Software Engineering' by Ruiqi Wang et al., Proc. ACM on Software Engineering 2(ISSTA), 2025, DOI 10.1145/3728963; arXiv 2502.06193. Partial-substitution finding matches. (Cited venue 'ACM TOSEM' is slightly off; actual is PACMSE/ISSTA, but DOI and paper are real.)"
+ },
+ {
+  "id": "ollion2023mindhype",
+  "verified": true,
+  "confidence": "medium",
+  "evidence": "Real: 'ChatGPT for Text Annotation? Mind the Hype!' by Ollion, Shen, Macanovic, Chatelain, SocArXiv preprint 2023, DOI 10.31235/osf.io/x58kn matches given id. Finding (reliability overstated, reproducibility/validity risks) matches. Cited venue 'Sociol. Methods Res.' not confirmed as actual publication venue (appears as SocArXiv preprint), but the paper and DOI are genuine."
+ },
+ {
+  "id": "cegin2023paraphrases",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "Real: 'ChatGPT to Replace Crowdsourcing of Paraphrases for Intent Classification: Higher Diversity and Comparable Model Robustness' by Cegin, Simko, Brusilovsky, EMNLP 2023 (2023.emnlp-main.117); arXiv 2305.12947 matches. Diversity/robustness finding matches."
+ },
+ {
+  "id": "song2024finesure",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "Real: 'FineSurE: Fine-grained Summarization Evaluation using LLMs' by Hwanjun Song et al., ACL 2024 (2024.acl-long.51); arXiv 2407.00908 matches. Faithfulness/completeness/conciseness finding matches."
+ },
+ {
+  "id": "li2023hotchatgpt",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "Real: '\"HOT\" ChatGPT: The promise of ChatGPT in detecting and discriminating hateful, offensive, and toxic comments on social media' by Lingyao Li et al., arXiv 2304.10619 (also ACM Trans. Web, DOI 10.1145/3643829). HOT detection finding matches."
+ },
+ {
+  "id": "wang2024clinicalevent",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "Real: 'Validation of GPT-4 for clinical event classification: A comparative analysis with ICD codes and human reviewers' by Wang et al., J. Gastroenterol. Hepatol. 39(8):1535-1543, 2024, DOI 10.1111/jgh.16561 (PMID 38627920). Clinical-event classification finding matches."
+ },
+ {
+  "id": "croxford2025clinsummjudge",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "Real: 'Evaluating clinical AI summaries with large language models as judges' by Croxford, Gao, First et al., npj Digital Medicine 8:640, 2025, DOI 10.1038/s41746-025-02005-2. Partial-alignment / missing clinically important errors finding matches."
+ },
+ {
+  "id": "pan2024hcdjudge",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "Real: 'Human-Centered Design Recommendations for LLM-as-a-judge' by Qian Pan et al. (IBM), HuCLLM 2024 workshop (2024.hucllm-1.2); arXiv 2407.03479. Human-oversight design-recommendations finding matches."
+ },
+ {
+  "id": "hua2025mhscoping",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "Real: 'A scoping review of large language models for generative tasks in mental health care' by Hua, Na, Li et al., npj Digital Medicine 8:230, 2025, DOI 10.1038/s41746-025-01611-4. Validation/safety evaluation gaps finding matches."
+ },
+ {
+  "id": "gao2023humanlike",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "Real: 'Human-like Summarization Evaluation with ChatGPT' by Mingqi Gao et al., arXiv 2304.02554 (2023). Correlates with humans but sensitive to aspect/prompt finding matches."
+ },
+ {
+  "id": "luo2023factinconsistency",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "Real: 'ChatGPT as a Factual Inconsistency Evaluator for Text Summarization' by Zheheng Luo, Qianqian Xie, Sophia Ananiadou, arXiv 2303.15621 (2023). Decent but below specialized metrics on some sets finding matches."
+ },
+ {
+  "id": "li2023coannotating",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "Real: 'CoAnnotating: Uncertainty-Guided Work Allocation between Human and Large Language Models for Data Annotation' by Minzhi Li et al., EMNLP 2023 (2023.emnlp-main.92); arXiv 2310.15638 matches. Uncertainty-based allocation finding matches. (Cited as EMNLP-Findings; actually EMNLP main, minor venue discrepancy.)"
+ },
+ {
+  "id": "nasution2024chatgptlabel",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "Real: 'ChatGPT Label: Comparing the Quality of Human-Generated and LLM-Generated Annotations in Low-Resource Language NLP Tasks' by Arbi Haza Nasution & Aytug Onan, IEEE Access 2024, DOI 10.1109/ACCESS.2024.3402809 (IEEE Xplore 10534765). Competitive LLM labels finding matches."
+ },
+ {
+  "id": "aldeen2023chatgptvshuman",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "Real: 'ChatGPT vs. Human Annotators: A Comprehensive Analysis of ChatGPT for Text Annotation' by Mohammed Aldeen et al., ICMLA 2023, pp. 602-609, DOI 10.1109/ICMLA58977.2023.00089 (IEEE Xplore 10460013). Strong on objective / weaker on subjective finding matches."
+ },
+ {
+  "id": "ronningstad2024gptannotator",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "Real: 'A GPT among Annotators: LLM-based Entity-Level Sentiment Annotation' by Egil Ronningstad, Erik Velldal, Lilja Ovrelid, LAW-XVIII (18th Linguistic Annotation Workshop) 2024, ACL Anthology 2024.law-1.13 (DOI matches). Topic matches finding."
+ },
+ {
+  "id": "qiu2025labelensemble",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "Real: arXiv:2501.08413 'Labeling Free-text Data using Language Model Ensembles' by Jiaxing Qiu et al. Topic (locally-deployable LLM ensembles labeling free-text near human quality) matches finding. arXiv ID valid."
+ },
+ {
+  "id": "niu2024text2emotion",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "Real: arXiv:2408.17026 'From Text to Emotion: Unveiling the Emotion Annotation Capabilities of LLMs' by Minxue Niu et al., Interspeech 2024 (ISCA archive, pp.2650-2654, DOI 10.21437/Interspeech.2024-2282). arXiv ID and venue match."
+ },
+ {
+  "id": "koptyra2023clarinemo",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "Real: 'CLARIN-Emo: Training Emotion Recognition Models Using Human Annotation and ChatGPT' by Koptyra, Ngo, Radlinski, Kocon, ICCS 2023, LNCS 14073, DOI 10.1007/978-3-031-35995-8_26 (matches exactly)."
+ },
+ {
+  "id": "li2024stance",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "Real: arXiv:2406.07483 'Advancing Annotation of Stance in Social Media Posts: A Comparative Analysis of Large Language Models and Crowd Sourcing' by Mao Li & Frederick Conrad. Authors, year, arXiv ID, and finding (explicitness drives LLM-human agreement) match."
+ },
+ {
+  "id": "nguyen2024crisismisinfo",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "Real: 'Human vs ChatGPT: Effect of Data Annotation in Interpretable Crisis-Related Microblog Classification' by Thi Huyen Nguyen & Koustav Rudra, ACM Web Conference (WWW) 2024, DOI 10.1145/3589334.3648141 (matches exactly)."
+ },
+ {
+  "id": "leas2023contentanalysis",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "Real: 'Using Large Language Models to Support Content Analysis: A Case Study of ChatGPT for Adverse Event Detection' by Leas et al., JMIR (Journal of Medical Internet Research) 2024, DOI 10.2196/52499 (matches; published 2024 though cite says 2023 - minor). High concordance with human annotators reported."
+ },
+ {
+  "id": "kaikaus2023financecorpora",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "Real: 'Humans vs. ChatGPT: Evaluating Annotation Methods for Financial Corpora' by Kaikaus, Li, Brunner, IEEE BigData 2023, DOI 10.1109/BigData59044.2023.10386425 (IEEE Xplore doc 10386425, matches). Note: paper actually finds GPT more consistent than humans; cite's 'trails experts on nuanced labels' is a loose paraphrase but the paper is real."
+ },
+ {
+  "id": "clarke2024cantreplace",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "Real: arXiv:2412.17156 'LLM-based relevance assessment still can't replace human relevance assessment' by Charles L. A. Clarke & Laura Dietz. Counterpoint to Upadhyay et al. matches finding. arXiv ID, authors, year all match."
+ },
+ {
+  "id": "arabzadeh2025benchrelevance",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "Real: arXiv:2504.12558 'Benchmarking LLM-based Relevance Judgment Methods' by Negar Arabzadeh & Charles L. A. Clarke, SIGIR '25. arXiv ID, authors, year match; finding (agreement varies by method/prompt) matches."
+ },
+ {
+  "id": "lu2023erroranalysis",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "Real: arXiv:2303.13809 'Error Analysis Prompting Enables Human-Like Translation Evaluation in Large Language Models' by Lu et al. (also Findings ACL 2024). arXiv ID matches; finding (EAPrompt improves MQM correlation) matches."
+ },
+ {
+  "id": "huang2024nlexpl",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "Real: arXiv:2403.17368 'ChatGPT Rates Natural Language Explanation Quality like Humans: But on Which Scales?' by Huang, Kwak, Park, An, LREC-COLING 2024 (anthology 2024.lrec-main.277). arXiv ID, venue, finding (agreement depends on rating scale) match."
+ },
+ {
+  "id": "guo2023howclose",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "Real: arXiv:2301.07597 'How Close is ChatGPT to Human Experts? Comparison Corpus, Evaluation, and Detection' by Biyang Guo et al. (HC3). arXiv ID, year, finding match."
+ },
+ {
+  "id": "doostmohammadi2024autoeval",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "Real: 'How Reliable Are Automatic Evaluation Methods for Instruction-Tuned LLMs?' by Doostmohammadi, Holmstrom, Kuhlmann, Findings of EMNLP 2024, anthology 2024.findings-emnlp.367 (matches exactly); also arXiv:2402.10770. Finding (only moderately reliable, method choice matters) matches."
+ },
+ {
+  "id": "zhang2023widerdeeper",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "Real: arXiv:2308.01862 'Wider and Deeper LLM Networks are Fairer LLM Evaluators' by Xinghua Zhang et al. arXiv ID, year, finding (networks of LLM evaluators fairer than single judge) match."
+ },
+ {
+  "id": "zhu2024nationalitybias",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "Real: arXiv:2405.06996 'Quite Good, but Not Enough: Nationality Bias in Large Language Models -- A Case Study of ChatGPT' by Shucheng Zhu, Weikang Wang, Ying Liu, accepted LREC-COLING 2024. arXiv ID, venue, year, nationality-bias topic match. Finding framing ('LLM evaluators exhibit nationality bias') is a slightly broader paraphrase but paper is real."
+ },
+ {
+  "id": "saito2023verbositybias",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2310.10076 'Verbosity Bias in Preference Labeling by Large Language Models' by Saito, Wachi, Wataoka, Akimoto (2023). Matches authors/year/venue (arXiv) and finding (GPT-4 prefers longer answers; quantifies verbosity bias)."
+ },
+ {
+  "id": "li2024splitmerge",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "'Split and Merge: Aligning Position Biases in LLM-based Evaluators' by Zongjie Li et al., EMNLP 2024, pp.11084-11108. DOI 10.18653/v1/2024.emnlp-main.621 confirmed on ACL Anthology. Introduces PORTIA, aligns position bias, improves human agreement. Matches."
+ },
+ {
+  "id": "liu2024pairwisepref",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2403.16950 'Aligning with Human Judgement: The Role of Pairwise Preference in Large Language Model Evaluators' by Yinhong Liu et al. (PAIRS). Accepted at COLM 2024 (reference lists arXiv, which is also correct). Matches finding that pairwise beats pointwise."
+ },
+ {
+  "id": "liu2023trustworthy",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2308.05374 'Trustworthy LLMs: a Survey and Guideline for Evaluating Large Language Models' Alignment' by Yang Liu et al. (2023). Matches authors/year/venue and survey/guideline finding."
+ },
+ {
+  "id": "voutsa2025biaseddesign",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "'Biased by Design? Evaluating Bias and Behavioral Diversity in LLM Annotation of Real-World and Synthetic Hotel Reviews', MDPI AI (Applied Informatics) 2025, DOI 10.3390/ai6080178 confirmed. Voutsa et al.; LLMs agree among themselves more than with humans, design-driven bias. Matches."
+ },
+ {
+  "id": "chung2025verifact",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2501.16672 'VeriFact: Verifying Facts in LLM-Generated Clinical Text with Electronic Health Records' led by Philip Chung (2025). RAG + LLM-as-judge vs EHR, 92.7% agreement with expert adjudication. Matches authors/year/venue/finding."
+ },
+ {
+  "id": "kim2025emulate",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "JMIR 2025 'Large Language Models' Accuracy in Emulating Human Experts' Evaluation of Public Sentiments about Heated Tobacco Products on Social Media' by Kim K and Kim S, DOI 10.2196/63631 confirmed. GPT-4 Turbo ~80% accuracy vs experts; limited on nuanced health communication. Matches."
+ },
+ {
+  "id": "croxford2025autoeval",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "medRxiv 'Automating Evaluation of AI Text Generation in Healthcare with a Large Language Model (LLM)-as-a-Judge' by Emma Croxford et al. (2025), DOI 10.1101/2025.04.22.25326219 confirmed (PubMed 40313300). Matches authors/year/venue/finding."
+ },
+ {
+  "id": "hou2024classroom",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "Real paper confirmed: 'Automated Assessment of Encouragement and Warmth in Classrooms Leveraging Multimodal Emotional Features and ChatGPT' by Ruikun Hou et al., AIED 2024; GPT-4 r=.341, ensemble r=.513 comparable to human IRR. Matches authors/year/venue/finding. NOTE: the arxiv id in the reference (2404.15531) is WRONG -- it resolves to an unrelated economics paper; the correct id is 2404.15310."
+ },
+ {
+  "id": "koraishi2024langassess",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "'The Intersection of AI and Language Assessment: A Study on the Reliability of ChatGPT in Grading IELTS Writing Task 2' by Koraishi, Language Teaching Research Quarterly 2024, v43 pp.22-42, DOI 10.32038/ltrq.2024.43.02 confirmed. High agreement but individual discrepancies; needs moderation. Matches."
+ },
+ {
+  "id": "haase2025creativitypeaked",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "'Has the creativity of large-language models peaked? An analysis of inter- and intra-LLM variability' by Haase, Hanel, Polkutta, Journal of Creativity 2025, DOI 10.1016/j.yjoc.2025.100113 confirmed (also arXiv:2504.12320). No increased creativity; plateau. Matches."
+ },
+ {
+  "id": "rose2025rob",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "'Using a large language model (ChatGPT) to assess risk of bias in randomized controlled trials...' by Rose CJ et al., BMC Med Res Methodol 25:182 (2025), DOI 10.1186/s12874-025-02631-0 confirmed on SpringerLink. Human-ChatGPT interrater agreement study. Matches."
+ },
+ {
+  "id": "thakur2024judgingjudges",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2406.12624 'Judging the Judges: Evaluating Alignment and Vulnerabilities in LLMs-as-Judges' by Aman Singh Thakur et al. (2024). Judges align moderately, vulnerable/inconsistent. Matches authors/year/venue/finding."
+ },
+ {
+  "id": "hsu2023figurecaption",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "'GPT-4 as an Effective Zero-Shot Evaluator for Scientific Figure Captions' by Hsu Ting-Yao et al., Findings of EMNLP 2023, DOI 10.18653/v1/2023.findings-emnlp.363 confirmed on ACL Anthology (also arXiv:2310.15405). Matches."
+ },
+ {
+  "id": "lai2023styletransfer",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2304.13462 'Multidimensional Evaluation for Text Style Transfer Using ChatGPT' by Huiyuan Lai, Antonio Toral, Malvina Nissim (2023). Style strength/content/fluency, competitive correlation with humans. Matches."
+ },
+ {
+  "id": "wang2024beyondagreement",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "'Beyond Agreement: Diagnosing the Rationale Alignment of Automated Essay Scoring Methods based on Linguistically-informed Counterfactuals' by Yupei Wang, Renfen Hu, Zhe Zhao, Findings of EMNLP 2024 pp.8906-8925, DOI 10.18653/v1/2024.findings-emnlp.520 confirmed (also arXiv:2405.19433). Matches finding that agreement alone misleads on rationale."
+ },
+ {
+  "id": "wataoka2024selfpref",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv 2410.21819 = 'Self-Preference Bias in LLM-as-a-Judge' by Wataoka, Takahashi, Ri (NeurIPS 2024 Safe Generative AI Workshop). Confirms judges prefer low-perplexity (own-style) outputs. Matches finding."
+ },
+ {
+  "id": "frobe2025assessorsagree",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "DOI 10.1145/3726302.3730218 = 'Large Language Model Relevance Assessors Agree With One Another More Than With Human Assessors', Froebe et al., SIGIR 2025 (ACM DL, dblp, Glasgow eprints). Matches authors/year/venue/finding."
+ },
+ {
+  "id": "arabzadeh2025promptsens",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv 2504.12408 = 'A Human-AI Comparative Analysis of Prompt Sensitivity in LLM-Based Relevance Judgment' by Arabzadeh & Clarke (2025). Matches finding on prompt sensitivity shifting agreement."
+ },
+ {
+  "id": "lin2024wildbench",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv 2406.04770 = 'WildBench: Benchmarking LLMs with Challenging Tasks from Real Users in the Wild', Lin (Bill Yuchen Lin) et al., 2024. Matches WildBench checklist-guided judge finding."
+ },
+ {
+  "id": "brake2024clinicalnote",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "DOI 10.18653/v1/2024.findings-naacl.25 = 'Comparing Two Model Designs for Clinical Note Generation; Is an LLM a Useful Evaluator of Consistency?', Brake & Schaaf, NAACL Findings 2024 (ACL Anthology, arXiv 2404.06503). Matches."
+ },
+ {
+  "id": "mehta2025qualgenai",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "DOI 10.1038/s41598-025-18969-w = 'Evaluation of large language models within GenAI in qualitative research', Mehta et al., Scientific Reports 2025 (Nature, PubMed PMC12504727). Matches authors/venue/year/topic."
+ },
+ {
+  "id": "ahmad2025moralmachine",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "DOI 10.1371/journal.pone.0322776 = 'Large-scale moral machine experiment on large language models', Zaim bin Ahmad & Takemoto, PLoS ONE 2025 (also arXiv 2411.06790). Matches finding LLM moral judgments partly track but deviate."
+ },
+ {
+  "id": "hu2025trainjudge",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv 2502.02988 = 'Training an LLM-as-a-Judge Model: Pipeline, Insights, and Practical Lessons' (Themis), Renjun Hu et al., 2025. Paper real and matches finding. Note: actual venue is WWW'25, not specified as such but listed as arXiv which is consistent."
+ },
+ {
+  "id": "kholodna2024activelearning",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv 2404.02261 = 'LLMs in the Loop: Leveraging Large Language Model Annotations for Active Learning in Low-Resource Languages', Kholodna et al., 2024. Matches finding."
+ },
+ {
+  "id": "li2024pedants",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "DOI 10.18653/v1/2024.findings-emnlp.548 = 'PEDANTS: Cheap but Effective and Interpretable Answer Equivalence', Zongxia Li et al., EMNLP Findings 2024 (ACL Anthology, arXiv 2402.11161). Matches authors/venue/finding."
+ },
+ {
+  "id": "shopovski2025peerreview",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "DOI 10.20944/preprints202502.0058.v1 = 'Revolutionizing Peer Review: A Comparative Analysis of ChatGPT and Human Review Reports in Scientific Publishing', Shopovski et al., Preprints.org Feb 2025. Matches."
+ },
+ {
+  "id": "zhu2023judgelm",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv 2310.17631 = 'JudgeLM: Fine-tuned Large Language Models are Scalable Judges', Zhu, Wang, Wang (2023), accepted ICLR 2025. Matches id/authors/venue/year."
+ },
+ {
+  "id": "wang2023pandalm",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv 2306.05087 = 'PandaLM: An Automatic Evaluation Benchmark for LLM Instruction Tuning Optimization', Yidong Wang et al. (2023), accepted ICLR 2024. Matches."
+ },
+ {
+  "id": "li2023autoj",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv 2310.05470 = 'Generative Judge for Evaluating Alignment' (Auto-J), Junlong Li et al. (2023), accepted ICLR 2024. Matches id/authors/venue."
+ },
+ {
+  "id": "wang2023shepherd",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv 2308.04592 = 'Shepherd: A Critic for Language Model Generation', Tianlu Wang et al. (2023). Matches authors/year/venue (arXiv) and critic-model finding."
+ },
+ {
+  "id": "ke2024critiquellm",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "DOI 10.18653/v1/2024.acl-long.704 = 'CritiqueLLM: Towards an Informative Critique Generation Model...', Pei Ke et al., ACL 2024 (ACL Anthology, arXiv 2311.18702). Matches authors/venue/year."
+ },
+ {
+  "id": "yuan2024selfrewarding",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv 2401.10020 'Self-Rewarding Language Models' by Yuan, Pang, Cho, Li, Sukhbaatar, Xu, Weston. Uses LLM-as-a-Judge prompting for self-rewards across iterations. Matches authors/year/finding. (ICML 2024 venue plausible.)"
+ },
+ {
+  "id": "wu2024metarewarding",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv 2407.19594 'Meta-Rewarding Language Models: Self-Improving Alignment with LLM-as-a-Meta-Judge' by Wu, Yuan, Golovneva, Xu, Tian, Jiao, Weston, Sukhbaatar. Model judges its own judgements. Matches."
+ },
+ {
+  "id": "li2024arenahard",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv 2406.11939 'From Crowdsourced Data to High-Quality Benchmarks: Arena-Hard and BenchBuilder Pipeline' by Li, Chiang, Frick et al. States 98.6% correlation with human preference. Matches Arena-Hard/BenchBuilder finding."
+ },
+ {
+  "id": "chiang2024arena",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv 2403.04132 'Chatbot Arena: An Open Platform for Evaluating LLMs by Human Preference' by Chiang, Zheng, Sheng et al. Crowdsourced pairwise human-preference platform. Matches (ICML 2024)."
+ },
+ {
+  "id": "meng2024chalet",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv 2405.05758 'Exploring the Human-LLM Synergy in Advancing Theory-driven Qualitative Analysis' (CHALET) by Han Meng et al. Human-LLM partnership for theory-driven qualitative analysis. Matches."
+ },
+ {
+  "id": "wu2023llmworkers",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv 2307.10168 'LLMs as Workers in Human-Computational Algorithms? Replicating Crowdsourcing Pipelines with LLMs' by Tongshuang Wu et al. Replicates crowdsourcing workflows with mixed fidelity. Matches."
+ },
+ {
+  "id": "zhu2023reproduce",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv 2304.10145 'Can ChatGPT Reproduce Human-Generated Labels? A Study of Social Computing Tasks' by Yiming Zhu et al. Mixed results, avg 60.9%, worse on subjective. Matches."
+ },
+ {
+  "id": "desmond2024evalullm",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "DOI 10.1145/3640544.3645216 'EvaluLLM: LLM assisted evaluation of generative outputs' by Desmond, Ashktorab, Pan, Dugan, Johnson, IUI 2024 Companion. Interactive evaluation against user criteria. Matches."
+ },
+ {
+  "id": "kim2024meganno",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "DOI 10.18653/v1/2024.eacl-demo.18 (also arXiv 2402.18050) 'MEGAnno+: A Human-LLM Collaborative Annotation System' by Hannah Kim et al., EACL 2024 demo. LLM pre-labels + human verification. Matches."
+ },
+ {
+  "id": "duan2024uimockup",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv 2403.13139 'Generating Automatic Feedback on UI Mockups with Large Language Models' by Duan, Warner, Li, Hartmann (CHI 2024). GPT-4 feedback vs expert designers, useful but decreases over iterations. Matches."
+ },
+ {
+  "id": "lin2023llmeval",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "DOI 10.18653/v1/2023.nlp4convai-1.5 (arXiv 2305.13711) 'LLM-Eval: Unified Multi-Dimensional Automatic Evaluation for Open-Domain Conversations' by Yen-Ting Lin & Yun-Nung Chen, NLP4ConvAI@ACL 2023. Single-prompt multi-dimensional. Matches."
+ },
+ {
+  "id": "chan2023chateval",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv 2308.07201 'ChatEval: Towards Better LLM-based Evaluators through Multi-Agent Debate' by Chan, Chen, Su et al. (ICLR 2024). Multi-agent debate improves agreement. Matches."
+ },
+ {
+  "id": "hashemi2024llmrubric",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv 2501.00274 'LLM-Rubric: A Multidimensional, Calibrated Approach to Automated Evaluation of Natural Language Texts' by Hashemi, Eisner, Rosset, Van Durme, Kedzie. Rubric + calibration network improves human correlation. Matches (ACL 2024/2025)."
+ },
+ {
+  "id": "ostyakova2023crowdexperts",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "DOI 10.18653/v1/2023.sigdial-1.23 'ChatGPT vs. Crowdsourcing vs. Experts: Annotating Open-Domain Conversations with Speech Functions' by Ostyakova et al., SIGDIAL 2023. ChatGPT between crowd and expert. Matches."
+ },
+ {
+  "id": "xie2023nextchapter",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "DOI 10.18653/v1/2023.inlg-main.23 (arXiv 2301.09790) 'The Next Chapter: A Study of Large Language Models in Storytelling' by Xie, Cohn, Lau, INLG 2023. Human + automatic evaluation of LLM storytelling. Matches."
+ },
+ {
+  "id": "ni2024afacta",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "DOI 10.18653/v1/2024.acl-long.104 (arXiv 2402.11073) 'AFaCTA: Assisting the Annotation of Factual Claim Detection with Reliable LLM Annotators' by Ni, Shi, Stammbach, Sachan, Ash, Leippold, ACL 2024. Calibrated confidence, high agreement w/ experts. Matches."
+ },
+ {
+  "id": "lee2023rlaif",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2309.00267 'RLAIF vs. RLHF: Scaling Reinforcement Learning from Human Feedback with AI Feedback' by Harrison Lee et al. (Google). Confirms RLAIF achieves comparable performance to RLHF on summarization/dialogue. Matches authors, year, finding. Published ICML 2024."
+ },
+ {
+  "id": "jung2024trustescalate",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2407.18370 'Trust or Escalate: LLM Judges with Provable Guarantees for Human Agreement' by Jaehun Jung, Faeze Brahman, Yejin Choi. Confidence-based selective judging with provable human-agreement guarantees, escalating hard cases. Matches authors/year/finding. EMNLP 2024."
+ },
+ {
+  "id": "li2025prefleakage",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2502.01534 'Preference Leakage: A Contamination Problem in LLM-as-a-judge' by Dawei Li et al. Judges biased toward related student/generator models. Matches authors (Li et al.), 2025, finding exactly."
+ },
+ {
+  "id": "murugadoss2025evaltheeval",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "'Evaluating the Evaluator: Measuring LLMs' Adherence to Task Evaluation Instructions' by Murugadoss et al., AAAI 2025, DOI 10.1609/aaai.v39i18.34157 confirmed in AAAI proceedings (ojs.aaai.org/index.php/AAAI/article/view/34157). Matches finding that judges fail to adhere to given rubric/instructions."
+ },
+ {
+  "id": "fan2024sedareval",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "'SedarEval: Automated Evaluation using Self-Adaptive Rubrics' by Zhiyuan Fan et al., Findings of EMNLP 2024, DOI 10.18653/v1/2024.findings-emnlp.984 (aclanthology.org/2024.findings-emnlp.984). Self-adaptive rubrics improve agreement with human grading over generic prompts. Matches."
+ },
+ {
+  "id": "horych2025promisespitfalls",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "'The Promises and Pitfalls of LLM Annotations in Dataset Labeling: a Case Study on Media Bias Detection' by Horych et al., Findings of NAACL 2025, DOI 10.18653/v1/2025.findings-naacl.75 (aclanthology.org/2025.findings-naacl.75). Matches finding about convenient LLM annotations injecting systematic artifacts."
+ },
+ {
+  "id": "gao2025reranking",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "'Re-evaluating Automatic LLM System Ranking for Alignment with Human Preference' by Mingqi Gao et al., Findings of NAACL 2025, DOI 10.18653/v1/2025.findings-naacl.260 (aclanthology.org/2025.findings-naacl.260; arXiv:2501.00560). Judge-induced rankings partially align with human preference; performance declines for similar systems. Matches."
+ },
+ {
+  "id": "yamauchi2025designchoices",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2506.13639 'An Empirical Study of LLM-as-a-Judge: How Design Choices Impact Evaluation Reliability' by Yusuke Yamauchi, Taro Yano, Masafumi Oyamada. Design choices (criteria, decoding/sampling, CoT) materially change human agreement. Matches authors/year/finding."
+ },
+ {
+  "id": "huang2025empiricaljudge",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "'An Empirical Study of LLM-as-a-Judge for LLM Evaluation: Fine-tuned Judge Model is not a General Substitute for GPT-4' by Hui Huang et al., Findings of ACL 2025, DOI 10.18653/v1/2025.findings-acl.306 (aclanthology.org/2025.findings-acl.306; arXiv:2403.02839). Fine-tuning/aggregation help but biases persist. Matches."
+ },
+ {
+  "id": "xiao2023support",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "'Supporting Qualitative Analysis with Large Language Models: Combining Codebook with GPT-3 for Deductive Coding' by Ziang Xiao, Xingdi Yuan, Q. Vera Liao et al., IUI '23 (arXiv:2304.10548). Cohen's kappa fair-to-substantial vs experts; reliability hinges on codebook design. Matches (arxiv field was None but paper is real)."
+ },
+ {
+  "id": "zhang2025inddeduct",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "'Exploring Inductive and Deductive Qualitative Coding with AI: Investigating Inter-Rater Reliability between Large Language Model and Human Coders' by Zhang et al., AHFE 2025 Open Access proceedings (openaccess.cms-conferences.org). Deductive Fleiss kappa ~0.46, inductive ~0.57 vs human coders. Matches exactly (arxiv field None but paper real)."
+ },
+ {
+  "id": "gao2024collabcoder",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "'CollabCoder: A Lower-barrier, Rigorous Workflow for Inductive Collaborative Qualitative Analysis with Large Language Models' by Jie Gao et al., CHI 2024, DOI 10.1145/3613904.3642002 (arXiv:2304.07366). Embeds LLM suggestions in collaborative inductive coding; humans keep authority. Matches (arxiv field None but paper real)."
+ },
+ {
+  "id": "dunivin2024scalablecot",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2401.15170 'Scalable Qualitative Coding with LLMs: Chain-of-Thought Reasoning Matches Human Performance in Some Hermeneutic Tasks' by Zackary Okun Dunivin (2024). GPT-4 substantial kappa >=0.6 on 8/9 codes; scalable but task-bounded. Matches author/year/finding (arxiv field None but paper real)."
+ },
+ {
+  "id": "ngo2026chatqda",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2602.18352 'Qualitative Coding Analysis through Open-Source Large Language Models: A User Study and Design Recommendations' by Tung T. Ngo et al., CHI EA 2026, DOI 10.1145/3772363.3798320. ChatQDA on-device open-source coding; users show 'conditional trust', doubting interpretive nuance/consistency. Matches exactly (arxiv field None but paper real)."
+ },
+ {
+  "id": "depaoli2023inductive",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "'Performing an Inductive Thematic Analysis of Semi-Structured Interviews With a Large Language Model: An Exploration and Provocation on the Limits of the Approach' by Stefano De Paoli, Social Science Computer Review (2024, online 2023), DOI 10.1177/08944393231220483. Feasible but themes need human verification. Matches (arxiv field None but paper real)."
+ },
+ {
+  "id": "dai2023llminloop",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "'LLM-in-the-loop: Leveraging Large Language Model for Thematic Analysis' by Shih-Chieh Dai et al., Findings of EMNLP 2023 (aclanthology.org/2023.findings-emnlp.669; arXiv:2310.15100). Human-AI collaboration yields themes comparable to human analysts with efficiency gains (kappa 0.87 vs gold 0.66). Matches (arxiv field None but paper real)."
+ },
+ {
+  "id": "nguyentrung2025chatgptta",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "Kien Nguyen-Trung, 'ChatGPT in thematic analysis: Can AI become a research assistant in qualitative research?', Quality & Quantity 2025, DOI 10.1007/s11135-025-02165-z confirmed on Springer Link. Proposes GAITA/ACTOR; finding (helpful for breadth, reflexive interpretation stays human; hybrid needed) matches."
+ },
+ {
+  "id": "jain2025multillmthematic",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv 2512.20352 'Multi-LLM Thematic Analysis with Dual Reliability Metrics: Combining Cohen's Kappa and Semantic Similarity' confirmed. Exact figures match: Gemini kappa 0.907, GPT-4o 0.853, Claude 0.842. Minor note: posted late 2025/early 2026, but valid arXiv id and exact content match."
+ },
+ {
+  "id": "castellanos2025thematicsumm",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "Castellanos et al., 'Large Language Models for Thematic Summarization in Qualitative Health Care Research', JMIR AI 2025;4:e64447, DOI 10.2196/64447 confirmed (ai.jmir.org, PubMed 40063266). On-topic; agreement-with-human-interpretation finding consistent."
+ },
+ {
+  "id": "sharma2025details",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv 2510.17575 'DeTAILS: Deep Thematic Analysis with Iterative LLM Support' by Sharma, Cochrane, Wallace (U Waterloo). Keeps researcher in control across coding/theme development; matches finding."
+ },
+ {
+  "id": "prescott2024efficacy",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "Prescott et al., 'Comparing the Efficacy and Efficiency of Human and Generative AI: Qualitative Thematic Analyses', JMIR AI 2024;1:e54482, DOI 10.2196/54482 confirmed. Comparable high-level themes, efficiency gain, humans better at nuanced themes -- matches."
+ },
+ {
+  "id": "chew2023llmcontent",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv 2306.14924 'LLM-Assisted Content Analysis: Using Large Language Models to Support Deductive Coding' by Chew, Bollenbacher, Wenger, Speer, Kim. GPT-3.5 substantial agreement, recommend human validation -- matches."
+ },
+ {
+  "id": "dunivin2025hermeneutics",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "Dunivin, 'Scaling hermeneutics: a guide to qualitative coding with LLMs for reflexive content analysis', EPJ Data Science 2025;14:28, DOI 10.1140/epjds/s13688-025-00548-8 confirmed on Springer/EPJDS. Preserves interpretive validity at scale -- matches."
+ },
+ {
+  "id": "leas2023contentanalysis",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "Leas et al., 'Using Large Language Models to Support Content Analysis: A Case Study of ChatGPT for Adverse Event Detection', J Med Internet Res 2024;e52499, DOI 10.2196/52499 (PMID 38696245). High concordance (Fleiss kappa ~0.95); assistant recommendation consistent. Note: published 2024 not 2023, but DOI and content correct."
+ },
+ {
+  "id": "schroeder2025usestensions",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "Schroeder, Aubin Le Quere, Randazzo, Mimno, Schoenebeck, 'Large Language Models in Qualitative Research: Uses, Tensions, and Intentions', CHI 2025, DOI 10.1145/3706598.3713120 (also arXiv 2410.07362). 20 interviews; breadth vs interpretive rigor/positionality -- matches."
+ },
+ {
+  "id": "davison2024ethics",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "Davison et al., 'The ethics of using generative AI for qualitative data analysis', Information Systems Journal 2024;34(5):1433-1439, DOI 10.1111/isj.12504 confirmed (Wiley). Warns uncritical use erodes interpretive accountability/rigor -- matches."
+ },
+ {
+  "id": "wachinger2024prompts",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "Wachinger, Barnighausen, Schafer, Scott, McMahon, 'Prompts, Pearls, Imperfections: Comparing ChatGPT and a Human Researcher in Qualitative Data Analysis', Qualitative Health Research 2024, DOI 10.1177/10497323241244669 (PMID 38775392). Matches surface-coding-useful/imperfections-in-depth finding."
+ },
+ {
+  "id": "li2024gpt4humanqual",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "Li et al., 'Comparing GPT-4 and Human Researchers in Health Care Data Analysis: Qualitative Description Study', J Med Internet Res 2024;e56500, DOI 10.2196/56500 confirmed. Moderate agreement kappa=0.401; AI aids not replaces -- matches exactly."
+ },
+ {
+  "id": "zhang2023redefining",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv 2309.10771 'Redefining Qualitative Analysis in the AI Era: Utilizing ChatGPT for Efficient Thematic Analysis' by Zhang, Wu, Xie, Lyu, Cai, Carroll. Accelerates coding, calls for human-AI workflows -- matches."
+ },
+ {
+  "id": "savelka2023textskilled",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv 2306.13906 'Can GPT-4 Support Analysis of Textual Data in Tasks Requiring Highly Specialized Domain Expertise?' by Savelka et al. Legal/court-opinion coding; GPT-4 on par with law students but brittle/below expert reliability -- matches finding (paraphrased title)."
+ },
+ {
+  "id": "long2024classroom",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "Long et al., 'Evaluating large language models in analysing classroom dialogue', npj Science of Learning 2024, DOI 10.1038/s41539-024-00273-3 (PMID 39358390; also arXiv 2402.02380). GPT-4 vs human coders, time savings, high consistency with minor discrepancies -- matches."
+ },
+ {
+  "id": "qualcoding2025jla",
+  "verified": true,
+  "confidence": "medium",
+  "evidence": "'Qualitative Coding with GPT-4: Where it Works Better', Journal of Learning Analytics 2025, article 8575 confirmed (learning-analytics.info/index.php/JLA/article/view/8575). Paper exists and is on-topic (human-GPT-4 agreement, GPT-4 self-consistency, hybrid advised). Exact figures (Fleiss kappa ~0.46, self-consistency ~0.87) not explicitly confirmed in snippets, hence medium confidence on numbers; paper existence high."
+ },
+ {
+  "id": "qualigpt2024",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2407.14925 'When Qualitative Research Meets Large Language Model: Exploring the Potential of QualiGPT as a Tool for Qualitative Coding' by He Zhang et al., 2024. Matches authors/year/topic (QualiGPT qualitative coding)."
+ },
+ {
+  "id": "meng2024chalet",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2405.05758 'Exploring the Human-LLM Synergy in Advancing Theory-driven Qualitative Analysis' by Han Meng et al., 2024 (CHALET). Matches authors/year/finding (human-LLM iterative coding, disagreement analysis)."
+ },
+ {
+  "id": "mehta2025qualgenai",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "DOI 10.1038/s41598-025-18969-w 'Evaluation of large language models within GenAI in qualitative research', Mehta et al., Scientific Reports 2025. Matches finding (moderate agreement, human oversight needed)."
+ },
+ {
+  "id": "thematic2025charity",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "DOI 10.1007/s00146-025-02487-4 'Leveraging large language models for thematic analysis: a case study in the charity sector', Wen et al., AI & Society 2025. Matches GPT-4o deductive kappa 0.61-0.65, sentiment 0.91-0.95, weak on impact - imperfect theme overlap."
+ },
+ {
+  "id": "argyle2023outofone",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2209.06899 'Out of One, Many: Using Language Models to Simulate Human Samples', Argyle et al.; published in Political Analysis (2023). Matches silicon sampling / algorithmic fidelity finding."
+ },
+ {
+  "id": "wang2024flatten",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2402.01908 'Large language models that replace human participants can harmfully misportray and flatten identity groups', Wang, Morgenstern, Dickerson, 2024, accepted Nature Machine Intelligence. Matches 3,200 participants, flatten/misportray demographics."
+ },
+ {
+  "id": "bail2024gensocsci",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "DOI 10.1073/pnas.2314021121 'Can Generative AI improve social science?', Christopher A. Bail, PNAS 2024. Matches finding (promise for annotation/simulation, bias/validity risks)."
+ },
+ {
+  "id": "bisbee2023perils",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "Bisbee et al. 'Synthetic Replacements for Human Survey Data? The Perils of Large Language Models', SocArXiv 2023 (DOI 10.31235/osf.io/5ecfa), later Political Analysis 2024. Matches finding (LLM respondents distort variances, unsafe replacement)."
+ },
+ {
+  "id": "huang2025surveyworth",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2502.17773 'How Many Human Survey Respondents is a Large Language Model Worth? An Uncertainty Quantification Perspective', Huang, Wu, Wang, 2025. Matches finding (bounded number of respondents, UQ view)."
+ },
+ {
+  "id": "cheng2023compost",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "DOI 10.18653/v1/2023.emnlp-main.669 / arXiv:2310.11501 'CoMPosT: Characterizing and Evaluating Caricature in LLM Simulations', Cheng, Piccardi, Yang, EMNLP 2023. Matches caricature of marginalized subgroups finding."
+ },
+ {
+  "id": "salminen2025syntheticcritical",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "DOI 10.1145/3745900.3746108 'The Use of Large Language Models in HCI: A Critical Analysis of Synthetic Users', Salminen et al., Augmented Humans 2025. Matches finding (cannot capture unpredictable behavior, not real-user substitute)."
+ },
+ {
+  "id": "abbasiantaeb2024llmstalk",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "DOI 10.1145/3616855.3635856 / arXiv:2312.02913 'Let the LLMs Talk: Simulating Human-to-Human Conversational QA...', Abbasiantaeb et al., WSDM 2024. Matches simulating users in conversational search finding."
+ },
+ {
+  "id": "salminen2024deusexmachina",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "DOI 10.1145/3613904.3642036 'Deus Ex Machina and Personas from Large Language Models...', Salminen et al., CHI 2024. Matches LLM personas plausible/useful but risk stereotyping/bias."
+ },
+ {
+  "id": "jung2025personacraft",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "DOI 10.1016/j.ijhcs.2025.103445 'PersonaCraft: Leveraging language models for data-driven persona development', Int. J. Human-Computer Studies vol 197, 2025. Matches data-grounded personas from survey segments."
+ },
+ {
+  "id": "haxvig2025personabias",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "DOI 10.1016/j.ijhcs.2025.103651 (S1071581925002083) Haxvig, D'Andrea, Teli 2025, IJHCS vol 205 - LLM synthetic personas gender bias from participatory-design perspective. Matches finding."
+ },
+ {
+  "id": "guerino2025gpt4ousability",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv:2506.16345 'Can GPT-4o Evaluate Usability Like Human Experts? ...Heuristic Evaluation', Guerino et al., 2025 (INTERACT 2025). Matches 21.2% overlap with expert issues, hallucinated false positives, not a substitute."
+ },
+ {
+  "id": "zhong2025synthheuristic",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv 2507.02306 'Synthetic Heuristic Evaluation: A Comparison between AI- and Human-Powered Usability Evaluation' by Ruican Zhong, David W. McDonald, Gary Hsieh (2025). Abstract confirms synthetic method found 73% and 77% of usability issues, exceeding 5 human evaluators (57%/63%). Matches finding exactly."
+ },
+ {
+  "id": "duan2024uicrit",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv 2407.08850 'UICrit: Enhancing Automated Design Evaluation with a UICritique Dataset' by Peitong Duan, Chin-yi Chen, Gang Li, Bjoern Hartmann, Yang Li. Accepted to ACM UIST 2024. Reports 55% performance gain in LLM UI feedback. Matches authors, venue, finding."
+ },
+ {
+  "id": "duan2024visualcritique",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv 2412.16829 'Visual Prompting with Iterative Refinement for Design Critique Generation' by Peitong Duan, Chin-Yi Cheng, Bjoern Hartmann, Yang Li. Multimodal LLM iterative refinement for design critique; reduces gap to human by ~50%. Matches Duan et al. 2024 arXiv and finding."
+ },
+ {
+  "id": "kocaballi2023convdesign",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv 2302.07406 'Conversational AI-Powered Design: ChatGPT as Designer, User, and Product' by A. Baki Kocaballi (2023). Explores ChatGPT as designer/user/evaluator in conversational design. Matches author, year, venue (arXiv), finding."
+ },
+ {
+  "id": "duan2024uimockup",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv 2403.13139 'Generating Automatic Feedback on UI Mockups with Large Language Models' by Peitong Duan, Jeremy Warner, Yang Li, Bjoern Hartmann. CHI 2024; GPT-4 heuristic eval, study with 12 expert designers, useful first pass. Matches authors, venue, finding."
+ },
+ {
+  "id": "gilardi2023chatgpt",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv 2303.15056; published PNAS 120(30):e2305016120 (2023) 'ChatGPT Outperforms Crowd-Workers for Text-Annotation Tasks' by Fabrizio Gilardi, Meysam Alizadeh, Mael Kubli. Matches authors, PNAS venue, +accuracy over MTurk finding."
+ },
+ {
+  "id": "tornberg2023political",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv 2304.06588 'ChatGPT-4 Outperforms Experts and Crowd Workers in Annotating Political Twitter Messages with Zero-Shot Learning' by Petter Tornberg (2023, arXiv). Matches author, year, venue, finding (outperforms experts and crowd)."
+ },
+ {
+  "id": "kuzman2023endannotation",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv 2303.03953 'ChatGPT: Beginning of an End of Manual Linguistic Data Annotation? Use Case of Automatic Genre Identification' by Taja Kuzman, Igor Mozetic, Nikola Ljubesic (2023). Matches title, authors, year, venue, finding."
+ },
+ {
+  "id": "li2023coannotating",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv 2310.15638 'CoAnnotating: Uncertainty-Guided Work Allocation between Human and Large Language Models for Data Annotation' by Minzhi Li, Taiwei Shi, Caleb Ziems, Min-Yen Kan, Nancy F. Chen, Zhengyuan Liu, Diyi Yang. EMNLP Findings 2023. Matches authors, venue, uncertainty-based allocation finding."
+ },
+ {
+  "id": "wu2023llmworkers",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv 2307.10168 'LLMs as Workers in Human-Computational Algorithms? Replicating Crowdsourcing Pipelines with LLMs' by Tongshuang Wu et al. (2023). Matches author (Wu et al.), year, venue (arXiv), finding on replicating crowdsourcing workflows."
+ },
+ {
+  "id": "zhu2023reproduce",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv 2304.10145 'Can ChatGPT Reproduce Human-Generated Labels? A Study of Social Computing Tasks' by Yiming Zhu, Peixian Zhang, Ehsan-Ul Haq, Pan Hui, Gareth Tyson (2023). 5 social computing datasets, varied performance. Matches Zhu et al., year, venue, finding."
+ },
+ {
+  "id": "ostyakova2023crowdexperts",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "ACL Anthology 2023.sigdial-1.23 'ChatGPT vs. Crowdsourcing vs. Experts: Annotating Open-Domain Conversations with Speech Functions' by Lidiia Ostyakova et al., SIGDIAL 2023. DOI 10.18653/v1/2023.sigdial-1.23 matches. Matches authors, venue, ChatGPT-between-crowd-and-expert finding."
+ },
+ {
+  "id": "rajashekar2024humanalgo",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "ACM DOI 10.1145/3613904.3642024 'Human-Algorithmic Interaction Using a Large Language Model-Augmented Artificial Intelligence Clinical Decision Support System' by Niroop Channa Rajashekar et al., CHI 2024. Matches author, venue, DOI, human-AI workflow finding."
+ },
+ {
+  "id": "lequere2024researchtools",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "ACM DOI 10.1145/3613905.3636301 'LLMs as Research Tools: Applications and Evaluations in HCI Data Work' by Marianne Aubin Le Quere et al., CHI 2024 Extended Abstracts (Article 479). Matches author, venue (CHI EA), DOI, evaluation-gaps/validation-norms finding."
+ },
+ {
+  "id": "tabone2023hciprimer",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "Royal Society Open Science 10(9):231053 (2023) DOI 10.1098/rsos.231053 'Using ChatGPT for human-computer interaction research: a primer' by Wilbert Tabone & Joost de Winter. Matches authors, venue, DOI, primer-with-caution finding."
+ },
+ {
+  "id": "anderson2024homogenization",
+  "verified": true,
+  "confidence": "high",
+  "evidence": "arXiv 2402.01536 'Homogenization Effects of Large Language Models on Human Creative Ideation' by Barrett R. Anderson, Jash Hemant Shah, Max Kreminski. Presented at Creativity & Cognition 2024. Matches authors, venue, less-diverse-ideation finding."
+ }
+]

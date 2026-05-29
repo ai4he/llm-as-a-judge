@@ -1,8 +1,8 @@
 family,count,mean,std
 Annotation / Classification,37,3.35,0.82
-Core NLG / Alignment,31,3.58,0.72
+Core NLG / Alignment,30,3.6,0.72
 Cross-lingual,4,2.25,0.5
-Education,18,3.39,0.5
+Education,17,3.35,0.49
 High-stakes / Expert,31,2.94,0.68
 Knowledge / Objective,25,3.36,0.91
 Methodology,38,2.87,0.78

@@ -1,0 +1,2450 @@
+[
+ {
+  "id": "zheng2023mtbench",
+  "corpus": "S1",
+  "authors": "Zheng et al.",
+  "year": 2023,
+  "venue": "NeurIPS",
+  "arxiv": "2306.05685",
+  "finding": "GPT-4 vs human 85% (no ties) > human-human 81% on MT-Bench; 87%=87% on Arena."
+ },
+ {
+  "id": "chiang2023alt",
+  "corpus": "S1",
+  "authors": "Chiang & Lee",
+  "year": 2023,
+  "venue": "ACL",
+  "arxiv": "2305.01937",
+  "finding": "LLM eval can mirror human ratings on story gen/adversarial but cannot fully replace; best combined."
+ },
+ {
+  "id": "liu2023geval",
+  "corpus": "S1",
+  "authors": "Liu et al.",
+  "year": 2023,
+  "venue": "EMNLP",
+  "arxiv": "2303.16634",
+  "finding": "G-Eval(GPT-4) Spearman 0.514 on SummEval, SOTA over prior metrics; still < perfect."
+ },
+ {
+  "id": "dubois2024lc",
+  "corpus": "S1",
+  "authors": "Dubois et al.",
+  "year": 2024,
+  "venue": "arXiv",
+  "arxiv": "2404.04475",
+  "finding": "Length-controlled AlpacaEval lifts corr with Arena 0.93->0.98 and removes length gameability."
+ },
+ {
+  "id": "verga2024poll",
+  "corpus": "S1",
+  "authors": "Verga et al.",
+  "year": 2024,
+  "venue": "arXiv",
+  "arxiv": "2404.18796",
+  "finding": "Panel-of-LLM-evaluators beats single GPT-4 judge, less bias, >7x cheaper."
+ },
+ {
+  "id": "kim2023prometheus",
+  "corpus": "S1",
+  "authors": "Kim et al.",
+  "year": 2023,
+  "venue": "ICLR'24",
+  "arxiv": "2310.08491",
+  "finding": "Open 13B evaluator Pearson 0.897 with humans (45 rubrics) ~ GPT-4 0.882, >> ChatGPT 0.392."
+ },
+ {
+  "id": "kim2024prometheus2",
+  "corpus": "S1",
+  "authors": "Kim et al.",
+  "year": 2024,
+  "venue": "arXiv",
+  "arxiv": "2405.01535",
+  "finding": "Open evaluator narrows gap to proprietary judges on both scoring and pairwise."
+ },
+ {
+  "id": "zeng2024llmbar",
+  "corpus": "S1",
+  "authors": "Zeng et al.",
+  "year": 2024,
+  "venue": "ICLR",
+  "arxiv": "2310.07641",
+  "finding": "LLMBar: judges good on natural set but fooled by adversarial well-formatted wrong answers."
+ },
+ {
+  "id": "gu2024survey",
+  "corpus": "S1",
+  "authors": "Gu et al.",
+  "year": 2024,
+  "venue": "arXiv",
+  "arxiv": "2411.15594",
+  "finding": "Survey across Functionality/Methodology/Application/Meta-eval/Limitation; biases not fixed by prompt/scale."
+ },
+ {
+  "id": "li2024gen2judge",
+  "corpus": "S1",
+  "authors": "Li et al.",
+  "year": 2024,
+  "venue": "EMNLP'25",
+  "arxiv": "2411.16594",
+  "finding": "Taxonomy what/how/benchmark to judge; calls for co-judging (human-LLM) and bias mitigation."
+ },
+ {
+  "id": "li2024compsurvey",
+  "corpus": "S1",
+  "authors": "Li et al.",
+  "year": 2024,
+  "venue": "arXiv",
+  "arxiv": "2412.05579",
+  "finding": "Comprehensive survey; pointwise/pairwise/listwise; reliability needs task-specific criteria."
+ },
+ {
+  "id": "tang2024tofueval",
+  "corpus": "S1",
+  "authors": "Tang et al.",
+  "year": 2024,
+  "venue": "NAACL",
+  "arxiv": "2402.13249",
+  "finding": "TofuEval: LLM-based factual-consistency detectors (incl. GPT-4) still miss many doc-summary errors."
+ },
+ {
+  "id": "lee2024unisumeval",
+  "corpus": "S1",
+  "authors": "Lee et al.",
+  "year": 2024,
+  "venue": "arXiv",
+  "arxiv": "2409.19898",
+  "finding": "Fine-grained multi-dimensional summarization eval; LLM judges align better on faithfulness than coherence."
+ },
+ {
+  "id": "kocmi2023gemba",
+  "corpus": "S1",
+  "authors": "Kocmi & Federmann",
+  "year": 2023,
+  "venue": "EAMT",
+  "arxiv": "2302.14520",
+  "finding": "GEMBA: GPT achieves SOTA system-level correlation with MQM; needs >=GPT-3.5."
+ },
+ {
+  "id": "kocmi2023gembamqm",
+  "corpus": "S1",
+  "authors": "Kocmi & Federmann",
+  "year": 2023,
+  "venue": "WMT",
+  "arxiv": "2310.13988",
+  "finding": "GEMBA-MQM 96.5% system-level pairwise accuracy (WMT23); reliable at SYSTEM level, NOT segment level."
+ },
+ {
+  "id": "mendonca2024dialogue",
+  "corpus": "S1",
+  "authors": "Mendonca et al.",
+  "year": 2024,
+  "venue": "arXiv",
+  "arxiv": "2406.17304",
+  "finding": "LLM judges measure dialogue quality with moderate-strong human correlation; varies by dimension."
+ },
+ {
+  "id": "wei2024safe",
+  "corpus": "S1",
+  "authors": "Wei et al.",
+  "year": 2024,
+  "venue": "NeurIPS",
+  "arxiv": "2403.18802",
+  "finding": "SAFE agrees with crowd 72%, wins 76% of disagreements, >20x cheaper; superhuman on a subset."
+ },
+ {
+  "id": "min2023factscore",
+  "corpus": "S1",
+  "authors": "Min et al.",
+  "year": 2023,
+  "venue": "EMNLP",
+  "arxiv": "2305.14251",
+  "finding": "FActScore automated estimator <2% error vs human factual-precision judgments (with retrieval)."
+ },
+ {
+  "id": "madaan2024refverdict",
+  "corpus": "S1",
+  "authors": "Reference-Guided Verdict authors",
+  "year": 2024,
+  "venue": "arXiv",
+  "arxiv": "2408.09235",
+  "finding": "Reference-guided multi-judge improves agreement with humans on free-form QA over single judge."
+ },
+ {
+  "id": "es2023ragas",
+  "corpus": "S1",
+  "authors": "Es et al.",
+  "year": 2023,
+  "venue": "EACL'24",
+  "arxiv": "2309.15217",
+  "finding": "RAGAS reference-free faithfulness/relevance correlate with human but unstable across pipelines."
+ },
+ {
+  "id": "saadfalcon2023ares",
+  "corpus": "S1",
+  "authors": "Saad-Falcon et al.",
+  "year": 2023,
+  "venue": "NAACL'24",
+  "arxiv": "2311.09476",
+  "finding": "ARES + prediction-powered inference ranks RAG systems accurately; needs small human-labeled set."
+ },
+ {
+  "id": "jin2024ragreward",
+  "corpus": "S1",
+  "authors": "Jin et al.",
+  "year": 2024,
+  "venue": "arXiv",
+  "arxiv": "2412.13746",
+  "finding": "RAG-RewardBench: judges struggle to jointly reward faithfulness, relevance and citation."
+ },
+ {
+  "id": "tong2024codejudge",
+  "corpus": "S1",
+  "authors": "Tong et al.",
+  "year": 2024,
+  "venue": "EMNLP",
+  "arxiv": "2410.02184",
+  "finding": "CodeJudge evaluates semantic correctness without tests, beating prior LLM-eval methods."
+ },
+ {
+  "id": "zhuo2025codejudgeeff",
+  "corpus": "S1",
+  "authors": "Wang et al.",
+  "year": 2025,
+  "venue": "arXiv",
+  "arxiv": "2507.16587",
+  "finding": "LLM-as-judge for code gen/summarization: useful but agreement varies by language and metric."
+ },
+ {
+  "id": "watson2024aicodereview",
+  "corpus": "S1",
+  "authors": "Watson et al.",
+  "year": 2024,
+  "venue": "arXiv",
+  "arxiv": "2404.18496",
+  "finding": "LLM code review surfaces real issues but with many false positives; first-pass only."
+ },
+ {
+  "id": "overcorrect2026",
+  "corpus": "S1",
+  "authors": "Jin et al.",
+  "year": 2026,
+  "venue": "arXiv",
+  "arxiv": "2603.00539",
+  "finding": "Systematic OVER-correction: judges misclassify correct code as non-conformant; more prompting -> more errors."
+ },
+ {
+  "id": "biasloop2026",
+  "corpus": "S1",
+  "authors": "Zhao et al.",
+  "year": 2026,
+  "venue": "arXiv",
+  "arxiv": "2604.16790",
+  "finding": "Audit of LLM-as-judge for SE finds pervasive position/verbosity/format bias in code judgments."
+ },
+ {
+  "id": "codespec2025",
+  "corpus": "S1",
+  "authors": "Jin et al.",
+  "year": 2025,
+  "venue": "arXiv",
+  "arxiv": "2508.12358",
+  "finding": "LLMs systematically fail to verify code against natural-language specifications."
+ },
+ {
+  "id": "tan2024judgebench",
+  "corpus": "S1",
+  "authors": "Tan et al.",
+  "year": 2024,
+  "venue": "ICLR'25",
+  "arxiv": "2410.12784",
+  "finding": "JudgeBench: many strong judges barely beat random on hard reasoning; math more tractable than knowledge."
+ },
+ {
+  "id": "raju2024calc2adj",
+  "corpus": "S1",
+  "authors": "Raju et al.",
+  "year": 2024,
+  "venue": "arXiv",
+  "arxiv": "2409.04168",
+  "finding": "Judges on math reasoning ok at final-answer checking, weaker at step/process adjudication."
+ },
+ {
+  "id": "mathrobust2026",
+  "corpus": "S1",
+  "authors": "Yosef et al.",
+  "year": 2026,
+  "venue": "arXiv",
+  "arxiv": "2604.22597",
+  "finding": "Robust math LLM-judge beyond symbolic matching improves agreement with human correctness labels."
+ },
+ {
+  "id": "thomas2024relevance",
+  "corpus": "S1",
+  "authors": "Thomas et al.",
+  "year": 2024,
+  "venue": "SIGIR",
+  "arxiv": "2309.10621",
+  "finding": "LLM relevance labels match human labellers; Cohen kappa ~ inter-human; better than third-party workers, cheaper."
+ },
+ {
+  "id": "upadhyay2024largescale",
+  "corpus": "S1",
+  "authors": "Upadhyay et al.",
+  "year": 2024,
+  "venue": "arXiv",
+  "arxiv": "2411.08275",
+  "finding": "Large-scale TREC study: LLM assessments largely reproduce system rankings; some divergence on borderline docs."
+ },
+ {
+  "id": "faggioli2023perspectives",
+  "corpus": "S1",
+  "authors": "Faggioli et al.",
+  "year": 2023,
+  "venue": "ICTIR",
+  "arxiv": "2304.09161",
+  "finding": "Perspectives paper: LLM relevance judgments promising; advocates human oversight for high-stakes IR."
+ },
+ {
+  "id": "gilardi2023chatgpt",
+  "corpus": "S1",
+  "authors": "Gilardi et al.",
+  "year": 2023,
+  "venue": "PNAS",
+  "arxiv": "2303.15056",
+  "finding": "ChatGPT +25pp accuracy over MTurk on relevance/stance/topic/frame; intercoder agreement > crowd & trained."
+ },
+ {
+  "id": "tornberg2025political",
+  "corpus": "S1",
+  "authors": "T\u00f6rnberg",
+  "year": 2025,
+  "venue": "Soc. Sci. Comp. Rev.",
+  "arxiv": "2304.06588",
+  "finding": "LLMs outperform expert coders and supervised classifiers at annotating political social-media messages."
+ },
+ {
+  "id": "pangakis2023validation",
+  "corpus": "S1",
+  "authors": "Pangakis et al.",
+  "year": 2023,
+  "venue": "arXiv",
+  "arxiv": "2306.00176",
+  "finding": "27 tasks/11 datasets: accuracy median 0.85, F1 median 0.707; 8 tasks high, 9 low. MUST validate per task."
+ },
+ {
+  "id": "ziems2024css",
+  "corpus": "S1",
+  "authors": "Ziems et al.",
+  "year": 2024,
+  "venue": "Comput. Linguistics",
+  "arxiv": "2305.03514",
+  "finding": "CSS: LLMs strong zero-shot on some constructs, far from human on nuanced/contextual ones."
+ },
+ {
+  "id": "reiss2023testing",
+  "corpus": "S1",
+  "authors": "Reiss",
+  "year": 2023,
+  "venue": "arXiv",
+  "arxiv": "2304.11085",
+  "finding": "Reliability of ChatGPT text annotation is fragile to prompt/temperature; caution against naive use."
+ },
+ {
+  "id": "pangakis2024keephumans",
+  "corpus": "S1",
+  "authors": "Pangakis & Wolken",
+  "year": 2024,
+  "venue": "ICWSM",
+  "arxiv": "2409.09467",
+  "finding": "Human-centered workflow: validate on a labeled subset, then automate; near-human label quality achievable."
+ },
+ {
+  "id": "zhang2023sentiment",
+  "corpus": "S1",
+  "authors": "Zhang et al.",
+  "year": 2023,
+  "venue": "arXiv",
+  "arxiv": "2304.04339",
+  "finding": "Good at sentiment polarity; weaker on fine-grained aspect-based extraction (E2E-ABSA, CEE)."
+ },
+ {
+  "id": "belal2023sentiment",
+  "corpus": "S1",
+  "authors": "Belal et al.",
+  "year": 2023,
+  "venue": "arXiv",
+  "arxiv": "2306.17177",
+  "finding": "ChatGPT as sentiment annotation tool reaches high accuracy with cost/time advantages."
+ },
+ {
+  "id": "hatespeechanno2025",
+  "corpus": "S1",
+  "authors": "authors",
+  "year": 2025,
+  "venue": "arXiv",
+  "arxiv": "2512.09662",
+  "finding": "LLMs cannot fully replace humans for subjective hate-speech; still diverge even with subjectivity-aware framing."
+ },
+ {
+  "id": "icwsm2025hatebias",
+  "corpus": "S1",
+  "authors": "Giorgi et al.",
+  "year": 2025,
+  "venue": "ICWSM",
+  "arxiv": "2410.07991",
+  "finding": "Both human and LLM hate-speech annotations carry socio-demographic biases; targets/annotators matter."
+ },
+ {
+  "id": "hatespeechprobe2023",
+  "corpus": "S1",
+  "authors": "Roy et al.",
+  "year": 2023,
+  "venue": "EMNLP-F",
+  "arxiv": "2310.12860",
+  "finding": "LLMs better on explicit than implicit/coded hate; vulnerable, relabeling agreement poor."
+ },
+ {
+  "id": "szymanski2025limits",
+  "corpus": "S1",
+  "authors": "Szymanski et al.",
+  "year": 2025,
+  "venue": "IUI",
+  "arxiv": "2410.20266",
+  "finding": "SMEs agree with LLM judges only 68% (dietetics)/64% (mental health); LLM judges unreliable for expert tasks."
+ },
+ {
+  "id": "medjudge2026scoping",
+  "corpus": "S1",
+  "authors": "Li et al.",
+  "year": 2026,
+  "venue": "arXiv",
+  "arxiv": "2604.25933",
+  "finding": "PRISMA-ScR (49 studies): 75.5% benchmarking, 85.7% pointwise; risk-of-bias absent in 73.5%; needs governance."
+ },
+ {
+  "id": "clinstruct2025",
+  "corpus": "S1",
+  "authors": "Brake et al.",
+  "year": 2025,
+  "venue": "medRxiv",
+  "arxiv": "2025.08.14",
+  "finding": "ICC 0.818 overall; structured docs 0.82-0.93, semi-structured 0.64-0.79, complex reasoning 0.47-0.71."
+ },
+ {
+  "id": "llmevalmed2025",
+  "corpus": "S1",
+  "authors": "Zhang et al.",
+  "year": 2025,
+  "venue": "arXiv",
+  "arxiv": "2506.04078",
+  "finding": "LLMEval-Med: real-world clinical benchmark with physician validation; agreement varies by criterion."
+ },
+ {
+  "id": "sun2023radimpressions",
+  "corpus": "S1",
+  "authors": "Sun et al.",
+  "year": 2023,
+  "venue": "Radiology",
+  "arxiv": "radiology231259",
+  "finding": "Radiologists score GPT-4 impressions lower than human ones; some referring physicians prefer GPT-4."
+ },
+ {
+  "id": "brain2024radgpt",
+  "corpus": "S1",
+  "authors": "Mitsuyama et al.",
+  "year": 2024,
+  "venue": "Eur. Radiol.",
+  "arxiv": "s00330-024-11032-8",
+  "finding": "GPT-4 differential-diagnosis accuracy 93-95% from reports, no significant difference vs radiologists."
+ },
+ {
+  "id": "healthbench2025",
+  "corpus": "S1",
+  "authors": "Arora et al. (OpenAI)",
+  "year": 2025,
+  "venue": "arXiv",
+  "arxiv": "2505.08775",
+  "finding": "HealthBench: 48,562 clinician criteria; model grader shows high concordance with physician ratings."
+ },
+ {
+  "id": "clindialog2026",
+  "corpus": "S1",
+  "authors": "Sun et al.",
+  "year": 2026,
+  "venue": "arXiv",
+  "arxiv": "2603.00314",
+  "finding": "Automatic similarity and LLM-as-judge disagree on clinical dialogue; neither alone reliable."
+ },
+ {
+  "id": "frenchmedqa2026",
+  "corpus": "S1",
+  "authors": "Belmadani et al.",
+  "year": 2026,
+  "venue": "arXiv",
+  "arxiv": "2603.04033",
+  "finding": "French medical open-ended QA: judge reliability degrades with language + clinical specificity."
+ },
+ {
+  "id": "mhtrust2025",
+  "corpus": "S1",
+  "authors": "Badawi et al.",
+  "year": 2025,
+  "venue": "arXiv",
+  "arxiv": "2510.19032",
+  "finding": "Reliable for cognitive attributes (guidance, safety, interpretation), unreliable for empathy/affect; inflated scores."
+ },
+ {
+  "id": "counselbench2025",
+  "corpus": "S1",
+  "authors": "Li et al.",
+  "year": 2025,
+  "venue": "arXiv",
+  "arxiv": "2506.08584",
+  "finding": "CounselBench: expert evaluation + adversarial probes expose unreliable LLM judging in counseling."
+ },
+ {
+  "id": "mhsupport2026",
+  "corpus": "S1",
+  "authors": "Badawi et al.",
+  "year": 2026,
+  "venue": "arXiv",
+  "arxiv": "2601.18630",
+  "finding": "Multi-attribute human eval: LLM support judged structured/safe but emotionally misattuned."
+ },
+ {
+  "id": "lemaj2025",
+  "corpus": "S1",
+  "authors": "Enguehard et al.",
+  "year": 2025,
+  "venue": "arXiv",
+  "arxiv": "2510.07243",
+  "finding": "LeMAJ: decomposing answers into Legal Data Points raises correlation with expert lawyers and IAA."
+ },
+ {
+  "id": "legaldocrec2025",
+  "corpus": "S1",
+  "authors": "Pradhan et al.",
+  "year": 2025,
+  "venue": "RecSys-W",
+  "arxiv": "2509.12382",
+  "finding": "Legal doc recommendation: GPT-4o Spearman 0.73, Gwet AC2 0.78 vs expert rankings."
+ },
+ {
+  "id": "trident2025",
+  "corpus": "S1",
+  "authors": "Hui et al.",
+  "year": 2025,
+  "venue": "arXiv",
+  "arxiv": "2507.21134",
+  "finding": "TRIDENT safety benchmark (finance/medicine/law): strict unanimous expert gold; judges partial."
+ },
+ {
+  "id": "bizfinbench2025",
+  "corpus": "S1",
+  "authors": "Lu et al.",
+  "year": 2025,
+  "venue": "arXiv",
+  "arxiv": "2505.19457",
+  "finding": "Business-driven financial benchmark; expert-annotated; LLM-judge alignment moderate, capability-bound."
+ },
+ {
+  "id": "mizumoto2023aes",
+  "corpus": "S1",
+  "authors": "Mizumoto & Eguchi",
+  "year": 2023,
+  "venue": "Res. Methods App. Ling.",
+  "arxiv": "2306.00622",
+  "finding": "Automated essay scoring with GPT reaches QWK ~0.67-0.80 across settings; near human agreement."
+ },
+ {
+  "id": "aescomparative2024",
+  "corpus": "S1",
+  "authors": "Lee et al.",
+  "year": 2024,
+  "venue": "arXiv",
+  "arxiv": "2407.05733",
+  "finding": "GPT-4 best QWK 0.57 < human baseline 0.66; alone insufficient for AES."
+ },
+ {
+  "id": "k12shortanswer2024",
+  "corpus": "S1",
+  "authors": "Henkel et al.",
+  "year": 2024,
+  "venue": "arXiv",
+  "arxiv": "2405.02985",
+  "finding": "K-12 short-answer marking: GPT-4 few-shot kappa 0.70 close to human 0.75."
+ },
+ {
+  "id": "asagfair2025",
+  "corpus": "S1",
+  "authors": "Henkel et al.",
+  "year": 2025,
+  "venue": "Comp.&Educ.:AI",
+  "arxiv": "S2666920X25000682",
+  "finding": "ASAG: GPT-4 consistent but slight agreement and systematic over-scoring; needs human moderation."
+ },
+ {
+  "id": "writingmultidim2024",
+  "corpus": "S1",
+  "authors": "Steiss et al.",
+  "year": 2024,
+  "venue": "PLoS ONE",
+  "arxiv": "PMC11305227",
+  "finding": "Multi-dimensional writing assessment: reliable on some traits, weaker on style/voice."
+ },
+ {
+  "id": "sefl2025feedback",
+  "corpus": "S1",
+  "authors": "authors",
+  "year": 2025,
+  "venue": "arXiv",
+  "arxiv": "2502.12927",
+  "finding": "Fine-tuned/few-shot GPT-4.1 matches human experts evaluating tutor feedback quality."
+ },
+ {
+  "id": "k12sci2026",
+  "corpus": "S1",
+  "authors": "He et al.",
+  "year": 2026,
+  "venue": "arXiv",
+  "arxiv": "2602.13243",
+  "finding": "Human validation of multi-LLM evaluation of K-12 science materials shows usable agreement."
+ },
+ {
+  "id": "studentsjudge2025",
+  "corpus": "S1",
+  "authors": "Banihashem et al.",
+  "year": 2025,
+  "venue": "Comp.&Educ.:AI",
+  "arxiv": "S2666920X25001730",
+  "finding": "Pedagogical quality of AI vs human formative feedback: experts and AI diverge on nuanced pedagogy."
+ },
+ {
+  "id": "chakrabarty2024artartifice",
+  "corpus": "S1",
+  "authors": "Chakrabarty et al.",
+  "year": 2024,
+  "venue": "CHI",
+  "arxiv": "2309.14556",
+  "finding": "LLM creativity ratings near-zero correlation with expert TTCW judgments; experts judge differently."
+ },
+ {
+  "id": "litbench2025",
+  "corpus": "S1",
+  "authors": "Fein et al.",
+  "year": 2025,
+  "venue": "arXiv",
+  "arxiv": "2507.00769",
+  "finding": "LitBench: off-the-shelf Claude-3.7 73% agreement; trained reward models 78% with human preferences."
+ },
+ {
+  "id": "ismayilzada2024creative",
+  "corpus": "S1",
+  "authors": "Ismayilzada et al.",
+  "year": 2024,
+  "venue": "ICCC'25",
+  "arxiv": "2411.02316",
+  "finding": "Non-experts and LLMs rate by linguistic complexity; only experts capture semantic creativity."
+ },
+ {
+  "id": "creativeevalmdpi2025",
+  "corpus": "S1",
+  "authors": "Kim et al.",
+  "year": 2025,
+  "venue": "Appl. Sci.",
+  "arxiv": "appl15062971",
+  "finding": "LLMs as creative-writing evaluators: moderate alignment, struggle with originality/voice."
+ },
+ {
+  "id": "liang2024feedback",
+  "corpus": "S1",
+  "authors": "Liang et al.",
+  "year": 2024,
+  "venue": "NEJM AI",
+  "arxiv": "2310.01783",
+  "finding": "GPT-4 review feedback overlaps human points ~ as much as two humans overlap; useful but shallow."
+ },
+ {
+  "id": "chatgptreviewers2024",
+  "corpus": "S1",
+  "authors": "Ho et al.",
+  "year": 2024,
+  "venue": "Comp. Biol. Med.",
+  "arxiv": "S0169260724003067",
+  "finding": "ChatGPT complete agreement with human reviewer comments only 6.7%; limited emulation of reviewers."
+ },
+ {
+  "id": "murad2024quality",
+  "corpus": "S1",
+  "authors": "Tarakji et al.",
+  "year": 2024,
+  "venue": "BMC Med Res Methodol",
+  "arxiv": "s12874-024-02372-6",
+  "finding": "GPT-4 vs humans appraising case-report quality: 41.9-80.9% agreement across items (Murad tool)."
+ },
+ {
+  "id": "prismascreen2024",
+  "corpus": "S1",
+  "authors": "Guo et al.",
+  "year": 2024,
+  "venue": "Int J Med Inform",
+  "arxiv": "S1386505624001941",
+  "finding": "GPT-4 as added reviewer in PRISMA SLR abstract screening: near-perfect agreement (Cohen kappa >0.9)."
+ },
+ {
+  "id": "chen2024mllmjudge",
+  "corpus": "S1",
+  "authors": "Chen et al.",
+  "year": 2024,
+  "venue": "ICML",
+  "arxiv": "2402.04788",
+  "finding": "MLLM-as-a-Judge: pairwise 79.3% human agreement but scoring/ranking much weaker; many biases."
+ },
+ {
+  "id": "lee2024promvision",
+  "corpus": "S1",
+  "authors": "Lee et al.",
+  "year": 2024,
+  "venue": "ACL-F",
+  "arxiv": "2401.06591",
+  "finding": "Open VLM evaluator correlates with humans on fine-grained image-response scoring."
+ },
+ {
+  "id": "lu2024wildvision",
+  "corpus": "S1",
+  "authors": "Lu et al.",
+  "year": 2024,
+  "venue": "NeurIPS",
+  "arxiv": "2406.11069",
+  "finding": "WildVision Arena: VLM judges approximate human preference rankings on real multimodal chats."
+ },
+ {
+  "id": "yasunaga2025mmrewardbench",
+  "corpus": "S1",
+  "authors": "Yasunaga et al.",
+  "year": 2025,
+  "venue": "arXiv",
+  "arxiv": "2502.14191",
+  "finding": "Multimodal RewardBench: even top VLMs reach only 72% accuracy vs human preference."
+ },
+ {
+  "id": "lin2024vqascore",
+  "corpus": "S1",
+  "authors": "Lin et al.",
+  "year": 2024,
+  "venue": "ECCV",
+  "arxiv": "2406.13743",
+  "finding": "VQAScore beats CLIPScore/PickScore/HPSv2/ImageReward at matching human T2I alignment ratings."
+ },
+ {
+  "id": "wu2023hpsv2",
+  "corpus": "S1",
+  "authors": "Wu et al.",
+  "year": 2023,
+  "venue": "arXiv",
+  "arxiv": "2306.09341",
+  "finding": "Human Preference Score v2 predicts human T2I preferences; trained on large human-rating corpus."
+ },
+ {
+  "id": "multiljudge2025",
+  "corpus": "S1",
+  "authors": "Fu et al.",
+  "year": 2025,
+  "venue": "arXiv",
+  "arxiv": "2505.12201",
+  "finding": "Judges inconsistent across languages; low-resource much worse; scale/multilingual training don't fix it."
+ },
+ {
+  "id": "mmeval2024",
+  "corpus": "S1",
+  "authors": "Son et al.",
+  "year": 2024,
+  "venue": "arXiv",
+  "arxiv": "2410.17578",
+  "finding": "MM-Eval multilingual meta-eval: judges drop on non-English, esp. low-resource and linguistics subsets."
+ },
+ {
+  "id": "reliablemulti2026",
+  "corpus": "S1",
+  "authors": "Zubiaga et al.",
+  "year": 2026,
+  "venue": "arXiv",
+  "arxiv": "2605.28710",
+  "finding": "Empirical study: multilingual LLM judges remain unreliable; ensembles/fine-tuning partially help."
+ },
+ {
+  "id": "lambert2024rewardbench",
+  "corpus": "S1",
+  "authors": "Lambert et al.",
+  "year": 2024,
+  "venue": "arXiv",
+  "arxiv": "2403.13787",
+  "finding": "RewardBench: chosen/rejected accuracy varies widely; safety/reasoning hardest; weak link to downstream."
+ },
+ {
+  "id": "ifreward2026",
+  "corpus": "S1",
+  "authors": "Wen et al.",
+  "year": 2026,
+  "venue": "arXiv",
+  "arxiv": "2603.04738",
+  "finding": "IF-RewardBench: best judge Kendall 0.609 << human 0.755 ranking instruction-following responses."
+ },
+ {
+  "id": "politicaltruths2024",
+  "corpus": "S1",
+  "authors": "Chatrath et al.",
+  "year": 2024,
+  "venue": "arXiv",
+  "arxiv": "2411.05775",
+  "finding": "LLMs as political-truth annotators: looser than humans on vague claims; mixed reliability."
+ },
+ {
+  "id": "factsopinions2025",
+  "corpus": "S1",
+  "authors": "Saju et al.",
+  "year": 2025,
+  "venue": "arXiv",
+  "arxiv": "2506.03655",
+  "finding": "Multilingual fact-checking: facts harder than opinions; small models overconfident & inaccurate."
+ },
+ {
+  "id": "claimmatch2023",
+  "corpus": "S1",
+  "authors": "Choi et al.",
+  "year": 2023,
+  "venue": "arXiv",
+  "arxiv": "2310.09223",
+  "finding": "LLM claim-matching comparable to human ratings; fine-tuned rivals large pre-trained."
+ },
+ {
+  "id": "zhou2023ifeval",
+  "corpus": "S1",
+  "authors": "Zhou et al.",
+  "year": 2023,
+  "venue": "arXiv",
+  "arxiv": "2311.07911",
+  "finding": "IFEval: verifiable constraints enable objective auto-eval WITHOUT an LLM judge (no judge bias)."
+ },
+ {
+  "id": "ifcritic2025",
+  "corpus": "S1",
+  "authors": "Wen et al.",
+  "year": 2025,
+  "venue": "arXiv",
+  "arxiv": "2511.01014",
+  "finding": "Fine-grained instruction-following critic improves per-requirement agreement with humans."
+ },
+ {
+  "id": "qualcoding2025jla",
+  "corpus": "S1",
+  "authors": "Xiao et al.",
+  "year": 2025,
+  "venue": "J. Learning Analytics",
+  "arxiv": "jla8575",
+  "finding": "Human-GPT-4 Fleiss kappa ~0.46 (moderate); GPT-4 self-consistency ~0.87 (>human); hybrid advised."
+ },
+ {
+  "id": "qualigpt2024",
+  "corpus": "S1",
+  "authors": "Zhang et al.",
+  "year": 2024,
+  "venue": "arXiv",
+  "arxiv": "2407.14925",
+  "finding": "QualiGPT supports qualitative coding; agreement adequate for deductive codebooks, weaker inductively."
+ },
+ {
+  "id": "thematic2025charity",
+  "corpus": "S1",
+  "authors": "Wen et al.",
+  "year": 2025,
+  "venue": "AI & Society",
+  "arxiv": "s00146-025-02487-4",
+  "finding": "Thematic analysis case study: GPT-4 accelerates coding with reasonable but imperfect theme overlap."
+ },
+ {
+  "id": "ner2024augment",
+  "corpus": "S1",
+  "authors": "Naraki et al.",
+  "year": 2024,
+  "venue": "arXiv",
+  "arxiv": "2404.01334",
+  "finding": "LLM pre-annotation + human refinement improves NER datasets cost-effectively (hybrid)."
+ },
+ {
+  "id": "nli2024labeldist",
+  "corpus": "S1",
+  "authors": "Chen et al.",
+  "year": 2024,
+  "venue": "arXiv",
+  "arxiv": "2412.13942",
+  "finding": "LLM explanations are good proxies for human explanations to recover NLI label distributions."
+ },
+ {
+  "id": "humanllmcollab2024",
+  "corpus": "S1",
+  "authors": "Wang et al.",
+  "year": 2024,
+  "venue": "CHI",
+  "arxiv": "3613904.3641960",
+  "finding": "Collaborative annotation: verify LLM labels selectively to reach high quality at lower human cost."
+ },
+ {
+  "id": "mirzakhmedova2024argument",
+  "corpus": "S1",
+  "authors": "Mirzakhmedova et al.",
+  "year": 2024,
+  "venue": "COMMA",
+  "arxiv": "2404.09696",
+  "finding": "LLMs moderately agree with experts on argument quality and show HIGHER IAA than humans, but gender bias."
+ },
+ {
+  "id": "panickssery2024selfpref",
+  "corpus": "S1",
+  "authors": "Panickssery et al.",
+  "year": 2024,
+  "venue": "NeurIPS",
+  "arxiv": "2404.13076",
+  "finding": "LLMs favor own generations even when humans rate them equal; self-recognition correlates with self-preference."
+ },
+ {
+  "id": "stureborg2024inconsistent",
+  "corpus": "S1",
+  "authors": "Stureborg et al.",
+  "year": 2024,
+  "venue": "arXiv",
+  "arxiv": "2405.01724",
+  "finding": "LLM evaluators are inconsistent and biased; sensitive to trivial prompt changes."
+ },
+ {
+  "id": "koo2024cobbler",
+  "corpus": "S1",
+  "authors": "Koo et al.",
+  "year": 2024,
+  "venue": "ACL-F",
+  "arxiv": "2309.17012",
+  "finding": "CoBBLEr: ~40% of comparisons biased; Rank-Biased Overlap with humans only 44%."
+ },
+ {
+  "id": "chen2024humansorllms",
+  "corpus": "S1",
+  "authors": "Chen et al.",
+  "year": 2024,
+  "venue": "EMNLP",
+  "arxiv": "2402.10669",
+  "finding": "Both human AND LLM judges biased & attackable; cutting-edge judges still carry considerable bias."
+ },
+ {
+  "id": "feuer2024style",
+  "corpus": "S1",
+  "authors": "Feuer et al.",
+  "year": 2024,
+  "venue": "arXiv",
+  "arxiv": "2409.15268",
+  "finding": "Judges reward style/completeness; correctness & safety are weak predictors of their scores."
+ },
+ {
+  "id": "raina2024robust",
+  "corpus": "S1",
+  "authors": "Raina et al.",
+  "year": 2024,
+  "venue": "arXiv",
+  "arxiv": "2402.14016",
+  "finding": "Short universal adversarial phrases inflate judge scores; absolute scoring far less robust than comparative."
+ },
+ {
+  "id": "shankar2024validators",
+  "corpus": "S1",
+  "authors": "Shankar et al.",
+  "year": 2024,
+  "venue": "UIST",
+  "arxiv": "2404.12272",
+  "finding": "EvalGen: aligning LLM evaluators needs human grading; 'criteria drift' makes fixed rubrics insufficient."
+ },
+ {
+  "id": "temperature2026",
+  "corpus": "S1",
+  "authors": "Li et al.",
+  "year": 2026,
+  "venue": "arXiv",
+  "arxiv": "2603.28304",
+  "finding": "Temperature strongly governs judge consistency; low temp near-deterministic, high temp error surges."
+ },
+ {
+  "id": "justice2024prejudice",
+  "corpus": "S1",
+  "authors": "Ye et al.",
+  "year": 2024,
+  "venue": "arXiv",
+  "arxiv": "2410.02736",
+  "finding": "CALM framework quantifies 12 judge biases; even best judges show non-trivial attack success."
+ },
+ {
+  "id": "calderon2025alttest",
+  "corpus": "S1",
+  "authors": "Calderon et al.",
+  "year": 2025,
+  "venue": "ACL",
+  "arxiv": "2501.10970",
+  "finding": "alt-test: leave-one-out statistical test for justified replacement; LLMs sometimes pass, closed-source best."
+ },
+ {
+  "id": "bavaresco2024judgebench",
+  "corpus": "S1",
+  "authors": "Bavaresco et al.",
+  "year": 2024,
+  "venue": "NAACL'25",
+  "arxiv": "2406.18403",
+  "finding": "JUDGE-BENCH (20 tasks): GPT-4o categorical kappa 0.28+-0.32, graded rho 0.50+-0.21; NOT ready to replace humans."
+ },
+ {
+  "id": "judgesverdict2025",
+  "corpus": "S1",
+  "authors": "Han et al.",
+  "year": 2025,
+  "venue": "arXiv",
+  "arxiv": "2510.09738",
+  "finding": "Judge's Verdict: 27/54 judges reach Tier-1; some judge MORE consistently than typical humans (Turing test for judges)."
+ },
+ {
+  "id": "imrit2026iaa",
+  "corpus": "S1",
+  "authors": "James et al.",
+  "year": 2026,
+  "venue": "arXiv",
+  "arxiv": "2603.06865",
+  "finding": "Guidance on IAA metric choice; subjective tasks (e.g., sarcasm) human alpha often <0.35 (low human ceiling)."
+ },
+ {
+  "id": "wang2023chatgptnlg",
+  "corpus": "S1",
+  "authors": "Wang et al.",
+  "year": 2023,
+  "venue": "NewSum@AACL",
+  "arxiv": "2303.04048",
+  "finding": "ChatGPT as NLG evaluator correlates with humans on some tasks but trails fine-tuned metrics; preliminary."
+ },
+ {
+  "id": "shen2023notyet",
+  "corpus": "S1",
+  "authors": "Shen et al.",
+  "year": 2023,
+  "venue": "EMNLP-F",
+  "arxiv": "2305.13091",
+  "finding": "LLMs are NOT yet human-level evaluators for abstractive summarization; unstable, sensitive to setup."
+ },
+ {
+  "id": "xu2023instructscore",
+  "corpus": "S1",
+  "authors": "Xu et al.",
+  "year": 2023,
+  "venue": "EMNLP",
+  "arxiv": "2305.14282",
+  "finding": "INSTRUCTSCORE: explainable fine-tuned evaluator with diagnostic feedback; strong human correlation."
+ },
+ {
+  "id": "zhang2024newssumm",
+  "corpus": "S1",
+  "authors": "Zhang et al.",
+  "year": 2024,
+  "venue": "TACL",
+  "arxiv": "2301.13848",
+  "finding": "Instruction-tuned LLM news summaries rated comparable to freelance-writer summaries by humans."
+ },
+ {
+  "id": "tang2023medevidence",
+  "corpus": "S1",
+  "authors": "Tang et al.",
+  "year": 2023,
+  "venue": "npj Digital Medicine",
+  "arxiv": "10.1038/s41746-023-00896-7",
+  "finding": "LLM medical-evidence summaries show factual errors/hallucination on expert review; not yet reliable."
+ },
+ {
+  "id": "hackl2023reliablerater",
+  "corpus": "S1",
+  "authors": "Hackl et al.",
+  "year": 2023,
+  "venue": "Frontiers in Education",
+  "arxiv": "10.3389/feduc.2023.1272229",
+  "finding": "GPT-4 shows high intra-rater consistency rating student feedback across repeated runs (reliable rater)."
+ },
+ {
+  "id": "grevisse2024asagmed",
+  "corpus": "S1",
+  "authors": "Gr\u00e9visse",
+  "year": 2024,
+  "venue": "BMC Medical Education",
+  "arxiv": "10.1186/s12909-024-06026-5",
+  "finding": "LLM-based automatic short-answer grading usable in undergraduate medical education with oversight."
+ },
+ {
+  "id": "yancey2023cefr",
+  "corpus": "S1",
+  "authors": "Yancey et al.",
+  "year": 2023,
+  "venue": "BEA@ACL",
+  "arxiv": "10.18653/v1/2023.bea-1.49",
+  "finding": "GPT-4 rates short L2 essays on CEFR scale; few-shot approaches but stays below expert agreement."
+ },
+ {
+  "id": "floden2024gradingexams",
+  "corpus": "S1",
+  "authors": "Flod\u00e9n",
+  "year": 2024,
+  "venue": "Br. Educ. Res. J.",
+  "arxiv": "10.1002/berj.4069",
+  "finding": "Comparison of human vs LLM exam grading: correlated but systematic divergences on nuanced answers."
+ },
+ {
+  "id": "kortemeyer2023physics",
+  "corpus": "S1",
+  "authors": "Kortemeyer",
+  "year": 2023,
+  "venue": "Phys. Rev. Phys. Educ. Res.",
+  "arxiv": "10.1103/physrevphyseducres.19.020163",
+  "finding": "AI grading of intro-physics solutions feasible but struggles with partial credit; needs oversight."
+ },
+ {
+  "id": "dubois2023alpacafarm",
+  "corpus": "S1",
+  "authors": "Dubois et al.",
+  "year": 2023,
+  "venue": "NeurIPS",
+  "arxiv": "2305.14387",
+  "finding": "AlpacaFarm: simulated LLM-judge win-rates rank methods at ~0.98 correlation with human win-rates, 50x cheaper."
+ },
+ {
+  "id": "quah2024dentalaes",
+  "corpus": "S1",
+  "authors": "Quah et al.",
+  "year": 2024,
+  "venue": "BMC Medical Education",
+  "arxiv": "10.1186/s12909-024-05881-6",
+  "finding": "ChatGPT essay scoring in dental exams: only moderate reliability vs examiners; not stand-alone."
+ },
+ {
+  "id": "gao2025nlgsurvey",
+  "corpus": "S1",
+  "authors": "Gao et al.",
+  "year": 2025,
+  "venue": "Computational Linguistics",
+  "arxiv": "10.1162/coli_a_00561",
+  "finding": "Survey of LLM-based NLG evaluation: status, meta-evaluation methods, and open reliability challenges."
+ },
+ {
+  "id": "khondaker2023gptaraeval",
+  "corpus": "S1",
+  "authors": "Khondaker et al.",
+  "year": 2023,
+  "venue": "EMNLP",
+  "arxiv": "2305.14976",
+  "finding": "GPTAraEval: ChatGPT lags dedicated/Arabic models across 44 Arabic NLP tasks (multilingual gap)."
+ },
+ {
+  "id": "khademi2023bardassessment",
+  "corpus": "S1",
+  "authors": "Khademi",
+  "year": 2023,
+  "venue": "J. Appl. Learn. Teach.",
+  "arxiv": "10.37074/jalt.2023.6.1.28",
+  "finding": "ChatGPT/Bard assessment-item alignment shows only low-moderate reliability vs human standards."
+ },
+ {
+  "id": "zhuang2024beyondyesno",
+  "corpus": "S1",
+  "authors": "Zhuang et al.",
+  "year": 2024,
+  "venue": "NAACL",
+  "arxiv": "10.18653/v1/2024.naacl-short.31",
+  "finding": "Fine-grained relevance scoring (beyond yes/no) improves zero-shot LLM ranker agreement with humans."
+ },
+ {
+  "id": "alaofi2024fooledrelevant",
+  "corpus": "S1",
+  "authors": "Alaofi et al.",
+  "year": 2024,
+  "venue": "SIGIR-AP",
+  "arxiv": "10.1145/3673791.3698431",
+  "finding": "LLM relevance labellers can be fooled by injected keywords to mark irrelevant docs relevant (robustness)."
+ },
+ {
+  "id": "wang2025setesting",
+  "corpus": "S1",
+  "authors": "Wang et al.",
+  "year": 2025,
+  "venue": "ACM TOSEM",
+  "arxiv": "10.1145/3728963",
+  "finding": "Empirical study of LLM-as-a-judge in software testing: partial substitution, notable disagreement cases."
+ },
+ {
+  "id": "ollion2023mindhype",
+  "corpus": "S1",
+  "authors": "Ollion et al.",
+  "year": 2023,
+  "venue": "Sociol. Methods Res.",
+  "arxiv": "10.31235/osf.io/x58kn",
+  "finding": "'Mind the Hype': cautions that ChatGPT annotation reliability is overstated; reproducibility/validity risks."
+ },
+ {
+  "id": "cegin2023paraphrases",
+  "corpus": "S1",
+  "authors": "Cegin et al.",
+  "year": 2023,
+  "venue": "EMNLP",
+  "arxiv": "2305.12947",
+  "finding": "ChatGPT paraphrases for intent classification: more diverse but less robust than crowdsourced ones."
+ },
+ {
+  "id": "song2024finesure",
+  "corpus": "S1",
+  "authors": "Song et al.",
+  "year": 2024,
+  "venue": "ACL",
+  "arxiv": "2407.00908",
+  "finding": "FineSurE: fine-grained faithfulness/completeness/conciseness scoring correlates better with humans."
+ },
+ {
+  "id": "li2023hotchatgpt",
+  "corpus": "S1",
+  "authors": "Li et al.",
+  "year": 2023,
+  "venue": "arXiv",
+  "arxiv": "2304.10619",
+  "finding": "'HOT' ChatGPT detects hateful/offensive/toxic content with fair human agreement but inconsistencies remain."
+ },
+ {
+  "id": "wang2024clinicalevent",
+  "corpus": "S1",
+  "authors": "Wang et al.",
+  "year": 2024,
+  "venue": "J. Gastroenterol. Hepatol.",
+  "arxiv": "10.1111/jgh.16561",
+  "finding": "GPT-4 validated for structured clinical-event classification with high agreement vs clinicians."
+ },
+ {
+  "id": "croxford2025clinsummjudge",
+  "corpus": "S1",
+  "authors": "Croxford et al.",
+  "year": 2025,
+  "venue": "npj Digital Medicine",
+  "arxiv": "10.1038/s41746-025-02005-2",
+  "finding": "Using LLMs as judges for clinical AI summaries: partial alignment; can miss clinically important errors."
+ },
+ {
+  "id": "pan2024hcdjudge",
+  "corpus": "S1",
+  "authors": "Pan et al.",
+  "year": 2024,
+  "venue": "HuCLLM@ACL",
+  "arxiv": "10.18653/v1/2024.hucllm-1.2",
+  "finding": "Human-centered design recommendations for deploying LLM-as-a-judge responsibly (with human oversight)."
+ },
+ {
+  "id": "hua2025mhscoping",
+  "corpus": "S1",
+  "authors": "Hua et al.",
+  "year": 2025,
+  "venue": "npj Digital Medicine",
+  "arxiv": "10.1038/s41746-025-01611-4",
+  "finding": "Scoping review of LLMs for generative mental-health tasks: validation and safety evaluation gaps remain."
+ },
+ {
+  "id": "gao2023humanlike",
+  "corpus": "S1",
+  "authors": "Gao et al.",
+  "year": 2023,
+  "venue": "arXiv",
+  "arxiv": "2304.02554",
+  "finding": "Human-like summarization evaluation with ChatGPT; correlates with humans but sensitive to aspect/prompt."
+ },
+ {
+  "id": "luo2023factinconsistency",
+  "corpus": "S1",
+  "authors": "Luo et al.",
+  "year": 2023,
+  "venue": "arXiv",
+  "arxiv": "2303.15621",
+  "finding": "ChatGPT as a factual-inconsistency evaluator for summarization; decent but below specialized metrics on some sets."
+ },
+ {
+  "id": "li2023coannotating",
+  "corpus": "S1",
+  "authors": "Li et al.",
+  "year": 2023,
+  "venue": "EMNLP-F",
+  "arxiv": "2310.15638",
+  "finding": "CoAnnotating allocates items between human and LLM by uncertainty, preserving quality at lower cost."
+ },
+ {
+  "id": "nasution2024chatgptlabel",
+  "corpus": "S1",
+  "authors": "Nasution & Onan",
+  "year": 2024,
+  "venue": "IEEE Access",
+  "arxiv": "10.1109/access.2024.3402809",
+  "finding": "Compares human- vs LLM-generated annotations; LLM labels competitive on several text tasks."
+ },
+ {
+  "id": "aldeen2023chatgptvshuman",
+  "corpus": "S1",
+  "authors": "Aldeen et al.",
+  "year": 2023,
+  "venue": "ICMLA",
+  "arxiv": "10.1109/icmla58977.2023.00089",
+  "finding": "Comprehensive ChatGPT-vs-human annotation analysis; strong on objective categories, weaker on subjective."
+ },
+ {
+  "id": "ronningstad2024gptannotator",
+  "corpus": "S1",
+  "authors": "Ronningstad et al.",
+  "year": 2024,
+  "venue": "LAW@ACL",
+  "arxiv": "10.18653/v1/2024.law-1.13",
+  "finding": "LLM entity-level sentiment annotation approaches but trails expert annotators."
+ },
+ {
+  "id": "qiu2025labelensemble",
+  "corpus": "S1",
+  "authors": "Qiu et al.",
+  "year": 2025,
+  "venue": "arXiv",
+  "arxiv": "2501.08413",
+  "finding": "Language-model ensembles label free-text data near human quality with calibrated abstention."
+ },
+ {
+  "id": "niu2024text2emotion",
+  "corpus": "S1",
+  "authors": "Niu et al.",
+  "year": 2024,
+  "venue": "Interspeech",
+  "arxiv": "2408.17026",
+  "finding": "LLM emotion annotation moderately agrees with humans; struggles with ambiguous/affective labels."
+ },
+ {
+  "id": "koptyra2023clarinemo",
+  "corpus": "S1",
+  "authors": "Koptyra et al.",
+  "year": 2023,
+  "venue": "ICCS (LNCS)",
+  "arxiv": "10.1007/978-3-031-35995-8_26",
+  "finding": "CLARIN-Emo: ChatGPT emotion annotation usable, but human annotation remains superior for model training."
+ },
+ {
+  "id": "li2024stance",
+  "corpus": "S1",
+  "authors": "Li & Conrad",
+  "year": 2024,
+  "venue": "arXiv",
+  "arxiv": "2406.07483",
+  "finding": "Comparative analysis of LLM stance annotation in social media; competitive with crowd on clear cases."
+ },
+ {
+  "id": "nguyen2024crisismisinfo",
+  "corpus": "S1",
+  "authors": "Nguyen & Rudra",
+  "year": 2024,
+  "venue": "WWW",
+  "arxiv": "10.1145/3589334.3648141",
+  "finding": "Human vs ChatGPT annotation for crisis misinformation; LLM helps but interpretable human labels still differ."
+ },
+ {
+  "id": "leas2023contentanalysis",
+  "corpus": "S1",
+  "authors": "Leas et al.",
+  "year": 2023,
+  "venue": "J. Med. Internet Res.",
+  "arxiv": "10.2196/52499",
+  "finding": "ChatGPT supports content analysis with reasonable concordance; recommended as assistant, not replacement."
+ },
+ {
+  "id": "kaikaus2023financecorpora",
+  "corpus": "S1",
+  "authors": "Kaikaus et al.",
+  "year": 2023,
+  "venue": "IEEE BigData",
+  "arxiv": "10.1109/bigdata59044.2023.10386425",
+  "finding": "Humans vs ChatGPT on financial-corpus annotation; ChatGPT trails experts on nuanced financial labels."
+ },
+ {
+  "id": "clarke2024cantreplace",
+  "corpus": "S1",
+  "authors": "Clarke & Dietz",
+  "year": 2024,
+  "venue": "arXiv",
+  "arxiv": "2412.17156",
+  "finding": "Argues LLM relevance assessment STILL cannot replace human assessors for reliable IR evaluation (counterpoint)."
+ },
+ {
+  "id": "arabzadeh2025benchrelevance",
+  "corpus": "S1",
+  "authors": "Arabzadeh & Clarke",
+  "year": 2025,
+  "venue": "arXiv",
+  "arxiv": "2504.12558",
+  "finding": "Benchmarks LLM relevance-judgment methods; agreement varies widely by method and prompt design."
+ },
+ {
+  "id": "lu2023erroranalysis",
+  "corpus": "S1",
+  "authors": "Lu et al.",
+  "year": 2023,
+  "venue": "arXiv",
+  "arxiv": "2303.13809",
+  "finding": "Error-analysis prompting yields human-like MT evaluation, improving correlation with MQM labels."
+ },
+ {
+  "id": "huang2024nlexpl",
+  "corpus": "S1",
+  "authors": "Huang et al.",
+  "year": 2024,
+  "venue": "LREC-COLING",
+  "arxiv": "2403.17368",
+  "finding": "ChatGPT rates NL-explanation quality like humans, but agreement depends strongly on the rating scale."
+ },
+ {
+  "id": "guo2023howclose",
+  "corpus": "S1",
+  "authors": "Guo et al.",
+  "year": 2023,
+  "venue": "arXiv",
+  "arxiv": "2301.07597",
+  "finding": "HC3: experts compare ChatGPT vs human answers; gaps remain on helpfulness and factual depth."
+ },
+ {
+  "id": "doostmohammadi2024autoeval",
+  "corpus": "S1",
+  "authors": "Doostmohammadi et al.",
+  "year": 2024,
+  "venue": "EMNLP-F",
+  "arxiv": "10.18653/v1/2024.findings-emnlp.367",
+  "finding": "Automatic evaluation methods for instruction-tuned LLMs are only moderately reliable; method choice matters."
+ },
+ {
+  "id": "zhang2023widerdeeper",
+  "corpus": "S1",
+  "authors": "Zhang et al.",
+  "year": 2023,
+  "venue": "arXiv",
+  "arxiv": "2308.01862",
+  "finding": "Networks of collaborating/debating LLM evaluators are fairer and better-aligned than single judges."
+ },
+ {
+  "id": "zhu2024nationalitybias",
+  "corpus": "S1",
+  "authors": "Zhu et al.",
+  "year": 2024,
+  "venue": "LREC-COLING",
+  "arxiv": "2405.06996",
+  "finding": "LLM evaluators exhibit nationality bias; overall quality good but not bias-free."
+ },
+ {
+  "id": "saito2023verbositybias",
+  "corpus": "S1",
+  "authors": "Saito et al.",
+  "year": 2023,
+  "venue": "arXiv",
+  "arxiv": "2310.10076",
+  "finding": "Quantifies verbosity bias in LLM preference labeling: longer answers favored independent of quality."
+ },
+ {
+  "id": "li2024splitmerge",
+  "corpus": "S1",
+  "authors": "Li et al.",
+  "year": 2024,
+  "venue": "EMNLP",
+  "arxiv": "10.18653/v1/2024.emnlp-main.621",
+  "finding": "Split-and-Merge aligns position biases in LLM evaluators, improving agreement with humans."
+ },
+ {
+  "id": "liu2024pairwisepref",
+  "corpus": "S1",
+  "authors": "Liu et al.",
+  "year": 2024,
+  "venue": "arXiv",
+  "arxiv": "2403.16950",
+  "finding": "Pairwise preference aligns LLM evaluators with human judgement better than pointwise scoring."
+ },
+ {
+  "id": "liu2023trustworthy",
+  "corpus": "S1",
+  "authors": "Liu et al.",
+  "year": 2023,
+  "venue": "arXiv",
+  "arxiv": "2308.05374",
+  "finding": "Survey/guideline for evaluating LLM alignment dimensions; evaluation reliability among the key challenges."
+ },
+ {
+  "id": "voutsa2025biaseddesign",
+  "corpus": "S1",
+  "authors": "Voutsa et al.",
+  "year": 2025,
+  "venue": "Applied Informatics",
+  "arxiv": "10.3390/ai6080178",
+  "finding": "Evaluates bias and behavioral diversity in LLM annotation; systematic biases arise from design choices."
+ },
+ {
+  "id": "chung2025verifact",
+  "corpus": "S1",
+  "authors": "Chung et al.",
+  "year": 2025,
+  "venue": "arXiv",
+  "arxiv": "2501.16672",
+  "finding": "VeriFact verifies facts in LLM clinical text against the EHR; agreement with clinicians moderate-to-high."
+ },
+ {
+  "id": "kim2025emulate",
+  "corpus": "S1",
+  "authors": "Kim & Kim",
+  "year": 2025,
+  "venue": "J. Med. Internet Res.",
+  "arxiv": "10.2196/63631",
+  "finding": "LLMs emulate human-expert evaluation with limited accuracy on nuanced health-communication judgments."
+ },
+ {
+  "id": "croxford2025autoeval",
+  "corpus": "S1",
+  "authors": "Croxford et al.",
+  "year": 2025,
+  "venue": "medRxiv",
+  "arxiv": "10.1101/2025.04.22.25326219",
+  "finding": "Automating evaluation of healthcare AI text with an LLM judge; partial alignment, residual clinical error."
+ },
+ {
+  "id": "hou2024classroom",
+  "corpus": "S1",
+  "authors": "Hou et al.",
+  "year": 2024,
+  "venue": "AIED",
+  "arxiv": "2404.15531",
+  "finding": "Automated multimodal assessment of classroom encouragement/warmth correlates moderately with human raters."
+ },
+ {
+  "id": "koraishi2024langassess",
+  "corpus": "S1",
+  "authors": "Koraishi",
+  "year": 2024,
+  "venue": "Lang. Teach. Res. Q.",
+  "arxiv": "10.32038/ltrq.2024.43.02",
+  "finding": "Reliability study of GPT for language assessment; promising but requires human moderation."
+ },
+ {
+  "id": "haase2025creativitypeaked",
+  "corpus": "S1",
+  "authors": "Haase et al.",
+  "year": 2025,
+  "venue": "J. Creativity",
+  "arxiv": "10.1016/j.yjoc.2025.100113",
+  "finding": "Asks whether LLM creativity has peaked; human evaluation shows a plateau and divergence from human creativity."
+ },
+ {
+  "id": "rose2025rob",
+  "corpus": "S1",
+  "authors": "Rose et al.",
+  "year": 2025,
+  "venue": "BMC Med. Res. Methodol.",
+  "arxiv": "10.1186/s12874-025-02631-0",
+  "finding": "ChatGPT risk-of-bias assessment in RCTs partially agrees with human reviewers; not yet standalone."
+ },
+ {
+  "id": "thakur2024judgingjudges",
+  "corpus": "S1",
+  "authors": "Thakur et al.",
+  "year": 2024,
+  "venue": "arXiv",
+  "arxiv": "2406.12624",
+  "finding": "Judging the Judges: LLM judges align moderately with humans but are vulnerable and inconsistent across setups."
+ },
+ {
+  "id": "hsu2023figurecaption",
+  "corpus": "S1",
+  "authors": "Hsu et al.",
+  "year": 2023,
+  "venue": "EMNLP-F",
+  "arxiv": "10.18653/v1/2023.findings-emnlp.363",
+  "finding": "GPT-4 is an effective zero-shot evaluator for scientific figure captions, correlating with expert ratings."
+ },
+ {
+  "id": "lai2023styletransfer",
+  "corpus": "S1",
+  "authors": "Lai et al.",
+  "year": 2023,
+  "venue": "arXiv",
+  "arxiv": "2304.13462",
+  "finding": "Multidimensional ChatGPT evaluation of text style transfer correlates with humans on some dimensions."
+ },
+ {
+  "id": "wang2024beyondagreement",
+  "corpus": "S1",
+  "authors": "Wang et al.",
+  "year": 2024,
+  "venue": "EMNLP-F",
+  "arxiv": "10.18653/v1/2024.findings-emnlp.520",
+  "finding": "Beyond Agreement: AES methods can match scores while misaligning on rationale -- agreement alone misleads."
+ },
+ {
+  "id": "wataoka2024selfpref",
+  "corpus": "S1",
+  "authors": "Wataoka et al.",
+  "year": 2024,
+  "venue": "arXiv",
+  "arxiv": "2410.21819",
+  "finding": "Self-preference bias: LLM judges favour outputs they assign lower perplexity, i.e., their own style."
+ },
+ {
+  "id": "frobe2025assessorsagree",
+  "corpus": "S1",
+  "authors": "Frobe et al.",
+  "year": 2025,
+  "venue": "SIGIR",
+  "arxiv": "10.1145/3726302.3730218",
+  "finding": "LLM relevance assessors agree with EACH OTHER more than with humans -- shared blind spots, not human alignment."
+ },
+ {
+  "id": "arabzadeh2025promptsens",
+  "corpus": "S1",
+  "authors": "Arabzadeh & Clarke",
+  "year": 2025,
+  "venue": "arXiv",
+  "arxiv": "2504.12408",
+  "finding": "Human-AI analysis of prompt sensitivity in LLM relevance judgments: small prompt changes shift agreement."
+ },
+ {
+  "id": "lin2024wildbench",
+  "corpus": "S1",
+  "authors": "Lin et al.",
+  "year": 2024,
+  "venue": "arXiv",
+  "arxiv": "2406.04770",
+  "finding": "WildBench: checklist-guided LLM-judge scores correlate ~0.98 with human Chatbot-Arena Elo on real-user tasks."
+ },
+ {
+  "id": "brake2024clinicalnote",
+  "corpus": "S1",
+  "authors": "Brake & Schaaf",
+  "year": 2024,
+  "venue": "NAACL-F",
+  "arxiv": "10.18653/v1/2024.findings-naacl.25",
+  "finding": "Is an LLM a useful evaluator for clinical note generation? Partially; misses some clinically salient errors."
+ },
+ {
+  "id": "mehta2025qualgenai",
+  "corpus": "S1",
+  "authors": "Mehta et al.",
+  "year": 2025,
+  "venue": "Scientific Reports",
+  "arxiv": "10.1038/s41598-025-18969-w",
+  "finding": "Evaluation of LLMs in qualitative research: useful coding support with moderate agreement; human oversight needed."
+ },
+ {
+  "id": "ahmad2025moralmachine",
+  "corpus": "S1",
+  "authors": "Ahmad & Takemoto",
+  "year": 2025,
+  "venue": "PLoS ONE",
+  "arxiv": "10.1371/journal.pone.0322776",
+  "finding": "Large-scale Moral Machine on LLMs: LLM moral judgments partly track human preferences but deviate systematically."
+ },
+ {
+  "id": "hu2025trainjudge",
+  "corpus": "S1",
+  "authors": "Hu et al.",
+  "year": 2025,
+  "venue": "arXiv",
+  "arxiv": "2502.02988",
+  "finding": "Practical pipeline for training an LLM-as-a-judge; fine-tuning improves human alignment over prompting alone."
+ },
+ {
+  "id": "kholodna2024activelearning",
+  "corpus": "S1",
+  "authors": "Kholodna et al.",
+  "year": 2024,
+  "venue": "arXiv",
+  "arxiv": "2404.02261",
+  "finding": "LLMs-in-the-loop: LLM annotations drive active learning, cutting human labeling while retaining accuracy."
+ },
+ {
+  "id": "li2024pedants",
+  "corpus": "S1",
+  "authors": "Li et al.",
+  "year": 2024,
+  "venue": "EMNLP-F",
+  "arxiv": "10.18653/v1/2024.findings-emnlp.548",
+  "finding": "PEDANTS: interpretable answer-equivalence judging for QA matches human judgments far better than exact match."
+ },
+ {
+  "id": "shopovski2025peerreview",
+  "corpus": "S1",
+  "authors": "Shopovski et al.",
+  "year": 2025,
+  "venue": "Preprints.org",
+  "arxiv": "10.20944/preprints202502.0058.v1",
+  "finding": "Comparative analysis of ChatGPT vs human peer review: overlap on broad points, divergence on technical depth."
+ },
+ {
+  "id": "zhu2023judgelm",
+  "corpus": "S1",
+  "authors": "Zhu et al.",
+  "year": 2023,
+  "venue": "ICLR'25",
+  "arxiv": "2310.17631",
+  "finding": "JudgeLM: fine-tuned judges reach >90% agreement with GPT-4, exceeding human-human agreement; swap/reference augmentation."
+ },
+ {
+  "id": "wang2023pandalm",
+  "corpus": "S1",
+  "authors": "Wang et al.",
+  "year": 2023,
+  "venue": "ICLR'24",
+  "arxiv": "2306.05087",
+  "finding": "PandaLM judge LLM validated on a human-labeled test set; PandaLM-7B ~ GPT-3.5/4, 70B surpasses them."
+ },
+ {
+  "id": "li2023autoj",
+  "corpus": "S1",
+  "authors": "Li et al.",
+  "year": 2023,
+  "venue": "ICLR'24",
+  "arxiv": "2310.05470",
+  "finding": "Auto-J generative judge with critiques across 58 real-world scenarios; pairwise + pointwise, human-aligned but imperfect."
+ },
+ {
+  "id": "wang2023shepherd",
+  "corpus": "S1",
+  "authors": "Wang et al.",
+  "year": 2023,
+  "venue": "arXiv",
+  "arxiv": "2308.04592",
+  "finding": "Shepherd critic (7B) produces feedback rated equivalent/preferred to ChatGPT; 53-87% win-rate vs alternatives."
+ },
+ {
+  "id": "ke2024critiquellm",
+  "corpus": "S1",
+  "authors": "Ke et al.",
+  "year": 2024,
+  "venue": "ACL",
+  "arxiv": "10.18653/v1/2024.acl-long.704",
+  "finding": "CritiqueLLM critique model correlates with humans on most tasks but degrades on reasoning/math critiques."
+ },
+ {
+  "id": "yuan2024selfrewarding",
+  "corpus": "S1",
+  "authors": "Yuan et al.",
+  "year": 2024,
+  "venue": "ICML",
+  "arxiv": "2401.10020",
+  "finding": "Self-Rewarding LMs use LLM-as-judge to reward themselves; reward quality improves over iterations (but self-bias risk)."
+ },
+ {
+  "id": "wu2024metarewarding",
+  "corpus": "S1",
+  "authors": "Wu et al.",
+  "year": 2024,
+  "venue": "EMNLP'25",
+  "arxiv": "2407.19594",
+  "finding": "Meta-Rewarding: the model judges its own judgments; meta-judge step improves judging skill and alignment."
+ },
+ {
+  "id": "li2024arenahard",
+  "corpus": "S1",
+  "authors": "Li et al.",
+  "year": 2024,
+  "venue": "NeurIPS",
+  "arxiv": "2406.11939",
+  "finding": "Arena-Hard/BenchBuilder: automatic LLM-judge benchmark reaches 89.1% agreement (up to 98.6% confidence) with Chatbot Arena."
+ },
+ {
+  "id": "chiang2024arena",
+  "corpus": "S1",
+  "authors": "Chiang et al.",
+  "year": 2024,
+  "venue": "ICML",
+  "arxiv": "2403.04132",
+  "finding": "Chatbot Arena: open human-preference platform; crowd votes agree with experts and ground LLM-judge validation (>2.5M votes)."
+ },
+ {
+  "id": "meng2024chalet",
+  "corpus": "S1",
+  "authors": "Meng et al.",
+  "year": 2024,
+  "venue": "ACM TOCHI",
+  "arxiv": "2405.05758",
+  "finding": "CHALET: human-LLM partnership for theory-driven qualitative analysis via iterative coding and disagreement analysis (HCI)."
+ },
+ {
+  "id": "wu2023llmworkers",
+  "corpus": "S1",
+  "authors": "Wu et al.",
+  "year": 2023,
+  "venue": "arXiv",
+  "arxiv": "2307.10168",
+  "finding": "LLMs as workers in human-computation pipelines: replicate multi-step crowdsourcing workflows with mixed fidelity (CSCW/HCOMP)."
+ },
+ {
+  "id": "zhu2023reproduce",
+  "corpus": "S1",
+  "authors": "Zhu et al.",
+  "year": 2023,
+  "venue": "arXiv",
+  "arxiv": "2304.10145",
+  "finding": "Can ChatGPT reproduce human labels for social-computing tasks? Good on some, poor on subjective/cultural ones (CSCW)."
+ },
+ {
+  "id": "desmond2024evalullm",
+  "corpus": "S1",
+  "authors": "Desmond et al.",
+  "year": 2024,
+  "venue": "IUI",
+  "arxiv": "10.1145/3640544.3645216",
+  "finding": "EvaluLLM: interactive HCI system for LLM-assisted evaluation of generative outputs against user-defined criteria (IUI)."
+ },
+ {
+  "id": "kim2024meganno",
+  "corpus": "S1",
+  "authors": "Kim et al.",
+  "year": 2024,
+  "venue": "EACL (demo)",
+  "arxiv": "10.18653/v1/2024.eacl-demo.18",
+  "finding": "MEGAnno+: human-LLM collaborative annotation with LLM pre-labels and required human verification."
+ },
+ {
+  "id": "duan2024uimockup",
+  "corpus": "S1",
+  "authors": "Duan et al.",
+  "year": 2024,
+  "venue": "CHI",
+  "arxiv": "2403.13139",
+  "finding": "LLM feedback on UI mockups partially matches expert designer feedback; useful first-pass but misses design nuance (HCI)."
+ },
+ {
+  "id": "lin2023llmeval",
+  "corpus": "S1",
+  "authors": "Lin & Chen",
+  "year": 2023,
+  "venue": "NLP4ConvAI@ACL",
+  "arxiv": "10.18653/v1/2023.nlp4convai-1.5",
+  "finding": "LLM-Eval: single-prompt multi-dimensional dialogue evaluation correlating with human ratings across benchmarks."
+ },
+ {
+  "id": "chan2023chateval",
+  "corpus": "S1",
+  "authors": "Chan et al.",
+  "year": 2023,
+  "venue": "ICLR'24",
+  "arxiv": "2308.07201",
+  "finding": "ChatEval: multi-agent debate among LLM evaluators improves agreement with human judgments over a single judge."
+ },
+ {
+  "id": "hashemi2024llmrubric",
+  "corpus": "S1",
+  "authors": "Hashemi et al.",
+  "year": 2024,
+  "venue": "ACL'25",
+  "arxiv": "2501.00274",
+  "finding": "LLM-Rubric: multidimensional rubric scoring with a small calibration network markedly improves human correlation."
+ },
+ {
+  "id": "ostyakova2023crowdexperts",
+  "corpus": "S1",
+  "authors": "Ostyakova et al.",
+  "year": 2023,
+  "venue": "SIGDIAL",
+  "arxiv": "10.18653/v1/2023.sigdial-1.23",
+  "finding": "ChatGPT vs crowdsourcing vs experts annotating open-domain dialogue: ChatGPT between crowd and expert quality."
+ },
+ {
+  "id": "xie2023nextchapter",
+  "corpus": "S1",
+  "authors": "Xie et al.",
+  "year": 2023,
+  "venue": "INLG",
+  "arxiv": "10.18653/v1/2023.inlg-main.23",
+  "finding": "The Next Chapter: human + automatic evaluation of LLM storytelling; LLM evaluators only partially track human judgments."
+ },
+ {
+  "id": "ni2024afacta",
+  "corpus": "S1",
+  "authors": "Ni et al.",
+  "year": 2024,
+  "venue": "ACL",
+  "arxiv": "10.18653/v1/2024.acl-long.104",
+  "finding": "AFaCTA: LLM-assisted annotation of factual-claim detection with calibrated confidence; high agreement with experts."
+ },
+ {
+  "id": "lee2023rlaif",
+  "corpus": "S1",
+  "authors": "Lee et al.",
+  "year": 2023,
+  "venue": "ICML'24",
+  "arxiv": "2309.00267",
+  "finding": "RLAIF vs RLHF: AI (LLM) preference labels yield comparable downstream gains to human labels on summarization/dialogue."
+ },
+ {
+  "id": "jung2024trustescalate",
+  "corpus": "S1",
+  "authors": "Jung et al.",
+  "year": 2024,
+  "venue": "EMNLP'24",
+  "arxiv": "2407.18370",
+  "finding": "Trust-or-Escalate: confidence-based selective LLM judging with provable human-agreement guarantees; escalate hard cases."
+ },
+ {
+  "id": "li2025prefleakage",
+  "corpus": "S1",
+  "authors": "Li et al.",
+  "year": 2025,
+  "venue": "arXiv",
+  "arxiv": "2502.01534",
+  "finding": "Preference Leakage: when judge and generated-data model are related, judges are biased toward those outputs (contamination)."
+ },
+ {
+  "id": "murugadoss2025evaltheeval",
+  "corpus": "S1",
+  "authors": "Murugadoss et al.",
+  "year": 2025,
+  "venue": "AAAI",
+  "arxiv": "10.1609/aaai.v39i18.34157",
+  "finding": "Evaluating the Evaluator: LLM judges often fail to adhere to the task evaluation instructions/rubric they are given."
+ },
+ {
+  "id": "fan2024sedareval",
+  "corpus": "S1",
+  "authors": "Fan et al.",
+  "year": 2024,
+  "venue": "EMNLP-F",
+  "arxiv": "10.18653/v1/2024.findings-emnlp.984",
+  "finding": "SedarEval: self-adaptive scoring rubrics improve LLM-judge agreement with human grading over generic prompts."
+ },
+ {
+  "id": "horych2025promisespitfalls",
+  "corpus": "S1",
+  "authors": "Horych et al.",
+  "year": 2025,
+  "venue": "NAACL-F",
+  "arxiv": "10.18653/v1/2025.findings-naacl.75",
+  "finding": "Promises and pitfalls of LLM dataset annotations: convenient but can inject systematic artifacts vs human labels."
+ },
+ {
+  "id": "gao2025reranking",
+  "corpus": "S1",
+  "authors": "Gao et al.",
+  "year": 2025,
+  "venue": "NAACL-F",
+  "arxiv": "10.18653/v1/2025.findings-naacl.260",
+  "finding": "Re-evaluating automatic LLM system ranking: judge-induced rankings only partially align with human-preference rankings."
+ },
+ {
+  "id": "yamauchi2025designchoices",
+  "corpus": "S1",
+  "authors": "Yamauchi et al.",
+  "year": 2025,
+  "venue": "arXiv",
+  "arxiv": "2506.13639",
+  "finding": "Empirical study: LLM-as-judge design choices (prompt, scale, format) materially change human agreement."
+ },
+ {
+  "id": "huang2025empiricaljudge",
+  "corpus": "S1",
+  "authors": "Huang et al.",
+  "year": 2025,
+  "venue": "ACL-F",
+  "arxiv": "10.18653/v1/2025.findings-acl.306",
+  "finding": "Empirical study of LLM-as-a-judge for LLM evaluation: fine-tuning and aggregation help, but biases persist."
+ },
+ {
+  "id": "xiao2023support",
+  "corpus": "S2",
+  "authors": "Xiao et al.",
+  "year": 2023,
+  "venue": "IUI",
+  "ref": "2304.10548",
+  "finding": "Codebook+GPT-3 deductive coding reaches fair-to-substantial agreement with expert coders; reliability hinges on codebook design."
+ },
+ {
+  "id": "zhang2025inddeduct",
+  "corpus": "S2",
+  "authors": "Zhang et al.",
+  "year": 2025,
+  "venue": "AHFE",
+  "ref": "10.54941/ahfe1006232",
+  "finding": "Inductive+deductive coding with AI: Fleiss kappa ~0.46 (deductive), 0.57 (inductive) vs human coders; moderate, hybrid advised."
+ },
+ {
+  "id": "gao2024collabcoder",
+  "corpus": "S2",
+  "authors": "Gao et al.",
+  "year": 2024,
+  "venue": "CHI",
+  "ref": "2304.07366",
+  "finding": "CollabCoder: lower-barrier rigorous workflow embedding LLM suggestions in collaborative inductive coding; humans keep interpretive authority."
+ },
+ {
+  "id": "dunivin2024scalablecot",
+  "corpus": "S2",
+  "authors": "Dunivin",
+  "year": 2024,
+  "venue": "arXiv",
+  "ref": "2401.15170",
+  "finding": "Chain-of-thought coding matches human performance on 8/9 hermeneutic tasks above substantial-kappa; scalable but task-bounded."
+ },
+ {
+  "id": "ngo2026chatqda",
+  "corpus": "S2",
+  "authors": "Ngo et al.",
+  "year": 2026,
+  "venue": "CHI EA",
+  "ref": "2602.18352",
+  "finding": "ChatQDA on-device open-source coding: usable but users show 'conditional trust', doubting interpretive nuance and consistency."
+ },
+ {
+  "id": "depaoli2023inductive",
+  "corpus": "S2",
+  "authors": "De Paoli",
+  "year": 2023,
+  "venue": "Soc. Sci. Comput. Rev.",
+  "ref": "10.1177/08944393231220483",
+  "finding": "Inductive thematic analysis of interviews with ChatGPT is feasible and plausible, but themes need human verification and lack depth."
+ },
+ {
+  "id": "dai2023llminloop",
+  "corpus": "S2",
+  "authors": "Dai et al.",
+  "year": 2023,
+  "venue": "EMNLP-F",
+  "ref": "10.18653/v1/2023.findings-emnlp.669",
+  "finding": "LLM-in-the-loop thematic analysis: human-AI collaboration yields themes comparable to human analysts with large efficiency gains."
+ },
+ {
+  "id": "nguyentrung2025chatgptta",
+  "corpus": "S2",
+  "authors": "Nguyen-Trung",
+  "year": 2025,
+  "venue": "Quality & Quantity",
+  "ref": "10.1007/s11135-025-02165-z",
+  "finding": "ChatGPT as a thematic-analysis research assistant: helpful for breadth, but reflexive interpretation remains human work."
+ },
+ {
+  "id": "jain2025multillmthematic",
+  "corpus": "S2",
+  "authors": "Jain et al.",
+  "year": 2025,
+  "venue": "arXiv",
+  "ref": "2512.20352",
+  "finding": "Multi-LLM thematic analysis with dual reliability (kappa + semantic): Gemini kappa 0.907, GPT-4o 0.853, Claude 0.842 vs humans."
+ },
+ {
+  "id": "castellanos2025thematicsumm",
+  "corpus": "S2",
+  "authors": "Castellanos et al.",
+  "year": 2025,
+  "venue": "JMIR AI",
+  "ref": "10.2196/64447",
+  "finding": "LLM thematic summarization in qualitative health research: 79.7% agreement with human interpretation (substantial)."
+ },
+ {
+  "id": "sharma2025details",
+  "corpus": "S2",
+  "authors": "Sharma et al.",
+  "year": 2025,
+  "venue": "arXiv",
+  "ref": "2510.17575",
+  "finding": "DeTAILS: iterative LLM-supported deep thematic analysis keeps the researcher in control across coding and theme development."
+ },
+ {
+  "id": "prescott2024efficacy",
+  "corpus": "S2",
+  "authors": "Prescott et al.",
+  "year": 2024,
+  "venue": "JMIR AI",
+  "ref": "10.2196/54482",
+  "finding": "Human vs generative-AI thematic analysis: comparable high-level themes, large efficiency gain, but AI misses nuanced sub-themes."
+ },
+ {
+  "id": "chew2023llmcontent",
+  "corpus": "S2",
+  "authors": "Chew et al.",
+  "year": 2023,
+  "venue": "arXiv",
+  "ref": "2306.14924",
+  "finding": "LLM-assisted content analysis: LLMs can apply codebooks with substantial agreement; recommend human validation on a labeled subset."
+ },
+ {
+  "id": "dunivin2025hermeneutics",
+  "corpus": "S2",
+  "authors": "Dunivin",
+  "year": 2025,
+  "venue": "EPJ Data Science",
+  "ref": "10.1140/epjds/s13688-025-00548-8",
+  "finding": "Scaling hermeneutics: guide to reflexive LLM content analysis preserving interpretive validity at scale."
+ },
+ {
+  "id": "leas2023contentanalysis",
+  "corpus": "S2",
+  "authors": "Leas et al.",
+  "year": 2023,
+  "venue": "J. Med. Internet Res.",
+  "ref": "10.2196/52499",
+  "finding": "ChatGPT supports content analysis with reasonable concordance; recommended as assistant, not replacement."
+ },
+ {
+  "id": "schroeder2025usestensions",
+  "corpus": "S2",
+  "authors": "Schroeder et al.",
+  "year": 2025,
+  "venue": "CHI",
+  "ref": "10.1145/3706598.3713120",
+  "finding": "Interviews with qualitative researchers reveal uses, tensions, and intentions: LLMs valued for breadth but threaten interpretive rigor/positionality."
+ },
+ {
+  "id": "davison2024ethics",
+  "corpus": "S2",
+  "authors": "Davison et al.",
+  "year": 2024,
+  "venue": "Information Systems J.",
+  "ref": "10.1111/isj.12504",
+  "finding": "Ethics of generative-AI qualitative data analysis: warns that uncritical use erodes interpretive accountability and rigor."
+ },
+ {
+  "id": "wachinger2024prompts",
+  "corpus": "S2",
+  "authors": "Wachinger et al.",
+  "year": 2024,
+  "venue": "Qual. Health Res.",
+  "ref": "10.1177/10497323241244669",
+  "finding": "Comparing ChatGPT and a human qualitative researcher: useful for surface coding, 'imperfections' in depth and context."
+ },
+ {
+  "id": "li2024gpt4humanqual",
+  "corpus": "S2",
+  "authors": "Li et al.",
+  "year": 2024,
+  "venue": "J. Med. Internet Res.",
+  "ref": "10.2196/56500",
+  "finding": "GPT-4 vs human researchers on health-care qualitative data: moderate agreement (kappa ~0.40); AI aids but does not replace."
+ },
+ {
+  "id": "zhang2023redefining",
+  "corpus": "S2",
+  "authors": "Zhang et al.",
+  "year": 2023,
+  "venue": "arXiv",
+  "ref": "2309.10771",
+  "finding": "Redefining qualitative analysis in the AI era: ChatGPT accelerates coding; calls for new human-AI qualitative workflows."
+ },
+ {
+  "id": "savelka2023textskilled",
+  "corpus": "S2",
+  "authors": "Savelka et al.",
+  "year": 2023,
+  "venue": "arXiv",
+  "ref": "2306.13906",
+  "finding": "GPT-4 supports analysis of textual data in tasks requiring highly skilled (legal) coding; promising but below expert reliability."
+ },
+ {
+  "id": "long2024classroom",
+  "corpus": "S2",
+  "authors": "Long et al.",
+  "year": 2024,
+  "venue": "npj Science of Learning",
+  "ref": "10.1038/s41539-024-00273-3",
+  "finding": "LLMs analysing classroom dialogue: moderate agreement with human coders; useful for scale, weaker on pedagogical subtlety."
+ },
+ {
+  "id": "qualcoding2025jla",
+  "corpus": "S2",
+  "authors": "authors",
+  "year": 2025,
+  "venue": "J. Learning Analytics",
+  "ref": "jla8575",
+  "finding": "Human-GPT-4 Fleiss kappa ~0.46; GPT-4 self-consistency ~0.87 (> human); hybrid coding advised."
+ },
+ {
+  "id": "qualigpt2024",
+  "corpus": "S2",
+  "authors": "Zhang et al.",
+  "year": 2024,
+  "venue": "arXiv",
+  "ref": "2407.14925",
+  "finding": "QualiGPT tool: adequate agreement for deductive codebooks, weaker inductively; positioned as assistant."
+ },
+ {
+  "id": "meng2024chalet",
+  "corpus": "S2",
+  "authors": "Meng et al.",
+  "year": 2024,
+  "venue": "ACM TOCHI",
+  "ref": "2405.05758",
+  "finding": "CHALET: human-LLM partnership for theory-driven qualitative analysis via iterative coding and disagreement analysis."
+ },
+ {
+  "id": "mehta2025qualgenai",
+  "corpus": "S2",
+  "authors": "Mehta et al.",
+  "year": 2025,
+  "venue": "Scientific Reports",
+  "ref": "10.1038/s41598-025-18969-w",
+  "finding": "Evaluation of LLMs in qualitative research: moderate agreement; human oversight needed for valid interpretation."
+ },
+ {
+  "id": "thematic2025charity",
+  "corpus": "S2",
+  "authors": "Wen et al.",
+  "year": 2025,
+  "venue": "AI & Society",
+  "ref": "10.1007/s00146-025-02487-4",
+  "finding": "Thematic analysis case study: GPT-4 accelerates coding with reasonable but imperfect theme overlap."
+ },
+ {
+  "id": "argyle2023outofone",
+  "corpus": "S2",
+  "authors": "Argyle et al.",
+  "year": 2023,
+  "venue": "Political Analysis",
+  "ref": "2209.06899",
+  "finding": "'Out of one, many': LLMs encode enough sociodemographic structure to simulate human survey samples ('silicon sampling') at group level."
+ },
+ {
+  "id": "wang2024flatten",
+  "corpus": "S2",
+  "authors": "Wang et al.",
+  "year": 2024,
+  "venue": "Nature Mach. Intell.",
+  "ref": "2402.01908",
+  "finding": "LLMs replacing participants misportray and FLATTEN demographic groups; cannot capture positionality (3,200 humans, 16 identities)."
+ },
+ {
+  "id": "bail2024gensocsci",
+  "corpus": "S2",
+  "authors": "Bail",
+  "year": 2024,
+  "venue": "PNAS",
+  "ref": "10.1073/pnas.2314021121",
+  "finding": "Can generative AI improve social science? Promising for annotation/simulation but validity and bias risks demand human benchmarking."
+ },
+ {
+  "id": "bisbee2023perils",
+  "corpus": "S2",
+  "authors": "Bisbee et al.",
+  "year": 2023,
+  "venue": "SocArXiv",
+  "ref": "10.31235/osf.io/5ecfa",
+  "finding": "Perils of synthetic survey data: LLM 'respondents' distort variances/correlations vs real humans; unsafe as a replacement."
+ },
+ {
+  "id": "huang2025surveyworth",
+  "corpus": "S2",
+  "authors": "Huang et al.",
+  "year": 2025,
+  "venue": "arXiv",
+  "ref": "2502.17773",
+  "finding": "Uncertainty-quantification view: an LLM is worth only a bounded number of human respondents; substitution adds hidden uncertainty."
+ },
+ {
+  "id": "cheng2023compost",
+  "corpus": "S2",
+  "authors": "Cheng et al.",
+  "year": 2023,
+  "venue": "EMNLP",
+  "ref": "10.18653/v1/2023.emnlp-main.669",
+  "finding": "CoMPosT: LLM simulations of human subgroups are often caricatures, especially for marginalized identities."
+ },
+ {
+  "id": "salminen2025syntheticcritical",
+  "corpus": "S2",
+  "authors": "Salminen et al.",
+  "year": 2025,
+  "venue": "Augmented Humans",
+  "ref": "10.1145/3745900.3746108",
+  "finding": "Critical analysis of synthetic users in HCI: cannot capture unpredictable behavior; should not stand in for real users."
+ },
+ {
+  "id": "abbasiantaeb2024llmstalk",
+  "corpus": "S2",
+  "authors": "Abbasiantaeb et al.",
+  "year": 2024,
+  "venue": "WSDM",
+  "ref": "10.1145/3616855.3635856",
+  "finding": "'Let the LLMs talk': simulating users in conversational search; useful for evaluation but diverges from real user behavior."
+ },
+ {
+  "id": "salminen2024deusexmachina",
+  "corpus": "S2",
+  "authors": "Salminen et al.",
+  "year": 2024,
+  "venue": "CHI",
+  "ref": "10.1145/3613904.3642036",
+  "finding": "LLM-generated personas can be plausible and useful for ideation but risk stereotyping and lack grounded data."
+ },
+ {
+  "id": "jung2025personacraft",
+  "corpus": "S2",
+  "authors": "Jung et al.",
+  "year": 2025,
+  "venue": "Int. J. Hum.-Comput. Stud.",
+  "ref": "10.1016/j.ijhcs.2025.103445",
+  "finding": "PersonaCraft: data-grounded LLM personas from survey segments; better grounded but still need human validation."
+ },
+ {
+  "id": "haxvig2025personabias",
+  "corpus": "S2",
+  "authors": "Haxvig et al.",
+  "year": 2025,
+  "venue": "Int. J. Hum.-Comput. Stud.",
+  "ref": "10.1016/j.ijhcs.2025.103651",
+  "finding": "LLM synthetic personas encode gender/role bias from a participatory-design lens; unsafe as stand-ins for real users."
+ },
+ {
+  "id": "guerino2025gpt4ousability",
+  "corpus": "S2",
+  "authors": "Guerino et al.",
+  "year": 2025,
+  "venue": "arXiv",
+  "ref": "2506.16345",
+  "finding": "GPT-4o heuristic evaluation overlaps only 21.2% with expert-found issues and hallucinates false positives; not a substitute."
+ },
+ {
+  "id": "zhong2025synthheuristic",
+  "corpus": "S2",
+  "authors": "Zhong et al.",
+  "year": 2025,
+  "venue": "arXiv",
+  "ref": "2507.02306",
+  "finding": "Synthetic heuristic evaluation finds 73-77% of issues, exceeding 5 human evaluators (57-63%) but with different error profile."
+ },
+ {
+  "id": "duan2024uicrit",
+  "corpus": "S2",
+  "authors": "Duan et al.",
+  "year": 2024,
+  "venue": "UIST",
+  "ref": "2407.08850",
+  "finding": "UICrit dataset shows LLM UI critique falls short of expert designers; few-shot/visual prompting gives +55% but gap remains."
+ },
+ {
+  "id": "duan2024visualcritique",
+  "corpus": "S2",
+  "authors": "Duan et al.",
+  "year": 2024,
+  "venue": "arXiv",
+  "ref": "2412.16829",
+  "finding": "Visual prompting with iterative refinement improves LLM design-critique quality toward, but not to, human-expert level."
+ },
+ {
+  "id": "kocaballi2023convdesign",
+  "corpus": "S2",
+  "authors": "Kocaballi",
+  "year": 2023,
+  "venue": "arXiv",
+  "ref": "2302.07406",
+  "finding": "ChatGPT explored as designer/user/evaluator in conversational design; useful provocation, not a reliable evaluator."
+ },
+ {
+  "id": "duan2024uimockup",
+  "corpus": "S2",
+  "authors": "Duan et al.",
+  "year": 2024,
+  "venue": "CHI",
+  "ref": "2403.13139",
+  "finding": "LLM feedback on UI mockups partially matches expert designer feedback; useful first pass, misses design nuance."
+ },
+ {
+  "id": "gilardi2023chatgpt",
+  "corpus": "S2",
+  "authors": "Gilardi et al.",
+  "year": 2023,
+  "venue": "PNAS",
+  "ref": "2303.15056",
+  "finding": "ChatGPT +25pp accuracy over MTurk on relevance/stance/topic/frame; intercoder agreement exceeds crowd and trained coders."
+ },
+ {
+  "id": "tornberg2023political",
+  "corpus": "S2",
+  "authors": "Tornberg",
+  "year": 2023,
+  "venue": "arXiv",
+  "ref": "2304.06588",
+  "finding": "ChatGPT-4 outperforms experts and crowd workers at annotating political social-media messages."
+ },
+ {
+  "id": "kuzman2023endannotation",
+  "corpus": "S2",
+  "authors": "Kuzman et al.",
+  "year": 2023,
+  "venue": "arXiv",
+  "ref": "2303.03953",
+  "finding": "'Beginning of an end of manual annotation?': ChatGPT competitive on automatic genre/text annotation but not uniformly."
+ },
+ {
+  "id": "li2023coannotating",
+  "corpus": "S2",
+  "authors": "Li et al.",
+  "year": 2023,
+  "venue": "EMNLP-F",
+  "ref": "2310.15638",
+  "finding": "CoAnnotating allocates items between human and LLM by uncertainty, preserving quality at lower human cost."
+ },
+ {
+  "id": "wu2023llmworkers",
+  "corpus": "S2",
+  "authors": "Wu et al.",
+  "year": 2023,
+  "venue": "arXiv",
+  "ref": "2307.10168",
+  "finding": "LLMs as workers in human-computation pipelines: replicate multi-step crowdsourcing workflows with mixed fidelity."
+ },
+ {
+  "id": "zhu2023reproduce",
+  "corpus": "S2",
+  "authors": "Zhu et al.",
+  "year": 2023,
+  "venue": "arXiv",
+  "ref": "2304.10145",
+  "finding": "Can ChatGPT reproduce human labels for social-computing tasks? Good on some, poor on subjective/cultural ones."
+ },
+ {
+  "id": "ostyakova2023crowdexperts",
+  "corpus": "S2",
+  "authors": "Ostyakova et al.",
+  "year": 2023,
+  "venue": "SIGDIAL",
+  "ref": "10.18653/v1/2023.sigdial-1.23",
+  "finding": "ChatGPT vs crowdsourcing vs experts annotating open-domain dialogue: ChatGPT between crowd and expert quality."
+ },
+ {
+  "id": "rajashekar2024humanalgo",
+  "corpus": "S2",
+  "authors": "Rajashekar et al.",
+  "year": 2024,
+  "venue": "CHI",
+  "ref": "10.1145/3613904.3642024",
+  "finding": "Human-algorithmic interaction with an LLM for annotation: human-AI workflow improves throughput with oversight."
+ },
+ {
+  "id": "lequere2024researchtools",
+  "corpus": "S2",
+  "authors": "Aubin Le Quere et al.",
+  "year": 2024,
+  "venue": "CHI EA",
+  "ref": "10.1145/3613905.3636301",
+  "finding": "LLMs as research tools across HCI data work: maps applications and evaluation gaps; calls for validation norms."
+ },
+ {
+  "id": "tabone2023hciprimer",
+  "corpus": "S2",
+  "authors": "Tabone & de Winter",
+  "year": 2023,
+  "venue": "R. Soc. Open Sci.",
+  "ref": "10.1098/rsos.231053",
+  "finding": "A primer on using ChatGPT for HCI research: opportunities across the method pipeline with caution on validity."
+ },
+ {
+  "id": "anderson2024homogenization",
+  "corpus": "S2",
+  "authors": "Anderson et al.",
+  "year": 2024,
+  "venue": "Creativity & Cognition",
+  "ref": "2402.01536",
+  "finding": "LLM assistance homogenizes human creative ideation (less collective diversity); a caution for LLM-mediated design research."
+ }
+]

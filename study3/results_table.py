@@ -31,11 +31,12 @@ for key,name,cons in DS:
     if cont.exists():
         cj=json.load(open(cont));
         if cj: cflag=max((v["flag"] for v in cj.values()),key=lambda f:{"LOW":0,"MEDIUM":1,"HIGH":2}[f])
+    bestmf1=s["models"][best].get("macro_f1",float("nan"))
     rows.append(f"{esc(name)} & {esc(cons)} & {ceil:.2f} & {bestacc:.2f} ({esc(best.replace('-fp8',''))}) & "
-                f"{jury:.2f} & {sig.get(vmode,'')}{vmode} & {npass}/{len(mods)} & {cflag} \\\\")
-tex=(r"\begin{tabular}{@{}l l c c c l c c@{}}"+"\n\\toprule"+"\n"
-     r"Dataset & Construct & Human & Best model & Jury & Modal verdict & alt-test & Contam. \\"+"\n"
-     r" & & ceiling & (acc) & (acc) & & pass & tier \\"+"\n\\midrule"+"\n"+"\n".join(rows)+
+                f"{bestmf1:.2f} & {jury:.2f} & {sig.get(vmode,'')}{vmode} & {cflag} \\\\")
+tex=(r"\begin{tabular}{@{}l l c c c c l c@{}}"+"\n\\toprule"+"\n"
+     r"Dataset & Construct & Human & Best model & macro-F1 & Jury & Modal verdict & Contam. \\"+"\n"
+     r" & & ceiling & (acc) & (best) & (acc) & & tier \\"+"\n\\midrule"+"\n"+"\n".join(rows)+
      "\n\\bottomrule\n\\end{tabular}")
 (TAB/"tab_study3_results.tex").write_text(tex)
 macros={"STHRn": n_judg, "STHRdatasets": len([1 for k,_,_ in DS if (OUT/f'{k}.full.scores.json').exists()]),

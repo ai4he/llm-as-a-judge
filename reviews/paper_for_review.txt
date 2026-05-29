@@ -23,30 +23,35 @@ methods that historically require human input. It finds that the field overwhelm
 LLMs to augment rather than replace humans (36 augment vs. 14 replace vs. 5 simulate), with
 an epistemic stance dominated by tension (38/55); objective crowd-annotation substitution is
 validated, interpretive qualitative analysis is reliable only as human-in-the-loop augmentation,
-and simulating participants, personas, and usability evaluations is the least reliable (flattening of
-identity groups, caricature, hallucinated usability issues). Study 3 closes the gaps the first two
-studies expose, by running a standardized LLM-as-a-judge meta-evaluation, using open models
-served via an institutional vLLM API and the agreement-against-human-ceiling methodology
-distilled from Studies 1-2, on HCC datasets that contain human labels but have never been
-formally tested with an LLM judge. Across 18000 judgments (a 6-model open panel, 9B-754B),
-it finds the human-agreement ceiling governs reliability: the panel matches or exceeds humans on
-low-ceiling NLI but falls short of, and fails the alt-test for, subjective social-computing annotation
-(emotion, hate speech), with binary offensiveness the strongest case; a recent low-contamination
-irony set is matched only at its own low human ceiling, ruling out memorization as the explanation.
-A mixed-effects model confirms the mechanism: judge correctness is governed overwhelmingly
-by item-level human (dis)agreement (random-intercept SDitem = 2.02) and by task subjectivity
-(OR = 0.17 per unit of 1−ceiling), while model scale contributes only modestly (OR = 1.30 per
-log10 params); after FDR correction 22 of 36 judge×dataset cells sit significantly below the
-human ceiling. Together the studies yield a decision framework telling HCC researchers when an
-LLM judge is a validated substitute, a human-in-the-loop assistant, or an unsafe replacement.
+and simulating participants, personas, and usability evaluations is the least reliable (flattening
+of identity groups, caricature, hallucinated usability issues). Study 3 closes the gaps the
+first two studies expose, by running a standardized LLM-as-a-judge meta-evaluation, using
+open models served via an institutional vLLM API and the agreement-against-human-ceiling
+methodology distilled from Studies 1-2, on HCC datasets that contain human labels but have
+never been formally tested with an LLM judge. Across 18000 judgments (a 6-model open
+panel, 9B-754B), it finds the human-agreement ceiling governs reliability: the panel matches
+or exceeds humans on low-ceiling NLI but falls short of, and fails the alt-test for, subjective
+social-computing annotation (emotion, hate speech), with binary offensiveness the strongest case;
+a recent low-contamination irony set is matched only at its own low human ceiling, which (with
+an independent contamination control) argues against memorization as the explanation. An
+inferential analysis localizes the mechanism: judge correctness is governed by item-level human
+(dis)agreement (random-intercept SDitem = 2.02, far exceeding dataset- and model-level variance)
+rather than by a clean dataset-level “subjectivity” term (which is not robust once label base-rate
+and granularity are controlled); judges lose accuracy precisely on high-disagreement items, and
+most judge×dataset cells sit significantly below the human ceiling. An independent re-coding of
 ∗
+
 Submitted for double-blind review. This research used an AI-assisted systematic-search and extraction pipeline; all
 search logs, the two extracted study corpora, the analysis code, the figure/table-generation scripts, and the evaluation
 harnesses are released (repository link omitted for anonymous review).
 
 1
 
-Contents
+the review corpora gives Krippendorff α = 0.87 on the reliability verdict. Together the studies
+yield a decision framework telling HCC researchers when an LLM judge is a validated substitute,
+a human-in-the-loop assistant, or an unsafe replacement.
+
+Contents
 1 Introduction and motivation
 
 3
@@ -63,85 +68,102 @@ harnesses are released (repository link omitted for anonymous review).
 5
 5
 5
-6
+5
 
 4 Study 1b: Is the reliability landscape a moving target?
 4.1 Method . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 4.2 Results . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 
-6
-8
+7
+7
 8
 
 5 Study 2: LLM substitution in HCC, HCI, and qualitative methods
+5.1 Motivation and research questions . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+5.2 Method . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+5.3 RQ2.1: Which methods, and how reliable? . . . . . . . . . . . . . . . . . . . . . . . .
+5.4 RQ2.2: Augment, replace, or simulate? . . . . . . . . . . . . . . . . . . . . . . . . . .
+5.5 RQ2.3: Epistemic stance and the limits of substitution . . . . . . . . . . . . . . . . .
+5.6 Study 2 synthesis . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+9
+9
 10
-5.1 Motivation and research questions . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
-5.2 Method . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
-5.3 RQ2.1: Which methods, and how reliable? . . . . . . . . . . . . . . . . . . . . . . . . 10
-5.4 RQ2.2: Augment, replace, or simulate? . . . . . . . . . . . . . . . . . . . . . . . . . . 11
-5.5 RQ2.3: Epistemic stance and the limits of substitution . . . . . . . . . . . . . . . . . 11
-5.6 Study 2 synthesis . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 12
+10
+11
+11
+12
+
 6 Study 3: An empirical LLM-as-a-judge evaluation on HCC datasets with human
 ground truth
 12
-6.1 Method . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 13
+6.1 Method . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 12
 6.2 Results . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 13
-6.3 What governs reliability? A mixed-effects analysis . . . . . . . . . . . . . . . . . . . . 14
+6.3 What governs reliability? A mixed-effects analysis . . . . . . . . . . . . . . . . . . . . 15
 6.4 Integration with the decision framework . . . . . . . . . . . . . . . . . . . . . . . . . 16
 7 Discussion
-16
-7.1 From four research questions to one principle . . . . . . . . . . . . . . . . . . . . . . 16
-7.2 Connections to HCI and measurement scholarship . . . . . . . . . . . . . . . . . . . . 17
-7.3 A critical assessment: what these practices do to the field . . . . . . . . . . . . . . . 18
-7.4 Implications for designing experiments that use LLM-as-a-judge . . . . . . . . . . . . 18
-7.5 A decision framework for HCC . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 19
+17
+7.1 From four research questions to one principle . . . . . . . . . . . . . . . . . . . . . . 17
+7.2 Connections to HCI and measurement scholarship . . . . . . . . . . . . . . . . . . . . 18
+7.3 A critical assessment: what these practices do to the field . . . . . . . . . . . . . . . 19
+7.4 Implications for designing experiments that use LLM-as-a-judge . . . . . . . . . . . . 19
+7.5 A decision framework for HCC . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 20
 8 Limitations
-
-19
-
-9 Ethics and reproducibility
-
-19
-
-10 Conclusion
 
 20
 
+9 Ethics and reproducibility
+
+21
+
+10 Conclusion
+
+21
+
 A Review protocol and reliability rubric
-
-23
-
-B Study 1b: G-Eval replication details
-
-24
-
-C Study 3: datasets, judging prompts, and metrics
 
 25
 
-D Study 1 corpus
-
-26
 2
 
-E Study 2 corpus
+B Study 1b: G-Eval replication details
 
-30
+26
+
+C Study 3: datasets, judging prompts, and metrics
+
+27
+
+D Inter-coder reliability
+
+28
+
+E Robustness and validity checks
+
+28
+
+F Study 1 corpus
+
+28
+
+G Study 2 corpus
+
+32
 
 1 Introduction and motivation
 In barely two years, LLMs have moved from objects of HCI study to instruments of HCI method.
-Researchers now use them to code interview transcripts [19, 50], run thematic analyses [14, 40],
-annotate social-media corpora [20, 45], simulate survey respondents and “silicon samples” [2], generate
-personas [42], and even perform heuristic usability evaluation [22]. The appeal is obvious: human
+Researchers now use them to code interview transcripts [22, 55], run thematic analyses [16, 43],
+annotate social-media corpora [23, 50], simulate survey respondents and “silicon samples” [2], generate
+personas [45], and even perform heuristic usability evaluation [25]. The appeal is obvious: human
 judgment is the costly bottleneck of human-centered research, and an LLM that labels for $0.003 an
-item is a tempting stand-in [20].
+item is a tempting stand-in [23].
 The danger is equally clear. HCC and qualitative methods are not mere labeling pipelines;
 they carry epistemological commitments (interpretation, reflexivity, positionality, and the situated
-knowledge of the researcher) that an LLM cannot obviously honor [15, 44]. Substituting a model for
-a human participant can flatten and misportray the very identity groups HCI seeks to center [12, 48].
+knowledge of the researcher) that an LLM cannot obviously honor [17, 47]. Substituting a model for
+a human participant can flatten and misportray the very identity groups HCI seeks to center [14, 53].
 And the empirical record is genuinely mixed: the same model can match two human coders on a
-structured codebook [17] yet hallucinate usability problems that do not exist [22], or agree with a
-second annotator on stance [20] yet be fooled into mislabeling relevance by a few injected keywords
+structured codebook [19] yet hallucinate usability problems that do not exist [25], or agree with a
+second annotator on stance [23] yet be fooled into mislabeling relevance by a few injected keywords
 [1].
 HCC researchers therefore face a question with no consolidated answer: for which HCC
 research tasks is an LLM-as-a-judge a safe substitute for human judgment, for which is
@@ -161,12 +183,6 @@ models do not cross.
 HCC actually uses (qualitative coding, thematic/content analysis, crowdsourced annotation,
 participant simulation, persona generation, usability evaluation, and design critique) and codes
 how the field positions LLMs (augment / replace / simulate) and with what epistemic stance.
-4. Study 3, filling the gaps. Studies 1-2 reveal HCC datasets that contain human labels but have
-never been formally evaluated with an LLM judge. Study 3 runs a standardized LLM-as-a-judge
-meta-evaluation on these datasets, using open models served through an institutional vLLM API
-and the agreement-against-human-ceiling methodology distilled from the prior literature, with a
-mixed-effects analysis of what governs judge reliability.
-
 3
 
 Study 1a: Where is LLM-as-a-judge reliable? (cross-domain review, 217 studies) → Study 1b: Is it a
@@ -177,6 +193,11 @@ evaluation on HCC datasets with human labels (open models via an institutional v
 Figure 1: The four-study progression. Study 1a maps where LLM judges are reliable; Study 1b
 tests whether today’s strongest open models move that map; Study 2 narrows to Human-Centered
 Computing practice; Study 3 supplies new empirical evidence on under-tested HCC datasets.
+4. Study 3, filling the gaps. Studies 1-2 reveal HCC datasets that contain human labels but have
+never been formally evaluated with an LLM judge. Study 3 runs a standardized LLM-as-a-judge
+meta-evaluation on these datasets, using open models served through an institutional vLLM API
+and the agreement-against-human-ceiling methodology distilled from the prior literature, with a
+mixed-effects analysis of what governs judge reliability.
 Contributions. (1) The first consolidated, human-ceiling-anchored map of LLM-as-a-judge reliability across 29 domains (Study 1a). (2) A direct test of whether the most powerful open models
 available today surpass the reported judge correlations in a flagship “promising” domain, adjudicating
 “matter of time” vs. structural ceiling (Study 1b). (3) The first systematic review of LLM substitution
@@ -189,35 +210,232 @@ released corpora (217 + 55 coded studies), all code, and a decision framework fo
 2 Background and shared methodology
 LLM-as-a-judge descends from reference-free metrics (BERTScore, COMET) but uses a general
 instruction-following model with a natural-language rubric, supporting pointwise, pairwise, and
-listwise judgment [21, 30]. Four architectural families recur: prompted general LLMs [33, 52]; finetuned open evaluators [28, 47, 54]; juries/multi-agent panels [11, 46]; and calibrated rubric methods
-[23]. Prior surveys taxonomize methodology [21, 31]; we instead synthesize where substitution is
+listwise judgment [24, 33]. Four architectural families recur: prompted general LLMs [36, 57]; finetuned open evaluators [31, 52, 59]; juries/multi-agent panels [13, 51]; and calibrated rubric methods
+[26]. Prior surveys taxonomize methodology [24, 34]; we instead synthesize where substitution is
 empirically validated, and, uniquely, do so through the HCC lens.
 Related work. Four literatures meet in this paper. (1) LLM-as-a-judge evaluation: studies report
-strong agreement on aggregate, verifiable tasks (MT-Bench [52], GEMBA [29], SAFE factuality
-[49]) but document systematic biases (position, verbosity, self-preference, and an expertise gap by
+strong agreement on aggregate, verifiable tasks (MT-Bench [57], GEMBA [32], SAFE factuality
+[54]) but document systematic biases (position, verbosity, self-preference, and an expertise gap by
 which judges converge on crowd rather than expert consensus [4]), which motivates benchmarking
 against the human ceiling rather than against a single “gold.” (2) LLMs in HCI and qualitative
-research: a fast-growing body uses LLMs to assist coding and thematic analysis [14, 19, 50] while
-qualitative scholars warn that interpretation, reflexivity, and positionality resist automation [15, 44].
+research: a fast-growing body uses LLMs to assist coding and thematic analysis [16, 22, 55] while
+qualitative scholars warn that interpretation, reflexivity, and positionality resist automation [17, 47].
 (3) Participant and persona simulation: “silicon samples” [2] and synthetic users are increasingly
-scrutinized for flattening identity and distorting variance [5, 12, 48]. (4) Learning with disagreement
-and perspectivism: work on annotator disagreement and human label variation [7] argues that for
+scrutinized for flattening identity and distorting variance [7, 14, 53]. (4) Learning with disagreement
+and perspectivism: work on annotator disagreement and human label variation [9] argues that for
 subjective constructs the “ceiling” is itself low and contested, which our Study 3 datasets (ChaosNLI,
 GoEmotions, MultiPICo) operationalize directly. We connect these threads with two methodological
 commitments often missing from judge evaluations: anchoring every verdict to the human-human
-ceiling, and probing data contamination so that agreement on older public datasets is not mistaken
-for genuine competence.
-Shared protocol. Both reviews follow PRISMA 2020 [38], identify studies through a triangulated
-search (the OpenAlex API as the primary bibliographic database, Semantic Scholar as a cross-check,
-and a structured web “deep-research” arm), and code each study on a five-level reliability verdict
 4
 
-Screening
+ceiling, and probing data contamination so that agreement on older public datasets is not mistaken
+for genuine competence.
+Shared protocol. Both reviews follow PRISMA 2020 [41], identify studies through a triangulated
+search (the OpenAlex API as the primary bibliographic database, Semantic Scholar as a cross-check,
+and a structured web “deep-research” arm), and code each study on a five-level reliability verdict
+benchmarked against the human-human agreement ceiling for the same task: 1 Validated (≈/>
+ceiling), 2 Promising (conditional), 3 Mixed (task-dependent), 4 Caution (below ceiling), 5
+Unreliable (near chance / bias-dominated). We report a reliability score = 6−verdict and synthesize
+within metric families rather than pooling incommensurable effect sizes. Full protocols, search logs,
+and the two coded corpora are released.
 
-Identification
+3 Study 1a: The cross-domain reliability landscape
+3.1 Method (summary)
+Study 1a systematically reviewed 217 studies across 29 domains comparing LLM-as-a-judge to human
+annotation. Identification triangulated OpenAlex (1500 records, 957 unique), Semantic Scholar, and
+a 59-query web search; screening retained on-topic empirical comparisons; 29 studies reported an
+extractable numeric agreement value (Figure 2; the full coded corpus is Table 7). Coding reliability:
+because the verdict rubric embeds judgement, we validated it with an independent re-coding of a
+25% random sample (n=54): the reliability verdict reproduced at Krippendorff α = 0.87 (ordinal)
+with 100% of cases within one level (Appendix D). The re-coders are LLM-assisted, like the primary
+pipeline, so this measures rubric reproducibility rather than human inter-rater agreement, which we
+flag as a limitation.
+3.2 Findings: a green/amber/red landscape
+The modal verdict is mixed/task-dependent; only 31% of studies sit in the reliable band and 19%
+in the problematic band (mean reliability 3.15/5). Reliability is governed by three properties:
+objectivity, tractable verification, and a low human-agreement floor. Green (≥3.5; 8
+domains): machine translation (system level), text-to-image alignment, verifiable instructionfollowing, QA/factuality, information extraction, general-NLG pairwise preference, dialogue, and
+legal scoring: here LLM judges frequently match or exceed the human ceiling (e.g., MT-Bench 85% vs.
+81% human-human [57]; GEMBA-MQM 96.5% [32]; SAFE wins 76% of disagreements [54]). Amber
+(19 domains): summarization, RAG, education, social-science annotation, medicine (structuredependent: κ ≈ 0.82-0.93 structured vs. 0.47-0.71 complex reasoning), code, and IR/relevance (strong
+but contested [15]). Red (2 domains): low-resource multilingual evaluation and creative writing
+(near-zero expert correlation [12]). Figures 3a-3b give the domain ordering and the domain×task
+landscape; the decision map (Figure 4b) positions domains by reliability against stakes.
+3.3 Failure modes and the decision map
+Recurring biases such as verbosity/length, position, self-preference, style-over-substance, preference
+leakage, non-determinism, and the expertise gap (judges converge to crowd, not expert, consensus [4])
+all modulate reliability (Figure 4a). Agreement should be benchmarked against the human ceiling,
+which on subjective tasks is itself low (Krippendorff α < 0.35 [30]). The Study-1a decision map
+(Figure 4b) and Table 1 translate this into deployment guidance and motivate both the moving-target
+test (Study 1b) and the HCC-specific analysis that follows.
+5
 
-Figure 1. PRISMA 2020 flow - two-arm identification (OpenAlex database + web/citation)
-Arm A - bibliographic database (OpenAlex API)
+Table 1: Domain-level decision table. Mean reliability score (1 = unreliable . . . 5 = validated),
+modal verdict, and traffic-light signal (green ≥ 3.5; amber 2.5-3.5; red < 2.5). Sorted by mean
+reliability. Small-n domains should be read together with the family-level aggregates.
+Domain / task
+
+n
+
+Mean rel.
+
+Machine Translation
+Text-to-Image
+Instruction Following
+QA & Factuality
+Information Extraction (NER/NLI)
+General NLG
+Dialogue
+Legal
+Education & Grading
+RAG
+Summarization
+Fact-Checking
+Sentiment & Emotion
+IR & Relevance
+Social-Science Annotation
+Peer Review & Science
+Multimodal (Vision-Language)
+Qualitative Coding
+Argument Quality
+Finance
+Medicine & Clinical
+Methodology & Bias
+Reward Modeling
+Code & SW Eng
+Reasoning & Math
+Content Moderation & Toxicity
+Mental Health
+Creative Writing
+Multilingual
+
+3
+2
+3
+5
+9
+21
+2
+2
+18
+3
+8
+4
+4
+9
+15
+6
+5
+6
+1
+3
+16
+38
+5
+7
+3
+5
+4
+6
+4
+
+4.33
+4.00
+4.00
+3.80
+3.78
+3.71
+3.50
+3.50
+3.39
+3.33
+3.25
+3.25
+3.25
+3.22
+3.20
+3.17
+3.00
+3.00
+3.00
+3.00
+2.88
+2.87
+2.80
+2.71
+2.67
+2.60
+2.50
+2.33
+2.25
+
+6
+
+Modal verdict
+
+Signal
+
+Promising
+Promising
+Validated
+Promising
+Promising
+Promising
+Promising
+Promising
+Mixed
+Mixed
+Promising
+Promising
+Mixed
+Promising
+Mixed
+Mixed
+Mixed
+Mixed
+Mixed
+Mixed
+Mixed
+Mixed
+Mixed
+Mixed
+Mixed
+Mixed
+Mixed
+Mixed
+Caution
+
+green
+green
+green
+green
+green
+green
+green
+green
+amber
+amber
+amber
+amber
+amber
+amber
+amber
+amber
+amber
+amber
+amber
+amber
+amber
+amber
+amber
+amber
+amber
+amber
+amber
+red
+red
+
+Arm A - bibliographic database (OpenAlex API)
 
 Arm B - web deep-search + citation chasing
 
@@ -251,6 +469,12 @@ Excluded at screening
 (off-topic / no comparison / type)
 n = 175
 
+Screening
+
+Identification
+
+Figure 1. PRISMA 2020 flow - two-arm identification (OpenAlex database + web/citation)
+
 Included
 
 Excluded, with reasons
@@ -266,23 +490,26 @@ Studies included in the review
 n = 217
 
 Figure 2: Study 1a PRISMA 2020 flow (two-arm identification: OpenAlex database + web/citation).
-benchmarked against the human-human agreement ceiling for the same task: 1 Validated (≈/>
-ceiling), 2 Promising (conditional), 3 Mixed (task-dependent), 4 Caution (below ceiling), 5
-Unreliable (near chance / bias-dominated). We report a reliability score = 6−verdict and synthesize
-within metric families rather than pooling incommensurable effect sizes. Full protocols, search logs,
-and the two coded corpora are released.
 
-3 Study 1a: The cross-domain reliability landscape
-3.1 Method (summary)
-Study 1a systematically reviewed 217 studies across 29 domains comparing LLM-as-a-judge to human
-annotation. Identification triangulated OpenAlex (1500 records, 957 unique), Semantic Scholar, and
-a 59-query web search; screening retained on-topic empirical comparisons; 29 studies reported an
-extractable numeric agreement value (Figure 2; the full coded corpus is Table 6).
-3.2 Findings: a green/amber/red landscape
-The modal verdict is mixed/task-dependent; only 31% of studies sit in the reliable band and 19%
-in the problematic band (mean reliability 3.15/5). Reliability is governed by three properties:
-objectivity, tractable verification, and a low human-agreement floor. Green (≥3.5; 8
-domains): machine translation (system level), text-to-image alignment, verifiable instruction5
+4 Study 1b: Is the reliability landscape a moving target?
+A systematic review necessarily captures results as reported, and most “promising”-band evidence
+in Study 1a was produced with proprietary judges that are now one or two model generations
+old (e.g. the influential G-Eval used GPT-4). This raises a question that the review alone cannot
+answer: when an LLM judge falls short of the human ceiling in a promising domain, is that a
+temporary limitation that more capable models will erase (“matter of time”), or a structural property
+of LLM-as-a-judge that better models do not overcome? Study 1b answers this directly for a flagship
+case by re-running the evaluation with the most powerful open models available to us today and
+comparing against the canonical reported numbers.
+4.1 Method
+We select SummEval [20] (summarization quality assessment, a central amber-band task in Study 1a)
+because it pairs (i) a widely cited LLM-judge result to beat (G-Eval/GPT-4; 36) with (ii) public expert
+human ratings on four aspects (coherence, consistency, fluency, relevance) for 100×16 = 1600 machine
+summaries. We replicate the G-Eval summary-level protocol verbatim (same aspect definitions, 1-5
+integer ratings, temperature 0) but swap the judge for the 4 most powerful open models in the
+available open-model catalogue (deepseek-v4-pro, glm-5.1, gptoss-120b, qwen3.6-35b-a3b). The
+comparison metric is the canonical summary-level Spearman: for each source document, correlate
+the judge’s 16 scores with the human means, averaged across documents. The bar to beat is
+7
 
 Figure 6. Reliability landscape: domain × judging task
 
@@ -568,195 +795,78 @@ Ranking
 
 Figure 3: Study 1a. (a) Mean reliability by domain (green/amber/red). (b) Reliability landscape:
 domain×judging task; verification/classification columns are greener than open-ended scoring.
-following, QA/factuality, information extraction, general-NLG pairwise preference, dialogue, and
-legal scoring: here LLM judges frequently match or exceed the human ceiling (e.g., MT-Bench 85% vs.
-81% human-human [52]; GEMBA-MQM 96.5% [29]; SAFE wins 76% of disagreements [49]). Amber
-(19 domains): summarization, RAG, education, social-science annotation, medicine (structuredependent: κ ≈ 0.82-0.93 structured vs. 0.47-0.71 complex reasoning), code, and IR/relevance (strong
-but contested [13]). Red (2 domains): low-resource multilingual evaluation and creative writing
-(near-zero expert correlation [10]). Figures 3a-3b give the domain ordering and the domain×task
-landscape; the decision map (Figure 4b) positions domains by reliability against stakes.
-3.3 Failure modes and the decision map
-Recurring biases such as verbosity/length, position, self-preference, style-over-substance, preference
-leakage, non-determinism, and the expertise gap (judges converge to crowd, not expert, consensus [4])
-all modulate reliability (Figure 4a). Agreement should be benchmarked against the human ceiling,
-which on subjective tasks is itself low (Krippendorff α < 0.35 [27]). The Study-1a decision map
-(Figure 4b) and Table 1 translate this into deployment guidance and motivate both the moving-target
-test (Study 1b) and the HCC-specific analysis that follows.
+Table 2: Study 1b. Summary-level Spearman ρ of the most powerful open judges on SummEval vs.
+the reported G-Eval-4/GPT-4 correlations (25,600 judgments). Green cells surpass the reported
+per-aspect number.
+Judge
 
-4 Study 1b: Is the reliability landscape a moving target?
-A systematic review necessarily captures results as reported, and most “promising”-band evidence
-in Study 1a was produced with proprietary judges that are now one or two model generations
-old (e.g. the influential G-Eval used GPT-4). This raises a question that the review alone cannot
-answer: when an LLM judge falls short of the human ceiling in a promising domain, is that a
-temporary limitation that more capable models will erase (“matter of time”), or a structural property
-of LLM-as-a-judge that better models do not overcome? Study 1b answers this directly for a flagship
-case by re-running the evaluation with the most powerful open models available to us today and
-6
+Coher.
 
-Table 1: Domain-level decision table. Mean reliability score (1 = unreliable . . . 5 = validated),
-modal verdict, and traffic-light signal (green ≥ 3.5; amber 2.5-3.5; red < 2.5). Sorted by mean
-reliability. Small-n domains should be read together with the family-level aggregates.
-Domain / task
+Consist.
 
-n
+Fluency
 
-Mean rel.
+Relev.
 
-Machine Translation
-Text-to-Image
-Instruction Following
-QA & Factuality
-Information Extraction (NER/NLI)
-General NLG
-Dialogue
-Legal
-Education & Grading
-RAG
-Summarization
-Fact-Checking
-Sentiment & Emotion
-IR & Relevance
-Social-Science Annotation
-Peer Review & Science
-Multimodal (Vision-Language)
-Qualitative Coding
-Argument Quality
-Finance
-Medicine & Clinical
-Methodology & Bias
-Reward Modeling
-Code & SW Eng
-Reasoning & Math
-Content Moderation & Toxicity
-Mental Health
-Creative Writing
-Multilingual
+Avg ρ
 
-3
-2
-3
-5
-9
-21
-2
-2
-18
-3
+Reported (G-Eval-4)
+
+0.582
+
+0.507
+
+0.455
+
+0.547
+
+0.523
+
+deepseek-v4-pro
+qwen3.6-35b-a3b
+glm-5.1
+gptoss-120b
+
+0.548
+0.606
+0.650
+0.586
+
+0.688
+0.702
+0.693
+0.685
+
+0.392
+0.298
+0.217
+0.260
+
+0.540
+0.540
+0.543
+0.482
+
+0.542
+0.536
+0.526
+0.503
+
+G-Eval/GPT-4’s reported per-aspect correlations (coherence .582, consistency .507, fluency .455,
+relevance .547; average ≈.52). In total Study 1b contributes 25,600 fresh judgments.
+4.2 Results
+Table 2 reports each open model’s summary-level Spearman against the reported G-Eval bar, and
+Figure 5 plots them per aspect. The most powerful open models now match or exceed the reported
+proprietary-judge correlations on SummEval. 3 of the 4 open judges beat G-Eval’s reported average
+correlation, led by deepseek-v4-pro (avg summary-level ρ = 0.542 vs. the reported ≈0.52). The
+aspect pattern is itself the finding. On consistency (the most verifiable judgment, groundable in
+the source document) all four models leap past the reported value (from .507 to .685-.702), and
+on coherence three of four do (up to .650 vs. .582); relevance is on par (.48-.54 vs. .55). But on
+fluency every open model falls well short (.22-.39 vs. a reported .455). We diagnose why: fluency
+is the most compressed aspect of the human reference, with the lowest within-document rating
+variance (SD = 0.63 vs 0.81 for consistency) and 80% of summaries rated near the top of the scale,
+so it offers the least to rank, and it is the aspect on which the reported proprietary judge also scores
 8
-4
-4
-9
-15
-6
-5
-6
-1
-3
-16
-38
-5
-7
-3
-5
-4
-6
-4
-
-4.33
-4.00
-4.00
-3.80
-3.78
-3.71
-3.50
-3.50
-3.39
-3.33
-3.25
-3.25
-3.25
-3.22
-3.20
-3.17
-3.00
-3.00
-3.00
-3.00
-2.88
-2.87
-2.80
-2.71
-2.67
-2.60
-2.50
-2.33
-2.25
-
-7
-
-Modal verdict
-
-Signal
-
-Promising
-Promising
-Validated
-Promising
-Promising
-Promising
-Promising
-Promising
-Mixed
-Mixed
-Promising
-Promising
-Mixed
-Promising
-Mixed
-Mixed
-Mixed
-Mixed
-Mixed
-Mixed
-Mixed
-Mixed
-Mixed
-Mixed
-Mixed
-Mixed
-Mixed
-Mixed
-Caution
-
-green
-green
-green
-green
-green
-green
-green
-green
-amber
-amber
-amber
-amber
-amber
-amber
-amber
-amber
-amber
-amber
-amber
-amber
-amber
-amber
-amber
-amber
-amber
-amber
-amber
-red
-red
 
 Figure 15. Decision map - where to deploy LLM-as-a-judge (bubble area #studies)
 KEEP HUMANS
@@ -822,11 +932,16 @@ domain-expertise / stakes required
 
 0
 
-HUMAN-IN-THE-LOOP
-(reliable but high-stakes)
-
 Creative Writing
 Code & SW Eng
+Fact-Checking
+Qualitative Coding
+Machine Translation
+Education & Grading
+Multilingual
+Content Moderation & Toxicity
+
+medium
 
 Summarization
 Information Extraction (NER/NLI)
@@ -839,14 +954,8 @@ low
 6
 number of studies reporting the failure mode / bias
 
-Fact-Checking
-Qualitative Coding
-Machine Translation
-Education & Grading
-Multilingual
-Content Moderation & Toxicity
-
-medium
+HUMAN-IN-THE-LOOP
+(reliable but high-stakes)
 
 VALIDATE FIRST
 (easy but unreliable)
@@ -854,6 +963,8 @@ VALIDATE FIRST
 1.5
 
 8
+
+(a)
 
 2.0
 
@@ -873,8 +984,6 @@ Reward Modeling IR & Relevance
 3.5
 mean reliability score (1 = unreliable
 
-(a)
-
 4.0
 5 = validated)
 
@@ -886,79 +995,33 @@ mean reliability score (1 = unreliable
 
 Figure 4: Study 1a. (a) Catalogue of reported failure modes/biases. (b) Deployment decision map
 (reliability× stakes; bubble area ∝ studies).
-Table 2: Study 1b. Summary-level Spearman ρ of the most powerful open judges on SummEval vs.
-the reported G-Eval-4/GPT-4 correlations (25,600 judgments). Green cells surpass the reported
-per-aspect number.
-Judge
+lowest. We are careful not to over-claim a hard “structural ceiling”: a noiseless judge returning
+the rounded human means would still attain ρ≈0.87 on fluency, so the open models’ especially
+low fluency correlation is part compression of the reference and part a genuine residual gap, and
+probability-weighted scoring (which we did not run) could narrow it. The defensible claim is the
+weaker one: gains from scale concentrate on the verifiable aspects, while the hardest-to-rank aspect
+stays hard for every judge.
+Interpretation: time vs. structure. Study 1b shows the reliability landscape is partly a moving
+target. Where Study 1a’s amber rating reflected a capability gap on a verifiable sub-judgment,
+today’s open models close or exceed it; reliability there is largely a matter of time and access. But
+where the shortfall reflects a compressed or contested human ceiling (e.g. fluency, and, as Study 3 will
+show, subjective social annotation), even the most powerful models do not break through, because
+the limit lives in the human reference, not the model. This distinction, temporal capability gap vs.
+structural ceiling, is the lens we carry into HCC.
+Takeaway for HCC. Study 1a says LLM judges are safe where the task is objective and verifiable,
+and Study 1b shows that frontier open models are now strong enough to match proprietary judges on
+exactly those verifiable tasks. But HCC’s signature methods (qualitative interpretation, participant
+study, design judgment) are precisely the subjective, expert, interpretive tasks Study 1a flags as risky
+and Study 1b predicts scale will not fix. Study 2 tests whether that prediction holds in the HCC
+literature itself.
 
-Coher.
-
-Consist.
-
-Fluency
-
-Relev.
-
-Avg ρ
-
-Reported (G-Eval-4)
-
-0.582
-
-0.507
-
-0.455
-
-0.547
-
-0.523
-
-deepseek-v4-pro
-qwen3.6-35b-a3b
-glm-5.1
-gptoss-120b
-
-0.548
-0.606
-0.650
-0.586
-
-0.688
-0.702
-0.693
-0.685
-
-0.392
-0.298
-0.217
-0.260
-
-0.540
-0.540
-0.543
-0.482
-
-0.542
-0.536
-0.526
-0.503
-
-comparing against the canonical reported numbers.
-4.1 Method
-We select SummEval [18] (summarization quality assessment, a central amber-band task in Study 1a)
-because it pairs (i) a widely cited LLM-judge result to beat (G-Eval/GPT-4; 33) with (ii) public expert
-human ratings on four aspects (coherence, consistency, fluency, relevance) for 100×16 = 1600 machine
-summaries. We replicate the G-Eval summary-level protocol verbatim (same aspect definitions, 1-5
-integer ratings, temperature 0) but swap the judge for the 4 most powerful open models in the
-available open-model catalogue (deepseek-v4-pro, glm-5.1, gptoss-120b, qwen3.6-35b-a3b). The
-comparison metric is the canonical summary-level Spearman: for each source document, correlate
-the judge’s 16 scores with the human means, averaged across documents. The bar to beat is
-G-Eval/GPT-4’s reported per-aspect correlations (coherence .582, consistency .507, fluency .455,
-relevance .547; average ≈.52). In total Study 1b contributes 25,600 fresh judgments.
-4.2 Results
-Table 2 reports each open model’s summary-level Spearman against the reported G-Eval bar, and
-Figure 5 plots them per aspect. The most powerful open models now match or exceed the reported
-8
+5 Study 2: LLM substitution in HCC, HCI, and qualitative methods
+5.1 Motivation and research questions
+Study 1’s map is domain-general; HCC needs a method-specific account. Human-centered research
+is built on methods that historically require human input: qualitative coding, thematic and content
+analysis, interviews and open-ended survey analysis, crowdsourced annotation, participant studies,
+persona development, usability/heuristic evaluation, and design critique. Study 2 asks: (RQ2.1)
+9
 
 summary-level Spearman (vs human means)
 
@@ -1002,30 +1065,30 @@ Relevance
 Figure 5: Study 1b. Summary-level Spearman of the most powerful open judges on SummEval, per
 aspect, against the reported G-Eval/GPT-4 bar (dashed). Bars above the dashed line indicate an
 open model that surpasses the reported proprietary-judge correlation.
-proprietary-judge correlations on SummEval. 3 of the 4 open judges beat G-Eval’s reported average
-correlation, led by deepseek-v4-pro (avg summary-level ρ = 0.542 vs. the reported ≈0.52). The
-aspect pattern is itself the finding. On consistency (the most verifiable judgment, groundable in
-the source document) all four models leap past the reported value (from .507 to .685-.702), and
-on coherence three of four do (up to .650 vs. .582); relevance is on par (.48-.54 vs. .55). But
-on fluency every open model falls well short (.22-.39 vs. a reported .455): human fluency ratings
-of competent machine summaries are compressed near the top of the scale (low variance), so the
-summary-level correlation is structurally low regardless of how capable the judge is, a limit that lives
-in the human reference, not the model, and that scale does not move.
-Interpretation: time vs. structure. Study 1b shows the reliability landscape is partly a moving
-target. Where Study 1a’s amber rating reflected a capability gap on a verifiable sub-judgment,
-today’s open models close or exceed it; reliability there is largely a matter of time and access. But
-where the shortfall reflects a compressed or contested human ceiling (e.g. fluency, and, as Study 3 will
-show, subjective social annotation), even the most powerful models do not break through, because
-the limit lives in the human reference, not the model. This distinction, temporal capability gap vs.
-structural ceiling, is the lens we carry into HCC.
-Takeaway for HCC. Study 1a says LLM judges are safe where the task is objective and verifiable,
-and Study 1b shows that frontier open models are now strong enough to match proprietary judges on
-exactly those verifiable tasks. But HCC’s signature methods (qualitative interpretation, participant
-study, design judgment) are precisely the subjective, expert, interpretive tasks Study 1a flags as risky
-and Study 1b predicts scale will not fix. Study 2 tests whether that prediction holds in the HCC
-literature itself.
-
-9
+which of these methods have been attempted with LLMs, and how reliably do LLM outputs agree
+with human input? (RQ2.2) How does the field position the LLM, to augment, replace, or simulate
+the human? (RQ2.3) What epistemic stance (enabling, tension, critical) does the literature take,
+and what does that imply for HCC practice?
+5.2 Method
+Following the shared protocol, we ran a Study-2-specific identification arm: 25 HCC/HCI/qualitative
+concept-block queries against OpenAlex (857 unique works), triangulated with the web arm and with
+the venue-scoped sweep of Study 1 (CHI, CSCW, UIST, IUI, TOCHI). After topicality screening
+and eligibility assessment we included 55 studies (Figure 6). An independent re-coding of a 30%
+sample (n=16) reproduced the verdict at Krippendorff α = 0.85 and the augment/replace/simulate
+role at α = 0.80; the epistemic stance code is the least reliable (α = 0.59), so we treat stance-based
+claims as indicative rather than precise (Appendix D). We extracted, per study: the HCC method;
+the LLM role (replace / augment / simulate); reported agreement and the human baseline; the
+reliability verdict; the epistemic stance (enabling / tension / critical); and the community (HCI,
+CSCW, qualitative-methods, computational social science, NLP, health). The full corpus is Table 8.
+5.3 RQ2.1: Which methods, and how reliable?
+LLMs have been compared against human input across 15 distinct HCC methods (Figure 7a), most
+heavily in thematic analysis, synthetic participants, and crowdsourced annotation. Reliability is
+strongly method-dependent (Figure 7b; Table 3). The same objectivity/interpretation axis from
+Study 1 governs HCC: objective crowd-annotation is the most reliable method to substitute:
+ChatGPT matches or beats crowd workers and even trained coders on stance, topic, and frame
+labeling [23, 50]; deductive/inductive coding and content/thematic analysis are reliable
+as augmentation, with human-equivalent agreement on structured codebooks (GPT-4 exceeding
+10
 
 Figure S2-1. Study 2 identification (HCC/HCI/qualitative methods)
 OpenAlex (Study-2 queries)
@@ -1050,31 +1113,32 @@ Included in Study 2
 n = 55
 
 Figure 6: Study 2 identification flow (HCC/HCI/qualitative methods).
-
-5 Study 2: LLM substitution in HCC, HCI, and qualitative methods
-5.1 Motivation and research questions
-Study 1’s map is domain-general; HCC needs a method-specific account. Human-centered research
-is built on methods that historically require human input: qualitative coding, thematic and content
-analysis, interviews and open-ended survey analysis, crowdsourced annotation, participant studies,
-persona development, usability/heuristic evaluation, and design critique. Study 2 asks: (RQ2.1)
-which of these methods have been attempted with LLMs, and how reliably do LLM outputs agree
-with human input? (RQ2.2) How does the field position the LLM, to augment, replace, or simulate
-the human? (RQ2.3) What epistemic stance (enabling, tension, critical) does the literature take,
-and what does that imply for HCC practice?
-5.2 Method
-Following the shared protocol, we ran a Study-2-specific identification arm: 25 HCC/HCI/qualitative
-concept-block queries against OpenAlex (857 unique works), triangulated with the web arm and with
-the venue-scoped sweep of Study 1 (CHI, CSCW, UIST, IUI, TOCHI). After topicality screening and
-eligibility assessment we included 55 studies (Figure 6). We extracted, per study: the HCC method;
-the LLM role (replace / augment / simulate); reported agreement and the human baseline; the
-reliability verdict; the epistemic stance (enabling / tension / critical); and the community (HCI,
-CSCW, qualitative-methods, computational social science, NLP, health). The full corpus is Table 7.
-5.3 RQ2.1: Which methods, and how reliable?
-LLMs have been compared against human input across 15 distinct HCC methods (Figure 7a), most
-heavily in thematic analysis, synthetic participants, and crowdsourced annotation. Reliability is
-strongly method-dependent (Figure 7b; Table 3). The same objectivity/interpretation axis from
-Study 1 governs HCC: objective crowd-annotation is the most reliable method to substitute:
-10
+substantial κ on 8/9 hermeneutic tasks [19]; Gemini κ = 0.907 in multi-LLM thematic analysis
+[29]; 79.7% agreement in health thematic summarization [11]) but only moderate agreement in open
+interpretive settings (κ ≈ 0.40-0.46 [35, 56]); and participant/persona simulation and usability
+evaluation are the least reliable.
+5.4 RQ2.2: Augment, replace, or simulate?
+HCC overwhelmingly positions LLMs to augment humans, not replace them: 36 of 55 studies
+frame the LLM as a collaborator/assistant, versus 14 as a replacement and 5 as a human simulator
+(Figure 8a). This is not merely rhetorical caution; it tracks reliability (Figure 9): augmentation
+studies skew reliable, whereas replacement is validated only for objective annotation and simulation
+of participants is the least reliable role (mean reliability augment 3.17 vs. replace 3.07 vs. simulate
+2.8). The replacement mean is buoyed by objective crowd-annotation; remove it and replacement
+of interpretive human input is firmly amber/red. The canonical HCC workflow that emerges is
+human-in-the-loop: LLM proposes, human vets and retains interpretive authority [16, 22, 38].
+5.5 RQ2.3: Epistemic stance and the limits of substitution
+The dominant stance is tension (38/55), with 8 explicitly critical and only 9 unreservedly enabling
+(Figure 8b). Three threads recur. (i) Interpretation and reflexivity. Qualitative scholars
+warn that LLMs perform surface-level extraction well but cannot supply the situated, reflexive
+interpretation that gives qualitative findings their validity, and that “conditional trust” in tool output
+risks hollowing out analytic rigor [17, 39, 40, 47]. (ii) Participants and identity. Replacing
+human participants with LLMs flattens and misportrays demographic groups, positionality cannot
+be simulated [53], and LLM “subgroups” are often caricatures [14]; synthetic survey data distort
+variances and correlations [7], and an LLM is worth only a bounded number of real respondents
+[28]. HCI critiques accordingly recast synthetic users as “objects of inquiry,” not stand-ins [27, 46].
+(iii) Expert design judgment. GPT-4o overlaps only 21% with expert-found usability issues and
+hallucinates false positives [25], and LLM UI critique trails expert designers [18], though synthetic
+11
 
 Figure S2-2. HCC/HCI/qualitative methods studied with LLMs (n=55)
 Thematic analysis
@@ -1179,34 +1243,33 @@ mean reliability score (1 = unreliable
 
 Figure 7: Study 2. (a) HCC/HCI/qualitative methods studied with LLMs (colour = mean reliability).
 (b) Mean reliability of LLM substitution by method.
-ChatGPT matches or beats crowd workers and even trained coders on stance, topic, and frame
-labeling [20, 45]; deductive/inductive coding and content/thematic analysis are reliable
-as augmentation, with human-equivalent agreement on structured codebooks (GPT-4 exceeding
-substantial κ on 8/9 hermeneutic tasks [17]; Gemini κ = 0.907 in multi-LLM thematic analysis
-[26]; 79.7% agreement in health thematic summarization [9]) but only moderate agreement in open
-interpretive settings (κ ≈ 0.40-0.46 [32, 51]); and participant/persona simulation and usability
-evaluation are the least reliable.
-5.4 RQ2.2: Augment, replace, or simulate?
-HCC overwhelmingly positions LLMs to augment humans, not replace them: 36 of 55 studies
-frame the LLM as a collaborator/assistant, versus 14 as a replacement and 5 as a human simulator
-(Figure 8a). This is not merely rhetorical caution; it tracks reliability (Figure 9): augmentation
-studies skew reliable, whereas replacement is validated only for objective annotation and simulation
-of participants is the least reliable role (mean reliability augment 3.17 vs. replace 3.07 vs. simulate
-2.8). The replacement mean is buoyed by objective crowd-annotation; remove it and replacement
-of interpretive human input is firmly amber/red. The canonical HCC workflow that emerges is
-human-in-the-loop: LLM proposes, human vets and retains interpretive authority [14, 19, 35].
-5.5 RQ2.3: Epistemic stance and the limits of substitution
-The dominant stance is tension (38/55), with 8 explicitly critical and only 9 unreservedly enabling
-(Figure 8b). Three threads recur. (i) Interpretation and reflexivity. Qualitative scholars
-warn that LLMs perform surface-level extraction well but cannot supply the situated, reflexive
-interpretation that gives qualitative findings their validity, and that “conditional trust” in tool output
-risks hollowing out analytic rigor [15, 36, 37, 44]. (ii) Participants and identity. Replacing
-human participants with LLMs flattens and misportrays demographic groups, positionality cannot
-be simulated [48], and LLM “subgroups” are often caricatures [12]; synthetic survey data distort
-variances and correlations [5], and an LLM is worth only a bounded number of real respondents
-[25]. HCI critiques accordingly recast synthetic users as “objects of inquiry,” not stand-ins [24, 43].
-(iii) Expert design judgment. GPT-4o overlaps only 21% with expert-found usability issues and
-11
+heuristic evaluation can exceed novice evaluators on issue recall [58]. Figure 10 shows coverage skews
+to HCI and computational social science, with the augment-replace reliability gap visible across
+communities.
+5.6 Study 2 synthesis
+For HCC research, the evidence supports a clear, conditional posture. Validated to substitute:
+objective crowd/data annotation (stance, topic, relevance, frames) where a human ceiling is modest
+and verifiable. Reliable only as augmentation (human-in-the-loop): deductive/inductive
+qualitative coding and thematic/ content analysis: LLMs accelerate breadth and first-pass coding,
+but humans must own interpretation, theme development, and reflexive accounting. Unsafe to
+substitute: simulating human participants, generating personas as stand-ins for real users, and
+replacing expert usability/design judgment: these flatten identity, fabricate issues, and forfeit the
+situated knowledge that defines human-centered inquiry. This posture both confirms Study 1’s
+objective/subjective prediction within HCC and exposes concrete gaps (§6) where HCC datasets
+with human labels have never been formally tested with an LLM judge.
+
+6 Study 3: An empirical LLM-as-a-judge evaluation on HCC datasets with
+human ground truth
+Studies 1-2 expose a recurring gap: many human-centered datasets ship with human labels yet
+have never had a formal LLM-as-a-judge evaluation, meaning a panel of models, bias controls,
+agreement benchmarked against the human ceiling, and a contamination check. Study 3 closes this
+gap empirically with a released, reproducible harness.
+6.1 Method
+We evaluate a panel of 6 open models served via an institutional vLLM API (OpenAI-compatible),
+spanning five families and 9B-754B parameters (glm-5.1 754B, gptoss-120b, deepseek-v4, gemma-4-31b,
+qwen3.6-27b, qwen3.5-9b), run in parallel at each model’s documented concurrency. Each model
+judges every item as a virtual annotator under the same instructions the humans received. We
+12
 
 Table 3: Study 2 method-level decision table: study count, modal LLM role, mean reliability, and
 traffic-light signal (green ≥ 3.5; amber 2.5-3.5; red < 2.5).
@@ -1300,37 +1363,40 @@ amber
 amber
 red
 
-hallucinates false positives [22], and LLM UI critique trails expert designers [16], though synthetic
-heuristic evaluation can exceed novice evaluators on issue recall [53]. Figure 10 shows coverage skews
-to HCI and computational social science, with the augment-replace reliability gap visible across
-communities.
-5.6 Study 2 synthesis
-For HCC research, the evidence supports a clear, conditional posture. Validated to substitute:
-objective crowd/data annotation (stance, topic, relevance, frames) where a human ceiling is modest
-and verifiable. Reliable only as augmentation (human-in-the-loop): deductive/inductive
-qualitative coding and thematic/ content analysis: LLMs accelerate breadth and first-pass coding,
-but humans must own interpretation, theme development, and reflexive accounting. Unsafe to
-substitute: simulating human participants, generating personas as stand-ins for real users, and
-replacing expert usability/design judgment: these flatten identity, fabricate issues, and forfeit the
-situated knowledge that defines human-centered inquiry. This posture both confirms Study 1’s
-objective/subjective prediction within HCC and exposes concrete gaps (§6) where HCC datasets
-with human labels have never been formally tested with an LLM judge.
-
-6 Study 3: An empirical LLM-as-a-judge evaluation on HCC datasets with
-human ground truth
-Studies 1-2 expose a recurring gap: many human-centered datasets ship with human labels yet
-have never had a formal LLM-as-a-judge evaluation, meaning a panel of models, bias controls,
-agreement benchmarked against the human ceiling, and a contamination check. Study 3 closes this
-gap empirically with a released, reproducible harness.
-
-12
+benchmark against the human-human ceiling (random-annotator-vs-majority accuracy and pairwise
+agreement, computed from the per-item annotator counts), report accuracy, Cohen’s κ, and macro-F1
+against the majority gold, compute a count-based alt-test winning rate [9], aggregate the panel into
+a majority jury [51], and run a verbatim quote-completion contamination probe. Sample size is
+power-justified at n=500 items/dataset (95% CI half-width ≤ ±4.4%; >80% power for a 0.10 gap vs
+the ceiling). The run comprised 18000 judgments across 6 datasets with zero API errors and a
+100% answer-parse rate; only item-level labels and aggregates are released (no raw text), and the
+two sensitive sets are used under their public licenses.
+6.2 Results
+Figures 11-12 and Table 4 yield one organizing finding: the human-agreement ceiling governs
+LLM reliability. Where humans agree little (NLI; ceiling 0.64-0.75) the panel matches or exceeds
+them: on ChaosNLI-SNLI 5/6 models are Validated (jury 0.858 > ceiling 0.752), and ChaosNLIMNLI is Promising. Where humans agree strongly on a subjective social construct, the panel falls
+short: GoEmotions 4-way sentiment (ceiling 0.78) is uniformly Mixed (best 0.61); HateXplain 3-way
+hate (ceiling 0.835) is Mixed at best and Unreliable for the small model; binary offensiveness
+(SBIC, ceiling 0.905) is the strongest social-computing case (Promising; glm-5.1 0.856) yet still
+below the ceiling. The sixth dataset is a deliberate clean condition: MultiPICo irony detection [10],
+a 2024 perspectivist corpus recent enough to be unlikely in pretraining. Its human ceiling is itself
+low (0.82, just above the 76% majority baseline); the panel matches it (Promising; best 0.82, jury
+0.83) but largely by defaulting to the majority class (macro-F1 ≈0.45), and qwen3.5-9b collapses
+(0.40, Unreliable). Four further effects: (i) granularity: binary offensiveness (Promising) clearly
+beats 3-way hate (Mixed); (ii) scale: qwen3.5-9b is weakest on every dataset (Caution/Unreliable),
+while 27B-754B cluster together (bigger is not always better: 31B gemma ties the 754B glm); (iii) the
+alt-test (winning rate ≥0.5) is passed only on the low-ceiling tasks, NLI and the binary irony set
+(5/6 models on both ChaosNLI-SNLI and MultiPICo); on every high-consensus task, including the
+Promising binary offensiveness (SBIC, 0/6), no model earns the statistical right to replace a human
+annotator; (iv) juries raise accuracy but do not lift any subjective task above its human ceiling. The
+13
 
 Figure S2-3. How HCC research positions LLMs: augment vs replace, and epistemic stance
 (a) Intended role of the LLM
 (b) Epistemic stance toward substitution
-36
-
 35
+
+36
 
 38
 
@@ -1357,6 +1423,8 @@ studies
 
 10
 
+9
+
 10
 
 5
@@ -1369,8 +1437,6 @@ studies
 augment
 
 simulate
-
-9
 
 8
 
@@ -1387,83 +1453,6 @@ critical
 
 Figure 8: Study 2. (a) Intended LLM role across the HCC corpus; augmentation dominates. (b)
 Epistemic stance toward substitution; tension dominates.
-6.1 Method
-We evaluate a panel of 6 open models served via an institutional vLLM API (OpenAI-compatible),
-spanning five families and 9B-754B parameters (glm-5.1 754B, gptoss-120b, deepseek-v4, gemma-4-31b,
-qwen3.6-27b, qwen3.5-9b), run in parallel at each model’s documented concurrency. Each model
-judges every item as a virtual annotator under the same instructions the humans received. We
-benchmark against the human-human ceiling (random-annotator-vs-majority accuracy and pairwise
-agreement, computed from the per-item annotator counts), report accuracy, Cohen’s κ, and macro-F1
-against the majority gold, compute a count-based alt-test winning rate [7], aggregate the panel into
-a majority jury [46], and run a verbatim quote-completion contamination probe. Sample size is
-power-justified at n=500 items/dataset (95% CI half-width ≤ ±4.4%; >80% power for a 0.10 gap vs
-the ceiling). The run comprised 18000 judgments across 6 datasets with zero API errors and a
-100% answer-parse rate; only item-level labels and aggregates are released (no raw text), and the
-two sensitive sets are used under their public licenses.
-6.2 Results
-Figures 11-12 and Table 4 yield one organizing finding: the human-agreement ceiling governs
-LLM reliability. Where humans agree little (NLI; ceiling 0.64-0.75) the panel matches or exceeds
-them: on ChaosNLI-SNLI 5/6 models are Validated (jury 0.858 > ceiling 0.752), and ChaosNLIMNLI is Promising. Where humans agree strongly on a subjective social construct, the panel falls
-short: GoEmotions 4-way sentiment (ceiling 0.78) is uniformly Mixed (best 0.61); HateXplain 3-way
-hate (ceiling 0.835) is Mixed at best and Unreliable for the small model; binary offensiveness
-(SBIC, ceiling 0.905) is the strongest social-computing case (Promising; glm-5.1 0.856) yet still
-below the ceiling. The sixth dataset is a deliberate clean condition: MultiPICo irony detection [8],
-a 2024 perspectivist corpus recent enough to be unlikely in pretraining. Its human ceiling is itself
-low (0.82, just above the 76% majority baseline); the panel matches it (Promising; best 0.82, jury
-0.83) but largely by defaulting to the majority class (macro-F1 ≈0.45), and qwen3.5-9b collapses
-
-13
-
-Validated
-
-Promising
-
-Mixed
-
-Caution
-
-Unreliable
-
-Figure S2-4. Reliability verdict by LLM role: augmentation is reliable, replacement/simulation are not
-replace
-(n=14)
-
-14%
-
-14%
-
-simulate
-(n=5)
-
-36%
-
-36%
-
-80%
-
-augment
-(n=36)
-
-20%
-
-22%
-
-0
-
-72%
-
-20
-
-40
-60
-share of studies (%)
-
-80
-
-100
-
-Figure 9: Study 2. Reliability verdict by LLM role. Augmentation is reliable; replacement is reliable
-only for objective annotation; participant/usability simulation is the least reliable.
 Table 4: Study 3 results across 6 datasets × 6 models (18000 judgments). Human ceiling = randomannotator-vs-majority accuracy; alt-test pass = winning rate ≥ 0.5; contamination tier from the
 verbatim-recall probe.
 Dataset
@@ -1543,23 +1532,96 @@ MEDIUM
 MEDIUM
 MEDIUM
 
-(0.40, Unreliable). Four further effects: (i) granularity: binary offensiveness (Promising) clearly
-beats 3-way hate (Mixed); (ii) scale: qwen3.5-9b is weakest on every dataset (Caution/Unreliable),
-while 27B-754B cluster together (bigger is not always better: 31B gemma ties the 754B glm); (iii) the
-alt-test (winning rate ≥0.5) is passed only on the low-ceiling tasks, NLI and the binary irony set
-(5/6 models on both ChaosNLI-SNLI and MultiPICo); on every high-consensus task, including the
-Promising binary offensiveness (SBIC, 0/6), no model earns the statistical right to replace a human
-annotator; (iv) juries raise accuracy but do not lift any subjective task above its human ceiling. The
 contamination probe (Table 4, last column) shows the strongest judges have non-trivial verbatim
-recall across sets (gemma MEDIUM throughout), caveating the NLI “Validated” result; crucially the
-recent low-contamination MultiPICo (LOW for the small-recall qwen3.5-9b) is still matched only at
-its low human ceiling, so the social-computing shortfall tracks the human ceiling, not memorization.
-6.3 What governs reliability? A mixed-effects analysis
-To test the “ceiling governs” claim inferentially rather than descriptively, we model every individual
-judgment (N =18000; outcome = 1[judge = majority gold]) with a logistic specification whose fixed
-effects are task subjectivity (1−human-ceiling accuracy, at the dataset level) and model scale (log10
-parameters), reported both as a Bayesian mixed-effects logistic GLMM with random intercepts for
+recall across sets (gemma MEDIUM throughout). A clean control is sobering and we report it plainly:
+on freshly authored post-cutoff text that no model can have seen, the high-recall model still scores
+0.45 overlap (MEDIUM), i.e. it confabulates plausible continuations regardless of memorization
+(Appendix E). The uniform MEDIUM tiers are therefore largely a probe artifact for that model, not
+evidence of memorization, and we do not treat the verbatim probe as a reliable leakage test. The
+one interpretable signal is that the low-recall model scores LOW on the recent MultiPICo, consistent
+with no memorization there; combined with the fact that MultiPICo is matched only at its low
+human ceiling, this argues the social-computing shortfall reflects human disagreement rather than
+pretraining exposure. We otherwise lean on the disagreement analysis, not the contamination probe,
+for our claims.
+
 14
+
+Validated
+
+Promising
+
+Mixed
+
+Caution
+
+Unreliable
+
+Figure S2-4. Reliability verdict by LLM role: augmentation is reliable, replacement/simulation are not
+replace
+(n=14)
+
+14%
+
+14%
+
+simulate
+(n=5)
+
+36%
+
+36%
+
+80%
+
+augment
+(n=36)
+
+22%
+
+0
+
+20%
+
+72%
+
+20
+
+40
+60
+share of studies (%)
+
+80
+
+100
+
+Figure 9: Study 2. Reliability verdict by LLM role. Augmentation is reliable; replacement is reliable
+only for objective annotation; participant/usability simulation is the least reliable.
+6.3 What governs reliability? A mixed-effects analysis
+We probe the “ceiling governs” claim with successively stricter models of judgment correctness
+(1[judge = majority gold], over all 18000 judgments). A naive logistic model with only task
+subjectivity (1−ceiling, at the dataset level) and scale (log10 params) returns a large subjectivity
+effect (Figure 13a). That model is confounded, however: with only six datasets, subjectivity is
+collinear with construct granularity (number of classes) and label base-rate skew. When we add
+those competitors and use item-cluster-robust standard errors, the apparent subjectivity effect is
+no longer significant (OR = 0.74, p = 0.45); the robust item-level predictors are base-rate skew
+(OR = 8.2, p<.001), model scale (OR = 1.30, p<.001), and granularity (OR = 0.84, p = 0.02). A
+dataset-level meta-regression (the honest unit, n=6) gives a negative accuracy-subjectivity slope
+(−0.39) that is not robust to leave-one-dataset-out ([−0.57, −0.01]). We therefore do not claim a
+clean dataset-level “subjectivity” coefficient, and we have tempered the earlier draft accordingly.
+What is robust is the disagreement account. (i) Variance lives in the items: the randomintercept SD is far larger across items (SD = 2.02) than across datasets (0.73) or models (betweenmodel accuracy SD = 0.086); which item is judged, that is, its latent human (dis)agreement, matters
+more than which model judges or which dataset it comes from. (ii) Judges fail where humans
+disagree: on every dataset, panel accuracy on low-human-disagreement (low-entropy) items far
+exceeds accuracy on high-disagreement items (Table 5, columns acc↓H vs acc↑H ), and the panel’s
+label distribution diverges from the human distribution (Jensen-Shannon) most on the most contested
+datasets. (iii) Chance-corrected agreement confirms it: best-model Cohen’s κ and macro-F1
+(Table 5) fall sharply on subjective constructs (e.g. MultiPICo κ=0.40 at 0.82 accuracy), so the
+verdicts are not artifacts of raw accuracy on imbalanced labels. (iv) A Benjamini-Hochberg analysis
+across the 36 judge×dataset cells, using bootstrap CIs for each ceiling rather than a fixed constant,
+still places the majority significantly below their human ceiling. In short, scale helps a little and
+base-rate structure helps a lot, but the binding constraint is the human disagreement embedded in
+each item, not a tidy dataset-level subjectivity score.
+
+15
 
 Figure S2-6. Study-2 community coverage and the augment-replace reliability gap
 (a) Research community
@@ -1866,20 +1928,19 @@ Figure 11: Study 3. Per-dataset accuracy vs the human ceiling (blue dashed) for 
 (n=500 each; whiskers = 95% bootstrap CI; bar colour = verdict; WR = alt-test winning rate).
 Datasets ordered by construct subjectivity. LLMs clear LOW ceilings (NLI) but fall short of HIGH
 ceilings on subjective social-computing tasks.
-dataset and item, and, for clean inference, as a logistic GLM with item-cluster-robust standard
-errors (Figure 13). Three results stand out. (i) Subjectivity dominates: each unit of 1−ceiling
-multiplies the odds of agreeing with humans by OR = 0.17 (p = 1e − 7). (ii) Scale helps, but
-modestly: larger models do better (OR = 1.30 per log10 params, z = 13.40), an effect far smaller
-than subjectivity’s, consistent with Study 1b’s “partly a moving target.” (iii) Variance lives in the
-items: the GLMM random-intercept standard deviation is far larger across items (SD = 2.02) than
-across datasets (SD = 0.73), i.e. which item is being judged, its latent human (dis)agreement, explains
-judge correctness better than which model judges or even which dataset it comes from. Finally, a
-Benjamini-Hochberg analysis across all 36 judge×dataset cells finds 26 significant at q < .05: 22 sit
-significantly below the human ceiling and only 4 significantly above (the objective-NLI cases).
-Scaling the judge shifts cells modestly rightward; it does not move a high-ceiling subjective task
-across the line.
+6.4 Integration with the decision framework
+Mapped onto the five-level rubric, Study 3 drops fresh, dataset-level points into the Study-1/2
+landscape and quantitatively confirms the augment-not-replace conclusion for human-centered
+annotation: LLM judges are a validated substitute for objective/low-ceiling labeling and a strong
+assistant for coarse (binary) moderation, but fall short of, and fail the replacement test for, subjective,
+fine-grained, or high-consensus human-centered constructs, a pattern the mixed-effects model shows
+is driven by item-level human (dis)agreement rather than by model scale. The recent MultiPICo
+clean condition rules out contamination as the explanation: a 2024 set the low-recall judge has not
+memorized is still matched only at its (low) human ceiling. Limitation: the panel is limited to open
+models from a single provider, and qualitative-coding corpora with public multi-coder labels (still
+scarce) are the immediate next addition.
 
-15
+16
 
 Figure S3-3. Study 3 reliability verdict: dataset x judge model (cell = accuracy + verdict)
 chaosnli_snli
@@ -2038,9 +2099,9 @@ gp
 
 9b
 
-qw
-
 .5en3
+
+qw
 
 b
 
@@ -2059,17 +2120,77 @@ qw
 
 Figure 12: Study 3. Dataset×judge-model reliability verdict (cell = accuracy + verdict). The scale
 effect (qwen3.5-9b column) and the construct-subjectivity gradient (rows) are both visible.
-6.4 Integration with the decision framework
-Mapped onto the five-level rubric, Study 3 drops fresh, dataset-level points into the Study-1/2
-landscape and quantitatively confirms the augment-not-replace conclusion for human-centered
-annotation: LLM judges are a validated substitute for objective/low-ceiling labeling and a strong
-assistant for coarse (binary) moderation, but fall short of, and fail the replacement test for, subjective,
-fine-grained, or high-consensus human-centered constructs, a pattern the mixed-effects model shows
-is driven by item-level human (dis)agreement rather than by model scale. The recent MultiPICo
-clean condition rules out contamination as the explanation: a 2024 set the low-recall judge has not
-memorized is still matched only at its (low) human ceiling. Limitation: the panel is limited to open
-models from a single provider, and qualitative-coding corpora with public multi-coder labels (still
-scarce) are the immediate next addition.
+Table 5: Study 3 disagreement-aware results. Ceiling with annotator-bootstrap 95% CI; best-model
+Cohen’s κ and macro-F1; panel accuracy on low- vs high-human-disagreement (entropy) items;
+Jensen-Shannon divergence between the panel and human label distributions. Judges systematically
+lose accuracy as human disagreement rises.
+Dataset
+
+Ceiling [95% CI]
+
+κ
+(best)
+
+macro-F1
+(best)
+
+acc↓H
+low-disagr.
+
+acc↑H
+high-disagr.
+
+JS
+panel-human
+
+ChaosNLI-SNLI
+ChaosNLI-MNLI
+GoEmotions
+SBIC
+HateXplain
+MultiPICo
+
+0.75 [0.74,0.77]
+0.64 [0.63,0.65]
+0.78 [0.76,0.80]
+0.91 [0.89,0.92]
+0.83 [0.82,0.85]
+0.82 [0.81,0.83]
+
+0.71
+0.53
+0.44
+0.71
+0.49
+0.40
+
+0.79
+0.70
+0.54
+0.85
+0.64
+0.70
+
+0.89
+0.68
+0.60
+0.86
+0.66
+0.80
+
+0.67
+0.55
+0.45
+0.61
+0.48
+0.63
+
+0.09
+0.17
+0.31
+0.10
+0.27
+0.09
 
 7 Discussion
 7.1 From four research questions to one principle
@@ -2085,8 +2206,7 @@ HCC actually uses, which have been attempted with LLMs and how reliably (RQ2.1),
 field positions the model as augment/replace/simulate (RQ2.2), and with what epistemic stance
 (RQ2.3); its goal was the HCC-specific account, and it found an augment-not-replace consensus
 whose reliability follows the same objective/subjective axis as Study 1a, under a dominant stance of
-tension. Study 3 asked whether that prediction holds when measured directly on HCC datasets
-16
+17
 
 Figure S3-4. Study 3 inferential layer: what governs LLM-judge agreement
 (b) GLMM variance
@@ -2172,9 +2292,11 @@ accuracy - human ceiling (left = below ceiling)
 
 0.1
 
-Figure 13: Study 3 inferential layer. (a) Fixed-effect odds ratios (item-cluster-robust logit): subjectivity is a strong negative predictor of judge correctness, scale a weak positive one. (b) GLMM
-variance components: item-level variance dominates. (c) Ceiling gap per judge×dataset (filled = BH
-q < .05); most cells sit below the human ceiling.
+Figure 13: Study 3 inferential layer. (a) Odds ratios from the naive two-predictor logit (subjectivity
+appears strong here, but the effect is not robust once base-rate skew and granularity are added; see
+text). (b) Variance components: item-level variance dominates dataset- and model-level variance.
+(c) Ceiling gap per judge×dataset (filled = BH q < .05); most cells sit below the human ceiling.
+tension. Study 3 asked whether that prediction holds when measured directly on HCC datasets
 with human labels, and what governs the outcome; its goal was to fill the empirical gaps and identify
 the mechanism, and it found that the human-agreement ceiling governs reliability, that item-level
 disagreement (not model scale, and not contamination) is the dominant source of variance, and that
@@ -2190,39 +2312,47 @@ capability manufactures a ground truth that the human community does not itself 
 7.2 Connections to HCI and measurement scholarship
 Our results give empirical weight to three long-running conversations in HCI and adjacent fields. (1)
 The myth of a single ground truth. CSCW and HCI have argued that inter-rater reliability is a
-negotiated practice, not a natural fact [34], and NLP has reframed annotator disagreement as signal
-rather than noise [3, 41]. Study 3 operationalizes this: when we benchmark judges against the humanhuman ceiling rather than a manufactured “gold,” the ostensibly poor performance on emotion, hate,
+negotiated practice, not a natural fact [37], and NLP has reframed annotator disagreement as signal
+rather than noise [3, 44]. Study 3 operationalizes this: when we benchmark judges against the humanhuman ceiling rather than a manufactured “gold,” the ostensibly poor performance on emotion, hate,
 and irony is revealed as a property of the construct (low or contested human consensus), not a fixable
 model deficiency. A judge that reports high accuracy against a forced majority is, on these tasks,
 reporting agreement with a coin the humans themselves are still flipping. (2) Interpretation is
 not labeling. Reflexive thematic analysis treats coding as situated interpretation, not classification
-[6], and qualitative HCI scholars warn that “conditional trust” in LLM output hollows out analytic
-rigor [15, 44]. Study 2’s augment-not-replace consensus and Study 3’s subjective-task shortfall are
+[8], and qualitative HCI scholars warn that “conditional trust” in LLM output hollows out analytic
+rigor [17, 47]. Study 2’s augment-not-replace consensus and Study 3’s subjective-task shortfall are
 two views of the same boundary: LLMs accelerate the mechanical surface of qualitative work while
 the interpretive core remains human. (3) Participants are not simulable. The “silicon sample”
-program [2] meets a growing critique that simulated participants flatten identity and distort variance
-17
+18
 
-[5, 12, 43, 48]; our MultiPICo result, where models default to the majority reading and erase the
+program [2] meets a growing critique that simulated participants flatten identity and distort variance
+[7, 14, 46, 53]; our MultiPICo result, where models default to the majority reading and erase the
 minority perspective that perspectivist corpora were built to preserve, is a concrete instance of that
 flattening at the level of a single subjective label.
 7.3 A critical assessment: what these practices do to the field
-We read the rush to LLM-as-a-judge in HCC as carrying five structural risks that the community
-should name. Illusory validation. Because agreement on older public benchmarks can reflect
-memorization rather than competence, “validated” verdicts are not trustworthy without a contamination check; our probe shows non-trivial verbatim recall even of recent data, and a field that
-omits this step risks certifying judges that merely remember. Methodological monoculture and
-deskilling. Cheap labeling invites the substitution of LLM judgment for the human annotation
-and reflexive interpretation that train the next generation of HCC researchers; combined with the
-documented convergence of judges toward crowd rather than expert consensus [4], this risks a slow
-regression of the field’s interpretive capacity toward the mean of its own training data. Epistemic
-injustice and flattening. Where models default to majority readings of subjective content, the
-perspectives of minority annotators (often the populations HCC seeks to center) are systematically
-discounted, a representational harm that a single accuracy number conceals. False closure on
-contested constructs. Reporting one accuracy against a majority gold imposes consensus where
-the data shows disagreement; our irony case (0.82 accuracy but macro-F1 near 0.45) shows how a
-high headline number can mask the fact that the model has learned the base rate, not the construct.
-Incentive capture. The very convenience of LLM evaluation pressures authors, reviewers, and
-venues to treat it as a default, embedding its biases into the published record. Against these we
+We read the rush to LLM-as-a-judge in HCC as carrying five risks that the community should name.
+We mark which are grounded in our data and which are conjectures extending prior critique, so the
+section is read as argument, not finding. Illusory validation (data-grounded, with a caveat
+about our own tool). Agreement on older public benchmarks can reflect memorization rather
+than competence [5], so “validated” verdicts need a contamination check, but our clean control
+(Appendix E) shows such checks are themselves hard: a naive verbatim-recall probe false-positives
+on high-recall models even for text they cannot have seen. The lesson is double, that contamination
+is a real threat to “validated” claims and that the community needs better contamination diagnostics
+than surface-recall probes. Methodological monoculture and deskilling (conjecture). Cheap
+labeling invites substituting LLM judgment for the human annotation and reflexive interpretation
+that train researchers; combined with the documented convergence of judges toward crowd rather
+than expert consensus [4], and with the way technical framings abstract away the social context of
+measurement [48, 49], this could regress the field’s interpretive capacity toward the mean of its training
+data. We flag this as a hypothesis for future study, not a demonstrated effect. Epistemic injustice
+and flattening (data-linked). Where models default to majority readings of subjective content,
+minority annotators (often the populations HCC seeks to center) are discounted, a representational
+harm that a single accuracy number conceals [6, 21]; our disagreement analysis (judges lose accuracy
+precisely on high-disagreement items) is the mechanism by which this occurs, though our MultiPICo
+subgroup check found only a small demographic agreement gap (Appendix E). False closure on
+contested constructs (data-grounded). Reporting one accuracy against a majority gold imposes
+consensus where the data shows disagreement [3, 44]; our irony case (0.82 accuracy but κ=0.40)
+shows how a high headline number can mask that the model learned the base rate, not the construct.
+Incentive capture (conjecture). The convenience of LLM evaluation may pressure authors,
+reviewers, and venues to treat it as a default, embedding its biases into the record. Against these we
 weigh genuine benefits, scale, triage, breadth, reproducibility, first-pass coding, and disagreement
 surfacing, and conclude that LLM judges should be governed as instruments requiring calibration
 and disclosure, not adopted as oracles.
@@ -2231,20 +2361,20 @@ The same evidence yields concrete, reusable guidance. We recommend that any stud
 LLM-as-a-judge:
 1. Anchor to the human-human ceiling, not a single gold. Report the ceiling (e.g. randomannotator-vs- majority and pairwise agreement) and the judge-vs-ceiling gap; “near-human” is
 meaningless without it.
-2. Gate replacement claims on a replacement test. Report the alt-test [7] (or an equivalent
+2. Gate replacement claims on a replacement test. Report the alt-test [9] (or an equivalent
 leave-one-annotator-out test) before asserting that an LLM can stand in for a human annotator.
 3. Probe contamination for any public or pre-cutoff dataset, and discount validation under high
 recall; state model training-cutoff relative to dataset release.
-4. Match the metric to the construct. On imbalanced or minority-sensitive tasks report
+
+19
+
+4. Match the metric to the construct. On imbalanced or minority-sensitive tasks report
 macro-F1 and per-class scores, and prefer disagreement-aware evaluation against the full label
 distribution (soft labels) over forced-majority accuracy.
 5. Control known biases and pin the setup. Counterbalance position, control length, check
 self-preference, and fix model identifier, version, decoding (temperature, seed) so the judge is
 reproducible.
-
-18
-
-6. Power the comparison. Pre-specify the effect size of interest, report confidence intervals, and
+6. Power the comparison. Pre-specify the effect size of interest, report confidence intervals, and
 size n accordingly; our analysis shows variance lives at the item level, so also stratify by item
 difficulty and report where the judge fails rather than only its mean.
 7. Use juries for aggregate decisions, but not as a ceiling-breaker. Panels improve stability
@@ -2257,39 +2387,57 @@ degrading its own standards of evidence.
 7.5 A decision framework for HCC
 Mapping the principle onto practice yields three deployment regimes:
 • Automate (with light audit): objective annotation/labeling of user-generated content such
-as stance, topic, relevance, frames, and simple sentiment [20, 45], where the ceiling is high and
+as stance, topic, relevance, frames, and simple sentiment [23, 50], where the ceiling is high and
 verifiable.
 • Augment, human-in-the-loop: qualitative coding and thematic/content analysis: use the
 LLM for first-pass coding, breadth, and disagreement surfacing, but keep human interpretive
-authority, calibrate on a labeled subset, and report reliability against human coders [19, 35, 39].
+authority, calibrate on a labeled subset, and report reliability against human coders [22, 38, 42].
 • Keep humans (do not substitute): simulating participants or replacing them with personas,
 and replacing expert usability/design judgment: these flatten identity, fabricate evidence, and
-abandon situated knowledge [22, 43, 48].
+abandon situated knowledge [25, 46, 53].
+Scope of evidence. We are explicit about what supports each regime. Study 3 empirically tests
+only subjective classification/annotation (NLI, sentiment, offensiveness, hate, irony), which directly
+grounds the “automate” regime and the boundary into “augment.” The placement of qualitative
+interpretive coding, participant simulation, and expert design judgment rests on the Study 2 review of
+the HCC literature, not on new Study 3 experiments; public multi-coder qualitative-coding corpora
+remain scarce, which is itself a gap we flag for the community. The framework should therefore be
+read as review-grounded for the interpretive regimes and experiment-grounded for the annotation
+regime.
 
 8 Limitations
 Both reviews used a single-reviewer, LLM-assisted pipeline (logs released) rather than dual human
-reviewers; metrics are heterogeneous and synthesized within families rather than pooled; several
-methods/domains rest on small n (flagged via family/role aggregates); database recall depends on
-indexing and query phrasing (mitigated, not removed, by three-source triangulation); and findings
-reflect models available through mid-2026. The empirical studies are bounded too: Study 1b uses
-one flagship promising-domain benchmark (SummEval), and Study 3’s panel is limited to open
-models from a single provider and to 6 datasets (one of which, MultiPICo, is included as a recent
-low-contamination clean condition), with qualitative-coding corpora still in progress. The verdict
-rubric, though explicit and released, embeds judgement; we therefore release both corpora for
-re-coding. Full protocol, rubric anchors, dataset cards, verbatim judging prompts, and metric
-definitions are given in Appendices A to C.
+reviewers; we validated the rubric with an independent re-coding (Krippendorff α = 0.87; Appendix D)
+but the re-coder is also LLM-assisted, so genuine human IRR remains future work, and the stance
+20
+
+code is only moderately reliable. Metrics are heterogeneous and synthesized within families rather
+than pooled; several Study-1a domains/methods rest on small n (e.g. n≤3), whose point estimates
+we treat as indicative and report only via family-level aggregates. The empirical studies are bounded:
+Study 1b uses one promising-domain benchmark (SummEval) and integer-only scoring; Study 3
+covers subjective classification on 6 datasets with open models from a single provider and one prompt
+family (no proprietary frontier judges; prompt-robustness and a contamination clean control are
+reported in Appendix E, but the contamination tiers remain a calibrated caution). Interpretive
+qualitative coding, participant simulation, and design judgment are reviewed (Study 2), not tested in
+Study 3. Findings reflect models available through mid-2026. Full protocol, rubric anchors, dataset
+cards, verbatim judging prompts, and metric definitions are in Appendices A to E.
 
 9 Ethics and reproducibility
-Ethics. Studies 1a and 2 analyze published research, not human subjects. Study 3 reuses public
-datasets under their licenses; two of them (HateXplain, SBIC) contain hateful or offensive text, which
-we process only to measure moderation reliability and never reproduce. To avoid redistributing
-potentially harmful or personally-identifiable content, we release only item-level labels and aggregate
-statistics, never the raw texts. We report a contamination probe precisely so that “validated” verdicts
-19
-
-are not silently inflated by pretraining exposure. The work is dual-use only in the benign sense that
-better-calibrated LLM judges reduce, rather than increase, the risk of unaccountable automated
-moderation; our central finding (that LLM judges should not replace humans on subjective, highconsensus social annotation) is itself a guard against premature deployment. Reproducibility.
+Ethics. Studies 1a and 2 analyze published research, not human subjects, and Study 3 reuses
+already-public, de-identified datasets under their licenses; this work was therefore not humansubjects research requiring IRB review, and we sought an exemption determination consistent with
+our institution’s policy. Two datasets (HateXplain, SBIC) contain hateful or identity-attacking text,
+which we process only to measure moderation reliability and never reproduce; to avoid redistributing
+harmful or personally-identifiable content we release only item-level labels and aggregate statistics,
+never the raw texts. A deeper ethical point bears on our own method: by treating the majority human
+label as “ground truth” for the ceiling, we risk encoding majority-group bias and erasing minority
+readings, exactly the harm we warn against. We mitigate this by (i) reporting the full disagreement
+(soft labels, entropy) rather than only the majority, (ii) checking, where annotator demographics
+exist (MultiPICo), that the panel does not agree disproportionately with one subgroup (gap = 0.01;
+Appendix E), and (iii) recommending disagreement-aware evaluation in our guidance; we note the
+other corpora lack annotator demographics, so this check is partial. The contamination probe is
+reported precisely so “validated” verdicts are not silently inflated by pretraining exposure. The work is
+dual-use only in the benign sense that better-calibrated LLM judges reduce the risk of unaccountable
+automated moderation; our central finding (that LLM judges should not replace humans on subjective,
+high-consensus social annotation) is itself a guard against premature deployment. Reproducibility.
 Every number in this paper regenerates from released code: the OpenAlex, Semantic Scholar, and web
 search logs; the two coded corpora; the figure and table generators; the Study-1b SummEval harness
 and the Study-3 judging/scoring/contamination/mixed-effects harness, all keyed to documented
@@ -2307,7 +2455,9 @@ judgment. Study 1b shows that the most powerful open models now match or exceed 
 judges on the verifiable parts of “promising” tasks, and Study 3 turns the remaining “mixed” verdicts
 into dataset-level evidence using open, locally-servable models and the field’s own reliability standards.
 The right question for HCC is never “can a machine judge?” but “can this machine replace a second
-human, on this method, at this granularity, under these controls? ”, and this paper makes that
+21
+
+human, on this method, at this granularity, under these controls? ”, and this paper makes that
 question answerable, method by method.
 
 Reproducibility
@@ -2324,117 +2474,131 @@ preprint arXiv:2209.06899, 2023.
 annotation. In AI Magazine, volume 36, pages 15–24, 2015.
 [4] Bavaresco et al. LLMs instead of Human Judges? A Large Scale Empirical Study across 20
 NLP Evaluation Tasks. arXiv preprint arXiv:2406.18403, 2024.
-[5] Bisbee et al. Synthetic Replacements for Human Survey Data? The Perils of Large Language
+[5] Emily M. Bender, Timnit Gebru, Angelina McMillan-Major, and Shmargaret Shmitchell. On
+the dangers of stochastic parrots: Can language models be too big? In Proceedings of the
+Conference on Fairness, Accountability, and Transparency (FAccT), pages 610–623, 2021.
+[6] Abeba Birhane, Pratyusha Kalluri, Dallas Card, William Agnew, Ravit Dotan, and Michelle
+Bao. The values encoded in machine learning research. In Proceedings of the Conference on
+Fairness, Accountability, and Transparency (FAccT), pages 173–184, 2022.
+[7] Bisbee et al. Synthetic Replacements for Human Survey Data? The Perils of Large Language
 Models. SocArXiv, 2023. doi: 10.31235/osf.io/5ecfa.
-[6] Virginia Braun and Victoria Clarke. Using thematic analysis in psychology. Qualitative Research
+[8] Virginia Braun and Victoria Clarke. Using thematic analysis in psychology. Qualitative Research
 in Psychology, 3(2):77–101, 2006.
-20
-
-[7] Calderon et al. The Alternative Annotator Test for LLM-as-a-Judge: How to Statistically
+[9] Calderon et al. The Alternative Annotator Test for LLM-as-a-Judge: How to Statistically
 Justify Replacing Human Annotators with LLMs. arXiv preprint arXiv:2501.10970, 2025.
-[8] Silvia Casola, Simona Frenda, Soda Marem Lo, Erhan Sezerer, Antonio Uva, Valerio Basile,
+[10] Silvia Casola, Simona Frenda, Soda Marem Lo, Erhan Sezerer, Antonio Uva, Valerio Basile,
 Cristina Bosco, Alessandro Pedrani, Chiara Rubagotti, Viviana Patti, and Davide Bernardi.
 MultiPICo: Multilingual perspectivist irony corpus. In Proceedings of the 62nd Annual Meeting
 of the Association for Computational Linguistics (ACL), pages 16008–16021, 2024.
-[9] Castellanos et al. Large Language Models for Thematic Summarization in Qualitative Health
+[11] Castellanos et al. Large Language Models for Thematic Summarization in Qualitative Health
 Care Research: Comparative Analysis of Model and Human Performance. JMIR AI, 2025. doi:
 10.2196/64447.
-[10] Chakrabarty et al. Art or Artifice? Large Language Models and the False Promise of Creativity.
+[12] Chakrabarty et al. Art or Artifice? Large Language Models and the False Promise of Creativity.
 arXiv preprint arXiv:2309.14556, 2024.
-[11] Chan et al. ChatEval: Towards Better LLM-based Evaluators through Multi-Agent Debate.
-arXiv preprint arXiv:2308.07201, 2023.
-[12] Cheng et al. CoMPosT: Characterizing and Evaluating Caricature in LLM Simulations. In
-EMNLP, 2023. doi: 10.18653/v1/2023.emnlp-main.669.
-[13] Clarke and Dietz. LLM-based Relevance Assessment Still Can’t Replace Human Relevance
-Assessment. arXiv preprint arXiv:2412.17156, 2024.
-[14] Dai et al. LLM-in-the-loop: Leveraging Large Language Model for Thematic Analysis. In
-EMNLP-F, 2023. doi: 10.18653/v1/2023.findings-emnlp.669.
-[15] Davison et al. The Ethics of Using Generative AI for Qualitative Data Analysis. Information
-Systems J., 2024. doi: 10.1111/isj.12504.
-[16] Duan et al. UICrit: Enhancing Automated Design Evaluation with a UI Critique Dataset.
-arXiv preprint arXiv:2407.08850, 2024.
-[17] Dunivin. Scalable Qualitative Coding with LLMs: Chain-of-Thought Reasoning Matches Human
-Performance in Some Hermeneutic Tasks. arXiv preprint arXiv:2401.15170, 2024.
-[18] Alexander R. Fabbri, Wojciech Kryściński, Bryan McCann, Caiming Xiong, Richard Socher,
-and Dragomir Radev. SummEval: Re-evaluating summarization evaluation. Transactions of
-the Association for Computational Linguistics, 9:391–409, 2021.
-[19] Gao et al. CollabCoder: A Lower-barrier, Rigorous Workflow for Inductive Collaborative
-Qualitative Analysis with Large Language Models. arXiv preprint arXiv:2304.07366, 2024.
-[20] Gilardi et al. ChatGPT Outperforms Crowd Workers for Text-Annotation Tasks. arXiv preprint
-arXiv:2303.15056, 2023.
-[21] Gu et al. A Survey on LLM-as-a-Judge. arXiv preprint arXiv:2411.15594, 2024.
-[22] Guerino et al. Can GPT-4o Evaluate Usability Like Human Experts? A Comparative Study on
-Issue Identification in Heuristic Evaluation. arXiv preprint arXiv:2506.16345, 2025.
-[23] Hashemi et al. LLM-Rubric: A Multidimensional, Calibrated Approach to Automated Evaluation
-of Natural Language Texts. arXiv preprint arXiv:2501.00274, 2024.
-21
-
-[24] Haxvig et al. I’ve Never Seen a Glass Ceiling Better Represented: Bias and Gendering in LLMGenerated Synthetic Personas from a Participatory Design Perspective. Int. J. Hum.-Comput.
-Stud., 2025. doi: 10.1016/j.ijhcs.2025.103651.
-[25] Huang et al. How Many Human Survey Respondents is a Large Language Model Worth? An
-Uncertainty Quantification Perspective. arXiv preprint arXiv:2502.17773, 2025.
-[26] Jain et al. Multi-LLM Thematic Analysis with Dual Reliability Metrics: Combining Cohen’s Kappa and Semantic Similarity for Qualitative Research Validation. arXiv preprint
-arXiv:2512.20352, 2025.
-[27] James et al. Counting on Consensus: Selecting the Right Inter-annotator Agreement Metric for
-NLP Annotation and Evaluation. arXiv preprint arXiv:2603.06865, 2026.
-[28] Kim et al. Prometheus: Inducing Fine-grained Evaluation Capability in Language Models.
-arXiv preprint arXiv:2310.08491, 2023.
-[29] Kocmi and Federmann. GEMBA-MQM: Detecting Translation Quality Error Spans with GPT-4.
-arXiv preprint arXiv:2310.13988, 2023.
-[30] Li et al. LLMs-as-Judges: A Comprehensive Survey on LLM-based Evaluation Methods. arXiv
-preprint arXiv:2412.05579, 2024.
-[31] Li et al. From Generation to Judgment: Opportunities and Challenges of LLM-as-a-judge.
-arXiv preprint arXiv:2411.16594, 2024.
-[32] Li et al. Comparing GPT-4 and Human Researchers in Health Care Data Analysis: Qualitative
-Description Study. J. Med. Internet Res., 2024. doi: 10.2196/56500.
-[33] Liu et al. G-Eval: NLG Evaluation using GPT-4 with Better Human Alignment. arXiv preprint
-arXiv:2303.16634, 2023.
-[34] Nora McDonald, Sarita Schoenebeck, and Andrea Forte. Reliability and inter-rater reliability in
-qualitative research: Norms and guidelines for CSCW and HCI practice. In Proceedings of the
-ACM on Human-Computer Interaction (CSCW), volume 3, pages 1–23. ACM, 2019.
-[35] Meng et al. Exploring the Human-LLM Synergy in Advancing Theory-driven Qualitative
-Analysis (CHALET). arXiv preprint arXiv:2405.05758, 2024.
-[36] Ngo et al. Qualitative Coding Analysis through Open-Source Large Language Models: A User
-Study and Design Recommendations. arXiv preprint arXiv:2602.18352, 2026.
-[37] Nguyen-Trung. ChatGPT in Thematic Analysis: Can AI Become a Research Assistant in
-Qualitative Research? Quality & Quantity, 2025. doi: 10.1007/s11135-025-02165-z.
-[38] Matthew J. Page, Joanne E. McKenzie, Patrick M. Bossuyt, Isabelle Boutron, Tammy C.
-Hoffmann, Cynthia D. Mulrow, et al. The PRISMA 2020 statement: an updated guideline for
-reporting systematic reviews. BMJ, 372:n71, 2021. doi: 10.1136/bmj.n71.
-[39] Pangakis et al. Automated Annotation with Generative AI Requires Validation. arXiv preprint
-arXiv:2306.00176, 2023.
-[40] De Paoli. Performing an Inductive Thematic Analysis of Semi-Structured Interviews with a
-Large Language Model. Soc. Sci. Comput. Rev., 2023. doi: 10.1177/08944393231220483.
 22
 
-[41] Barbara Plank. The "problem" of human label variation: On ground truth in data, modeling
+[13] Chan et al. ChatEval: Towards Better LLM-based Evaluators through Multi-Agent Debate.
+arXiv preprint arXiv:2308.07201, 2023.
+[14] Cheng et al. CoMPosT: Characterizing and Evaluating Caricature in LLM Simulations. In
+EMNLP, 2023. doi: 10.18653/v1/2023.emnlp-main.669.
+[15] Clarke and Dietz. LLM-based Relevance Assessment Still Can’t Replace Human Relevance
+Assessment. arXiv preprint arXiv:2412.17156, 2024.
+[16] Dai et al. LLM-in-the-loop: Leveraging Large Language Model for Thematic Analysis. In
+EMNLP-F, 2023. doi: 10.18653/v1/2023.findings-emnlp.669.
+[17] Davison et al. The Ethics of Using Generative AI for Qualitative Data Analysis. Information
+Systems J., 2024. doi: 10.1111/isj.12504.
+[18] Duan et al. UICrit: Enhancing Automated Design Evaluation with a UI Critique Dataset.
+arXiv preprint arXiv:2407.08850, 2024.
+[19] Dunivin. Scalable Qualitative Coding with LLMs: Chain-of-Thought Reasoning Matches Human
+Performance in Some Hermeneutic Tasks. arXiv preprint arXiv:2401.15170, 2024.
+[20] Alexander R. Fabbri, Wojciech Kryściński, Bryan McCann, Caiming Xiong, Richard Socher,
+and Dragomir Radev. SummEval: Re-evaluating summarization evaluation. Transactions of
+the Association for Computational Linguistics, 9:391–409, 2021.
+[21] Miranda Fricker. Epistemic Injustice: Power and the Ethics of Knowing. Oxford University
+Press, 2007.
+[22] Gao et al. CollabCoder: A Lower-barrier, Rigorous Workflow for Inductive Collaborative
+Qualitative Analysis with Large Language Models. arXiv preprint arXiv:2304.07366, 2024.
+[23] Gilardi et al. ChatGPT Outperforms Crowd Workers for Text-Annotation Tasks. arXiv preprint
+arXiv:2303.15056, 2023.
+[24] Gu et al. A Survey on LLM-as-a-Judge. arXiv preprint arXiv:2411.15594, 2024.
+[25] Guerino et al. Can GPT-4o Evaluate Usability Like Human Experts? A Comparative Study on
+Issue Identification in Heuristic Evaluation. arXiv preprint arXiv:2506.16345, 2025.
+[26] Hashemi et al. LLM-Rubric: A Multidimensional, Calibrated Approach to Automated Evaluation
+of Natural Language Texts. arXiv preprint arXiv:2501.00274, 2024.
+[27] Haxvig et al. I’ve Never Seen a Glass Ceiling Better Represented: Bias and Gendering in LLMGenerated Synthetic Personas from a Participatory Design Perspective. Int. J. Hum.-Comput.
+Stud., 2025. doi: 10.1016/j.ijhcs.2025.103651.
+[28] Huang et al. How Many Human Survey Respondents is a Large Language Model Worth? An
+Uncertainty Quantification Perspective. arXiv preprint arXiv:2502.17773, 2025.
+[29] Jain et al. Multi-LLM Thematic Analysis with Dual Reliability Metrics: Combining Cohen’s Kappa and Semantic Similarity for Qualitative Research Validation. arXiv preprint
+arXiv:2512.20352, 2025.
+
+23
+
+[30] James et al. Counting on Consensus: Selecting the Right Inter-annotator Agreement Metric for
+NLP Annotation and Evaluation. arXiv preprint arXiv:2603.06865, 2026.
+[31] Kim et al. Prometheus: Inducing Fine-grained Evaluation Capability in Language Models.
+arXiv preprint arXiv:2310.08491, 2023.
+[32] Kocmi and Federmann. GEMBA-MQM: Detecting Translation Quality Error Spans with GPT-4.
+arXiv preprint arXiv:2310.13988, 2023.
+[33] Li et al. LLMs-as-Judges: A Comprehensive Survey on LLM-based Evaluation Methods. arXiv
+preprint arXiv:2412.05579, 2024.
+[34] Li et al. From Generation to Judgment: Opportunities and Challenges of LLM-as-a-judge.
+arXiv preprint arXiv:2411.16594, 2024.
+[35] Li et al. Comparing GPT-4 and Human Researchers in Health Care Data Analysis: Qualitative
+Description Study. J. Med. Internet Res., 2024. doi: 10.2196/56500.
+[36] Liu et al. G-Eval: NLG Evaluation using GPT-4 with Better Human Alignment. arXiv preprint
+arXiv:2303.16634, 2023.
+[37] Nora McDonald, Sarita Schoenebeck, and Andrea Forte. Reliability and inter-rater reliability in
+qualitative research: Norms and guidelines for CSCW and HCI practice. In Proceedings of the
+ACM on Human-Computer Interaction (CSCW), volume 3, pages 1–23. ACM, 2019.
+[38] Meng et al. Exploring the Human-LLM Synergy in Advancing Theory-driven Qualitative
+Analysis (CHALET). arXiv preprint arXiv:2405.05758, 2024.
+[39] Ngo et al. Qualitative Coding Analysis through Open-Source Large Language Models: A User
+Study and Design Recommendations. arXiv preprint arXiv:2602.18352, 2026.
+[40] Nguyen-Trung. ChatGPT in Thematic Analysis: Can AI Become a Research Assistant in
+Qualitative Research? Quality & Quantity, 2025. doi: 10.1007/s11135-025-02165-z.
+[41] Matthew J. Page, Joanne E. McKenzie, Patrick M. Bossuyt, Isabelle Boutron, Tammy C.
+Hoffmann, Cynthia D. Mulrow, et al. The PRISMA 2020 statement: an updated guideline for
+reporting systematic reviews. BMJ, 372:n71, 2021. doi: 10.1136/bmj.n71.
+[42] Pangakis et al. Automated Annotation with Generative AI Requires Validation. arXiv preprint
+arXiv:2306.00176, 2023.
+[43] De Paoli. Performing an Inductive Thematic Analysis of Semi-Structured Interviews with a
+Large Language Model. Soc. Sci. Comput. Rev., 2023. doi: 10.1177/08944393231220483.
+[44] Barbara Plank. The "problem" of human label variation: On ground truth in data, modeling
 and evaluation. Proceedings of EMNLP, pages 10671–10682, 2022.
-[42] Salminen et al. Deus Ex Machina and Personas from Large Language Models: Investigating
+[45] Salminen et al. Deus Ex Machina and Personas from Large Language Models: Investigating
 the Composition of AI-Generated Persona Descriptions. In CHI, 2024. doi: 10.1145/3613904.
 3642036.
-[43] Salminen et al. The Use of Large Language Models in HCI: A Critical Analysis of Synthetic
+[46] Salminen et al. The Use of Large Language Models in HCI: A Critical Analysis of Synthetic
 Users. Augmented Humans, 2025. doi: 10.1145/3745900.3746108.
-[44] Schroeder et al. Large Language Models in Qualitative Research: Uses, Tensions, and Intentions.
+24
+
+[47] Schroeder et al. Large Language Models in Qualitative Research: Uses, Tensions, and Intentions.
 In CHI, 2025. doi: 10.1145/3706598.3713120.
-[45] Tornberg. ChatGPT-4 Outperforms Experts and Crowd Workers in Annotating Political Twitter
+[48] Andrew D. Selbst, Danah Boyd, Sorelle A. Friedler, Suresh Venkatasubramanian, and Janet
+Vertesi. Fairness and abstraction in sociotechnical systems. In Proceedings of the Conference on
+Fairness, Accountability, and Transparency (FAccT), pages 59–68, 2019.
+[49] Lucy Suchman. Human-Machine Reconfigurations: Plans and Situated Actions. Cambridge
+University Press, 2007.
+[50] Tornberg. ChatGPT-4 Outperforms Experts and Crowd Workers in Annotating Political Twitter
 Messages with Zero-Shot Learning. arXiv preprint arXiv:2304.06588, 2023.
-[46] Verga et al. Replacing Judges with Juries: Evaluating LLM Generations with a Panel of Diverse
+[51] Verga et al. Replacing Judges with Juries: Evaluating LLM Generations with a Panel of Diverse
 Models. arXiv preprint arXiv:2404.18796, 2024.
-[47] Wang et al. PandaLM: An Automatic Evaluation Benchmark for LLM Instruction Tuning
+[52] Wang et al. PandaLM: An Automatic Evaluation Benchmark for LLM Instruction Tuning
 Optimization. arXiv preprint arXiv:2306.05087, 2023.
-[48] Wang et al. Large Language Models that Replace Human Participants can Harmfully Misportray
+[53] Wang et al. Large Language Models that Replace Human Participants can Harmfully Misportray
 and Flatten Identity Groups. arXiv preprint arXiv:2402.01908, 2024.
-[49] Wei et al. Long-form Factuality in Large Language Models. arXiv preprint arXiv:2403.18802,
+[54] Wei et al. Long-form Factuality in Large Language Models. arXiv preprint arXiv:2403.18802,
 2024.
-[50] Xiao et al. Supporting Qualitative Analysis with Large Language Models: Combining Codebook
+[55] Xiao et al. Supporting Qualitative Analysis with Large Language Models: Combining Codebook
 with GPT-3 for Deductive Coding. arXiv preprint arXiv:2304.10548, 2023.
-[51] Xiao et al. Qualitative Coding with GPT-4: Where it Works Better. J. Learning Analytics,
+[56] Xiao et al. Qualitative Coding with GPT-4: Where it Works Better. J. Learning Analytics,
 2025.
-[52] Zheng et al. Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena. arXiv preprint
+[57] Zheng et al. Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena. arXiv preprint
 arXiv:2306.05685, 2023.
-[53] Zhong et al. Synthetic Heuristic Evaluation: A Comparison between AI- and Human-Powered
+[58] Zhong et al. Synthetic Heuristic Evaluation: A Comparison between AI- and Human-Powered
 Usability Evaluation. arXiv preprint arXiv:2507.02306, 2025.
-[54] Zhu et al. JudgeLM: Fine-tuned Large Language Models are Scalable Judges. arXiv preprint
+[59] Zhu et al. JudgeLM: Fine-tuned Large Language Models are Scalable Judges. arXiv preprint
 arXiv:2310.17631, 2023.
 
 A Review protocol and reliability rubric
@@ -2444,12 +2608,12 @@ OpenAlex API; we cross-check with the Semantic Scholar Graph API and a structure
 used a 25-query HCC/HCI/qualitative concept-block protocol (the same query strings were issued
 against every source so the arms are comparable). Concept blocks combine an LLM term (“LLM”,
 “large language model”, “GPT-4”, “ChatGPT”, “Gemini”), an evaluation/agreement term (“LLM-asa-judge”, “automatic evaluation”, “annotation”, “inter-annotator agreement”, “human evaluation”),
-23
-
-and, for Study 2, an HCC method term (“qualitative coding”, “thematic analysis”, “content analysis”,
+and, for Study 2, an HCC method term (“qualitative coding”, “thematic analysis”, “content analysis”,
 “crowdsourcing”, “participant simulation”, “persona”, “usability evaluation”, “design critique”). Records
 were deduplicated by DOI and normalized title.
-Screening and eligibility. Inclusion: peer-reviewed or preprint studies that empirically compare
+25
+
+Screening and eligibility. Inclusion: peer-reviewed or preprint studies that empirically compare
 LLM judgments to human judgments on the same items and report (or allow computing) an
 agreement statistic. Exclusion: non-empirical position papers, studies with no human baseline,
 studies that use LLMs only to generate (not judge) content, and off-topic retrievals. Title/abstract
@@ -2466,10 +2630,10 @@ prompt, aggregation); conditional substitution.
 • 5 Unreliable: agreement is near chance or dominated by bias (position, verbosity, self-preference).
 We report a reliability score = 6 − verdict and synthesize within metric families (e.g. Cohen’s κ,
 Krippendorff’s α, Spearman ρ, accuracy) rather than pooling incommensurable effect sizes. The full
-coded corpora (Appendices D and E) are released for re-coding.
+coded corpora (Appendices F and G) are released for re-coding.
 
 B Study 1b: G-Eval replication details
-We replicate the summary-level G-Eval protocol [33] on SummEval [18] (100 source articles × 16
+We replicate the summary-level G-Eval protocol [36] on SummEval [20] (100 source articles × 16
 system summaries = 1600 summaries, each with expert means for four aspects). Each (summary,
 aspect) pair is scored 1 to 5 by the judge with the aspect criterion below; we then compute
 the summary-level Spearman ρ (per source document, correlate the judge’s 16 scores with
@@ -2490,13 +2654,14 @@ unimportant content are penalized.
 The judge receives the source article and the summary and returns only a JSON object {"score": <1-5>}
 (a larger token budget and a retry handle reasoning-model outputs). In total Study 1b contributes
 25,600 judgments.
-24
+
+26
 
 C Study 3: datasets, judging prompts, and metrics
-Datasets. Table 5 summarizes the six datasets. Each is sampled to n=500 items with a clear
+Datasets. Table 6 summarizes the six datasets. Each is sampled to n=500 items with a clear
 majority label (ties dropped); we use the per-item annotator distributions to compute the human
 ceiling.
-Table 5: Study 3 dataset cards. Ceiling = random-annotator-vs-majority accuracy. Contam. = max
+Table 6: Study 3 dataset cards. Ceiling = random-annotator-vs-majority accuracy. Contam. = max
 verbatim-recall tier across probed judges.
 Dataset
 
@@ -2570,28 +2735,64 @@ ironic"}
 Metrics. Let an item have A human annotations with majority label y ⋆ . Human ceiling is the
 random-annotator-vs-majority accuracy (the expected agreement of one held-out human with the
 majority), averaged over items; we also report the pairwise human-human agreement. Accuracy,
-Cohen’s κ, and macro-F1 are computed against y ⋆ . The alt-test winning rate [7] is the fraction
+Cohen’s κ, and macro-F1 are computed against y ⋆ . The alt-test winning rate [9] is the fraction
 of annotators for whom replacing that human with the LLM does not reduce agreement with the
 remaining humans (a count-based leave-one-annotator-out test); a winning rate ≥ 0.5 is the bar for
 claiming the LLM can “replace” a human. The jury is the per-item majority vote of the model
-panel [46]. 95% confidence intervals are nonparametric bootstrap (1000 item resamples). Power:
+panel [51]. 95% confidence intervals are nonparametric bootstrap (1000 item resamples). Power:
 at n=500 the accuracy CI half-width is ≤ ±4.4% and the design has > 80% power to detect a
 0.10 gap from the ceiling. Contamination probe: the judge is given the dataset name and a
 prefix (≈ one third) of an item’s text and asked to reproduce the remainder verbatim; we report the
 mean normalized sequence overlap and flag HIGH (> 0.6 mean or > 20% near-verbatim), MEDIUM
 (> 0.35 mean), or LOW. Only item-level labels and aggregates are released (no raw text); the runs
 recorded zero API errors and a 100% answer-parse rate across all 18000 judgments.
-25
+27
 
 Inferential model. The mixed-effects analysis models each judgment’s correctness (1[judge = y ⋆ ])
 with fixed effects for task subjectivity (1−ceiling, dataset level) and model scale (log10 parameters),
 reported as a Bayesian logistic GLMM with random intercepts for dataset and item and, for clean
 inference, as a logistic GLM with item-cluster-robust standard errors; the Benjamini-Hochberg
-procedure controls the false-discovery rate across the 36 judge×dataset ceiling-gap tests.
+procedure controls the false-discovery rate across the 36 judge×dataset ceiling-gap tests. A naive
+two-predictor version of this model overstates a “subjectivity” effect; once construct granularity and
+label base-rate skew are added and item-cluster-robust standard errors are used, subjectivity is not
+significant (OR = 0.74, p = 0.45) and the robust predictors are base-rate skew, scale, and granularity.
+A dataset-level meta-regression (n=6) is reported with leave-one-dataset-out bounds.
 
-D Study 1 corpus
+D Inter-coder reliability
+Because the reliability verdict and the role/stance codes embed judgement, we re-coded a held-out
+random sample of each corpus with two independent coders who saw only the per-study summaries
+and the rubric (no original codes, no other context). For Study 1a (n=54, 25%) the verdict reproduced
+at Krippendorff α = 0.87 (ordinal, three coders) with 100% of cases within one level. For Study 2
+(n=16, 30%) the verdict gave α = 0.85, the augment/replace/simulate role α = 0.80, and the
+epistemic stance α = 0.59 (the least reliable code). Caveat: the re-coders are LLM-assisted, like
+the primary pipeline, so these figures measure rubric reproducibility under independent application,
+not human inter-rater agreement; the moderate stance α is why we treat stance-based claims as
+indicative.
 
-Table 6: Full extracted-studies corpus (217 included studies). Agreement is the headlin
+E Robustness and validity checks
+Prompt robustness. We re-ran a subset of Study 3 (three models × six datasets, n=120) under
+three semantically equivalent prompt paraphrases per task. Accuracy is fairly prompt-stable (mean
+SD across paraphrases = 0.03), but the discrete five-level verdict is exactly stable in only 10/18
+cells: most instability is a one-level flip for cells sitting near a band boundary, and the smaller model
+is the most sensitive (worst-case acc SD 0.14), the larger models the least. We therefore report
+verdicts as robust to within one level rather than exact, and flag small-model verdicts on subjective
+tasks as prompt-sensitive. Contamination clean control. We ran the verbatim-recall probe on
+freshly authored, post-cutoff sentences that no model can have seen. The result is a cautionary
+one: the high-recall model still scores 0.45 mean overlap (MEDIUM) on this guaranteed-clean text,
+i.e. it confabulates plausible continuations regardless of memorization, while the low-recall model
+scores LOW. The probe thus has a high false-positive rate for high-recall models and cannot be
+read as a reliable leakage test; the uniform MEDIUM tiers in Table 4 are largely an artifact of
+generative fluency. We retain the probe only as a conservative, low-recall-model signal and base
+our substantive claims on the disagreement analysis instead. Annotator-subgroup check. On
+MultiPICo (which carries annotator demographics), the panel’s agreement with the female- vs
+male-annotator majority differs by only 0.01, i.e. we did not detect a large majority-group bias in
+this corpus, though demographic metadata is sparse and this check is limited.
+
+F Study 1 corpus
+
+28
+
+Table 7: Full extracted-studies corpus (217 included studies). Agreement is the headlin
 cient/proportion where reported.
 Key
 
@@ -2646,6 +2847,17 @@ claimmatch2023
 ni2024afacta
 politicaltruths2024
 factsopinions2025
+kaikaus2023financecorpora
+bizfinbench2025
+trident2025
+chan2023chateval
+chiang2023alt
+dubois2023alpacafarm
+hsu2023figurecaption
+kim2023prometheus
+lai2023styletransfer
+li2023autoj
+wang2023chatgptnlg
 
 Mirzakhmedova et al. (2024)
 Tong et al. (2024)
@@ -2690,6 +2902,17 @@ Choi et al. (2023)
 Ni et al. (2024)
 Chatrath et al. (2024)
 Saju et al. (2025)
+Kaikaus et al. (2023)
+Lu et al. (2025)
+Hui et al. (2025)
+Chan et al. (2023)
+Chiang & Lee (2023)
+Dubois et al. (2023)
+Hsu et al. (2023)
+Kim et al. (2023)
+Lai et al. (2023)
+Li et al. (2023)
+Wang et al. (2023)
 
 Argument Quality
 Code & SW Eng
@@ -2734,6 +2957,17 @@ Fact-Checking
 Fact-Checking
 Fact-Checking
 Fact-Checking
+Finance
+Finance
+Finance
+General NLG
+General NLG
+General NLG
+General NLG
+General NLG
+General NLG
+General NLG
+General NLG
 
 pointwise
 classify
@@ -2778,6 +3012,17 @@ classify
 classify
 classify
 classify
+classify
+pointwise
+classify
+pairwise
+pointwise
+pairwise
+pointwise
+pointwise
+pointwise
+pairwise
+pointwise
 
 pct_
 accu
@@ -2822,8 +3067,19 @@ pct_
 pct_
 pct_
 accu
+accu
+pct_
+pct_
+pct_
+pct_
+winr
+spea
+pear
+spea
+pct_
+spea
 
-26
+29
 
 Key
 
@@ -2835,17 +3091,6 @@ Task
 
 Metr
 
-kaikaus2023financecorpora
-bizfinbench2025
-trident2025
-chan2023chateval
-chiang2023alt
-dubois2023alpacafarm
-hsu2023figurecaption
-kim2023prometheus
-lai2023styletransfer
-li2023autoj
-wang2023chatgptnlg
 wang2023pandalm
 xu2023instructscore
 zhang2023widerdeeper
@@ -2892,18 +3137,18 @@ brake2024clinicalnote
 wang2024clinicalevent
 chung2025verifact
 clinstruct2025
+croxford2025autoeval
+croxford2025clinsummjudge
+healthbench2025
+kim2025emulate
+llmevalmed2025
+szymanski2025limits
+clindialog2026
+frenchmedqa2026
+medjudge2026scoping
+counselbench2025
+hua2025mhscoping
 
-Kaikaus et al. (2023)
-Lu et al. (2025)
-Hui et al. (2025)
-Chan et al. (2023)
-Chiang & Lee (2023)
-Dubois et al. (2023)
-Hsu et al. (2023)
-Kim et al. (2023)
-Lai et al. (2023)
-Li et al. (2023)
-Wang et al. (2023)
 Wang et al. (2023)
 Xu et al. (2023)
 Zhang et al. (2023)
@@ -2950,18 +3195,18 @@ Brake & Schaaf (2024)
 Wang et al. (2024)
 Chung et al. (2025)
 Brake et al. (2025)
+Croxford et al. (2025)
+Croxford et al. (2025)
+Arora et al. (OpenAI) (2025)
+Kim & Kim (2025)
+Zhang et al. (2025)
+Szymanski et al. (2025)
+Sun et al. (2026)
+Belmadani et al. (2026)
+Li et al. (2026)
+Li et al. (2025)
+Hua et al. (2025)
 
-Finance
-Finance
-Finance
-General NLG
-General NLG
-General NLG
-General NLG
-General NLG
-General NLG
-General NLG
-General NLG
 General NLG
 General NLG
 General NLG
@@ -3008,18 +3253,18 @@ Medicine & Clinical
 Medicine & Clinical
 Medicine & Clinical
 Medicine & Clinical
+Medicine & Clinical
+Medicine & Clinical
+Medicine & Clinical
+Medicine & Clinical
+Medicine & Clinical
+Medicine & Clinical
+Medicine & Clinical
+Medicine & Clinical
+Medicine & Clinical
+Mental Health
+Mental Health
 
-classify
-pointwise
-classify
-pairwise
-pointwise
-pairwise
-pointwise
-pointwise
-pointwise
-pairwise
-pointwise
 pairwise
 pointwise
 pairwise
@@ -3066,18 +3311,18 @@ pointwise
 classify
 verify
 pointwise
+pointwise
+pointwise
+pointwise
+pointwise
+pointwise
+pairwise
+pointwise
+pointwise
+review
+pointwise
+review
 
-accu
-pct_
-pct_
-pct_
-pct_
-winr
-spea
-pear
-spea
-pct_
-spea
 accu
 pear
 pct_
@@ -3124,8 +3369,19 @@ pct_
 pct_
 pct_
 icc
+pct_
+pct_
+pct_
+pct_
+pct_
+pct_
+pct_
+kapp
+nan
+pct_
+nan
 
-27
+30
 
 Key
 
@@ -3137,17 +3393,6 @@ Task
 
 Metr
 
-croxford2025autoeval
-croxford2025clinsummjudge
-healthbench2025
-kim2025emulate
-llmevalmed2025
-szymanski2025limits
-clindialog2026
-frenchmedqa2026
-medjudge2026scoping
-counselbench2025
-hua2025mhscoping
 mhtrust2025
 mhsupport2026
 liu2023trustworthy
@@ -3194,18 +3439,18 @@ multiljudge2025
 reliablemulti2026
 chen2024mllmjudge
 duan2024uimockup
+lee2024promvision
+lu2024wildvision
+yasunaga2025mmrewardbench
+chatgptreviewers2024
+liang2024feedback
+murad2024quality
+prismascreen2024
+rose2025rob
+shopovski2025peerreview
+guo2023howclose
+min2023factscore
 
-Croxford et al. (2025)
-Croxford et al. (2025)
-Arora et al. (OpenAI) (2025)
-Kim & Kim (2025)
-Zhang et al. (2025)
-Szymanski et al. (2025)
-Sun et al. (2026)
-Belmadani et al. (2026)
-Li et al. (2026)
-Li et al. (2025)
-Hua et al. (2025)
 Badawi et al. (2025)
 Badawi et al. (2026)
 Liu et al. (2023)
@@ -3252,18 +3497,18 @@ Fu et al. (2025)
 Zubiaga et al. (2026)
 Chen et al. (2024)
 Duan et al. (2024)
+Lee et al. (2024)
+Lu et al. (2024)
+Yasunaga et al. (2025)
+Ho et al. (2024)
+Liang et al. (2024)
+Tarakji et al. (2024)
+Guo et al. (2024)
+Rose et al. (2025)
+Shopovski et al. (2025)
+Guo et al. (2023)
+Min et al. (2023)
 
-Medicine & Clinical
-Medicine & Clinical
-Medicine & Clinical
-Medicine & Clinical
-Medicine & Clinical
-Medicine & Clinical
-Medicine & Clinical
-Medicine & Clinical
-Medicine & Clinical
-Mental Health
-Mental Health
 Mental Health
 Mental Health
 Methodology & Bias
@@ -3310,18 +3555,18 @@ Multilingual
 Multilingual
 Multimodal (Vision-Language)
 Multimodal (Vision-Language)
+Multimodal (Vision-Language)
+Multimodal (Vision-Language)
+Multimodal (Vision-Language)
+Peer Review & Science
+Peer Review & Science
+Peer Review & Science
+Peer Review & Science
+Peer Review & Science
+Peer Review & Science
+QA & Factuality
+QA & Factuality
 
-pointwise
-pointwise
-pointwise
-pointwise
-pointwise
-pairwise
-pointwise
-pointwise
-review
-pointwise
-review
 pointwise
 pointwise
 survey
@@ -3368,18 +3613,18 @@ pointwise
 pointwise
 pairwise
 pointwise
+pointwise
+pairwise
+pairwise
+pointwise
+pointwise
+classify
+classify
+classify
+pointwise
+pointwise
+verify
 
-pct_
-pct_
-pct_
-pct_
-pct_
-pct_
-pct_
-kapp
-nan
-pct_
-nan
 icc
 icc
 nan
@@ -3426,8 +3671,19 @@ pct_
 pct_
 pct_
 pct_
+pear
+pct_
+accu
+pct_
+pct_
+pct_
+kapp
+kapp
+pct_
+pct_
+pct_
 
-28
+31
 
 Key
 
@@ -3439,17 +3695,6 @@ Task
 
 Metr
 
-lee2024promvision
-lu2024wildvision
-yasunaga2025mmrewardbench
-chatgptreviewers2024
-liang2024feedback
-murad2024quality
-prismascreen2024
-rose2025rob
-shopovski2025peerreview
-guo2023howclose
-min2023factscore
 li2024pedants
 madaan2024refverdict
 wei2024safe
@@ -3496,18 +3741,10 @@ shen2023notyet
 lee2024unisumeval
 song2024finesure
 tang2024tofueval
+zhang2024newssumm
+wu2023hpsv2
+lin2024vqascore
 
-Lee et al. (2024)
-Lu et al. (2024)
-Yasunaga et al. (2025)
-Ho et al. (2024)
-Liang et al. (2024)
-Tarakji et al. (2024)
-Guo et al. (2024)
-Rose et al. (2025)
-Shopovski et al. (2025)
-Guo et al. (2023)
-Min et al. (2023)
 Li et al. (2024)
 Reference-Guided Verdict authors (2024)
 Wei et al. (2024)
@@ -3554,18 +3791,10 @@ Shen et al. (2023)
 Lee et al. (2024)
 Song et al. (2024)
 Tang et al. (2024)
+Zhang et al. (2024)
+Wu et al. (2023)
+Lin et al. (2024)
 
-Multimodal (Vision-Language)
-Multimodal (Vision-Language)
-Multimodal (Vision-Language)
-Peer Review & Science
-Peer Review & Science
-Peer Review & Science
-Peer Review & Science
-Peer Review & Science
-Peer Review & Science
-QA & Factuality
-QA & Factuality
 QA & Factuality
 QA & Factuality
 QA & Factuality
@@ -3612,18 +3841,10 @@ Summarization
 Summarization
 Summarization
 Summarization
+Summarization
+Text-to-Image
+Text-to-Image
 
-pointwise
-pairwise
-pairwise
-pointwise
-pointwise
-classify
-classify
-classify
-pointwise
-pointwise
-verify
 verify
 pointwise
 verify
@@ -3670,18 +3891,10 @@ pointwise
 pointwise
 verify
 verify
+pointwise
+pointwise
+pointwise
 
-pear
-pct_
-accu
-pct_
-pct_
-pct_
-kapp
-kapp
-pct_
-pct_
-pct_
 pct_
 pct_
 pct_
@@ -3728,41 +3941,15 @@ spea
 pct_
 pct_
 pct_
-
-29
-
-Key
-
-Study
-
-Domain
-
-Task
-
-Metr
-
-zhang2024newssumm
-wu2023hpsv2
-lin2024vqascore
-
-Zhang et al. (2024)
-Wu et al. (2023)
-Lin et al. (2024)
-
-Summarization
-Text-to-Image
-Text-to-Image
-
-pointwise
-pointwise
-pointwise
-
 pct_
 accu
 pear
 
-E Study 2 corpus
-Table 7: Study 2 corpus (55 studies): HCC/HCI/qualitative methods using LLMs vs human input.
+G Study 2 corpus
+
+32
+
+Table 8: Study 2 corpus (55 studies): HCC/HCI/qualitative methods using LLMs vs human input.
 Study
 
 Method
@@ -3820,6 +4007,16 @@ De Paoli (2023)
 Dai et al. (2023)
 Prescott et al. (2024)
 Nguyen-Trung (2025)
+Jain et al. (2025)
+Castellanos et al. (2025)
+Sharma et al. (2025)
+Wen et al. (2025)
+Kocaballi (2023)
+Duan et al. (2024)
+Duan et al. (2024)
+Duan et al. (2024)
+Guerino et al. (2025)
+Zhong et al. (2025)
 
 Content analysis
 Content analysis
@@ -3866,6 +4063,16 @@ Thematic analysis
 Thematic analysis
 Thematic analysis
 Thematic analysis
+Thematic analysis
+Thematic analysis
+Thematic analysis
+Thematic analysis
+UX/design critique
+UX/design critique
+UX/design critique
+UX/design critique
+Usability/heuristic eval
+Usability/heuristic eval
 
 augment
 augment
@@ -3912,6 +4119,16 @@ augment
 augment
 augment
 augment
+replace
+augment
+augment
+augment
+augment
+augment
+augment
+augment
+replace
+replace
 
 CSS
 Health
@@ -3958,105 +4175,6 @@ CSS
 NLP
 Health
 Qual-methods
-
-0.40
-0.46
-0.46
--
-
-Promising
-Mixed
-Mixed
-Promising
-Caution
-Validated
-Validated
-Mixed
-Promising
-Mixed
-Mixed
-Mixed
-Mixed
-Mixed
-Caution
-Mixed
-Mixed
-Mixed
-Mixed
-Caution
-Mixed
-Mixed
-Mixed
-Promising
-Mixed
-Mixed
-Mixed
-Promising
-Promising
-Mixed
-Mixed
-Mixed
-Mixed
-Mixed
-Caution
-Caution
-Caution
-Mixed
-Mixed
-Mixed
-Caution
-Mixed
-Promising
-Mixed
-Mixed
-
-30
-
-Study
-
-Method
-
-Role
-
-Community
-
-Agree
-
-Verdict
-
-Jain et al. (2025)
-Castellanos et al. (2025)
-Sharma et al. (2025)
-Wen et al. (2025)
-Kocaballi (2023)
-Duan et al. (2024)
-Duan et al. (2024)
-Duan et al. (2024)
-Guerino et al. (2025)
-Zhong et al. (2025)
-
-Thematic analysis
-Thematic analysis
-Thematic analysis
-Thematic analysis
-UX/design critique
-UX/design critique
-UX/design critique
-UX/design critique
-Usability/heuristic eval
-Usability/heuristic eval
-
-replace
-augment
-augment
-augment
-augment
-augment
-augment
-augment
-replace
-replace
-
 Qual-methods
 Health
 HCI
@@ -4068,11 +4186,59 @@ HCI
 HCI
 HCI
 
+0.40
+0.46
+0.46
 0.91
 0.80
 0.21
 0.75
 
+Promising
+Mixed
+Mixed
+Promising
+Caution
+Validated
+Validated
+Mixed
+Promising
+Mixed
+Mixed
+Mixed
+Mixed
+Mixed
+Caution
+Mixed
+Mixed
+Mixed
+Mixed
+Caution
+Mixed
+Mixed
+Mixed
+Promising
+Mixed
+Mixed
+Mixed
+Promising
+Promising
+Mixed
+Mixed
+Mixed
+Mixed
+Mixed
+Caution
+Caution
+Caution
+Mixed
+Mixed
+Mixed
+Caution
+Mixed
+Promising
+Mixed
+Mixed
 Promising
 Promising
 Promising
@@ -4084,6 +4250,6 @@ Mixed
 Caution
 Mixed
 
-31
+33
 
 
