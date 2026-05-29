@@ -1,23 +1,23 @@
 {
   "gemma-4-31b": {
-    "n": 25,
-    "mean_overlap": 0.58,
+    "n": 24,
+    "mean_overlap": 0.451,
     "frac_verbatim_ge0.9": 0.0,
-    "max_overlap": 0.698,
+    "max_overlap": 0.621,
     "flag": "MEDIUM"
   },
   "qwen3.5-9b": {
-    "n": 25,
-    "mean_overlap": 0.084,
+    "n": 24,
+    "mean_overlap": 0.062,
     "frac_verbatim_ge0.9": 0.0,
-    "max_overlap": 0.144,
+    "max_overlap": 0.146,
     "flag": "LOW"
   },
   "glm-5.1-fp8": {
-    "n": 25,
-    "mean_overlap": 0.096,
+    "n": 24,
+    "mean_overlap": 0.106,
     "frac_verbatim_ge0.9": 0.0,
-    "max_overlap": 0.317,
+    "max_overlap": 0.29,
     "flag": "LOW"
   }
 }

@@ -28,6 +28,7 @@
 
 \input{tables/autostats}        % Study 1 macros (\Nstudies, \Ndomains, ...)
 \input{tables/study2_autostats} % Study 2 macros (\STN, \STaugment, ...)
+\input{tables/study3_autostats} % Study 3 macros (\STHRn, \STHRdatasets, ...)
 
 \titleformat{\section}{\large\bfseries}{\thesection}{0.6em}{}
 \titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{0.6em}{}
@@ -60,10 +61,13 @@ LLMs to \emph{augment} rather than replace humans (\STaugment{} augment vs.\ \ST
 simulate), with an epistemic stance dominated by \emph{tension} (\STtension/\STN); objective crowd-annotation
 substitution is validated, interpretive qualitative analysis is reliable only as human-in-the-loop augmentation, and
 \emph{simulating} participants, personas, and usability evaluations is the least reliable (flattening of identity
-groups, caricature, hallucinated usability issues). \textbf{Study 3} (protocol; in progress) closes the gaps the
+groups, caricature, hallucinated usability issues). \textbf{Study 3} closes the
 first two studies expose by running a standardized LLM-as-a-judge meta-evaluation---using open models served via
 Clemson's vLLM API and the agreement-against-human-ceiling methodology distilled from Studies 1--2---on HCC datasets
-that contain human labels but have never been formally tested with an LLM judge. Together the studies yield a
+that contain human labels but have never been formally tested with an LLM judge. Across \STHRn{} judgments (a
+6-model open panel, 9B--754B), it finds the human-agreement ceiling governs reliability: the panel matches or
+exceeds humans on low-ceiling NLI but falls short of---and fails the alt-test for---subjective social-computing
+annotation (emotion, hate speech), with binary offensiveness the strongest case. Together the studies yield a
 decision framework telling HCC researchers when an LLM judge is a validated substitute, a human-in-the-loop
 assistant, or an unsafe replacement.
 \end{abstract}
@@ -331,39 +335,77 @@ knowledge that defines human-centered inquiry. This posture both confirms Study 
 been formally tested with an LLM judge.
 
 % =====================================================================
-\section{Study 3: Filling the gaps with a standardized LLM-as-a-judge evaluation (protocol)}
+\section{Study 3: An empirical LLM-as-a-judge evaluation on HCC datasets with human ground truth}
 \label{sec:study3}
 % =====================================================================
-Studies 1--2 reveal a recurring gap: many HCC datasets ship with human labels or codings, yet a \emph{formal}
-LLM-as-a-judge evaluation---multiple models, bias controls, agreement benchmarked against the human ceiling---has
-never been run on them. Study 3 (in progress) fills these gaps with a standardized, reproducible harness.
+Studies 1--2 expose a recurring gap: many human-centered datasets ship with human labels yet have never had a
+\emph{formal} LLM-as-a-judge evaluation---a panel of models, bias controls, agreement benchmarked against the human
+ceiling, and contamination checked. Study 3 closes this gap empirically with a released, reproducible harness.
 
-\paragraph{Target datasets.} From Studies 1--2 we shortlist HCC datasets that (a) contain human annotations/codings
-and (b) lack a published LLM-as-a-judge evaluation---e.g., qualitative-coding corpora with codebooks and
-inter-coder reliability, crowd-annotation benchmarks, usability-issue sets, and open-ended survey/interview codings.
-Each dataset must report a human--human baseline so that ``matches a second human'' is a testable bar.
+\subsection{Method}
+We evaluate a panel of \STHRmodels{} open models served via \textbf{Clemson RCD's vLLM API} (OpenAI-compatible),
+spanning five families and 9B--754B parameters (\texttt{glm-5.1}~754B, \texttt{gptoss-120b}, \texttt{deepseek-v4},
+\texttt{gemma-4-31b}, \texttt{qwen3.6-27b}, \texttt{qwen3.5-9b}), run in parallel at each model's documented
+concurrency. Each model judges every item as a \emph{virtual annotator} under the same instructions the humans
+received. We benchmark against the \emph{human--human ceiling} (random-annotator-vs-majority accuracy and pairwise
+agreement, computed from the per-item annotator counts), report accuracy, Cohen's $\kappa$, and macro-F1 against the
+majority gold, compute a count-based \textbf{alt-test} winning rate \citep{calderon2025alttest}, aggregate the panel
+into a majority \textbf{jury} \citep{verga2024poll}, and run a verbatim quote-completion \textbf{contamination
+probe}. Sample size is power-justified at $n{=}500$ items/dataset (95\% CI half-width $\le\!\pm4.4\%$; $>$80\% power
+for a 0.10 gap vs the ceiling). The run comprised \textbf{\STHRn{} judgments} across \STHRdatasets{} datasets with
+\emph{zero} API errors and a 100\% answer-parse rate; only item-level labels and aggregates are released (no raw
+text), and the two sensitive sets are used under their public licenses.
 
-\paragraph{Models.} We use open models served via \textbf{Clemson's vLLM API} (OpenAI-compatible), spanning families
-and scales---e.g., \texttt{deepseek-v4-pro}, \texttt{gemma-4-31b}, a \texttt{mistral} model, and the
-\texttt{qwen3.x} instruct line (\texttt{qwen3-30b-a3b-instruct}, \texttt{qwen3.5-9b}, \texttt{qwen3.6-27b},
-\texttt{qwen3.6-35b-a3b}, \texttt{qwen3-omni-30b-a3b})---with \texttt{qwen3-embedding}/\texttt{qwen3-rerank} for
-retrieval-style relevance tasks. Using multiple open models (rather than a single proprietary judge) tests
-robustness and enables the jury/panel design shown to reduce bias \citep{verga2024poll,chan2023chateval}.
+\subsection{Results}
+Figures~\ref{fig:s3acc}--\ref{fig:s3heat} and Table~\ref{tab:study3} yield one organizing finding:
+\textbf{the human-agreement ceiling governs LLM reliability.} Where humans agree little (NLI; ceiling 0.64--0.75) the
+panel \emph{matches or exceeds} them---ChaosNLI-SNLI: 5/6 models \textbf{Validated}, jury 0.858 ($>$ ceiling 0.752);
+ChaosNLI-MNLI \textbf{Promising}. Where humans agree strongly on a subjective social construct, the panel falls
+short: GoEmotions 4-way sentiment (ceiling 0.78) is uniformly \textbf{Mixed} (best 0.61); HateXplain 3-way hate
+(ceiling 0.835) is \textbf{Mixed} at best and \textbf{Unreliable} for the small model; binary offensiveness (SBIC,
+ceiling 0.905) is the strongest social-computing case (\textbf{Promising}; \texttt{glm-5.1} 0.856) yet still below
+the ceiling. Four further effects: (i) \textbf{granularity}---binary offensiveness (Promising) clearly beats 3-way
+hate (Mixed); (ii) \textbf{scale}---\texttt{qwen3.5-9b} is weakest on \emph{every} dataset (Caution/Unreliable),
+while 27B--754B cluster together (bigger is not always better: 31B \texttt{gemma} ties the 754B \texttt{glm});
+(iii) the \textbf{alt-test} is passed (winning rate $\ge$0.5) \emph{only} on NLI---on every subjective
+social-computing task no model statistically earns the right to replace a human annotator; (iv) \textbf{juries}
+raise accuracy but do not lift any subjective task above its human ceiling. The \textbf{contamination probe}
+(Table~\ref{tab:study3}, last column) shows the strongest judges have non-trivial verbatim recall of the oldest sets
+(e.g., MEDIUM on SNLI), caveating the NLI ``Validated'' result; the social-computing shortfall holds regardless of
+tier.
 
-\paragraph{Methodology (standardized from Studies 1--2).} For each (dataset, model) pair we will: judge every item
-pointwise and pairwise; control presentation biases (position swapping, length normalization)
-\citep{zheng2023mtbench,dubois2024lc}; pin temperature/seed/version for reproducibility \citep{temperature2026};
-and report agreement with humans using the metric native to the task (Cohen's/Fleiss' $\kappa$, Krippendorff's
-$\alpha$, ICC, \% agreement, or correlation), \emph{always against the human--human ceiling}. We will apply the
-\textbf{alt-test} \citep{calderon2025alttest}---a leave-one-annotator-out procedure that statistically justifies
-replacing a human---as the formal decision rule, aggregate models into a jury, and probe the failure modes from
-Study 1 (self-preference, verbosity, expertise gap). Each dataset will be scored on the same five-level reliability
-verdict, slotting directly into the Study-1/Study-2 landscape.
+\begin{figure}[t]\centering
+\includegraphics[width=\linewidth]{s3_fig02_full_accuracy}
+\caption{Study 3. Per-dataset accuracy vs the human ceiling (blue dashed) for the 6-model panel (n=500 each;
+whiskers = 95\% bootstrap CI; bar colour = verdict; WR = alt-test winning rate). Datasets ordered by construct
+subjectivity. LLMs clear LOW ceilings (NLI) but fall short of HIGH ceilings on subjective social-computing tasks.}
+\label{fig:s3acc}
+\end{figure}
 
-\paragraph{Expected contribution.} Study 3 will convert qualitative ``promising/mixed'' verdicts on HCC methods into
-\emph{quantitative}, dataset-level evidence on previously untested data, and will report---per method and per
-model---whether an open, locally-servable LLM jury can replace a second human coder under the field's own
-reliability standards. The harness and all outputs will be released for the community to extend.
+\begin{figure}[t]\centering
+\includegraphics[width=0.92\linewidth]{s3_fig03_full_verdict}
+\caption{Study 3. Dataset$\times$judge-model reliability verdict (cell = accuracy + verdict). The scale effect
+(\texttt{qwen3.5-9b} column) and the construct-subjectivity gradient (rows) are both visible.}
+\label{fig:s3heat}
+\end{figure}
+
+\begin{table}[t]\centering\small
+\caption{Study 3 results across \STHRdatasets{} datasets $\times$ \STHRmodels{} models (15{,}000 judgments).
+Human ceiling = random-annotator-vs-majority accuracy; alt-test pass = winning rate $\ge0.5$; contamination tier
+from the verbatim-recall probe.}
+\label{tab:study3}
+\input{tables/tab_study3_results}
+\end{table}
+
+\subsection{Integration with the decision framework}
+Mapped onto the five-level rubric, Study 3 drops fresh, dataset-level points into the Study-1/2 landscape and
+\emph{quantitatively confirms} the augment-not-replace conclusion for human-centered annotation: LLM judges are a
+validated substitute for objective/low-ceiling labeling and a strong assistant for coarse (binary) moderation, but
+fall short of---and fail the replacement test for---subjective, fine-grained, or high-consensus human-centered
+constructs. \emph{Limitation:} the present datasets are predominantly higher-contamination; a dedicated
+low-contamination clean condition (a post-cutoff annotated set) and additional qualitative-coding corpora are the
+immediate next additions, alongside a mixed-effects model of agreement on family, size, subjectivity, and
+contamination tier with FDR control.
 
 % =====================================================================
 \section{General discussion: a decision framework for HCC}
