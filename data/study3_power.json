@@ -1,0 +1,102 @@
+{
+  "params": {
+    "alpha": 0.05,
+    "power": 0.8,
+    "za": 1.96,
+    "zpower": 0.8416
+  },
+  "tables": {
+    "proportion_CI_n": {
+      "p=0.5": {
+        "halfwidth=0.05": 385,
+        "halfwidth=0.04": 601,
+        "halfwidth=0.03": 1068,
+        "halfwidth=0.02": 2401
+      },
+      "p=0.7": {
+        "halfwidth=0.05": 323,
+        "halfwidth=0.04": 505,
+        "halfwidth=0.03": 897,
+        "halfwidth=0.02": 2017
+      },
+      "p=0.8": {
+        "halfwidth=0.05": 246,
+        "halfwidth=0.04": 385,
+        "halfwidth=0.03": 683,
+        "halfwidth=0.02": 1537
+      },
+      "p=0.9": {
+        "halfwidth=0.05": 139,
+        "halfwidth=0.04": 217,
+        "halfwidth=0.03": 385,
+        "halfwidth=0.02": 865
+      }
+    },
+    "detect_gap_n": {
+      "human_ceiling=0.7": {
+        "delta=0.1": {
+          "independent_per_group": 356,
+          "paired_mcnemar": 391
+        },
+        "delta=0.075": {
+          "independent_per_group": 623,
+          "paired_mcnemar": 814
+        },
+        "delta=0.05": {
+          "independent_per_group": 1377,
+          "paired_mcnemar": 3923
+        }
+      },
+      "human_ceiling=0.75": {
+        "delta=0.1": {
+          "independent_per_group": 329,
+          "paired_mcnemar": 391
+        },
+        "delta=0.075": {
+          "independent_per_group": 571,
+          "paired_mcnemar": 814
+        },
+        "delta=0.05": {
+          "independent_per_group": 1251,
+          "paired_mcnemar": 3923
+        }
+      },
+      "human_ceiling=0.8": {
+        "delta=0.1": {
+          "independent_per_group": 294,
+          "paired_mcnemar": 391
+        },
+        "delta=0.075": {
+          "independent_per_group": 505,
+          "paired_mcnemar": 814
+        },
+        "delta=0.05": {
+          "independent_per_group": 1094,
+          "paired_mcnemar": 3923
+        }
+      }
+    },
+    "correlation_CI_n": {
+      "rho=0.5": {
+        "halfwidth=0.1": 220,
+        "halfwidth=0.05": 868
+      },
+      "rho=0.7": {
+        "halfwidth=0.1": 103,
+        "halfwidth=0.05": 403
+      },
+      "rho=0.8": {
+        "halfwidth=0.1": 53,
+        "halfwidth=0.05": 203
+      }
+    }
+  },
+  "recommendation": {
+    "per_dataset_target_n": 500,
+    "rationale": "n=500 gives <=+-4.4% 95% CI on an agreement proportion at p=0.5 (tighter at p>=0.8), and >=80% power to detect a 0.10 gap vs the human ceiling on the same items (paired). Use the FULL dataset when it has <=1000 labelable items; otherwise draw a stratified random sample of n=500 (by class label and, where available, by annotator-disagreement stratum) so rare classes and hard/contested items are represented.",
+    "annotators_required": ">=3 human annotators per item for the human-human ceiling and the alt-test (>=5 preferred for stable leave-one-out winning-rate estimates).",
+    "replication": "temperature=0 for the primary run + 3 replicate runs at temperature=0.7 to quantify self-consistency (intra-model agreement); >=3 prompt variants for prompt-sensitivity.",
+    "multiplicity": "Benjamini-Hochberg FDR across the (dataset x model x metric) grid.",
+    "total_scale": "With ~6 datasets x ~6 judge models x 500 items x (1 primary + 3 replicate) ~= 72k primary + 216k replicate model judgments; ample for mixed-effects modelling."
+  }
+}
