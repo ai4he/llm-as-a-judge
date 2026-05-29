@@ -1,0 +1,33 @@
+\noindent
+Large language models (LLMs) are flooding into Human-Centered Computing (HCC) research as substitutes for human
+judgment: coding qualitative data, annotating crowdsourced corpora, simulating study participants, generating
+personas, and evaluating designs. Yet HCC's methods carry epistemological commitments (interpretation, reflexivity,
+positionality) that make uncritical substitution risky, and the field lacks an evidence-based account of
+\emph{when} an ``LLM-as-a-judge'' can stand in for a human and when it cannot. We address this with four studies.
+\textbf{Study 1a} is a PRISMA systematic review of \Nstudies{} studies across \Ndomains{} domains that establishes
+the general reliability landscape of LLM-as-a-judge: substitution is validated ($\approx$ or above the
+human-human ceiling) for objective, verifiable, low-expertise tasks judged in aggregate, and unreliable for
+subjective, expert, low-resource, or adversarial ones (mean reliability \Meanrel/5; only \Pctreliable\% of studies
+in the reliable band). \textbf{Study 1b} asks whether this landscape is a moving target: we re-run a flagship
+``promising'' benchmark (SummEval) with the most powerful open models served via Clemson's vLLM API and ask whether
+they now \emph{surpass} the agreement numbers reported for proprietary judges, distinguishing a ``matter of time''
+from a structural ceiling. \textbf{Study 2} is a PRISMA systematic review of \STN{} studies focused on HCC, HCI, and
+qualitative-research methods that historically require human input. It finds that the field overwhelmingly positions
+LLMs to \emph{augment} rather than replace humans (\STaugment{} augment vs.\ \STreplace{} replace vs.\ \STsimulate{}
+simulate), with an epistemic stance dominated by \emph{tension} (\STtension/\STN); objective crowd-annotation
+substitution is validated, interpretive qualitative analysis is reliable only as human-in-the-loop augmentation, and
+\emph{simulating} participants, personas, and usability evaluations is the least reliable (flattening of identity
+groups, caricature, hallucinated usability issues). \textbf{Study 3} closes the gaps the
+first two studies expose, by running a standardized LLM-as-a-judge meta-evaluation, using open models served via
+Clemson's vLLM API and the agreement-against-human-ceiling methodology distilled from Studies 1-2, on HCC datasets
+that contain human labels but have never been formally tested with an LLM judge. Across \STHRn{} judgments (a
+6-model open panel, 9B-754B), it finds the human-agreement ceiling governs reliability: the panel matches or
+exceeds humans on low-ceiling NLI but falls short of, and fails the alt-test for, subjective social-computing
+annotation (emotion, hate speech), with binary offensiveness the strongest case. A mixed-effects model confirms the
+mechanism: judge correctness is governed overwhelmingly by item-level human (dis)agreement (random-intercept
+$\mathrm{SD}_{\text{item}}=\SMEvcitem$) and by task subjectivity ($\mathrm{OR}=\SMEsubjOR$ per unit of
+$1\!-\!$ceiling), while model scale contributes only modestly ($\mathrm{OR}=\SMEsizeOR$ per $\log_{10}$ params);
+after FDR correction \SMEfdrbelow{} of \SMEfdrtests{} judge$\times$dataset cells sit significantly below the human
+ceiling. Together the studies yield a
+decision framework telling HCC researchers when an LLM judge is a validated substitute, a human-in-the-loop
+assistant, or an unsafe replacement.

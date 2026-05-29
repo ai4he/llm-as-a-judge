@@ -13,8 +13,10 @@ DS=[("chaosnli_snli","ChaosNLI-SNLI\n(NLI)"),
     ("chaosnli_mnli","ChaosNLI-MNLI\n(NLI, harder)"),
     ("go_emotions","GoEmotions\n(4-way sentiment)"),
     ("social_bias_frames","SBIC\n(offensive, sensitive)"),
-    ("hatexplain","HateXplain\n(hate speech, sensitive)")]
-S={k:json.load(open(OUT/f"{k}.full.scores.json")) for k,_ in DS if (OUT/f"{k}.full.scores.json").exists()}
+    ("hatexplain","HateXplain\n(hate speech, sensitive)"),
+    ("multipico","MultiPICo\n(irony, clean)")]
+DS=[d for d in DS if (OUT/f"{d[0]}.full.scores.json").exists()]   # only datasets that have been scored
+S={k:json.load(open(OUT/f"{k}.full.scores.json")) for k,_ in DS}
 models=sorted({m for s in S.values() for m in s["models"] if "accuracy" in s["models"][m]})
 
 # Fig A: per-dataset accuracy vs ceiling

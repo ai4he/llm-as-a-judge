@@ -13,7 +13,7 @@ sys.path.insert(0,str(ROOT/"study3")); from harness import BASE,KEY,call_chat,LO
 from plan import FULL_PLAN
 DSNAME={"chaosnli_snli":"SNLI natural-language-inference","chaosnli_mnli":"MultiNLI natural-language-inference",
         "hatexplain":"HateXplain hate-speech detection","go_emotions":"GoEmotions emotion",
-        "social_bias_frames":"Social Bias Frames (SBIC)"}
+        "social_bias_frames":"Social Bias Frames (SBIC)","multipico":"MultiPICo irony detection"}
 def norm(s): return re.sub(r"\s+"," ",re.sub(r"[^a-z0-9 ]","",str(s).lower())).strip()
 def overlap(pred,truth):
     a,b=norm(pred),norm(truth)

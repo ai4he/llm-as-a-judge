@@ -61,6 +61,15 @@ PROMPTS = {
           "Answer with ONLY a JSON object on the last line: {{\"label\": \"offensive\"|\"not offensive\"}}",
    "labels":{"offensive":"off","maybe":"off","yes":"off","not offensive":"notoff","inoffensive":"notoff","no":"notoff","none":"notoff"},
  },
+ "irony_v1": {
+   "system":"You are an expert annotator labeling whether a social-media reply is ironic or sarcastic in the "
+            "context of the post it replies to.",
+   "user":"{text}\n\nIs the REPLY ironic/sarcastic (it conveys a meaning different from or opposite to its literal "
+          "content), or not ironic (literal/sincere)?\n"
+          "Answer with ONLY a JSON object on the last line: {{\"label\": \"ironic\"|\"not ironic\"}}",
+   "labels":{"ironic":"iro","irony":"iro","sarcastic":"iro","sarcasm":"iro","yes":"iro",
+             "not ironic":"noiro","notironic":"noiro","literal":"noiro","sincere":"noiro","no":"noiro","not":"noiro"},
+ },
 }
 
 def parse_label(text, labelmap):
@@ -169,13 +178,37 @@ def load_sbic(n=None, seed=20260529):
                       "label_count":[cnt.get(c,0) for c in classes],"n_annot":len(d["o"])}); i+=1
     random.Random(seed).shuffle(items); return items[:n] if n else items
 
+def load_multipico(n=500, lang="en", seed=20260529):
+    "MultiPICo (2024): subjective irony detection, binary. Multi-annotator + demographics; recent release"
+    " -> low-contamination CLEAN condition vs the older sensitive sets."
+    from datasets import load_dataset
+    from collections import defaultdict, Counter
+    ds=load_dataset("Multilingual-Perspectivist-NLU/MultiPICo","default",split="train",streaming=True)
+    byk=defaultdict(lambda:{"text":None,"labs":[]})
+    for ex in ds:
+        if ex.get("language")!=lang: continue
+        try: lab="iro" if int(ex["label"])==1 else "noiro"
+        except: continue
+        d=byk[(ex.get("post_id"),ex.get("reply_id"))]; d["labs"].append(lab)
+        if d["text"] is None:
+            d["text"]=f"Post: {(ex.get('post') or '').strip()}\nReply: {(ex.get('reply') or '').strip()}"
+    classes=["iro","noiro"]; items=[]; i=0
+    for k,d in byk.items():
+        if len(d["labs"])<3: continue
+        cnt=Counter(d["labs"]); top,tc=cnt.most_common(1)[0]
+        if list(cnt.values()).count(tc)>1: continue          # drop ties (no clear majority)
+        items.append({"id":f"mpc_{i}","text":d["text"],"gold":top,"classes":classes,
+                      "label_count":[cnt.get(c,0) for c in classes],"n_annot":len(d["labs"])}); i+=1
+    random.Random(seed).shuffle(items); return items[:n] if n else items
+
 LOADERS={"chaosnli_snli":lambda n: load_chaosnli("snli",n),
          "chaosnli_mnli":lambda n: load_chaosnli("mnli",n),
          "hatexplain":lambda n: load_hatexplain(n),
          "go_emotions":lambda n: load_goemotions(n),
-         "social_bias_frames":lambda n: load_sbic(n)}
+         "social_bias_frames":lambda n: load_sbic(n),
+         "multipico":lambda n: load_multipico(n)}
 TASK_PROMPT={"chaosnli_snli":"nli_v1","chaosnli_mnli":"nli_v1","hatexplain":"hate_v1",
-             "go_emotions":"emotion_v1","social_bias_frames":"offensive_v1"}
+             "go_emotions":"emotion_v1","social_bias_frames":"offensive_v1","multipico":"irony_v1"}
 
 # ---------------- async judging ----------------
 async def call_chat(session, model, messages, max_tokens, temperature):

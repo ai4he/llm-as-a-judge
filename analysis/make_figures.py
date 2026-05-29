@@ -436,7 +436,7 @@ def tables():
         arows.append(f"{esc(r['authors'])} ({r['year']}) & {esc(r['domain'])} & {esc(r['metric'])} & "
                      f"{r['agreement']:.2f} & {hb} & {VERDICT_LABEL_SHORT[int(r['verdict'])]} \\\\")
     atex=(r"\begin{tabular}{@{}l l l c c l@{}}"+"\n\\toprule\n"
-          r"Study & Domain & Metric & LLM--human & Human--human & Verdict \\"+"\n\\midrule\n"
+          r"Study & Domain & Metric & LLM-human & Human-human & Verdict \\"+"\n\\midrule\n"
           +"\n".join(arows)+"\n\\bottomrule\n\\end{tabular}")
     (TAB/"tab_anchor_numbers.tex").write_text(atex)
 
@@ -466,7 +466,7 @@ def tables():
         "pointwise-scoring":"pointwise","ranking":"ranking","survey":"survey","review":"review"}
     rows=[]
     for _,r in df.sort_values(["domain","year","id"]).iterrows():
-        ag = "--" if pd.isna(r["agreement"]) else f"{r['agreement']:.2f}"
+        ag = "-" if pd.isna(r["agreement"]) else f"{r['agreement']:.2f}"
         rows.append(f"\\texttt{{{esc_tex(r['id'])}}} & {esc_tex(r['authors'])} ({r['year']}) & "
                     f"{esc_tex(r['domain'])} & {TS.get(r['task'],r['task'])} & {esc_tex(r['metric']) or '--'} & "
                     f"{ag} & {VERDICT_LABEL_SHORT[int(r['verdict'])]} \\\\")

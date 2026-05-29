@@ -7,7 +7,7 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parent.parent; OUT=ROOT/"study3"/"outputs"; TAB=ROOT/"paper"/"tables"
 DS=[("chaosnli_snli","ChaosNLI-SNLI","NLI"),("chaosnli_mnli","ChaosNLI-MNLI","NLI"),
     ("go_emotions","GoEmotions","emotion (4-way)"),("social_bias_frames","SBIC","offensive (binary)"),
-    ("hatexplain","HateXplain","hate (3-way)")]
+    ("hatexplain","HateXplain","hate (3-way)"),("multipico","MultiPICo (clean)","irony (binary)")]
 esc=lambda s:str(s).replace("&",r"\&").replace("%",r"\%").replace("_",r"\_")
 sig={"Validated":r"\cellcolor{g!55}","Promising":r"\cellcolor{g!25}","Mixed":r"\cellcolor{a!60}",
      "Caution":r"\cellcolor{r!30}","Unreliable":r"\cellcolor{r!55}"}

@@ -1,0 +1,417 @@
+{
+  "n_obs": 15000,
+  "n_items": 2500,
+  "sizes_B": {
+    "qwen3.5-9b": 9,
+    "qwen3.6-27b-fp8": 27,
+    "gemma-4-31b": 31,
+    "gptoss-120b": 120,
+    "deepseek-v4-pro": 671,
+    "glm-5.1-fp8": 754
+  },
+  "ceiling": {
+    "chaosnli_snli": 0.752,
+    "chaosnli_mnli": 0.641,
+    "go_emotions": 0.782,
+    "social_bias_frames": 0.905,
+    "hatexplain": 0.835
+  },
+  "logit_cluster_robust": {
+    "Intercept": {
+      "beta": 0.6917030085432605,
+      "se": 0.0319333878501539,
+      "z": 21.660808799525068,
+      "p": 4.8071996505335384e-104,
+      "OR": 1.9971137405958024,
+      "ci": [
+        1.8759491008119553,
+        2.126104216340548
+      ]
+    },
+    "subjectivity_c": {
+      "beta": -1.5486433861973083,
+      "se": 0.3415603514995609,
+      "z": -4.534025625041844,
+      "p": 5.7870003686992014e-06,
+      "OR": 0.21253610775667278,
+      "ci": [
+        0.10881681861121847,
+        0.41511595061187584
+      ]
+    },
+    "logsize_c": {
+      "beta": 0.19727082673918855,
+      "se": 0.020492609937078406,
+      "z": 9.626437400843491,
+      "p": 6.183623991509199e-22,
+      "OR": 1.2180738830166618,
+      "ci": [
+        1.170119697711702,
+        1.2679933406717574
+      ]
+    }
+  },
+  "glmm": {
+    "fixed": {
+      "Intercept": {
+        "post_mean": 1.1963058853711344,
+        "post_sd": 0.023620434515315883,
+        "z": 50.647073600421265
+      },
+      "subjectivity_c": {
+        "post_mean": -0.5657075225835617,
+        "post_sd": 0.26620629410860275,
+        "z": -2.1250719276861765
+      },
+      "logsize_c": {
+        "post_mean": 0.3672573155576315,
+        "post_sd": 0.03289039322075213,
+        "z": 11.166096832369618
+      }
+    },
+    "vc_sd": {
+      "dataset": 0.8320377172480344,
+      "item": 2.2138235204854904
+    }
+  },
+  "fdr": {
+    "n_tests": 30,
+    "alpha": 0.05,
+    "method": "fdr_bh",
+    "n_sig": 25,
+    "n_sig_below_ceiling": 20,
+    "n_sig_above_ceiling": 5,
+    "tests": [
+      {
+        "dataset": "chaosnli_snli",
+        "model": "deepseek-v4-pro",
+        "acc": 0.792,
+        "ceiling": 0.752,
+        "delta": 0.040000000000000036,
+        "n": 500,
+        "p": 0.038322692582622164,
+        "q": 0.0459872310991466,
+        "sig_fdr": true
+      },
+      {
+        "dataset": "chaosnli_snli",
+        "model": "gemma-4-31b",
+        "acc": 0.836,
+        "ceiling": 0.752,
+        "delta": 0.08399999999999996,
+        "n": 500,
+        "p": 7.76338016000904e-06,
+        "q": 1.164507024001356e-05,
+        "sig_fdr": true
+      },
+      {
+        "dataset": "chaosnli_snli",
+        "model": "glm-5.1-fp8",
+        "acc": 0.832,
+        "ceiling": 0.752,
+        "delta": 0.07999999999999996,
+        "n": 500,
+        "p": 2.035566592319431e-05,
+        "q": 2.7757726258901334e-05,
+        "sig_fdr": true
+      },
+      {
+        "dataset": "chaosnli_snli",
+        "model": "gptoss-120b",
+        "acc": 0.786,
+        "ceiling": 0.752,
+        "delta": 0.03400000000000003,
+        "n": 500,
+        "p": 0.07850792796083544,
+        "q": 0.08723103106759493,
+        "sig_fdr": false
+      },
+      {
+        "dataset": "chaosnli_snli",
+        "model": "qwen3.5-9b",
+        "acc": 0.594,
+        "ceiling": 0.752,
+        "delta": -0.15800000000000003,
+        "n": 500,
+        "p": 8.800026476172462e-15,
+        "q": 1.7600052952344924e-14,
+        "sig_fdr": true
+      },
+      {
+        "dataset": "chaosnli_snli",
+        "model": "qwen3.6-27b-fp8",
+        "acc": 0.834,
+        "ceiling": 0.752,
+        "delta": 0.08199999999999996,
+        "n": 500,
+        "p": 1.2632530032357618e-05,
+        "q": 1.80464714747966e-05,
+        "sig_fdr": true
+      },
+      {
+        "dataset": "chaosnli_mnli",
+        "model": "deepseek-v4-pro",
+        "acc": 0.602,
+        "ceiling": 0.641,
+        "delta": -0.039000000000000035,
+        "n": 500,
+        "p": 0.07637983465455994,
+        "q": 0.08723103106759493,
+        "sig_fdr": false
+      },
+      {
+        "dataset": "chaosnli_mnli",
+        "model": "gemma-4-31b",
+        "acc": 0.698,
+        "ceiling": 0.641,
+        "delta": 0.05699999999999994,
+        "n": 500,
+        "p": 0.007840085538300876,
+        "q": 0.009800106922876094,
+        "sig_fdr": true
+      },
+      {
+        "dataset": "chaosnli_mnli",
+        "model": "glm-5.1-fp8",
+        "acc": 0.616,
+        "ceiling": 0.641,
+        "delta": -0.025000000000000022,
+        "n": 500,
+        "p": 0.2441903124565952,
+        "q": 0.26163247763206626,
+        "sig_fdr": false
+      },
+      {
+        "dataset": "chaosnli_mnli",
+        "model": "gptoss-120b",
+        "acc": 0.632,
+        "ceiling": 0.641,
+        "delta": -0.009000000000000008,
+        "n": 500,
+        "p": 0.6750404908502533,
+        "q": 0.6750404908502533,
+        "sig_fdr": false
+      },
+      {
+        "dataset": "chaosnli_mnli",
+        "model": "qwen3.5-9b",
+        "acc": 0.526,
+        "ceiling": 0.641,
+        "delta": -0.11499999999999999,
+        "n": 500,
+        "p": 1.561481292044607e-07,
+        "q": 2.602468820074345e-07,
+        "sig_fdr": true
+      },
+      {
+        "dataset": "chaosnli_mnli",
+        "model": "qwen3.6-27b-fp8",
+        "acc": 0.632,
+        "ceiling": 0.641,
+        "delta": -0.009000000000000008,
+        "n": 500,
+        "p": 0.6750404908502533,
+        "q": 0.6750404908502533,
+        "sig_fdr": false
+      },
+      {
+        "dataset": "go_emotions",
+        "model": "deepseek-v4-pro",
+        "acc": 0.58,
+        "ceiling": 0.782,
+        "delta": -0.20200000000000007,
+        "n": 500,
+        "p": 5.712341121530564e-24,
+        "q": 1.9041137071768548e-23,
+        "sig_fdr": true
+      },
+      {
+        "dataset": "go_emotions",
+        "model": "gemma-4-31b",
+        "acc": 0.582,
+        "ceiling": 0.782,
+        "delta": -0.20000000000000007,
+        "n": 500,
+        "p": 1.2026146062211555e-23,
+        "q": 3.607843818663467e-23,
+        "sig_fdr": true
+      },
+      {
+        "dataset": "go_emotions",
+        "model": "glm-5.1-fp8",
+        "acc": 0.594,
+        "ceiling": 0.782,
+        "delta": -0.18800000000000006,
+        "n": 500,
+        "p": 3.409552225779338e-21,
+        "q": 9.298778797580013e-21,
+        "sig_fdr": true
+      },
+      {
+        "dataset": "go_emotions",
+        "model": "gptoss-120b",
+        "acc": 0.578,
+        "ceiling": 0.782,
+        "delta": -0.20400000000000007,
+        "n": 500,
+        "p": 1.861052537819824e-24,
+        "q": 6.97894701682434e-24,
+        "sig_fdr": true
+      },
+      {
+        "dataset": "go_emotions",
+        "model": "qwen3.5-9b",
+        "acc": 0.474,
+        "ceiling": 0.782,
+        "delta": -0.30800000000000005,
+        "n": 500,
+        "p": 4.570751334511436e-51,
+        "q": 3.4280635008835774e-50,
+        "sig_fdr": true
+      },
+      {
+        "dataset": "go_emotions",
+        "model": "qwen3.6-27b-fp8",
+        "acc": 0.608,
+        "ceiling": 0.782,
+        "delta": -0.17400000000000004,
+        "n": 500,
+        "p": 1.856350663128994e-18,
+        "q": 4.2838861456822936e-18,
+        "sig_fdr": true
+      },
+      {
+        "dataset": "social_bias_frames",
+        "model": "deepseek-v4-pro",
+        "acc": 0.832,
+        "ceiling": 0.905,
+        "delta": -0.07300000000000006,
+        "n": 500,
+        "p": 3.5748928410048315e-07,
+        "q": 5.64456764369184e-07,
+        "sig_fdr": true
+      },
+      {
+        "dataset": "social_bias_frames",
+        "model": "gemma-4-31b",
+        "acc": 0.822,
+        "ceiling": 0.905,
+        "delta": -0.08300000000000007,
+        "n": 500,
+        "p": 1.0346322712442667e-08,
+        "q": 1.8258216551369413e-08,
+        "sig_fdr": true
+      },
+      {
+        "dataset": "social_bias_frames",
+        "model": "glm-5.1-fp8",
+        "acc": 0.856,
+        "ceiling": 0.905,
+        "delta": -0.049000000000000044,
+        "n": 500,
+        "p": 0.00042254553918259,
+        "q": 0.0005511463554555521,
+        "sig_fdr": true
+      },
+      {
+        "dataset": "social_bias_frames",
+        "model": "gptoss-120b",
+        "acc": 0.778,
+        "ceiling": 0.905,
+        "delta": -0.127,
+        "n": 500,
+        "p": 3.3875924694384866e-17,
+        "q": 7.259126720225328e-17,
+        "sig_fdr": true
+      },
+      {
+        "dataset": "social_bias_frames",
+        "model": "qwen3.5-9b",
+        "acc": 0.622,
+        "ceiling": 0.905,
+        "delta": -0.28300000000000003,
+        "n": 500,
+        "p": 8.709205011362915e-65,
+        "q": 1.3063807517044372e-63,
+        "sig_fdr": true
+      },
+      {
+        "dataset": "social_bias_frames",
+        "model": "qwen3.6-27b-fp8",
+        "acc": 0.814,
+        "ceiling": 0.905,
+        "delta": -0.09100000000000008,
+        "n": 500,
+        "p": 5.463672927623292e-10,
+        "q": 1.0244386739293673e-09,
+        "sig_fdr": true
+      },
+      {
+        "dataset": "hatexplain",
+        "model": "deepseek-v4-pro",
+        "acc": 0.576,
+        "ceiling": 0.835,
+        "delta": -0.259,
+        "n": 500,
+        "p": 1.7414556694503328e-42,
+        "q": 1.0448734016701998e-41,
+        "sig_fdr": true
+      },
+      {
+        "dataset": "hatexplain",
+        "model": "gemma-4-31b",
+        "acc": 0.662,
+        "ceiling": 0.835,
+        "delta": -0.17299999999999993,
+        "n": 500,
+        "p": 3.7973227235732814e-21,
+        "q": 9.493306808933202e-21,
+        "sig_fdr": true
+      },
+      {
+        "dataset": "hatexplain",
+        "model": "glm-5.1-fp8",
+        "acc": 0.608,
+        "ceiling": 0.835,
+        "delta": -0.22699999999999998,
+        "n": 500,
+        "p": 1.0033666983986158e-33,
+        "q": 5.016833491993079e-33,
+        "sig_fdr": true
+      },
+      {
+        "dataset": "hatexplain",
+        "model": "gptoss-120b",
+        "acc": 0.536,
+        "ceiling": 0.835,
+        "delta": -0.29899999999999993,
+        "n": 500,
+        "p": 1.2160883436604886e-54,
+        "q": 1.2160883436604886e-53,
+        "sig_fdr": true
+      },
+      {
+        "dataset": "hatexplain",
+        "model": "qwen3.5-9b",
+        "acc": 0.42,
+        "ceiling": 0.835,
+        "delta": -0.415,
+        "n": 500,
+        "p": 9.388921952241255e-98,
+        "q": 2.8166765856723764e-96,
+        "sig_fdr": true
+      },
+      {
+        "dataset": "hatexplain",
+        "model": "qwen3.6-27b-fp8",
+        "acc": 0.626,
+        "ceiling": 0.835,
+        "delta": -0.20899999999999996,
+        "n": 500,
+        "p": 4.075237236373235e-29,
+        "q": 1.7465302441599578e-28,
+        "sig_fdr": true
+      }
+    ]
+  }
+}

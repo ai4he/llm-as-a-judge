@@ -1,0 +1,172 @@
+{
+  "dataset": "summeval",
+  "run": "powerful",
+  "reported": {
+    "coherence": 0.582,
+    "consistency": 0.507,
+    "fluency": 0.455,
+    "relevance": 0.547,
+    "source": "G-Eval-4 (GPT-4), Liu et al. 2023"
+  },
+  "models": {
+    "deepseek-v4-pro": {
+      "coherence": {
+        "summary_spearman": 0.5477,
+        "n_docs": 100,
+        "pooled_spearman": 0.5533,
+        "coverage": 0.9994,
+        "reported": 0.582,
+        "surpasses_reported": false
+      },
+      "consistency": {
+        "summary_spearman": 0.6875,
+        "n_docs": 94,
+        "pooled_spearman": 0.6631,
+        "coverage": 1.0,
+        "reported": 0.507,
+        "surpasses_reported": true
+      },
+      "fluency": {
+        "summary_spearman": 0.3917,
+        "n_docs": 98,
+        "pooled_spearman": 0.3603,
+        "coverage": 1.0,
+        "reported": 0.455,
+        "surpasses_reported": false
+      },
+      "relevance": {
+        "summary_spearman": 0.5405,
+        "n_docs": 100,
+        "pooled_spearman": 0.5631,
+        "coverage": 1.0,
+        "reported": 0.547,
+        "surpasses_reported": false
+      },
+      "_avg_summary_spearman": 0.5418,
+      "_avg_reported": 0.5228,
+      "_surpasses_avg": true,
+      "_n_aspects_surpassed": 1
+    },
+    "glm-5.1-fp8": {
+      "coherence": {
+        "summary_spearman": 0.6504,
+        "n_docs": 100,
+        "pooled_spearman": 0.6702,
+        "coverage": 1.0,
+        "reported": 0.582,
+        "surpasses_reported": true
+      },
+      "consistency": {
+        "summary_spearman": 0.6931,
+        "n_docs": 96,
+        "pooled_spearman": 0.6845,
+        "coverage": 1.0,
+        "reported": 0.507,
+        "surpasses_reported": true
+      },
+      "fluency": {
+        "summary_spearman": 0.2166,
+        "n_docs": 98,
+        "pooled_spearman": 0.2395,
+        "coverage": 1.0,
+        "reported": 0.455,
+        "surpasses_reported": false
+      },
+      "relevance": {
+        "summary_spearman": 0.5428,
+        "n_docs": 100,
+        "pooled_spearman": 0.5578,
+        "coverage": 1.0,
+        "reported": 0.547,
+        "surpasses_reported": false
+      },
+      "_avg_summary_spearman": 0.5257,
+      "_avg_reported": 0.5228,
+      "_surpasses_avg": true,
+      "_n_aspects_surpassed": 2
+    },
+    "gptoss-120b": {
+      "coherence": {
+        "summary_spearman": 0.5859,
+        "n_docs": 100,
+        "pooled_spearman": 0.5972,
+        "coverage": 1.0,
+        "reported": 0.582,
+        "surpasses_reported": true
+      },
+      "consistency": {
+        "summary_spearman": 0.6847,
+        "n_docs": 96,
+        "pooled_spearman": 0.6641,
+        "coverage": 1.0,
+        "reported": 0.507,
+        "surpasses_reported": true
+      },
+      "fluency": {
+        "summary_spearman": 0.2595,
+        "n_docs": 94,
+        "pooled_spearman": 0.2883,
+        "coverage": 1.0,
+        "reported": 0.455,
+        "surpasses_reported": false
+      },
+      "relevance": {
+        "summary_spearman": 0.4818,
+        "n_docs": 100,
+        "pooled_spearman": 0.4949,
+        "coverage": 1.0,
+        "reported": 0.547,
+        "surpasses_reported": false
+      },
+      "_avg_summary_spearman": 0.503,
+      "_avg_reported": 0.5228,
+      "_surpasses_avg": false,
+      "_n_aspects_surpassed": 2
+    },
+    "qwen3.6-35b-a3b-fp8": {
+      "coherence": {
+        "summary_spearman": 0.6055,
+        "n_docs": 100,
+        "pooled_spearman": 0.6332,
+        "coverage": 1.0,
+        "reported": 0.582,
+        "surpasses_reported": true
+      },
+      "consistency": {
+        "summary_spearman": 0.7022,
+        "n_docs": 94,
+        "pooled_spearman": 0.6893,
+        "coverage": 1.0,
+        "reported": 0.507,
+        "surpasses_reported": true
+      },
+      "fluency": {
+        "summary_spearman": 0.2985,
+        "n_docs": 96,
+        "pooled_spearman": 0.3187,
+        "coverage": 0.9994,
+        "reported": 0.455,
+        "surpasses_reported": false
+      },
+      "relevance": {
+        "summary_spearman": 0.5398,
+        "n_docs": 100,
+        "pooled_spearman": 0.5577,
+        "coverage": 1.0,
+        "reported": 0.547,
+        "surpasses_reported": false
+      },
+      "_avg_summary_spearman": 0.5365,
+      "_avg_reported": 0.5228,
+      "_surpasses_avg": true,
+      "_n_aspects_surpassed": 2
+    }
+  },
+  "verdict": {
+    "best_model": "deepseek-v4-pro",
+    "best_avg": 0.5418,
+    "reported_avg": 0.5228,
+    "any_model_surpasses_avg": true,
+    "interpretation": "MATTER OF TIME: open models already match/exceed the reported proprietary judge"
+  }
+}

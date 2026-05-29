@@ -133,7 +133,7 @@ def tables_and_macros():
         r"Study & Method & Role & Community & Agree & Verdict \\"+"\n\\midrule\n\\endfirsthead"+"\n"
         r"\toprule Study & Method & Role & Community & Agree & Verdict \\ \midrule \endhead"]
     for _,r in df.sort_values(["method","year"]).iterrows():
-        ag="--" if pd.isna(r["agreement"]) else f"{r['agreement']:.2f}"
+        ag="-" if pd.isna(r["agreement"]) else f"{r['agreement']:.2f}"
         lt.append(f"{esc(r['authors'])} ({r['year']}) & {esc(r['method'])} & {RS.get(r['role'],r['role'])} & {esc(r['community'])} & {ag} & {VNAME[int(r['verdict'])]} \\\\")
     lt.append("\\bottomrule\n\\end{longtable}")
     (TAB/"tab_study2_full.tex").write_text("\n".join(lt))
