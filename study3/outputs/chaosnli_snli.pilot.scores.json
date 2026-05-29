@@ -1,0 +1,88 @@
+{
+  "dataset": "chaosnli_snli",
+  "run": "pilot",
+  "n_items": 250,
+  "human_ceiling_acc": 0.75,
+  "human_pairwise_agree": 0.656,
+  "models": {
+    "gemma-4-31b": {
+      "parse_rate": 1.0,
+      "n": 250,
+      "accuracy": 0.832,
+      "acc_CI": [
+        0.784,
+        0.88
+      ],
+      "cohen_kappa_vs_gold": 0.709,
+      "macro_f1": 0.782,
+      "macro_precision": 0.86,
+      "macro_recall": 0.757,
+      "alt_test_winrate": 0.543,
+      "alt_test_pass": true,
+      "verdict": 1,
+      "verdict_label": "Validated",
+      "vs_ceiling_acc": 0.082
+    },
+    "glm-5.1-fp8": {
+      "parse_rate": 1.0,
+      "n": 250,
+      "accuracy": 0.804,
+      "acc_CI": [
+        0.752,
+        0.848
+      ],
+      "cohen_kappa_vs_gold": 0.673,
+      "macro_f1": 0.782,
+      "macro_precision": 0.801,
+      "macro_recall": 0.781,
+      "alt_test_winrate": 0.531,
+      "alt_test_pass": true,
+      "verdict": 1,
+      "verdict_label": "Validated",
+      "vs_ceiling_acc": 0.054
+    },
+    "gptoss-120b": {
+      "parse_rate": 1.0,
+      "n": 250,
+      "accuracy": 0.756,
+      "acc_CI": [
+        0.7,
+        0.808
+      ],
+      "cohen_kappa_vs_gold": 0.57,
+      "macro_f1": 0.699,
+      "macro_precision": 0.765,
+      "macro_recall": 0.671,
+      "alt_test_winrate": 0.505,
+      "alt_test_pass": true,
+      "verdict": 2,
+      "verdict_label": "Promising",
+      "vs_ceiling_acc": 0.006
+    },
+    "qwen3.5-9b": {
+      "parse_rate": 1.0,
+      "n": 250,
+      "accuracy": 0.6,
+      "acc_CI": [
+        0.54,
+        0.664
+      ],
+      "cohen_kappa_vs_gold": 0.377,
+      "macro_f1": 0.552,
+      "macro_precision": 0.604,
+      "macro_recall": 0.575,
+      "alt_test_winrate": 0.428,
+      "alt_test_pass": false,
+      "verdict": 4,
+      "verdict_label": "Caution",
+      "vs_ceiling_acc": -0.15
+    }
+  },
+  "jury": {
+    "n": 250,
+    "accuracy": 0.824,
+    "cohen_kappa": 0.696,
+    "verdict_label": "Validated",
+    "vs_ceiling_acc": 0.074
+  }
+}
