@@ -1,0 +1,24 @@
+\documentclass[manuscript,review,anonymous,nonacm,screen]{acmart}
+\usepackage{graphicx}\graphicspath{{../figures/}}
+\usepackage{array}\usepackage{colortbl}\usepackage{longtable}\usepackage{subcaption}\usepackage{enumitem}
+\definecolor{g}{RGB}{26,152,80}\definecolor{a}{RGB}{254,224,139}\definecolor{r}{RGB}{215,48,39}
+\newcommand{\PROVIDER}{an institutional vLLM API}
+\newcommand{\REPO}{a public repository (URL omitted for anonymous review)}
+\newcommand{\corpustabref}{the released corpus}
+\newcommand{\sttwotabref}{Table~\ref{tab:study2full}}
+\input{tables/autostats}\input{tables/study2_autostats}\input{tables/study3_autostats}
+\input{tables/study1b_autostats}\input{tables/study3_stats_autostats}\input{tables/revision_autostats}
+\input{tables/rev2_autostats}\input{tables/split_autostats}
+\begin{document}
+\title{Augment, Replace, or Simulate? A Systematic Review and Empirical Evaluation of LLMs as Substitutes for Human Input in Human-Centered Computing}
+\author{Anonymous Author(s)}
+\affiliation{\institution{Anonymous Institution}\country{}}
+\renewcommand{\shortauthors}{Anonymous Author(s)}
+\begin{abstract}\input{abstractB}\end{abstract}
+\keywords{human-centered computing, LLM substitution, qualitative coding, crowdsourced annotation, participant simulation, human-AI collaboration, annotator disagreement}
+\maketitle
+\input{bodyB}
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{references}
+\input{appendixB}
+\end{document}

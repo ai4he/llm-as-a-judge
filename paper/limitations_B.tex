@@ -1,0 +1,13 @@
+% =====================================================================
+\section{Limitations}
+% =====================================================================
+The \emph{human} validation here is inherited from prior work, not added by us: Study 2's ground truth is each
+dataset's own human annotators (3 to 8 per item), and the review codes each study against the human baselines those
+studies report. The review verdict is our interpretation (only a minority of studies report an extractable numeric
+agreement value); we report an independent re-coding as a reproducibility check (verdict Krippendorff
+$\alpha=\IRRstwoV$, role $\alpha=\IRRstwoRole$, the more interpretive stance $\alpha=\IRRstwoStance$;
+Appendix~\ref{app:irr}), which is LLM-assisted and therefore measures rubric reproducibility; we treat stance claims
+as indicative. All references were web-verified. By design we evaluate \emph{open} models (the reproducible choice
+for most HCC labs) at temperature~0 across \SOCndat{} subjective datasets; interpretive qualitative coding,
+participant simulation, and design judgment are characterized by the review rather than tested empirically here.
+Findings reflect models available through mid-2026.

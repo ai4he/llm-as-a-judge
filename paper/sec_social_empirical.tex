@@ -1,0 +1,60 @@
+% =====================================================================
+\section{Study 2: An empirical test on subjective social-computing annotation}\label{sec:study2emp}
+% =====================================================================
+The review establishes what the field \emph{believes} (augment, do not replace) but not whether that belief is
+empirically warranted on the tasks HCC depends on. Study 2 supplies the missing evidence on the central case:
+subjective social-computing annotation. We evaluate a panel of \STHRmodels{} open models (9B--754B, served via
+\PROVIDER{} at temperature~0) as virtual annotators on \SOCndat{} datasets that ship human label distributions, the
+constructs HCC and CSCW routinely label: \textbf{emotion} (GoEmotions, an authors-defined 4-way sentiment grouping),
+binary \textbf{offensiveness} (SBIC), 3-way \textbf{hate speech} (HateXplain), and binary \textbf{irony} (MultiPICo,
+a 2024 perspectivist corpus). The run comprised \SOCnjudg{} judgments with zero API errors and a 100\% parse rate.
+
+\subsection{Method}
+Each model labels every item under the same guidelines the human annotators received. We benchmark against the
+\emph{human-human ceiling} (random-annotator-vs-majority accuracy with an annotator-bootstrap 95\% CI) and report
+accuracy, Cohen's $\kappa$, macro-F1, a majority \textbf{jury} \citep{verga2024poll}, and a calibrated contamination
+screen. Because subjective labels are not a single ``gold'' \citep{aroyo2015truth,plank2022humanlabel}, we also
+report disagreement-aware metrics: panel accuracy stratified by item human-entropy, and the Jensen-Shannon
+divergence between the panel and human label distributions. Dataset cards, prompts, and metric definitions are in
+Appendices~\ref{app:protocol} to~\ref{app:robust}.
+
+\subsection{The augment-not-replace consensus is empirically warranted}
+On every subjective construct the open panel falls short of the human ceiling (Table~\ref{tab:socres}). Binary
+offensiveness is the strongest case (\textbf{Promising}; best 0.86) yet still below its 0.91 ceiling; multi-way
+emotion and 3-way hate are \textbf{Mixed} (best 0.61 / 0.66); and even where headline accuracy looks high, it
+reflects base-rate learning rather than construct competence: on the recent irony corpus the best model reaches 0.82
+accuracy but only $\kappa{=}0.40$. Chance-corrected agreement (Table~\ref{tab:socdis}) is modest throughout, exactly
+the pattern the review's augment-not-replace consensus predicts.
+
+\begin{table}[t]\centering\small
+\caption{Study 2. Open panel vs the human-human ceiling on \SOCndat{} subjective social-computing datasets. Ceiling
+= random-annotator-vs-majority accuracy; macro-F1 is the best model's chance-corrected score.}
+\label{tab:socres}
+\input{tables/tab_social_results}
+\end{table}
+
+\subsection{Item-level human disagreement governs reliability}
+The shortfall is not uniform; it concentrates on \emph{contested} items. On every dataset, panel accuracy on
+low-human-disagreement items far exceeds accuracy on high-disagreement items ($\SOClowH$ vs $\SOChighH$;
+Table~\ref{tab:socdis}), and the panel's label distribution diverges from the human distribution most on the most
+contested datasets. An item-level mixed-effects model of judge correctness (over all \SOCnjudg{} judgments) confirms
+the mechanism: the random-intercept SD is far larger across \emph{items} ($\mathrm{SD}=\VCitem$) than across datasets
+($\VCdataset$) or models (between-model accuracy SD $=\VCmodel$), and with standardized predictors model scale
+contributes only modestly ($\mathrm{OR}_{/\mathrm{SD}}=\RTwosizeOR$). The driver is the latent human disagreement in
+each item, not which model judges it. A calibrated contamination screen (Appendix~\ref{app:robust}) does not explain
+the shortfall: the recent (2024) MultiPICo corpus, which the low-recall judge has not memorized, is matched only at
+its low ceiling, so the limitation tracks human disagreement, not pretraining exposure.
+
+\begin{table}[t]\centering\small
+\caption{Study 2 disagreement-aware results. Ceiling with annotator-bootstrap 95\% CI; best-model $\kappa$ and
+macro-F1; panel accuracy on low- vs high-human-disagreement items; Jensen-Shannon panel-vs-human divergence. Judges
+lose accuracy precisely as human disagreement rises.}
+\label{tab:socdis}
+\input{tables/tab_social_disagr}
+\end{table}
+
+\paragraph{What this means for HCC.} The model that simply predicts the majority looks accurate but erases the
+minority readings that perspectivist annotation is designed to preserve, which is precisely the flattening HCC warns
+against \citep{wang2024flatten,fricker2007epistemic}. Empirically, then, the field's instinct is right: for
+subjective social annotation an LLM is a useful first-pass assistant but not a replacement for the human annotators
+whose disagreement \emph{is} the signal.

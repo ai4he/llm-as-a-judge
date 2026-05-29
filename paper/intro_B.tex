@@ -1,0 +1,32 @@
+% =====================================================================
+\section{Introduction}
+% =====================================================================
+In barely two years, large language models have moved from objects of HCI study to \emph{instruments} of HCI method.
+Researchers now use them to code interview transcripts \citep{xiao2023support,gao2024collabcoder}, run thematic
+analyses \citep{depaoli2023inductive,dai2023llminloop}, annotate social-media corpora
+\citep{gilardi2023chatgpt,tornberg2023political}, simulate survey respondents \citep{argyle2023outofone}, and
+generate personas \citep{salminen2024deusexmachina}. The appeal is obvious: human judgment is the costly bottleneck
+of human-centered research. The danger is equally clear. HCC and qualitative methods are not mere labeling
+pipelines; they carry epistemological commitments, interpretation, reflexivity, positionality, and situated
+knowledge, that an LLM cannot obviously honor \citep{schroeder2025usestensions,davison2024ethics}, and substituting
+a model for a human participant can flatten the very identity groups HCI seeks to center
+\citep{wang2024flatten,cheng2023compost}.
+
+The field therefore faces a question with no consolidated answer: \textbf{for which HCC tasks is an LLM a safe
+substitute for human input, for which is it a useful assistant, and for which is it unsafe?} We answer with two
+complementary studies. First, a systematic review of how HCC \emph{actually} uses LLMs and how reliable that use is.
+Second, because a review alone cannot settle a contested empirical boundary (and because the field rightly distrusts
+AI-generated literature surveys without new evidence), we run a controlled experiment on the field's central case:
+subjective social-computing annotation, the kind of labeling HCC and CSCW depend on for studies of affect,
+toxicity, and online behavior. Throughout, we measure LLMs against the \emph{human-human agreement ceiling} computed
+from each dataset's own annotators, because for subjective constructs there is no single ground truth
+\citep{aroyo2015truth,plank2022humanlabel}, and we use \emph{open, locally-servable} models, the realistic choice
+for most HCC labs.
+
+\paragraph{Contributions.} (1) \textbf{Study 1:} the first systematic review (PRISMA, \STN{} studies, all references
+web-verified) of LLM substitution specifically for HCC/HCI/qualitative methods, coding method $\times$ role
+(augment/replace/simulate) $\times$ epistemic stance, which surfaces an augment-not-replace consensus and its
+tensions. (2) \textbf{Study 2:} a new empirical evaluation of a six-model open panel on \SOCndat{} subjective
+social-computing datasets with human label distributions (\SOCnjudg{} judgments), showing the consensus is
+empirically warranted and that item-level human disagreement, not model scale, governs reliability. (3) An
+evidence-based decision framework for HCC practice. All code, corpora, and harnesses are released.

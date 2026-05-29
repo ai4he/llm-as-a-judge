@@ -1,0 +1,309 @@
+% =====================================================================
+\section{Introduction}
+% =====================================================================
+In barely two years, large language models have moved from objects of HCI study to \emph{instruments} of HCI method.
+Researchers now use them to code interview transcripts \citep{xiao2023support,gao2024collabcoder}, run thematic
+analyses \citep{depaoli2023inductive,dai2023llminloop}, annotate social-media corpora
+\citep{gilardi2023chatgpt,tornberg2023political}, simulate survey respondents \citep{argyle2023outofone}, and
+generate personas \citep{salminen2024deusexmachina}. The appeal is obvious: human judgment is the costly bottleneck
+of human-centered research. The danger is equally clear. HCC and qualitative methods are not mere labeling
+pipelines; they carry epistemological commitments, interpretation, reflexivity, positionality, and situated
+knowledge, that an LLM cannot obviously honor \citep{schroeder2025usestensions,davison2024ethics}, and substituting
+a model for a human participant can flatten the very identity groups HCI seeks to center
+\citep{wang2024flatten,cheng2023compost}.
+
+The field therefore faces a question with no consolidated answer: \textbf{for which HCC tasks is an LLM a safe
+substitute for human input, for which is it a useful assistant, and for which is it unsafe?} We answer with two
+complementary studies. First, a systematic review of how HCC \emph{actually} uses LLMs and how reliable that use is.
+Second, because a review alone cannot settle a contested empirical boundary (and because the field rightly distrusts
+AI-generated literature surveys without new evidence), we run a controlled experiment on the field's central case:
+subjective social-computing annotation, the kind of labeling HCC and CSCW depend on for studies of affect,
+toxicity, and online behavior. Throughout, we measure LLMs against the \emph{human-human agreement ceiling} computed
+from each dataset's own annotators, because for subjective constructs there is no single ground truth
+\citep{aroyo2015truth,plank2022humanlabel}, and we use \emph{open, locally-servable} models, the realistic choice
+for most HCC labs.
+
+\paragraph{Contributions.} (1) \textbf{Study 1:} the first systematic review (PRISMA, \STN{} studies, all references
+web-verified) of LLM substitution specifically for HCC/HCI/qualitative methods, coding method $\times$ role
+(augment/replace/simulate) $\times$ epistemic stance, which surfaces an augment-not-replace consensus and its
+tensions. (2) \textbf{Study 2:} a new empirical evaluation of a six-model open panel on \SOCndat{} subjective
+social-computing datasets with human label distributions (\SOCnjudg{} judgments), showing the consensus is
+empirically warranted and that item-level human disagreement, not model scale, governs reliability. (3) An
+evidence-based decision framework for HCC practice. All code, corpora, and harnesses are released.
+\section{Study 1: LLM substitution in HCC, HCI, and qualitative methods}
+% =====================================================================
+\subsection{Motivation and research questions}
+Cross-domain evidence (our companion paper) shows LLM-judge reliability is broadly domain-general; HCC needs a method-specific account. Human-centered research is built on methods
+that historically \emph{require} human input: qualitative coding, thematic and content analysis, interviews and
+open-ended survey analysis, crowdsourced annotation, participant studies, persona development, usability/heuristic
+evaluation, and design critique. Study 1 asks: \textbf{(RQ1.1)} which of these methods have been attempted with
+LLMs, and how reliably do LLM outputs agree with human input? \textbf{(RQ1.2)} How does the field position the
+LLM, to \emph{augment}, \emph{replace}, or \emph{simulate} the human? \textbf{(RQ1.3)} What epistemic stance
+(enabling, tension, critical) does the literature take, and what does that imply for HCC practice?
+
+\subsection{Method}
+Following the shared protocol, we ran a Study-2-specific identification arm: 25 HCC/HCI/qualitative concept-block
+queries against OpenAlex (\SToa{} unique works), triangulated with the web arm and a venue-scoped sweep of HCI venues (CHI, CSCW, UIST, IUI, TOCHI). After topicality screening and eligibility assessment we included
+\STN{} studies (Figure~\ref{fig:s2prisma}). An independent re-coding of a 30\% sample ($n{=}\IRRstwoN$) reproduced
+the verdict at Krippendorff $\alpha=\IRRstwoV$ and the augment/replace/simulate role at $\alpha=\IRRstwoRole$; the
+\emph{epistemic stance} code is the least reliable ($\alpha=\IRRstwoStance$), so we treat stance-based claims as
+indicative rather than precise (Appendix~\ref{app:irr}). We extracted, per study: the HCC \textbf{method}; the LLM \textbf{role}
+(replace / augment / simulate); reported agreement and the human baseline; the reliability \textbf{verdict};
+the \textbf{epistemic stance} (enabling / tension / critical); and the \textbf{community} (HCI, CSCW,
+qualitative-methods, computational social science, NLP, health). The full corpus is \sttwotabref.
+
+\begin{figure}[t]\centering
+\includegraphics[width=0.96\linewidth]{s2_fig01_prisma}
+\caption{Study 1 identification flow (HCC/HCI/qualitative methods).}
+\label{fig:s2prisma}
+\end{figure}
+
+\subsection{RQ1.1: Which methods, and how reliable?}
+LLMs have been compared against human input across \STmethods{} distinct HCC methods
+(Figure~\ref{fig:s2methods}), most heavily in \emph{thematic analysis}, \emph{synthetic participants}, and
+\emph{crowdsourced annotation}. Reliability is strongly method-dependent (Figure~\ref{fig:s2relmethod};
+Table~\ref{tab:s2methods}). The \emph{same objectivity/interpretation axis} seen across domains governs HCC:
+\textbf{objective crowd-annotation} is the most reliable method to substitute: ChatGPT matches or beats crowd
+workers and even trained coders on stance, topic, and frame labeling \citep{gilardi2023chatgpt,tornberg2023political};
+\textbf{deductive/inductive coding and content/thematic analysis} are reliable \emph{as augmentation}, with
+human-equivalent agreement on structured codebooks (GPT-4 exceeding substantial $\kappa$ on 8/9 hermeneutic tasks
+\citep{dunivin2024scalablecot}; Gemini $\kappa=0.907$ in multi-LLM thematic analysis \citep{jain2025multillmthematic};
+79.7\% agreement in health thematic summarization \citep{castellanos2025thematicsumm}) but only moderate agreement
+in open interpretive settings ($\kappa\approx0.40$-$0.46$ \citep{li2024gpt4humanqual,qualcoding2025jla}); and
+\textbf{participant/persona simulation and usability evaluation} are the least reliable.
+
+\begin{figure}[t]\centering
+\begin{subfigure}{0.52\linewidth}\includegraphics[width=\linewidth]{s2_fig02_methods}\caption{}\label{fig:s2methods}\end{subfigure}\hfill
+\begin{subfigure}{0.46\linewidth}\includegraphics[width=\linewidth]{s2_fig05_reliability_by_method}\caption{}\label{fig:s2relmethod}\end{subfigure}
+\caption{Study 1. (a) HCC/HCI/qualitative methods studied with LLMs (colour = mean reliability). (b) Mean reliability
+of LLM substitution by method.}
+\end{figure}
+
+\begin{table}[t]\centering\small
+\caption{Study 1 method-level decision table: study count, modal LLM role, mean reliability, and traffic-light
+signal (\textsc{green} $\ge3.5$; \textsc{amber} 2.5-3.5; \textsc{red} $<2.5$).}
+\label{tab:s2methods}
+\input{tables/tab_study2_methods}
+\end{table}
+
+\subsection{RQ1.2: Augment, replace, or simulate?}
+HCC overwhelmingly positions LLMs to \emph{augment} humans, not replace them: \STaugment{} of \STN{} studies frame
+the LLM as a collaborator/assistant, versus \STreplace{} as a replacement and \STsimulate{} as a human simulator
+(Figure~\ref{fig:s2rolestance}a). This is not merely rhetorical caution; it tracks reliability
+(Figure~\ref{fig:s2verdictrole}): augmentation studies skew reliable, whereas \emph{replacement} is validated only
+for objective annotation and \emph{simulation} of participants is the least reliable role
+(mean reliability augment \STrelaugment{} vs.\ replace \STrelreplace{} vs.\ simulate \STrelsim{}). The replacement
+mean is buoyed by objective crowd-annotation; remove it and replacement of \emph{interpretive} human input is
+firmly amber/red. The canonical HCC workflow that emerges is human-in-the-loop: LLM proposes, human vets and retains
+interpretive authority \citep{gao2024collabcoder,meng2024chalet,dai2023llminloop}.
+
+\begin{figure}[t]\centering
+\includegraphics[width=0.95\linewidth]{s2_fig03_role_stance}
+\caption{Study 1. (a) Intended LLM role across the HCC corpus; augmentation dominates. (b) Epistemic stance toward
+substitution; \emph{tension} dominates.}
+\label{fig:s2rolestance}
+\end{figure}
+
+\begin{figure}[t]\centering
+\includegraphics[width=0.8\linewidth]{s2_fig04_verdict_by_role}
+\caption{Study 1. Reliability verdict by LLM role. Augmentation is reliable; replacement is reliable only for
+objective annotation; participant/usability \emph{simulation} is the least reliable.}
+\label{fig:s2verdictrole}
+\end{figure}
+
+\subsection{RQ1.3: Epistemic stance and the limits of substitution}
+The dominant stance is \emph{tension} (\STtension/\STN), with \STcritical{} explicitly \emph{critical} and only
+\STenabling{} unreservedly \emph{enabling} (Figure~\ref{fig:s2rolestance}b). Three threads recur.
+\textbf{(i) Interpretation and reflexivity.} Qualitative scholars warn that LLMs perform surface-level extraction
+well but cannot supply the situated, reflexive interpretation that gives qualitative findings their validity, and
+that ``conditional trust'' in tool output risks hollowing out analytic rigor \citep{schroeder2025usestensions,
+ngo2026chatqda,davison2024ethics,nguyentrung2025chatgptta}.
+\textbf{(ii) Participants and identity.} Replacing human participants with LLMs \emph{flattens and misportrays}
+demographic groups, positionality cannot be simulated \citep{wang2024flatten}, and LLM ``subgroups'' are often
+caricatures \citep{cheng2023compost}; synthetic survey data distort variances and correlations
+\citep{bisbee2023perils}, and an LLM is worth only a bounded number of real respondents \citep{huang2025surveyworth}.
+HCI critiques accordingly recast synthetic users as ``objects of inquiry,'' not stand-ins \citep{salminen2025syntheticcritical,
+haxvig2025personabias}.
+\textbf{(iii) Expert design judgment.} GPT-4o overlaps only 21\% with expert-found usability issues and hallucinates
+false positives \citep{guerino2025gpt4ousability}, and LLM UI critique trails expert designers
+\citep{duan2024uicrit}, though synthetic heuristic evaluation can exceed \emph{novice} evaluators on issue recall
+\citep{zhong2025synthheuristic}. Figure~\ref{fig:s2comm} shows coverage skews to HCI and computational social
+science, with the augment-replace reliability gap visible across communities.
+
+\begin{figure}[t]\centering
+\includegraphics[width=0.95\linewidth]{s2_fig06_community_role}
+\caption{Study 1. (a) Coverage by research community. (b) Mean reliability by LLM role, augmentation $>$
+replacement $>$ simulation.}
+\label{fig:s2comm}
+\end{figure}
+
+\subsection{Study 1 synthesis}
+For HCC research, the evidence supports a clear, conditional posture.
+\textbf{Validated to substitute:} objective crowd/data annotation (stance, topic, relevance, frames) where a human
+ceiling is modest and verifiable.
+\textbf{Reliable only as augmentation (human-in-the-loop):} deductive/inductive qualitative coding and thematic/
+content analysis: LLMs accelerate breadth and first-pass coding, but humans must own interpretation, theme
+development, and reflexive accounting.
+\textbf{Unsafe to substitute:} simulating human participants, generating personas as stand-ins for real users, and
+replacing expert usability/design judgment: these flatten identity, fabricate issues, and forfeit the situated
+knowledge that defines human-centered inquiry. This posture both confirms the cross-domain objective/subjective prediction
+\emph{within} HCC and exposes concrete gaps (\S\ref{sec:study2emp}) where HCC datasets with human labels have never
+been formally tested with an LLM judge.
+
+% =====================================================================
+% =====================================================================
+\section{Study 2: An empirical test on subjective social-computing annotation}\label{sec:study2emp}
+% =====================================================================
+The review establishes what the field \emph{believes} (augment, do not replace) but not whether that belief is
+empirically warranted on the tasks HCC depends on. Study 2 supplies the missing evidence on the central case:
+subjective social-computing annotation. We evaluate a panel of \STHRmodels{} open models (9B-754B, served via
+\PROVIDER{} at temperature~0) as virtual annotators on \SOCndat{} datasets that ship human label distributions, the
+constructs HCC and CSCW routinely label: \textbf{emotion} (GoEmotions, an authors-defined 4-way sentiment grouping),
+binary \textbf{offensiveness} (SBIC), 3-way \textbf{hate speech} (HateXplain), and binary \textbf{irony} (MultiPICo,
+a 2024 perspectivist corpus). The run comprised \SOCnjudg{} judgments with zero API errors and a 100\% parse rate.
+
+\subsection{Method}
+Each model labels every item under the same guidelines the human annotators received. We benchmark against the
+\emph{human-human ceiling} (random-annotator-vs-majority accuracy with an annotator-bootstrap 95\% CI) and report
+accuracy, Cohen's $\kappa$, macro-F1, a majority \textbf{jury} \citep{verga2024poll}, and a calibrated contamination
+screen. Because subjective labels are not a single ``gold'' \citep{aroyo2015truth,plank2022humanlabel}, we also
+report disagreement-aware metrics: panel accuracy stratified by item human-entropy, and the Jensen-Shannon
+divergence between the panel and human label distributions. Dataset cards, prompts, and metric definitions are in
+Appendices~\ref{app:protocol} to~\ref{app:robust}.
+
+\subsection{The augment-not-replace consensus is empirically warranted}
+On every subjective construct the open panel falls short of the human ceiling (Table~\ref{tab:socres}). Binary
+offensiveness is the strongest case (\textbf{Promising}; best 0.86) yet still below its 0.91 ceiling; multi-way
+emotion and 3-way hate are \textbf{Mixed} (best 0.61 / 0.66); and even where headline accuracy looks high, it
+reflects base-rate learning rather than construct competence: on the recent irony corpus the best model reaches 0.82
+accuracy but only $\kappa{=}0.40$. Chance-corrected agreement (Table~\ref{tab:socdis}) is modest throughout, exactly
+the pattern the review's augment-not-replace consensus predicts.
+
+\begin{table}[t]\centering\small
+\caption{Study 2. Open panel vs the human-human ceiling on \SOCndat{} subjective social-computing datasets. Ceiling
+= random-annotator-vs-majority accuracy; macro-F1 is the best model's chance-corrected score.}
+\label{tab:socres}
+\input{tables/tab_social_results}
+\end{table}
+
+\subsection{Item-level human disagreement governs reliability}
+The shortfall is not uniform; it concentrates on \emph{contested} items. On every dataset, panel accuracy on
+low-human-disagreement items far exceeds accuracy on high-disagreement items ($\SOClowH$ vs $\SOChighH$;
+Table~\ref{tab:socdis}), and the panel's label distribution diverges from the human distribution most on the most
+contested datasets. An item-level mixed-effects model of judge correctness (over all \SOCnjudg{} judgments) confirms
+the mechanism: the random-intercept SD is far larger across \emph{items} ($\mathrm{SD}=\VCitem$) than across datasets
+($\VCdataset$) or models (between-model accuracy SD $=\VCmodel$), and with standardized predictors model scale
+contributes only modestly ($\mathrm{OR}_{/\mathrm{SD}}=\RTwosizeOR$). The driver is the latent human disagreement in
+each item, not which model judges it. A calibrated contamination screen (Appendix~\ref{app:robust}) does not explain
+the shortfall: the recent (2024) MultiPICo corpus, which the low-recall judge has not memorized, is matched only at
+its low ceiling, so the limitation tracks human disagreement, not pretraining exposure.
+
+\begin{table}[t]\centering\small
+\caption{Study 2 disagreement-aware results. Ceiling with annotator-bootstrap 95\% CI; best-model $\kappa$ and
+macro-F1; panel accuracy on low- vs high-human-disagreement items; Jensen-Shannon panel-vs-human divergence. Judges
+lose accuracy precisely as human disagreement rises.}
+\label{tab:socdis}
+\input{tables/tab_social_disagr}
+\end{table}
+
+\paragraph{What this means for HCC.} The model that simply predicts the majority looks accurate but erases the
+minority readings that perspectivist annotation is designed to preserve, which is precisely the flattening HCC warns
+against \citep{wang2024flatten,fricker2007epistemic}. Empirically, then, the field's instinct is right: for
+subjective social annotation an LLM is a useful first-pass assistant but not a replacement for the human annotators
+whose disagreement \emph{is} the signal.
+% =====================================================================
+\section{Discussion}
+% =====================================================================
+\subsection{Review and experiment agree}
+The review and the experiment tell one story. The field positions LLMs to \emph{augment} rather than replace humans,
+with reliability ordered augment $>$ replace $>$ simulate; the experiment shows why that ordering is correct for the
+field's central labeling case. On subjective social-computing constructs, open judges do not reach the human-human
+ceiling, and their errors are not random: they concentrate on the items where humans themselves disagree. The
+binding constraint is therefore not model capability but the contested human reference, which is exactly the
+property that makes these constructs ``human-centered'' in the first place.
+
+\subsection{Connections to HCI and measurement scholarship}
+Three HCI conversations are sharpened by this evidence. \textbf{(1) There is no single ground truth.} CSCW and HCI
+have long argued that inter-rater reliability is a negotiated practice, not a natural fact
+\citep{mcdonald2019reliability}, and NLP has reframed annotator disagreement as signal \citep{aroyo2015truth,
+plank2022humanlabel}; benchmarking against the human ceiling makes the judges' ``failures'' legible as properties of
+the construct, not fixable model deficits. \textbf{(2) Interpretation is not labeling.} Reflexive thematic analysis
+treats coding as situated interpretation \citep{braun2006thematic}, and qualitative scholars warn that ``conditional
+trust'' in LLM output hollows out rigor \citep{schroeder2025usestensions,davison2024ethics}; the augment-not-replace
+consensus and the empirical shortfall are two views of the same boundary. \textbf{(3) Participants are not
+simulable.} The ``silicon sample'' program \citep{argyle2023outofone} meets a growing critique that simulated
+participants flatten identity \citep{wang2024flatten,cheng2023compost,bisbee2023perils,salminen2025syntheticcritical};
+our finding that judges default to majority readings and lose the minority signal is that flattening at the level of
+a single subjective label, a representational harm a single accuracy number conceals \citep{fricker2007epistemic,
+birhane2022values}.
+
+\subsection{A critical assessment for the field}
+We name two risks the community should track, marking what our data support and what extends prior critique.
+\textbf{False closure (data-grounded).} Reporting one accuracy against a majority gold imposes consensus where the
+data shows disagreement; our irony case (0.82 accuracy at $\kappa{=}0.40$) shows how a headline number masks
+base-rate learning. \textbf{Monoculture and deskilling (conjecture).} Cheap labeling invites substituting LLM
+judgment for the human annotation and reflexive interpretation that train researchers; combined with the documented
+convergence of judges toward crowd rather than expert consensus \citep{bavaresco2024judgebench} and the way
+technical framings abstract away the social context of measurement \citep{selbst2019abstraction,suchman2007humanmachine},
+this could erode the field's interpretive capacity. We offer it as a hypothesis, not a finding.
+
+\subsection{A decision framework for HCC}
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+\item \textbf{Automate (with light audit):} objective annotation of user-generated content (stance, topic, frames)
+where the human ceiling is high and verifiable \citep{gilardi2023chatgpt,tornberg2023political}.
+\item \textbf{Augment, human-in-the-loop:} subjective coding and thematic/content analysis: use the LLM for
+first-pass coding, breadth, and disagreement surfacing, but keep human interpretive authority, calibrate on a
+labeled subset, and report chance-corrected agreement against human coders \citep{gao2024collabcoder,dai2023llminloop}.
+\item \textbf{Keep humans (do not substitute):} simulating participants or personas, and replacing expert
+usability/design judgment, which flatten identity and forfeit situated knowledge
+\citep{wang2024flatten,guerino2025gpt4ousability,salminen2025syntheticcritical}.
+\end{itemize}
+Practically, any HCC study reporting LLM-assisted analysis should state the LLM's \emph{role}, benchmark against a
+\emph{human-human} baseline at the right granularity, report chance-corrected and disagreement-aware metrics with
+uncertainty, evaluate on post-cutoff data where possible, and treat minority annotator readings as signal rather
+than noise.
+% =====================================================================
+\section{Limitations}
+% =====================================================================
+The \emph{human} validation here is inherited from prior work, not added by us: Study 2's ground truth is each
+dataset's own human annotators (3 to 8 per item), and the review codes each study against the human baselines those
+studies report. The review verdict is our interpretation (only a minority of studies report an extractable numeric
+agreement value); we report an independent re-coding as a reproducibility check (verdict Krippendorff
+$\alpha=\IRRstwoV$, role $\alpha=\IRRstwoRole$, the more interpretive stance $\alpha=\IRRstwoStance$;
+Appendix~\ref{app:irr}), which is LLM-assisted and therefore measures rubric reproducibility; we treat stance claims
+as indicative. All references were web-verified. By design we evaluate \emph{open} models (the reproducible choice
+for most HCC labs) at temperature~0 across \SOCndat{} subjective datasets; interpretive qualitative coding,
+participant simulation, and design judgment are characterized by the review rather than tested empirically here.
+Findings reflect models available through mid-2026.
+\section{Ethics and reproducibility}
+% =====================================================================
+\textbf{Ethics.} The review analyzes published research, not human subjects, and Study 3 reuses already-public,
+de-identified datasets under their licenses; this work was therefore not human-subjects research requiring IRB
+review, and we sought an exemption determination consistent with our institution's policy. Two datasets (HateXplain,
+SBIC) contain hateful or identity-attacking text, which we process only to measure moderation reliability and never
+reproduce; to avoid redistributing harmful or personally-identifiable content we release only item-level labels and
+aggregate statistics, never the raw texts. A deeper ethical point bears on our own method: by treating the
+\emph{majority} human label as ``ground truth'' for the ceiling, we risk encoding majority-group bias and erasing
+minority readings, exactly the harm we warn against. We mitigate this by (i) reporting the full disagreement (soft
+labels, entropy) rather than only the majority, (ii) checking, where annotator demographics exist (MultiPICo), that
+the panel does not agree disproportionately with one subgroup (gap $=\MPCgenderGap$; Appendix~\ref{app:robust}), and
+(iii) recommending disagreement-aware evaluation in our guidance; we note the other corpora lack annotator
+demographics, so this check is partial. The contamination probe is reported precisely so ``validated'' verdicts are
+not silently inflated by pretraining exposure. The work is dual-use only in the benign sense that better-calibrated
+LLM judges reduce the risk of unaccountable automated moderation; our central finding (that LLM judges should not replace humans on subjective social annotation) is itself a guard against premature deployment.
+\textbf{Reproducibility.} Every number in this paper regenerates from released code: the OpenAlex, Semantic Scholar,
+and web search logs; the coded corpus; the figure and table generators; the Study-2 judging/scoring/contamination/mixed-effects harness, all keyed to documented model identifiers served through
+\PROVIDER{} at temperature~$0$ with idempotent, resumable checkpoints. The auto-generated statistics macros
+mean the manuscript cannot drift from the data. Repository: \REPO{}.
+
+% =====================================================================
+% =====================================================================
+\section{Conclusion}
+% =====================================================================
+Human-Centered Computing is right to position LLMs as assistants rather than replacements for human input. Across
+\STN{} reviewed studies and a \SOCnjudg{}-judgment experiment on subjective social-computing annotation, the
+evidence converges: open LLM judges do not reach the human-human agreement ceiling on contested constructs, and
+their errors concentrate on exactly the items where humans disagree, which is the signal HCC cares about. The field
+should treat an LLM judge as a measured instrument, reported against a human-human baseline with chance-corrected,
+disagreement-aware metrics, used to augment and accelerate human interpretation rather than to stand in for the
+humans whose disagreement constitutes the phenomenon under study.

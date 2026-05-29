@@ -1,0 +1,121 @@
+\section{Study 1: LLM substitution in HCC, HCI, and qualitative methods}
+% =====================================================================
+\subsection{Motivation and research questions}
+Cross-domain evidence (our companion paper) shows LLM-judge reliability is broadly domain-general; HCC needs a method-specific account. Human-centered research is built on methods
+that historically \emph{require} human input: qualitative coding, thematic and content analysis, interviews and
+open-ended survey analysis, crowdsourced annotation, participant studies, persona development, usability/heuristic
+evaluation, and design critique. Study 1 asks: \textbf{(RQ1.1)} which of these methods have been attempted with
+LLMs, and how reliably do LLM outputs agree with human input? \textbf{(RQ1.2)} How does the field position the
+LLM, to \emph{augment}, \emph{replace}, or \emph{simulate} the human? \textbf{(RQ1.3)} What epistemic stance
+(enabling, tension, critical) does the literature take, and what does that imply for HCC practice?
+
+\subsection{Method}
+Following the shared protocol, we ran a Study-2-specific identification arm: 25 HCC/HCI/qualitative concept-block
+queries against OpenAlex (\SToa{} unique works), triangulated with the web arm and a venue-scoped sweep of HCI venues (CHI, CSCW, UIST, IUI, TOCHI). After topicality screening and eligibility assessment we included
+\STN{} studies (Figure~\ref{fig:s2prisma}). An independent re-coding of a 30\% sample ($n{=}\IRRstwoN$) reproduced
+the verdict at Krippendorff $\alpha=\IRRstwoV$ and the augment/replace/simulate role at $\alpha=\IRRstwoRole$; the
+\emph{epistemic stance} code is the least reliable ($\alpha=\IRRstwoStance$), so we treat stance-based claims as
+indicative rather than precise (Appendix~\ref{app:irr}). We extracted, per study: the HCC \textbf{method}; the LLM \textbf{role}
+(replace / augment / simulate); reported agreement and the human baseline; the reliability \textbf{verdict};
+the \textbf{epistemic stance} (enabling / tension / critical); and the \textbf{community} (HCI, CSCW,
+qualitative-methods, computational social science, NLP, health). The full corpus is \sttwotabref.
+
+\begin{figure}[t]\centering
+\includegraphics[width=0.96\linewidth]{s2_fig01_prisma}
+\caption{Study 1 identification flow (HCC/HCI/qualitative methods).}
+\label{fig:s2prisma}
+\end{figure}
+
+\subsection{RQ1.1: Which methods, and how reliable?}
+LLMs have been compared against human input across \STmethods{} distinct HCC methods
+(Figure~\ref{fig:s2methods}), most heavily in \emph{thematic analysis}, \emph{synthetic participants}, and
+\emph{crowdsourced annotation}. Reliability is strongly method-dependent (Figure~\ref{fig:s2relmethod};
+Table~\ref{tab:s2methods}). The \emph{same objectivity/interpretation axis} seen across domains governs HCC:
+\textbf{objective crowd-annotation} is the most reliable method to substitute: ChatGPT matches or beats crowd
+workers and even trained coders on stance, topic, and frame labeling \citep{gilardi2023chatgpt,tornberg2023political};
+\textbf{deductive/inductive coding and content/thematic analysis} are reliable \emph{as augmentation}, with
+human-equivalent agreement on structured codebooks (GPT-4 exceeding substantial $\kappa$ on 8/9 hermeneutic tasks
+\citep{dunivin2024scalablecot}; Gemini $\kappa=0.907$ in multi-LLM thematic analysis \citep{jain2025multillmthematic};
+79.7\% agreement in health thematic summarization \citep{castellanos2025thematicsumm}) but only moderate agreement
+in open interpretive settings ($\kappa\approx0.40$-$0.46$ \citep{li2024gpt4humanqual,qualcoding2025jla}); and
+\textbf{participant/persona simulation and usability evaluation} are the least reliable.
+
+\begin{figure}[t]\centering
+\begin{subfigure}{0.52\linewidth}\includegraphics[width=\linewidth]{s2_fig02_methods}\caption{}\label{fig:s2methods}\end{subfigure}\hfill
+\begin{subfigure}{0.46\linewidth}\includegraphics[width=\linewidth]{s2_fig05_reliability_by_method}\caption{}\label{fig:s2relmethod}\end{subfigure}
+\caption{Study 1. (a) HCC/HCI/qualitative methods studied with LLMs (colour = mean reliability). (b) Mean reliability
+of LLM substitution by method.}
+\end{figure}
+
+\begin{table}[t]\centering\small
+\caption{Study 1 method-level decision table: study count, modal LLM role, mean reliability, and traffic-light
+signal (\textsc{green} $\ge3.5$; \textsc{amber} 2.5-3.5; \textsc{red} $<2.5$).}
+\label{tab:s2methods}
+\input{tables/tab_study2_methods}
+\end{table}
+
+\subsection{RQ1.2: Augment, replace, or simulate?}
+HCC overwhelmingly positions LLMs to \emph{augment} humans, not replace them: \STaugment{} of \STN{} studies frame
+the LLM as a collaborator/assistant, versus \STreplace{} as a replacement and \STsimulate{} as a human simulator
+(Figure~\ref{fig:s2rolestance}a). This is not merely rhetorical caution; it tracks reliability
+(Figure~\ref{fig:s2verdictrole}): augmentation studies skew reliable, whereas \emph{replacement} is validated only
+for objective annotation and \emph{simulation} of participants is the least reliable role
+(mean reliability augment \STrelaugment{} vs.\ replace \STrelreplace{} vs.\ simulate \STrelsim{}). The replacement
+mean is buoyed by objective crowd-annotation; remove it and replacement of \emph{interpretive} human input is
+firmly amber/red. The canonical HCC workflow that emerges is human-in-the-loop: LLM proposes, human vets and retains
+interpretive authority \citep{gao2024collabcoder,meng2024chalet,dai2023llminloop}.
+
+\begin{figure}[t]\centering
+\includegraphics[width=0.95\linewidth]{s2_fig03_role_stance}
+\caption{Study 1. (a) Intended LLM role across the HCC corpus; augmentation dominates. (b) Epistemic stance toward
+substitution; \emph{tension} dominates.}
+\label{fig:s2rolestance}
+\end{figure}
+
+\begin{figure}[t]\centering
+\includegraphics[width=0.8\linewidth]{s2_fig04_verdict_by_role}
+\caption{Study 1. Reliability verdict by LLM role. Augmentation is reliable; replacement is reliable only for
+objective annotation; participant/usability \emph{simulation} is the least reliable.}
+\label{fig:s2verdictrole}
+\end{figure}
+
+\subsection{RQ1.3: Epistemic stance and the limits of substitution}
+The dominant stance is \emph{tension} (\STtension/\STN), with \STcritical{} explicitly \emph{critical} and only
+\STenabling{} unreservedly \emph{enabling} (Figure~\ref{fig:s2rolestance}b). Three threads recur.
+\textbf{(i) Interpretation and reflexivity.} Qualitative scholars warn that LLMs perform surface-level extraction
+well but cannot supply the situated, reflexive interpretation that gives qualitative findings their validity, and
+that ``conditional trust'' in tool output risks hollowing out analytic rigor \citep{schroeder2025usestensions,
+ngo2026chatqda,davison2024ethics,nguyentrung2025chatgptta}.
+\textbf{(ii) Participants and identity.} Replacing human participants with LLMs \emph{flattens and misportrays}
+demographic groups, positionality cannot be simulated \citep{wang2024flatten}, and LLM ``subgroups'' are often
+caricatures \citep{cheng2023compost}; synthetic survey data distort variances and correlations
+\citep{bisbee2023perils}, and an LLM is worth only a bounded number of real respondents \citep{huang2025surveyworth}.
+HCI critiques accordingly recast synthetic users as ``objects of inquiry,'' not stand-ins \citep{salminen2025syntheticcritical,
+haxvig2025personabias}.
+\textbf{(iii) Expert design judgment.} GPT-4o overlaps only 21\% with expert-found usability issues and hallucinates
+false positives \citep{guerino2025gpt4ousability}, and LLM UI critique trails expert designers
+\citep{duan2024uicrit}, though synthetic heuristic evaluation can exceed \emph{novice} evaluators on issue recall
+\citep{zhong2025synthheuristic}. Figure~\ref{fig:s2comm} shows coverage skews to HCI and computational social
+science, with the augment-replace reliability gap visible across communities.
+
+\begin{figure}[t]\centering
+\includegraphics[width=0.95\linewidth]{s2_fig06_community_role}
+\caption{Study 1. (a) Coverage by research community. (b) Mean reliability by LLM role, augmentation $>$
+replacement $>$ simulation.}
+\label{fig:s2comm}
+\end{figure}
+
+\subsection{Study 1 synthesis}
+For HCC research, the evidence supports a clear, conditional posture.
+\textbf{Validated to substitute:} objective crowd/data annotation (stance, topic, relevance, frames) where a human
+ceiling is modest and verifiable.
+\textbf{Reliable only as augmentation (human-in-the-loop):} deductive/inductive qualitative coding and thematic/
+content analysis: LLMs accelerate breadth and first-pass coding, but humans must own interpretation, theme
+development, and reflexive accounting.
+\textbf{Unsafe to substitute:} simulating human participants, generating personas as stand-ins for real users, and
+replacing expert usability/design judgment: these flatten identity, fabricate issues, and forfeit the situated
+knowledge that defines human-centered inquiry. This posture both confirms the cross-domain objective/subjective prediction
+\emph{within} HCC and exposes concrete gaps (\S\ref{sec:study2emp}) where HCC datasets with human labels have never
+been formally tested with an LLM judge.
+
+% =====================================================================

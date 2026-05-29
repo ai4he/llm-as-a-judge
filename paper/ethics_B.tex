@@ -1,0 +1,22 @@
+\section{Ethics and reproducibility}
+% =====================================================================
+\textbf{Ethics.} The review analyzes published research, not human subjects, and Study 3 reuses already-public,
+de-identified datasets under their licenses; this work was therefore not human-subjects research requiring IRB
+review, and we sought an exemption determination consistent with our institution's policy. Two datasets (HateXplain,
+SBIC) contain hateful or identity-attacking text, which we process only to measure moderation reliability and never
+reproduce; to avoid redistributing harmful or personally-identifiable content we release only item-level labels and
+aggregate statistics, never the raw texts. A deeper ethical point bears on our own method: by treating the
+\emph{majority} human label as ``ground truth'' for the ceiling, we risk encoding majority-group bias and erasing
+minority readings, exactly the harm we warn against. We mitigate this by (i) reporting the full disagreement (soft
+labels, entropy) rather than only the majority, (ii) checking, where annotator demographics exist (MultiPICo), that
+the panel does not agree disproportionately with one subgroup (gap $=\MPCgenderGap$; Appendix~\ref{app:robust}), and
+(iii) recommending disagreement-aware evaluation in our guidance; we note the other corpora lack annotator
+demographics, so this check is partial. The contamination probe is reported precisely so ``validated'' verdicts are
+not silently inflated by pretraining exposure. The work is dual-use only in the benign sense that better-calibrated
+LLM judges reduce the risk of unaccountable automated moderation; our central finding (that LLM judges should not replace humans on subjective social annotation) is itself a guard against premature deployment.
+\textbf{Reproducibility.} Every number in this paper regenerates from released code: the OpenAlex, Semantic Scholar,
+and web search logs; the coded corpus; the figure and table generators; the Study-2 judging/scoring/contamination/mixed-effects harness, all keyed to documented model identifiers served through
+\PROVIDER{} at temperature~$0$ with idempotent, resumable checkpoints. The auto-generated statistics macros
+mean the manuscript cannot drift from the data. Repository: \REPO{}.
+
+% =====================================================================

@@ -1,0 +1,20 @@
+\noindent
+Human-Centered Computing (HCC) research increasingly uses large language models to stand in for human input: to
+code qualitative data, annotate crowdsourced corpora, simulate study participants, and generate personas. This
+raises an epistemological question for a field built on interpretation, reflexivity, and situated knowledge: when
+can an LLM substitute for a human, and when must a human remain in the loop? We answer with a review paired with a
+new experiment. \textbf{Study 1} is a PRISMA systematic review of \STN{} HCC, HCI, and qualitative-methods studies
+(all references independently web-verified), coding each on method, the LLM's intended role
+(augment / replace / simulate), the reported reliability against a human baseline, and the epistemic stance. The
+field overwhelmingly positions LLMs to \emph{augment} rather than replace humans (\STaugment{} augment vs.\
+\STreplace{} replace vs.\ \STsimulate{} simulate), under a stance dominated by \emph{tension}, with reliability
+ordered augment $>$ replace $>$ simulate. \textbf{Study 2} tests the field's central boundary empirically: we run a
+six-model open panel (9B-754B) as virtual annotators on \SOCndat{} subjective social-computing datasets that carry
+human label distributions (emotion, offensiveness, hate, irony; \SOCnjudg{} judgments), benchmarked against the
+human-human agreement ceiling with chance-corrected agreement, a calibrated contamination screen, and an item-level
+mixed-effects analysis. The augment-not-replace consensus is empirically warranted: open judges fall short of the
+human ceiling on every subjective construct, and their errors concentrate on exactly the items where humans
+disagree (accuracy $\SOClowH$ on low-disagreement vs $\SOChighH$ on high-disagreement items). Reliability is
+governed by item-level human disagreement, not model scale or contamination, which we confirm on a recent
+post-cutoff corpus. We translate this into an evidence-based decision framework for when HCC researchers should
+automate, augment with a human in the loop, or keep humans.

@@ -1,0 +1,51 @@
+% =====================================================================
+\section{Discussion}
+% =====================================================================
+\subsection{Review and experiment agree}
+The review and the experiment tell one story. The field positions LLMs to \emph{augment} rather than replace humans,
+with reliability ordered augment $>$ replace $>$ simulate; the experiment shows why that ordering is correct for the
+field's central labeling case. On subjective social-computing constructs, open judges do not reach the human-human
+ceiling, and their errors are not random: they concentrate on the items where humans themselves disagree. The
+binding constraint is therefore not model capability but the contested human reference, which is exactly the
+property that makes these constructs ``human-centered'' in the first place.
+
+\subsection{Connections to HCI and measurement scholarship}
+Three HCI conversations are sharpened by this evidence. \textbf{(1) There is no single ground truth.} CSCW and HCI
+have long argued that inter-rater reliability is a negotiated practice, not a natural fact
+\citep{mcdonald2019reliability}, and NLP has reframed annotator disagreement as signal \citep{aroyo2015truth,
+plank2022humanlabel}; benchmarking against the human ceiling makes the judges' ``failures'' legible as properties of
+the construct, not fixable model deficits. \textbf{(2) Interpretation is not labeling.} Reflexive thematic analysis
+treats coding as situated interpretation \citep{braun2006thematic}, and qualitative scholars warn that ``conditional
+trust'' in LLM output hollows out rigor \citep{schroeder2025usestensions,davison2024ethics}; the augment-not-replace
+consensus and the empirical shortfall are two views of the same boundary. \textbf{(3) Participants are not
+simulable.} The ``silicon sample'' program \citep{argyle2023outofone} meets a growing critique that simulated
+participants flatten identity \citep{wang2024flatten,cheng2023compost,bisbee2023perils,salminen2025syntheticcritical};
+our finding that judges default to majority readings and lose the minority signal is that flattening at the level of
+a single subjective label, a representational harm a single accuracy number conceals \citep{fricker2007epistemic,
+birhane2022values}.
+
+\subsection{A critical assessment for the field}
+We name two risks the community should track, marking what our data support and what extends prior critique.
+\textbf{False closure (data-grounded).} Reporting one accuracy against a majority gold imposes consensus where the
+data shows disagreement; our irony case (0.82 accuracy at $\kappa{=}0.40$) shows how a headline number masks
+base-rate learning. \textbf{Monoculture and deskilling (conjecture).} Cheap labeling invites substituting LLM
+judgment for the human annotation and reflexive interpretation that train researchers; combined with the documented
+convergence of judges toward crowd rather than expert consensus \citep{bavaresco2024judgebench} and the way
+technical framings abstract away the social context of measurement \citep{selbst2019abstraction,suchman2007humanmachine},
+this could erode the field's interpretive capacity. We offer it as a hypothesis, not a finding.
+
+\subsection{A decision framework for HCC}
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+\item \textbf{Automate (with light audit):} objective annotation of user-generated content (stance, topic, frames)
+where the human ceiling is high and verifiable \citep{gilardi2023chatgpt,tornberg2023political}.
+\item \textbf{Augment, human-in-the-loop:} subjective coding and thematic/content analysis: use the LLM for
+first-pass coding, breadth, and disagreement surfacing, but keep human interpretive authority, calibrate on a
+labeled subset, and report chance-corrected agreement against human coders \citep{gao2024collabcoder,dai2023llminloop}.
+\item \textbf{Keep humans (do not substitute):} simulating participants or personas, and replacing expert
+usability/design judgment, which flatten identity and forfeit situated knowledge
+\citep{wang2024flatten,guerino2025gpt4ousability,salminen2025syntheticcritical}.
+\end{itemize}
+Practically, any HCC study reporting LLM-assisted analysis should state the LLM's \emph{role}, benchmark against a
+\emph{human-human} baseline at the right granularity, report chance-corrected and disagreement-aware metrics with
+uncertainty, evaluate on post-cutoff data where possible, and treat minority annotator readings as signal rather
+than noise.
