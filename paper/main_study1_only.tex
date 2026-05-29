@@ -1,0 +1,210 @@
+\documentclass[11pt]{article}
+% =====================================================================
+%  ARCHIVED VERSION 1 -- standalone Study-1-only paper (pre-CHI-restructure).
+%  Kept for provenance/rollback. The current paper is main.tex (3-study CHI).
+%  Compile:  latexmk -pdf main_study1_only.tex
+% =====================================================================
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\graphicspath{{../figures/}}
+\usepackage[table,dvipsnames]{xcolor}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{amsmath,amssymb}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{enumitem}
+\usepackage{microtype}
+\usepackage[numbers,sort&compress]{natbib}
+\usepackage[colorlinks=true,linkcolor=NavyBlue,citecolor=BrickRed,urlcolor=NavyBlue]{hyperref}
+\usepackage{titlesec}
+
+\definecolor{g}{RGB}{26,152,80}
+\definecolor{a}{RGB}{254,224,139}
+\definecolor{r}{RGB}{215,48,39}
+
+\input{tables/autostats}
+
+\titleformat{\section}{\large\bfseries}{\thesection}{0.6em}{}
+\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{0.6em}{}
+
+\title{\textbf{When Can a Machine Judge Like a Human?}\\[2pt]
+\large A PRISMA Systematic Review of LLM-as-a-Judge versus Human Annotation\\
+across \Ndomains{} Domains and Tasks}
+\author{Carlos Toxtli\thanks{Correspondence: \texttt{ai4helab@gmail.com}. AI-assisted systematic-search and
+extraction pipeline; all search logs, the extracted-studies dataset, the analysis code, and the figure-generation
+scripts are released for reproducibility.}}
+\date{May 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\noindent
+Large language models (LLMs) are increasingly deployed as automatic \emph{judges} and \emph{annotators}. Adoption
+has outpaced validation, and the field lacks a panoramic answer to the question that matters: \emph{not} ``do LLM
+judges work?'' but ``\emph{in which domains, tasks, and conditions} do LLM judgments agree with human judgments well
+enough to substitute for them?'' We address this with a PRISMA~2020 systematic review. Using a triangulated
+identification strategy---OpenAlex (\OAretrieved{} records, \OAunique{} unique), Semantic Scholar, and a web
+deep-search---we screened \Nexclscreen{}+ records and included \Nstudies{} studies across \Ndomains{} domains. Each
+was coded on a five-level reliability rubric benchmarked against the \emph{human--human} ceiling. Only \Pctreliable\%
+of studies place LLM judges at or near validated substitution; the modal verdict is \emph{mixed/task-dependent}
+(mean reliability \Meanrel/5). Reliability is high---often exceeding the human ceiling---for objective,
+well-structured, low-expertise tasks judged at the aggregate level, and collapses for subjective, expert,
+low-resource, or adversarial settings. We provide a domain$\times$task reliability landscape, a deployment decision
+map, a catalogue of failure modes, and a validation checklist.
+\end{abstract}
+
+\tableofcontents
+\bigskip
+
+\section{Introduction}
+The cost, latency, and irreproducibility of human evaluation have made ``LLM-as-a-judge'' the dominant scalable
+surrogate \citep{zheng2023mtbench,gu2024survey}. Yet a model that matches human preferences at $>$80\% on chat
+\citep{zheng2023mtbench} can correlate near zero with expert creativity judgments \citep{chakrabarty2024artartifice},
+or be fooled into mislabeling relevance by a few injected keywords \citep{alaofi2024fooledrelevant}. This review maps,
+domain by domain and task by task, the conditions under which LLM--human agreement is good enough to substitute,
+anchoring every claim to the human--human ceiling. Contributions: a PRISMA review of \Nstudies{} studies across
+\Ndomains{} domains; a reproducible five-level reliability rubric; a reliability landscape and decision map; and
+synthesis along the judge-architecture axis.
+
+\section{Background and related reviews}
+LLM-as-a-judge descends from reference-free metrics but uses a general instruction-following model with a
+natural-language rubric \citep{li2024compsurvey,gao2025nlgsurvey}. Four architectural families recur: prompted
+general LLMs \citep{zheng2023mtbench,liu2023geval}; fine-tuned open evaluators \citep{kim2023prometheus,
+zhu2023judgelm,wang2023pandalm,li2023autoj,wang2023shepherd}; juries/multi-agent panels \citep{verga2024poll,
+chan2023chateval}; and calibrated rubric methods \citep{hashemi2024llmrubric,fan2024sedareval}. Prior surveys
+taxonomize methodology \citep{gu2024survey,li2024gen2judge}; large meta-evaluations supply task-level data
+\citep{bavaresco2024judgebench,tan2024judgebench,calderon2025alttest,judgesverdict2025}. This review synthesizes the
+cross-domain reliability map they imply.
+
+\section{Methods}\label{sec:rubric}
+We followed PRISMA~2020 \citep{page2021prisma}. \textbf{Inclusion:} empirical studies (2023--2026) that directly
+compare LLM judgments to human judgments and report an agreement metric or structured concordance. Identification
+triangulated OpenAlex (primary; \OAretrieved{} retrieved, \OAunique{} unique), Semantic Scholar, and a 59-query web
+search (Figure~\ref{fig:prisma}). Each study was coded for domain, task formulation, subjectivity, expertise, judge
+model/architecture, comparator, metric, headline agreement, human baseline, biases, and a five-level reliability
+verdict (1 Validated $\dots$ 5 Unreliable) benchmarked against the human ceiling; reliability score $=6-$verdict.
+
+\begin{figure}[t]\centering
+\includegraphics[width=\linewidth]{fig01_prisma_flow}
+\caption{PRISMA~2020 two-arm identification (OpenAlex database + web/citation).}\label{fig:prisma}
+\end{figure}
+
+\section{Results}
+\subsection{Corpus overview}
+The \Nstudies{} studies span \Ndomains{} domains (Figure~\ref{fig:coverage}), concentrated in methodology/bias,
+general NLG, education, medicine, and social-science annotation; by venue the corpus is ML/NLP-dominant with HCI/CSCW
+and domain-journal representation. Volume rises across 2023--2026 (Figure~\ref{fig:year}); the objective/mixed/
+subjective split (Figure~\ref{fig:method}) is the strongest predictor of reliability.
+
+\begin{figure}[t]\centering
+\begin{subfigure}{0.49\linewidth}\includegraphics[width=\linewidth]{fig04_domain_counts}\caption{}\label{fig:coverage}\end{subfigure}\hfill
+\begin{subfigure}{0.49\linewidth}\includegraphics[width=\linewidth]{fig03_studies_per_year}\caption{}\label{fig:year}\end{subfigure}
+\caption{Coverage: (a) studies per domain; (b) studies per year by verdict.}
+\end{figure}
+\begin{figure}[t]\centering\includegraphics[width=\linewidth]{fig16_methodology}
+\caption{Methodological profile: metric reported and construct subjectivity.}\label{fig:method}\end{figure}
+
+\subsection{Overall and by domain}
+The modal verdict is mixed; \Pctreliable\% reliable, \Pctproblematic\% problematic (mean \Meanrel/5;
+Figure~\ref{fig:verdict}). \textbf{Green ($\ge$3.5; \Ngreen{} domains):} MT (system level), text-to-image,
+instruction-following, QA/factuality, information extraction, general-NLG pairwise, dialogue, legal.
+\textbf{Amber (\Namber):} summarization, RAG, education, social-science annotation, medicine (structure-dependent),
+code, IR/relevance (contested \citep{clarke2024cantreplace,frobe2025assessorsagree}). \textbf{Red (\Nred):}
+low-resource multilingual, creative writing. Family aggregates appear in Figure~\ref{fig:family}; the domain and
+landscape views in Figures~\ref{fig:dom}--\ref{fig:land}; the decision table in Table~\ref{tab:decision}.
+
+\begin{figure}[t]\centering\includegraphics[width=0.8\linewidth]{fig02_verdict_overall}
+\caption{Reliability verdict across all \Nstudies{} studies.}\label{fig:verdict}\end{figure}
+\begin{figure}[t]\centering
+\begin{subfigure}{0.5\linewidth}\includegraphics[width=\linewidth]{fig05_reliability_by_domain}\caption{}\label{fig:dom}\end{subfigure}\hfill
+\begin{subfigure}{0.48\linewidth}\includegraphics[width=\linewidth]{fig06_reliability_landscape}\caption{}\label{fig:land}\end{subfigure}
+\caption{(a) Mean reliability by domain. (b) Domain$\times$task reliability landscape.}
+\end{figure}
+\input{tables/tab_domain_decision_wrap}
+\begin{figure}[t]\centering\includegraphics[width=0.82\linewidth]{fig13_family_reliability}
+\caption{Reliability by domain family (mean$\pm$SD).}\label{fig:family}\end{figure}
+
+\subsection{Task type, subjectivity, expertise}
+Verification/classification tasks are more reliable than open-ended scoring (Figure~\ref{fig:subjexp}c); construct
+subjectivity and required expertise both predict reliability monotonically (Figure~\ref{fig:subjexp}a,b), and judges
+align better with non-experts than experts \citep{bavaresco2024judgebench,szymanski2025limits}.
+
+\begin{figure}[t]\centering
+\begin{subfigure}{0.32\linewidth}\includegraphics[width=\linewidth]{fig07_subjectivity}\caption{}\end{subfigure}\hfill
+\begin{subfigure}{0.32\linewidth}\includegraphics[width=\linewidth]{fig08_expertise}\caption{}\end{subfigure}\hfill
+\begin{subfigure}{0.32\linewidth}\includegraphics[width=\linewidth]{fig12_verdict_by_task}\caption{}\end{subfigure}
+\caption{Verdict by (a) subjectivity, (b) expertise, (c) task formulation.}\label{fig:subjexp}
+\end{figure}
+
+\subsection{Agreement vs.\ the human ceiling}
+The \Nnumeric{} studies with numeric values (Figure~\ref{fig:forest}) show the strongest results meet or exceed the
+human ceiling---MT-Bench 85\% vs.\ 81\% \citep{zheng2023mtbench}, GEMBA-MQM 96.5\% \citep{kocmi2023gembamqm}, SAFE
+wins 76\% of disagreements \citep{wei2024safe}, Prometheus Pearson 0.897 \citep{kim2023prometheus}, PRISMA screening
+$\kappa>0.9$ \citep{prismascreen2024}---while the weakest fall far below (JUDGE-BENCH $\kappa=0.28$
+\citep{bavaresco2024judgebench}). On subjective tasks the human ceiling is itself low ($\alpha<0.35$
+\citep{imrit2026iaa}; Figure~\ref{fig:parity}; Table~\ref{tab:anchors}).
+
+\begin{figure}[t]\centering\includegraphics[width=0.9\linewidth]{fig09_agreement_forest}
+\caption{Reported LLM--human agreement by study, grouped by metric family.}\label{fig:forest}\end{figure}
+\begin{figure}[t]\centering\includegraphics[width=0.72\linewidth]{fig10_parity_scatter}
+\caption{LLM--human vs.\ human--human agreement.}\label{fig:parity}\end{figure}
+\input{tables/tab_anchor_numbers_wrap}
+
+\subsection{Failure modes and moderators}
+Recurring biases---verbosity/length \citep{dubois2024lc}, position \citep{zheng2023mtbench}, self-preference
+\citep{panickssery2024selfpref,wataoka2024selfpref}, style-over-substance \citep{feuer2024style}, preference leakage
+\citep{li2025prefleakage}, non-determinism \citep{temperature2026}, the expertise gap, and adversarial
+manipulability \citep{raina2024robust}---modulate reliability (Figure~\ref{fig:bias}). Moderators: fine-tuned judges
+excel in-domain but do not generalize \citep{zhu2023judgelm,huang2025empiricaljudge}; juries reduce bias
+\citep{verga2024poll}; aggregate $\ne$ item-level reliability \citep{kocmi2023gembamqm}; low-resource languages
+degrade sharply \citep{multiljudge2025}.
+
+\begin{figure}[t]\centering\includegraphics[width=0.9\linewidth]{fig11_bias_frequency}
+\caption{Reported failure modes / biases (study counts).}\label{fig:bias}\end{figure}
+
+\section{Discussion}
+\textbf{Green zone (automate w/ light audit):} objective, verifiable, low-expertise tasks judged in aggregate.
+\textbf{Amber zone (human-in-the-loop + per-task validation):} summarization, RAG, grading, social-science
+annotation, peer review, structured clinical evaluation. \textbf{Red zone (keep humans):} subjective/expert/
+low-resource/adversarial judgments. \emph{Architecture matters:} comparative $>$ absolute, juries $>$ single,
+calibrated $>$ raw, fine-tuned $=$ in-domain specialist. The decision map (Figure~\ref{fig:decision}) and checklist
+(Table~\ref{tab:checklist}) operationalize this.
+
+\begin{figure}[t]\centering\includegraphics[width=\linewidth]{fig15_decision_map}
+\caption{Deployment decision map (reliability$\times$stakes; bubble area $\propto$ studies).}\label{fig:decision}\end{figure}
+
+\begin{table}[t]\centering\small
+\caption{Validation checklist for trusting an LLM judge on a new task.}\label{tab:checklist}
+\begin{tabular}{@{}p{0.62\linewidth} p{0.32\linewidth}@{}}
+\toprule Question & If ``no''/unfavourable \\ \midrule
+Objective with verifiable ground truth? & Expect verdict 3--5 \\
+Low required expertise; non-expert labels suffice? & Beware expert--LLM gap \\
+Human--human baseline known (``match a second human'')? & Run the alt-test \citep{calderon2025alttest} \\
+Right granularity (item vs.\ system)? & Re-test at item level \\
+Comparative (pairwise/jury) not absolute? & Prefer comparative \citep{verga2024poll} \\
+Presentation biases controlled? & Debias \citep{dubois2024lc} \\
+Generator and judge unrelated? & Avoid preference leakage \citep{li2025prefleakage} \\
+Temperature/seed/version pinned? & Pin \citep{temperature2026} \\ \bottomrule
+\end{tabular}\end{table}
+
+\section{Limitations}
+Single-reviewer LLM-assisted screening/extraction; heterogeneous metrics synthesized within families; small $n$ in
+several domains; database recall depends on indexing; findings reflect mid-2026 models.
+
+\section{Conclusion}
+LLM-as-a-judge is a \emph{validated} substitute for objective, aggregate-level tasks, a \emph{conditional}
+human-in-the-loop assistant for many applied domains, and an \emph{unsafe} replacement for subjective/expert/
+low-resource/adversarial judgments. The right question is ``can this judge replace a second human on this task, at
+this granularity, under these controls?''---answerable domain by domain.
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+\appendix
+\section{Full extracted-studies corpus}\label{app:full}
+{\footnotesize\input{tables/tab_full_studies}}
+\end{document}
